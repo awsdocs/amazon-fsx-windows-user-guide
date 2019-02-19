@@ -1,7 +1,7 @@
 # Amazon FSx for Windows File Server 
 
 -----
-*****Copyright &copy; 2018 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -34,7 +34,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Using Service-Linked Roles for Amazon FSx](using-service-linked-roles.md)
       + [Amazon FSx API Permissions: Actions, Resources, and Conditions Reference](fsx-api-permissions-ref.md)
    + [Encryption of Data at Rest and Data in Transit](encryption.md)
-+ [AWS CloudTrail Monitoring](logging-using-cloudtrail.md)
++ [Logging Amazon FSx for Windows File Server API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
 + [Amazon FSx Maintenance Windows](maintenance-windows.md)
 + [Limits](limits.md)
 + [Amazon FSx Walkthroughs](walkthroughs.md)
@@ -42,6 +42,6 @@ Amazon's trademarks and trade dress may not be used in
    + [Walkthrough 2: Create a File System from a Backup](walkthrough02-create-from-backup.md)
    + [Walkthrough 3: Update an Existing File System](walkthrough03-update-file-system.md)
    + [Walkthrough 4: Using Amazon FSx with Amazon AppStream 2.0](walkthrough04-fsx-with-appstream2.md)
-   + [Walkthrough 5: Using a Custom DNS Name for your File System](walkthrough05-file-system-custom-CNAME.md)
+   + [Walkthrough 5: Using a Custom DNS Name for Your File System](walkthrough05-file-system-custom-CNAME.md)
 + [Troubleshooting](troubleshooting.md)
 + [Document History](doc-history.md)

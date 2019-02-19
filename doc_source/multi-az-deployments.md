@@ -245,8 +245,6 @@ Windows Server 2008 mode is the latest available option for Namespaces\.
 
 1. Connect to one of the DFS Namespace servers launched in the previous step as a user in the **AWS Delegated Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
-1. Connect to your instance as a user in the **AWS Delegated Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
-
 1. Open the **Start** menu and type **PowerShell**\. You'll see **Windows PowerShell** from the list of matches\.
 
 1. Context–click on **Windows PowerShell** and choose **Run as Administrator**\.
