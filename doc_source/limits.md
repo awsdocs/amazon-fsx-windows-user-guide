@@ -52,7 +52,7 @@ For information on throughput capacity, see [Performance in Amazon FSx for Windo
 ## Additional Considerations<a name="limits-additional-considerations"></a>
 
 In addition, note the following:
-+ You can us each AWS Key Management Service \(AWS KMS\) key on up to 125 Amazon FSx file systems\.
++ You can use each AWS Key Management Service \(AWS KMS\) key on up to 125 Amazon FSx file systems\.
 + For a list of AWS Regions where you can create file systems, see the [AWS General Reference](https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticfilesystem_region)\.
 + You map your file shares from Amazon EC2 instances in your virtual private cloud \(VPC\) with their Domain Name Service \(DNS\) names\. You can also map your file share on your EC2\-Classic instances \(which are not in a VPC\), but you must link them to your VPC by using ClassicLink\. For more information about using ClassicLink, see [ClassicLink](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
