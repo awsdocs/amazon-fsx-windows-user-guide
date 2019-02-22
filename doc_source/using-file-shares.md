@@ -99,5 +99,5 @@ Following, you can find a description of the various methods you can use to mana
 
 Now that you've connected **Shared Folders** to your FSx file system, you can manage the Windows file shares on the file system\. You can do so with the following actions:
 + **Create a new file share** – From **Shared Folders**, choose **Shares** in the left pane to see the active shares for your Amazon FSx file system\. Choose **New Share** and complete the **Create a Shared Folder** wizard\.
-+ **Modify a file share** – From the **Shared Folders** app, context–click the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
-+ **Remove a file share** – From the **Shared Folders** app, context–click the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.
++ **Modify a file share** – From the **Shared Folders** app, open the context \(right\-click\) menu for the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
++ **Remove a file share** – From the **Shared Folders** app, open the context \(right\-click\) menu for the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.

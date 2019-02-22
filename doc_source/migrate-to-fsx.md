@@ -1,6 +1,6 @@
 # Migrating Existing Files to Amazon FSx<a name="migrate-to-fsx"></a>
 
-Built on Microsoft Windows Server, Amazon FSx for Windows File Server allows you to migrate your existing file datasets fully into your Amazon FSx file systems\. You can migrate not just the data for each file, but also all the relevant file metadata including attributes, time stamps, access control lists \(ACLs\), owner information, and auditing information\. With this total migration support, Amazon FSx enables moving your Windows\-based workloads and applications relying on these file datasets to the AWS Cloud\.
+Built on Microsoft Windows Server, Amazon FSx for Windows File Server enables you to migrate your existing file datasets fully into your Amazon FSx file systems\. You can migrate not just the data for each file, but also all the relevant file metadata including attributes, time stamps, access control lists \(ACLs\), owner information, and auditing information\. With this total migration support, Amazon FSx enables moving your Windows\-based workloads and applications relying on these file datasets to the AWS Cloud\.
 
 Use the following topic as a guide through the process for copying existing file data, while preserving all file metadata, from your on\-premises data centers or from your self\-managed file servers on Amazon EC2\.
 
@@ -67,4 +67,4 @@ You can migrate existing files to Amazon FSx by using the following procedure\.
    + /secfix – Fixes file security on all files, even skipped ones\.
    + /e – Copies subdirectories, including empty ones\.
    + /z – Copies files in restartable mode\.
-   + /MT:8 – Specifies how many threads to use for performing multi\-threaded copies\.
+   + /MT:8 – Specifies how many threads to use for performing multithreaded copies\.

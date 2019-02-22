@@ -1,6 +1,6 @@
 # File System Access Control with Amazon VPC<a name="limit-access-security-groups"></a>
 
-An Amazon FSx file system is accessible through an elastic network interface that resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. You access your Amazon FSx file system through its Domain Name Service \(DNS\) name, which maps to the file system's elastic network interface\. Only resources within the associated VPC can access your file system's network interface\. For more information, see [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) in the* Amazon VPC User Guide\.*
+An Amazon FSx file system is accessible through an elastic network interface that resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. You access your Amazon FSx file system through its Domain Name Service \(DNS\) name, which maps to the file system's elastic network interface\. Only resources within the associated VPC, resources connected with the associated VPC by AWS Direct Connect or VPN, or resources within peered VPCs can access your file system's network interface\. For more information, see [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) in the* Amazon VPC User Guide\.*
 
 ## Amazon VPC Security Groups<a name="fsx-vpc-security-groups"></a>
 
