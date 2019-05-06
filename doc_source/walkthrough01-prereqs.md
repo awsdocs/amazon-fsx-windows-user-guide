@@ -12,9 +12,12 @@ Before you can complete the getting started exercise, you must already have a Mi
 
 With Amazon FSx, you can operate fully managed file storage for Windows\-based workloads\. Likewise, AWS Directory Service provides fully managed directories to use in your workload deployment\. If you have an existing corporate AD domain running in AWS in a virtual private cloud \(VPC\) using EC2 instances, you can enable user\-based authentication and access control\. You do this by establishing a trust relationship between your AWS Managed Microsoft AD and your corporate domain\. For Windows authentication in Amazon FSx, you only need a one\-way directional forest trust, where the AWS managed forest trusts the corporate domain forest\.
 
-Your corporate domain takes the role of the trusted domain, and the AWS Directory Service managed domain takes the role of the trusting domain\. Validated authentication requests travel between the domains in only one direction—allowing accounts in your corporate domain to authenticate against resources shared in the managed domain\. In this case, Amazon FSx interacts only with the managed domain, and the managed domain then passes on the authentication requests to your corporate domain\.
+Your corporate domain takes the role of the trusted domain, and the AWS Directory Service managed domain takes the role of the trusting domain\. Validated authentication requests travel between the domains in only one direction—allowing accounts in your corporate domain to authenticate against resources shared in the managed domain\. In this case, Amazon FSx interacts only with the managed domain\. The managed domain then passes on the authentication requests to your corporate domain\.
 
-Your Active Directory security group must enable inbound access from the Amazon FSx file system’s security group\. For more information, see [Step 1: Set Up Active Directory](#prereq-step1)\.
+**Note**  
+You can also use an external trust type with Amazon FSx for trusted domains\.
+
+Your Active Directory security group must enable inbound access from the Amazon FSx file system’s security group\.
 
 **To create an AWS Directory Services for Microsoft AD**
 + If you don't already have one, use the AWS Directory Service to create your AWS Managed Microsoft AD directory\. For more information, see [Create Your AWS Managed Microsoft AD directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_create_directory.html) in the *AWS Directory Service Administration Guide*\.
@@ -73,7 +76,7 @@ To connect to a Windows instance, you must retrieve the initial administrator pa
 
 The name of the administrator account depends on the language of the operating system\. For example, for English it's Administrator, for French it's Administrateur, and for Portuguese it's Administrador\. For more information, see [Localized Names for Administrator Account in Windows](http://social.technet.microsoft.com/wiki/contents/articles/13813.localized-names-for-administrator-account-in-windows.aspx) in the Microsoft TechNet Wiki\.
 
-If you joined your instance to a domain, you can connect to your instance using domain credentials you defined in AWS Directory Service\. On the Remote Desktop login screen, instead of using the local computer name and the generated password, use the fully qualified user name for the administrator and the password for this account\. An example is **corp\.example\.com\\Admin**\. 
+If you joined your instance to a domain, you can connect to your instance using domain credentials you defined in AWS Directory Service\. On the Remote Desktop login screen, don't use the local computer name and the generated password\. Instead, use the fully qualified user name for the administrator and the password for this account\. An example is **corp\.example\.com\\Admin**\. 
 
 The license for the Windows Server operating system \(OS\) allows two simultaneous remote connections for administrative purposes\. The license for Windows Server is included in the price of your Windows instance\. If you need more than two simultaneous remote connections, you must purchase a Remote Desktop Services \(RDS\) license\. If you attempt a third connection, an error occurs\. For more information, see [Configure the Number of Simultaneous Remote Connections Allowed for a Connection](http://technet.microsoft.com/en-us/library/cc753380.aspx)\.
 
@@ -157,4 +160,4 @@ You can enter either the fully qualified name of your domain or the NetBios name
 
 1. Reconnect to your instance over RPD, and sign into the instance using the user name and password for your AWS Directory Service directory's Admin user\.
 
-Now that your instance has been joined to the domain, you're ready to create your Amazon FSx file system and finish the other tasks in the getting started exercise\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.
+Now that your instance has been joined to the domain, you're ready to create your Amazon FSx file system\. You can then go on to finish the other tasks in the getting started exercise\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.

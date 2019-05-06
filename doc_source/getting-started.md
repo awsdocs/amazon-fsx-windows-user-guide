@@ -29,11 +29,20 @@ To create your Amazon FSx file system, you must create your Amazon Elastic Compu
 
 1. Choose any value for **Availability Zones** and **Subnet**\.
 
-1. For **VPC security groups**, the ID for the default security group for your default Amazon VPC should be already added\. If you're not using the default security group, make sure that the following inbound rules are added to the security group you're using for this getting started exercise\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started.html)
+1. <a name="security_group_setup"></a>For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. If you're not using the default security group, make sure that you add the following rules to the security group you're using for this getting started exercise:
 
-   For the same Amazon VPC security group, add the following outbound rule\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started.html)
+   1. Inbound and outbound rules to allow the following ports:
+      + TCP/UDP 445 \(SMB\)
+      + TCP 135 \(RPC\)
+      + TCP/UDP 1024\-65535 \(Ephemeral ports for RPC\)
+
+      From and to IP addresses or security group IDs associated with the following source and destination resources:
+      + Client compute instances from which you want to access the file system\.
+      + Other file servers that you expect this file system to participate with in DFS Replication groups\.
+
+   1. Outbound rules to allow all traffic to the security group ID associated with the AWS Managed Microsoft AD directory to which you're joining your file system\.
+**Note**  
+In some cases, you might have modified the rules of your AWS Managed Microsoft AD's security group from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. To learn more about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
 
 1. For **Windows authentication**, choose the fully qualified domain name for your AWS Directory Service directory from the list\.
 
@@ -41,11 +50,11 @@ To create your Amazon FSx file system, you must create your Amazon Elastic Compu
 
 1. Review the settings for your Amazon FSx file system, and choose **Create file system**\.
 
-1. After the file system has been created, choose the file system ID in the **File Systems** dashboard, choose **Attach**, and make a note of the fully qualified domain name for your file system\. You need it in a later step\.
+1. After the file system has been created, choose the file system ID in the **File Systems** dashboard, choose **Attach**, and note the fully qualified domain name for your file system\. You need it in a later step\.
 
 ## Step 2: Map Your File Share to an EC2 Instance Running Windows Server<a name="getting-started-step2"></a>
 
-You can now mount your Amazon FSx file system to your Microsoft Windows–based Amazon EC2 instance joined to your AWS Directory Service directory\. Note that the name of your file share is not the name of your file system\.
+You can now mount your Amazon FSx file system to your Microsoft Windows–based Amazon EC2 instance joined to your AWS Directory Service directory\. The name of your file share is not the same as name of your file system\.
 
 **To map a file share on an Amazon EC2 Windows instance using the GUI**
 
@@ -61,7 +70,7 @@ You can now mount your Amazon FSx file system to your Microsoft Windows–based 
 
 1. Choose a drive letter of your choice for **Drive**\.
 
-1. Type in the fully qualified domain name \(FQDN\) name for your file share, which you construct from the FQDN of your file system and the name of your Windows file share\. For example, \\\\fs\-*012345678901234567*\.*ad\-domain*\.com\\share for **Folder**\.
+1. Enter the fully qualified domain name \(FQDN\) name for your file share\. You construct this name from the FQDN of your file system and the name of your Windows file share\. An example is `\\fs-012345678901234567.ad-domain.com\share` for **Folder**\.
 
 1. Choose whether the file share should **Reconnect at sign\-in** and then choose **Finish**\.
 

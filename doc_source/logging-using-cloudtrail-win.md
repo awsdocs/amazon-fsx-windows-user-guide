@@ -1,4 +1,4 @@
-# Logging Amazon FSx for Windows File Server API Calls with AWS CloudTrail<a name="logging-using-cloudtrail"></a>
+# Logging Amazon FSx for Windows File Server API Calls with AWS CloudTrail<a name="logging-using-cloudtrail-win"></a>
 
 Amazon FSx is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in Amazon FSx\. CloudTrail captures all API calls for Amazon FSx as events\. Captured calls include calls from the Amazon FSx console and from code calls to Amazon FSx API operations\.
 
@@ -6,7 +6,7 @@ If you create a trail, you can enable continuous delivery of CloudTrail events t
 
 To learn more about CloudTrail, see the [AWS CloudTrail User Guide](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)\.
 
-## Amazon FSx Information in CloudTrail<a name="fsx-info-in-cloudtrail"></a>
+## Amazon FSx Information in CloudTrail<a name="fsxW-info-in-cloudtrail"></a>
 
 CloudTrail is enabled on your AWS account when you create the account\. When API activity occurs in Amazon FSx, that activity is recorded in a CloudTrail event along with other AWS service events in **Event history**\. You can view, search, and download recent events in your AWS account\. For more information, see [Viewing Events with CloudTrail Event History](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html)\. 
 
@@ -25,7 +25,7 @@ Every event or log entry contains information about who generated the request\. 
 
 For more information, see the [CloudTrail userIdentity Element](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html) in the *AWS CloudTrail User Guide\.*
 
-## Understanding Amazon FSx Log File Entries<a name="understanding-service-name-entries"></a>
+## Understanding Amazon FSx Log File Entries<a name="w-understanding-service-name-entries"></a>
 
 A *trail* is a configuration that enables delivery of events as log files to an Amazon S3 bucket that you specify\. CloudTrail log files contain one or more log entries\. An *event* represents a single request from any source and includes information about the requested action, the date and time of the action, request parameters, and so on\. CloudTrail log files aren't an ordered stack trace of the public API calls, so they don't appear in any specific order\. 
 

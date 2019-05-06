@@ -1,4 +1,4 @@
-# Amazon FSx for Windows File Server 
+# Amazon FSx for Windows File Server Windows User Guide
 
 -----
 *****Copyright &copy; 2019 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
@@ -27,6 +27,10 @@ Amazon's trademarks and trade dress may not be used in
    + [Setting Up a Custom Backup Schedule](custom-backup-schedule.md)
 + [Grouping Multiple File Systems into a Common Namespace](group-file-systems.md)
 + [Multi-AZ File System Deployments](multi-az-deployments.md)
++ [Monitoring Amazon FSx for Windows File Server](monitoring_overview.md)
+   + [How to Use Amazon FSx for Windows File Server Metrics](how_to_use_metrics.md)
+   + [Accessing CloudWatch Metrics](accessingmetrics.md)
+   + [Creating CloudWatch Alarms to Monitor Amazon FSx](creating_alarms.md)
 + [Security](security.md)
    + [File- and Folder-Level Access Control with Windows ACLs and Active Directory](limit-access-file-folder.md)
    + [File System Access Control with Amazon VPC](limit-access-security-groups.md)
@@ -34,7 +38,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Using Service-Linked Roles for Amazon FSx](using-service-linked-roles.md)
       + [Amazon FSx API Permissions: Actions, Resources, and Conditions Reference](fsx-api-permissions-ref.md)
    + [Encryption of Data at Rest and Data in Transit](encryption.md)
-+ [Logging Amazon FSx for Windows File Server API Calls with AWS CloudTrail](logging-using-cloudtrail.md)
++ [Logging Amazon FSx for Windows File Server API Calls with AWS CloudTrail](logging-using-cloudtrail-win.md)
 + [Amazon FSx Maintenance Windows](maintenance-windows.md)
 + [Limits](limits.md)
 + [Amazon FSx Walkthroughs](walkthroughs.md)
@@ -42,5 +46,6 @@ Amazon's trademarks and trade dress may not be used in
    + [Walkthrough 2: Create a File System from a Backup](walkthrough02-create-from-backup.md)
    + [Walkthrough 3: Update an Existing File System](walkthrough03-update-file-system.md)
    + [Walkthrough 4: Using Amazon FSx with Amazon AppStream 2.0](walkthrough04-fsx-with-appstream2.md)
+   + [Walkthrough 5: Using a Custom DNS Name for Your File System](walkthrough05-file-system-custom-CNAME.md)
 + [Troubleshooting](troubleshooting.md)
 + [Document History](doc-history.md)

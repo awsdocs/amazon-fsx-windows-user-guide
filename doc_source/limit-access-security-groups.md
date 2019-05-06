@@ -22,17 +22,20 @@ For more information on security group rules, see [Security Group Rules](https:/
 
 1. For **VPC**, choose the Amazon VPC associated with your file system to create the security group within that VPC\.
 
-1. Add the following inbound rules:    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/limit-access-security-groups.html)
+1. <a name="vpc-sg-step6"></a>Add the following rules\.
 
-Your Active Directory's security group must enable inbound access from the Amazon FSx file system’s security group\. By default, this access is enabled, though it can be manually removed if you modified the rules for your directory's security group\.
+   1. Inbound and outbound rules to allow the following ports:
+      + TCP/UDP 445 \(SMB\)
+      + TCP 135 \(RPC\)
+      + TCP/UDP 1024\-65535 \(Ephemeral ports for RPC\)
 
-Likewise, the security group for your Amazon FSx file system must enable outbound access to your directory\. If you remove or change the default outbound rule for your file system's security group, you need to add the following outbound rule\.
+      From and to IP addresses or security group IDs associated with the following source and destination resources:
+      + Client compute instances from which you want to access the file system\.
+      + Other file servers that you expect this file system to participate with in DFS Replication groups\.
 
-
-| Type | Protocol | Port Range | Source | Description | 
-| --- | --- | --- | --- | --- | 
-| All traffic | All | 0\-65535 | Security group of the AWS Directory Service for Microsoft Active Directory to which you will join your file system | Communication with the managed Active Directory for Amazon FSx | 
+   1. Outbound rules to allow all traffic to the security group ID associated with the AWS Managed Microsoft AD directory to which you're joining your file system\.
+**Note**  
+In some cases, you might have modified the rules of your AWS Managed Microsoft AD's security group from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. To learn more about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
 
 Now that you've created your security group, you can associate it with your Amazon FSx file system's elastic network interface\.
 
