@@ -71,3 +71,9 @@ A *VPC peering connection* is a networking connection between two VPCs that you 
 A *transit gateway *is a network transit hub that you can use to interconnect your VPCs and on\-premises networks\. For more information about using VPC transit gateways, see [Getting Started with Transit Gateways](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-getting-started.html) in the *Amazon VPC Transit Gateways*\.
 
 After you set up a VPC peering or transit gateway connection, you can access your file system using its DNS name\. You do so just as you do from compute instances within the associated VPC\.
+
+**Note**  
+Amazon FSx can support access from resources outside the VPC associated with your file system\. It can do this if those resources have an IP address in the following private IP version 4 \(IPv4\) address ranges, as specified in [RFC 1918](http://www.faqs.org/rfcs/rfc1918.html):  
+10\.0\.0\.0–10\.255\.255\.255 \(10/8 prefix\)
+172\.16\.0\.0–172\.31\.255\.255 \(172\.16/12 prefix\)
+192\.168\.0\.0–192\.168\.255\.255 \(192\.168/16 prefix\)
