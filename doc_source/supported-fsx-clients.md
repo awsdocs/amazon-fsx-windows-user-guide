@@ -12,10 +12,10 @@ Amazon FSx supports access to your file systems using a variety of clients and m
 Amazon FSx supports connecting to your file system from a wide variety of compute instances and operating systems\. It does this by supporting access through the Server Message Block \(SMB\) protocol, versions 2\.0 through 3\.1\.1\. 
 
 The following AWS compute instances are supported for use with Amazon FSx:
-+ Amazon Elastic Compute Cloud \(Amazon EC2\) instances
-+ Amazon WorkSpaces instances
-+ Amazon AppStream 2\.0 instances
-+ VMs running in VMware Cloud on AWS environments
++ Amazon Elastic Compute Cloud \(Amazon EC2\) instances\.
++ Amazon WorkSpaces instances – to learn more, see the AWS blog post [ Using Amazon FSx for Windows File Server with Amazon WorkSpaces](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-for-windows-file-server-with-amazon-workspaces/)\.
++ Amazon AppStream 2\.0 instances – to learn more, see the AWS blog post [ Using Amazon FSx with Amazon AppStream 2\.0](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-with-amazon-appstream-2-0/)\. 
++  VMs running in VMware Cloud on AWS environments – to learn more, see the AWS blog post [Storing and Sharing Files with Amazon FSx for Windows File Server in a VMware Cloud on AWS Environment](http://aws.amazon.com/blogs/apn/storing-and-sharing-files-with-amazon-fsx-in-a-vmware-cloud-on-aws-environment/)\. 
 
 The following operating systems are supported for use with Amazon FSx:
 + Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, and Windows Server 2016
@@ -28,8 +28,10 @@ You can use the following access methods and approaches with Amazon FSx\.
 
 ### Accessing Amazon FSx File Systems Using DNS Names<a name="dns-name"></a>
 
-An Amazon FSx for Windows File Server file system is accessible through an elastic network interface\. This elastic network interface resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. Amazon FSx for Windows File Server provides a DNS name for every file system in the form of `fs-1234567891011121.domain.com`\. This name maps to the file system's elastic network interface\. The DNS name is composed as follows:
-+ `fs-1234567891011121` – The file system's AWS resource identifier
+An Amazon FSx for Windows File Server file system is accessible through an elastic network interface\. This elastic network interface resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. Amazon FSx for Windows File Server provides a DNS name for every file system in the form of `fileservername.domain.com`\. This name maps to the file system's elastic network interface\. The DNS name is composed as follows:
++ `fileservername` – The file system's AWS resource identifier of the form:
+  + `fs-0123456789abcdef1` in the case where your file system is joined to AWS Managed AD
+  + `AMZNFSX1234ABCD` in the case where your file system is joined to your self\-managed AD
 + `domain.com` – The Microsoft Active Directory domain name associated with your file system 
 
 You access your Amazon FSx for Windows File Server file system using this DNS name\.
@@ -48,7 +50,7 @@ You can access your file system from resources that are in the same VPC as your 
 You can also access file systems created after February 22, 2019, from on\-premises resources and from resources that are in a different VPC, AWS account, or AWS Region\. Following, you can find information about how to access your Amazon FSx for Windows File Server file systems from on\-premises and from different VPCs, AWS accounts, or AWS Regions\.
 
 **Important**  
-In some cases, you might want to access a file system created before February 22, 2019, from on\-premises resources or from resources in a different VPC, AWS account, or AWS Region\. To do this, create a new file system from a backup of your existing file system\. To learn more about creating and restoring backups, see [Using Backups](using-backups.md)\. 
+In some cases, you might want to access a file system created before February 22, 2019, from on\-premises resources or from resources in a different VPC, AWS account, or AWS Region\. To do this, create a new file system from a backup of your existing file system\. To learn more about creating and restoring backups, see [Working with Backups](using-backups.md)\. 
 
 ### Accessing Amazon FSx for Windows File Server File Systems from On\-Premises<a name="on-premise-access"></a>
 

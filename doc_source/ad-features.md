@@ -1,0 +1,8 @@
+# Self\-Managed Active Directory Feature Support<a name="ad-features"></a>
+
+ When you join your file system directly to your self\-managed AD, your Amazon FSx for Windows File Server resides in the same AD forest \(the top\-most logical container in an AD configuration that contains domains, users, and computers\) and in the same AD domain as your users and existing resources \(including existing file servers\)\. This enables you to use the following AD features that work only within the same AD forest or AD domain\. 
++  Microsoft Distributed File System \(DFS\) Replication to automatically replicate data between your existing file servers and Amazon FSx, or between multiple Amazon FSx file systems across AWS Regions for data migration, cloud\-bursting, data backup, and disaster recovery work flows\. 
++ AD configurations like Security Identifier \(SID\) Histories from previous domain migrations, and domain\-local groups\. 
+
+**Note**  
+ When you use your Amazon FSx file system with your self\-managed AD by using a trust relationship from your AWS Managed Microsoft AD instead of directly joining it to your self\-managed AD, it resides in a different AD forest than the one your users and existing resources belong to\. DFS Replication between your existing file servers and Amazon FSx, or between Amazon FSx file systems across AWS Regions, is therefore not supported, nor are AD configurations like SID Histories and domain\-local groups\. 

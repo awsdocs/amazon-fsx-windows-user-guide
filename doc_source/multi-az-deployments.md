@@ -1,4 +1,4 @@
-# Multi\-AZ File System Deployments<a name="multi-az-deployments"></a>
+# Deploying Multi\-AZ File Systems<a name="multi-az-deployments"></a>
 
 Each Amazon FSx for Windows File Server file system resides in a particular Availability Zone \(AZ\), which you specify during creation\. Amazon FSx automatically replicates file system data within the AZ, and ensures high availability within the AZ by detecting and addressing component failures\. For workloads that require Multi\-AZ redundancy to tolerate temporary AZ unavailability, you can create multiple file systems in separate AZs, keep them in sync, and configure failover between them\.
 
@@ -16,13 +16,16 @@ Amazon FSx fully supports the use of the Microsoft Distributed File System \(DFS
 
 You can use DFS Replication to automatically replicate data between two Amazon FSx file systems\. This replication is bidirectional, meaning that you can write to either file system and the changes are replicated to the other\.
 
-### To set up DFS Replication \(Windows Server 2016, scripted\)<a name="win-server-2016-scripted.title"></a>
+**Important**  
+ You cannot use the DFS Management GUI in the Microsoft Windows Administrative Tools \(dfsmgmt\.msc\) to configure DFS Replication on your Amazon FSx for Windows File Server file system\. 
 
-1. Begin the process of managing DFS by launching your instance and connecting it to the AWS Directory Service for Microsoft Active Directory where you joined your Amazon FSx file systems\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+### To set up DFS Replication \(scripted\)<a name="win-server-2016-scripted.title"></a>
+
+1. Begin the process of managing DFS by launching your instance and connecting it to the Microsoft Active Directory where you joined your Amazon FSx file systems\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance as a user in the **AWS Delegated FSx Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. Connect to your instance as an Active Directory user that is a member of both the file system administrators group \(**AWS Delegated FSx Administrators** in AWS Managed AD, and **Domain Admins** or the custom group you specified during creation for file system administration in your self\-managed Microsoft AD\), as well as a group that has DFS administration permissions delegated to it \(**AWS Delegated Distributed File System Administrators** in AWS Managed AD, and **Domain Admins** or another group to which you’ve delegated DFS administration permissions in your self\-managed AD\)\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. Download this [FSx\-DFSr\-Setup\.ps1](https://s3.amazonaws.com/solution-references/fsx/dfs/FSx-DFSr-Setup.ps1                 ) PowerShell script\.
 
@@ -38,13 +41,13 @@ You can use DFS Replication to automatically replicate data between two Amazon F
    FSx-DFSr-Setup.ps1 -group Group -folder Folder -path ContentPath -primary FSxFileSystem1-DNS-Name -standby FSxFileSystem2-DNS-Name
    ```
 
-### To set up DFS Replication \(Windows Server 2016, step by step\)<a name="win-server-2016"></a>
+### To set up DFS Replication \(step by step\)<a name="win-server-2016"></a>
 
-1. Begin the process of managing DFS by launching your instance and connecting it to the AWS Directory Service for Microsoft Active Directory where you joined your Amazon FSx file systems\. To perform this action, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+1. Begin the process of managing DFS by launching your instance and connecting it to the Microsoft Active Directory where you joined your Amazon FSx file systems\. To perform this action, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance as a user in the **AWS Delegated FSx Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. Connect to your instance as an Active Directory user that is a member of both the file system administrators group \(**AWS Delegated FSx Administrators** in AWS Managed AD, and **Domain Admins** or the custom group you specified during creation for file system administration in your self\-managed Microsoft AD\), as well as a group that has DFS administration permissions delegated to it \(**AWS Delegated Distributed File System Administrators** in AWS Managed AD, and **Domain Admins** or another group to which you’ve delegated DFS administration permissions in your self\-managed AD\)\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. Open the **Start** menu and enter **PowerShell**\. From the list of matches, choose **Windows PowerShell**\.
 
@@ -61,18 +64,17 @@ You can use DFS Replication to automatically replicate data between two Amazon F
    $Folder = "Name of the DFS Replication folder"
    
    New-DfsReplicationGroup –GroupName $Group
-   Grant-DfsrDelegation –GroupName $Group –AccountName “FSxAdmins” –Force
    New-DfsReplicatedFolder –GroupName $Group –FolderName $Folder
    ```
 
 1. Determine the Active Directory computer name associated with each file system with the following commands\.
 
    ```
-   $FileSystemId1 = "File system ID of the primary FSx file system"
-   $FileSystemId2 = "File system ID of the secondary FSx file system"
-                   
-   $C1 = (Resolve-DnsName $FileSystemId1 –Type CNAME).NameHost
-   $C2 = (Resolve-DnsName $FileSystemId2 –Type CNAME).NameHost
+   $Primary = "DNS name of the primary FSx file system"
+   $Standby = "DNS name of the standby FSx file system"
+   
+   $C1 = (Get-ADObject -Filter "objectClass -eq 'Computer' -and ServicePrincipalName -eq 'HOST/$Primary'").Name
+   $C2 = (Get-ADObject -Filter "objectClass -eq 'Computer' -and ServicePrincipalName -eq 'HOST/$Standby'").Name
    ```
 
 1. Add your file systems as members of the DFS Replication group that you created with the following commands\.
@@ -82,92 +84,7 @@ You can use DFS Replication to automatically replicate data between two Amazon F
    Add-DfsrMember –GroupName $Group –ComputerName $C2
    ```
 
-1. Use the following commands to add the local path \(for example, `D:\share`\) for each file system to the DFS Replication group\. In this procedure, `FileSystemID1` serves as the primary member, meaning that its contents initially are synced to the other file system\.
-
-   ```
-   $ContentPath1 = "Local path to the folder you want to replicate on file system 1"
-   $ContentPath2 = "Local path to the folder you want to replicate on file system 2"
-                   
-   Set-DfsrMembership –GroupName $Group –FolderName $Folder –ContentPath $ContentPath1 –ComputerName $C1 –PrimaryMember $True
-   Set-DfsrMembership –GroupName $Group –FolderName $Folder –ContentPath $ContentPath2 –ComputerName $C2 –PrimaryMember $False
-   ```
-
-1. Add a connection between the file systems with the following command\.
-
-   ```
-   Add-DfsrConnection –GroupName $Group –SourceComputerName $C1 –DestinationComputerName $C2
-   ```
-
-Within minutes, both file systems should begin synchronizing the contents of the `ContentPath` specified preceding\.
-
-### To set up DFS Replication \(earlier versions of Windows Server\)<a name="earlier-win-server"></a>
-
-1. Begin the process of managing DFS by launching your instance and connecting it to the AWS Directory Service for Microsoft Active Directory where you joined your Amazon FSx file systems\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
-   + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
-   + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
-
-1. Connect to your instance as a user in the **AWS Delegated FSx Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
-
-1. Open the **Start** menu and enter **PowerShell**\. From the list of matches, choose **Windows PowerShell**\.
-
-1. If you don't have DFS Management Tools installed already, install them on your instance with the following command\.
-
-   ```
-   Install-WindowsFeature RSAT-DFS-Mgmt-Con
-   ```
-
-1. From the PowerShell prompt, create a DFS Replication group and folder with the following command\.
-
-   ```
-   $Group = "Name of the DFS Replication group"
-                   
-   New-DfsReplicationGroup –GroupName $Group
-   ```
-
-1. Delegate DFS Management permissions for the new group that you just created to the user **FSxAdmins**:
-
-   1. Open the **Start** menu and run `dfsmgmt.msc`\. Doing this opens the **DFS Management** GUI tool\.
-
-   1. Choose **Action**, and then **Add Replication Groups to Display**\.
-
-   1. Choose the new group that you just created in the dialog box that opens, and choose **OK**\.
-
-   1. Choose the new group under **Replication** in the navigation bar\.
-
-   1. Choose **Action**, and then **Delegate Management Permissions**\.
-
-   1. Enter **FSxAdmins** for **Enter the object name to select**, and choose **OK**\.
-
-   1. Navigate to the **Delegation** tab for your group, and ensure that you see the **Explicit** entry for ***your\-domain*\\FSxAdmins**\.
-
-   1. Close the **DFS Management** tool\.
-
-1. Return to the PowerShell prompt, and create a DFS Replication folder with the following command\.
-
-   ```
-   $Folder = "Name of the DFS Replication folder"
-                   
-   New-DfsReplicatedFolder –GroupName $Group –FolderName $FolderNew-DfsReplicatedFolder –GroupName $Group –FolderName $Folder
-   ```
-
-1. Determine the Active Directory computer name associated with each file system with the following commands\.
-
-   ```
-   $FileSystemId1 = "File system ID of the primary FSx file system"
-   $FileSystemId2 = "File system ID of the secondary FSx file system"
-                   
-   $C1 = (Resolve-DnsName $FileSystemId1 –Type CNAME).NameHost
-   $C2 = (Resolve-DnsName $FileSystemId2 –Type CNAME).NameHost
-   ```
-
-1. Add your file systems as members of the DFS Replication group that you created with the following commands\.
-
-   ```
-   Add-DfsrMember –GroupName $Group –ComputerName $C1
-   Add-DfsrMember –GroupName $Group –ComputerName $C2
-   ```
-
-1. Use the following commands to add the local path \(for example, `D:\share`\) for each file system to the DFS Replication group\. In this procedure, `FileSystemID1` serves as the primary member, meaning that its contents initially are synced to the other file system\.
+1. Use the following commands to add the local path \(for example, `D:\share`\) for each file system to the DFS Replication group\. In this procedure, `file system 1` serves as the primary member, meaning that its contents initially are synced to the other file system\.
 
    ```
    $ContentPath1 = "Local path to the folder you want to replicate on file system 1"

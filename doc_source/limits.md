@@ -47,7 +47,7 @@ Following are the limits on Amazon FSx for Windows File Server resources for eac
 | Maximum number of file shares | 100,000 | 
 | Retention period for automated backups | 35 days | 
 
-For information on throughput capacity, see [Performance in Amazon FSx for Windows File Server ](performance.md)\.
+For information on throughput capacity, see [Getting the Best Performance in Amazon FSx for Windows File Server ](performance.md)\.
 
 ## Additional Considerations<a name="limits-additional-considerations"></a>
 

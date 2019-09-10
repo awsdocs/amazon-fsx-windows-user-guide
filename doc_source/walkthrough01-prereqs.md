@@ -158,6 +158,6 @@ You can enter either the fully qualified name of your domain or the NetBios name
 
 1. After you receive the message welcoming you to the domain, restart the instance to have the changes take effect\.
 
-1. Reconnect to your instance over RPD, and sign into the instance using the user name and password for your AWS Directory Service directory's Admin user\.
+1. Reconnect to your instance over RDP, and sign into the instance using the user name and password for your AWS Directory Service directory's Admin user\.
 
 Now that your instance has been joined to the domain, you're ready to create your Amazon FSx file system\. You can then go on to finish the other tasks in the getting started exercise\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.

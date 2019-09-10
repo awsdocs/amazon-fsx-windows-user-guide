@@ -1,12 +1,12 @@
 # File System Access Control with Amazon VPC<a name="limit-access-security-groups"></a>
 
-An Amazon FSx file system is accessible through an elastic network interface that resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. You access your Amazon FSx file system through its Domain Name Service \(DNS\) name, which maps to the file system's elastic network interface\. Only resources within the associated VPC, resources connected with the associated VPC by AWS Direct Connect or VPN, or resources within peered VPCs can access your file system's network interface\. For more information, see [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) in the* Amazon VPC User Guide\.*
+You access your Amazon FSx file system through an elastic network interface\. This network interface resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. You connect to your Amazon FSx file system through its Domain Name Service \(DNS\) name\. The DNS name maps to the private IP address of the file system's elastic network interface in your VPC\. Only resources within the associated VPC, resources connected with the associated VPC by AWS Direct Connect or VPN, or resources within peered VPCs can access your file system's network interface\. For more information, see [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) in the * Amazon VPC User Guide\.* 
 
 ## Amazon VPC Security Groups<a name="fsx-vpc-security-groups"></a>
 
-To further control network traffic going through your file system's elastic network interface within your VPC, you use security groups to limit access to your file systems\. A *security group *acts as a virtual firewall to control the traffic for its associated resources\. In this case, the associated resource is your file system's network interface\.
+ To further control network traffic going through your file system's elastic network interface within your VPC, you use security groups to limit access to your file systems\. A *security group *is a stateful firewall that controls the traffic to and from its associated network interfaces\. In this case, the associated resource is your file system's network interface\. 
 
-To use a security group to control access to your Amazon FSx file system, you add the inbound rules to control incoming traffic and outbound rules to control the outgoing traffic from your file system\. Make sure that you have the right network traffic rules in your security group to map your Amazon FSx file system's file share to a folder on your supported compute instance\.
+ To use a security group to control access to your Amazon FSx file system, add inbound and outbound rules\. Inbound rules control incoming traffic, and outbound rules control outgoing traffic from your file system\. Make sure that you have the right network traffic rules in your security group to map your Amazon FSx file system's file share to a folder on your supported compute instance\. 
 
 For more information on security group rules, see [Security Group Rules](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html#security-group-rules) in the *Amazon EC2 User Guide for Linux Instances\.*
 
@@ -27,7 +27,7 @@ For more information on security group rules, see [Security Group Rules](https:/
    1. Inbound and outbound rules to allow the following ports:
       + TCP/UDP 445 \(SMB\)
       + TCP 135 \(RPC\)
-      + TCP/UDP 1024\-65535 \(Ephemeral ports for RPC\)
+      + TCP/UDP 1024–65535 \(Ephemeral ports for RPC\)
 
       From and to IP addresses or security group IDs associated with the following source and destination resources:
       + Client compute instances from which you want to access the file system\.

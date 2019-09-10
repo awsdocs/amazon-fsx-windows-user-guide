@@ -6,12 +6,12 @@ With Amazon FSx, you can create a file system from a backup\. When you do so, yo
 + Availability Zone
 + Subnet
 + VPC security groups
-+ AWS Directory Service for Microsoft Active Directory
++ Active Directory Configuration
 + AWS KMS encryption key
 + Daily automatic backup start time
 + Weekly maintenance window
 
-The following procedure guides you through the process of creating a new file system from a backup\. Before you can create this file system, you must have an existing backup\. For more information, see [Using Backups](using-backups.md)
+The following procedure guides you through the process of creating a new file system from a backup\. Before you can create this file system, you must have an existing backup\. For more information, see [Working with Backups](using-backups.md)
 
 **To create a file system from an existing backup**
 

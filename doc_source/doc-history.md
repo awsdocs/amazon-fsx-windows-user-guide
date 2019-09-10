@@ -1,11 +1,15 @@
 # Document History<a name="doc-history"></a>
 + **API version:** 
-+ **Latest documentation update:** February 25, 2019
++ **Latest documentation update:** July 31, 2019
 
 The following table describes important changes to the *Amazon FSx Windows User Guide*\. For notifications about documentation updates, you can subscribe to the RSS feed\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Amazon FSx releases support for Microsoft Windows shadow copies](#doc-history) | You can now configure Windows shadow copies on your Amazon FSx for Windows File Server file systems\. Shadow copies enable your users to easily undo file changes and compare file versions by restoring files to previous versions\. For more information, see [Working with Shadow Copies](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/shadow-copies-fsxW.html)\. | July 31, 2019 | 
+| [Amazon FSx releases shared Microsoft Active Directory support ](#doc-history) | You can now join Amazon FSx for Windows File Server file systems to AWS Managed AD directories that are in a different VPC or in a different AWS account than the file system\. For more information, see [Active Directory Support](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/shared-mad.html)\. | June 25, 2019 | 
+| [Amazon FSx releases enhanced Microsoft Active Directory support ](#doc-history) | You can now join Amazon FSx for Windows File Server file systems to your self\-managed Microsoft Active Directory domains, either on\-premises or in the cloud\. For more information, see [Active Directory Support](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/aws-ad-integration-fsxW.html)\. | June 24, 2019 | 
+| [Amazon FSx complies with SOC certification](#doc-history) | Amazon FSx has been assessed to comply with SOC certification\. For more information, see [Security and Data Protection](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html#security-considerations)\. | May 16, 2019 | 
 | [Added clarifying note regarding AWS Direct Connect, VPN, and inter\-region VPC peering connection support](#doc-history) | Amazon FSx file systems created after February 22, 2019 are accessible using AWS Direct Connect, VPN, and inter\-region VPC peering\. For more information, see [Supported Access Methods](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/support-fsx-clients.html#access-methods)\. | February 25, 2019 | 
 | [AWS Direct Connect, VPN, and inter\-region VPC peering connection support added](#doc-history) | You can now access Amazon FSx for Windows File Server file systems from on\-premises resources and from resources in a different Amazon VPC or AWS account\. For more information, see [Supported Access Methods](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/support-fsx-clients.html#access-methods)\. | February 22, 2019 | 
 | [Amazon FSx is now generally available](#doc-history) | Amazon FSx for Windows File Server provides Microsoft Windows file servers that are fully managed, backed by a fully native Windows file system\. Amazon FSx for Windows File Server provides the features, performance, and compatibility to easily lift and shift enterprise applications to AWS\. | November 28, 2018 | 

@@ -1,4 +1,4 @@
-# Performance in Amazon FSx for Windows File Server<a name="performance"></a>
+# Getting the Best Performance in Amazon FSx for Windows File Server<a name="performance"></a>
 
 Amazon FSx for Windows File Server uses high\-performance SSD storage to provide consistent submillisecond latencies for file operations\.
 

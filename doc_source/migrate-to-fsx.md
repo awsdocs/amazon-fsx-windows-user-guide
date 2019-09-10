@@ -2,15 +2,14 @@
 
 Built on Microsoft Windows Server, Amazon FSx for Windows File Server enables you to migrate your existing file datasets fully into your Amazon FSx file systems\. You can migrate the data for each file\. You can also migrate all the relevant file metadata including attributes, time stamps, access control lists \(ACLs\), owner information, and auditing information\. With this total migration support, Amazon FSx enables moving your Windows\-based workloads and applications relying on these file datasets to the AWS Cloud\.
 
-Use the following topic as a guide through the process for copying existing file data\. As you perform this copy, you preserve all file metadata from your on\-premises data centers or from your self\-managed file servers on Amazon EC2\.
+Use the following topics as a guide through the process for copying existing file data\. As you perform this copy, you preserve all file metadata from your on\-premises data centers or from your self\-managed file servers on Amazon EC2\.
 
 ## Prerequisites<a name="fsx-migrate-prereqs"></a>
 
 Before you begin, make sure that you do the following:
-+ Deploy an AWS Directory Service for Microsoft Active Directory \(AWS Managed Microsoft AD\) directory in your Amazon VPC\.
-+ Establish a one\-way forest\-level trust relationship between the AWS Managed Microsoft AD directory and your on\-premises Microsoft AD directory\. In this relationship, the AWS Managed Microsoft AD directory forest should trust your on\-premises Microsoft AD forest\.
-+ Add your on\-premises AD's **Domain Administrators** group as a member of the **AWS Delegated FSx Administrators** group in your AWS Managed Microsoft AD domain\. Do so by using the Active Directory Users and Computers remote administration tool on an instance that is joined to your AWS Managed Microsoft AD\. You do this to ensure that you have sufficient administrative privileges to transfer owner, auditing, and other sensitive information to your Amazon FSx file system\. 
-+ Create an Amazon FSx file system in the same Amazon VPC, joined to your AWS Managed Microsoft AD directory\.
++ Establish network connectivity \(via AWS Direct Connect or VPN\) between your on\-premises Active Directory and the Amazon VPC in which you wish to create the Amazon FSx file system\.
++ Create a service account on your Active Directory with delegated permissions to join computers to the domain\. For more information, see [ Using Amazon FSx with your Self\-Managed Microsoft Active Directory](docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)\.
++ Create an Amazon FSx file system, joined to your self\-managed \(on\-premises\) Microsoft AD directory\.
 + Note the location \(for example, `\\Source\Share`\) of the file share \(either on\-premises or in AWS\) that contains the existing files you want to transfer over to Amazon FSx\.
 + Note the location \(for example, `\\Target\Share`\) of the file share on your Amazon FSx file system to which you want to transfer over your existing files\.
 
@@ -24,7 +23,7 @@ You can migrate existing files to Amazon FSx by using the following procedure\.
 
 1. Launch a Windows Server 2016 Amazon EC2 instance in the same Amazon VPC as that of your Amazon FSx file system\.
 
-1. Log on to the Amazon EC2 instance as a user on your AWS Managed Microsoft AD domain\.
+1. Connect to your Amazon EC2 instance\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. Open the **Command Prompt** and map the source file share on your existing file server \(on\-premises or in AWS\) to a drive letter \(for example, *Y*:\) as follows\. As part of this, you provide credentials for a member of your on\-premises AD's **Domain Administrators** group\.
 
@@ -40,10 +39,10 @@ You can migrate existing files to Amazon FSx by using the following procedure\.
 1. Map the target file share on your Amazon FSx file system to a different drive letter \(for example, *Z*:\) on your Amazon EC2 instance as follows\. As part of this, you provide credentials for a member of your on\-premises AD's **Domain Administrators** group\.
 
    ```
-   C:\>net use Z: \\fs-0123456789abcdef0.my-aws-ad.com\share /user:mydata.com\Administrator
-   Enter the password for 'fs-0123456789abcdef0.my-aws-ad.com': _
+   C:\>net use Z: \\amznfsxabcdef1.mydata.com\share /user:mydata.com\Administrator
+   Enter the password for 'amznfsxabcdef1.mydata.com': _
    
-   Drive Z: is now connected to \\fs-0123456789abcdef0.my-aws-ad.com\share.
+   Drive Z: is now connected to \\amznfsxabcdef1.mydata.com\share.
    
    The command completed successfully.
    ```
@@ -58,7 +57,7 @@ You can migrate existing files to Amazon FSx by using the following procedure\.
 
    The example command preceding uses the following elements and options:
    + Y – Refers to the source share located in the on\-premises Active Directory forest mydata\.com\.
-   + Z – Refers to the target share \\\\fs\-0c322f485eb48aec1\\share on Amazon FSx\.
+   + Z – Refers to the target share \\\\amznfsxabcdef1\.mydata\.com\\share on Amazon FSx\.
    + /copy – Specifies the following file properties to be copied: 
      + D – data
      + A – attributes

@@ -2,9 +2,6 @@
 
 You can see Amazon FSx metrics for CloudWatch in many ways\. You can view them through the CloudWatch console, or you can access them using the CloudWatch CLI or the CloudWatch API\. The following procedures show you how to access the metrics using these various tools\.
 
-**Important**  
-Amazon CloudWatch metrics are available for Amazon FSx for Windows File Server file systems created after May 1, 2019\. If you want to use CloudWatch on a file system created before May 1, 2019, create a new file system from a recent backup\. To learn more, see [Restoring Backups](using-backups.md#restoring-backups)\.
-
 **To view metrics using the CloudWatch console**
 
 1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch)\.

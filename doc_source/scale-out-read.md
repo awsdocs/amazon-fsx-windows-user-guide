@@ -12,11 +12,11 @@ You can use DFS Replication to replicate a file share’s data to multiple other
 
 **To set up a DFS Replication group**
 
-1. Before you can manage DFS, you must launch the instance and connect it to the AWS Directory Service for Microsoft Active Directory to which you've joined your Amazon FSx file systems\. To perform this action, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance as a user in the **AWS Delegated FSx Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. Connect to your instance as an Active Directory user that is a member of both the file system administrators group \(**AWS Delegated FSx Administrators** in AWS Managed AD, and **Domain Admins** or the custom group you specified during creation for file system administration in your self\-managed Microsoft AD\) as well as a group that has DFS administration permissions delegated to it \(**AWS Delegated Distributed File System Administrators** in AWS Managed AD, and **Domain Admins** or another group to which you’ve delegated DFS administration permissions in your self\-managed AD\)\.
 
 1. Open the **Start** menu and type **PowerShell**\. From the list of matches, choose **Windows PowerShell**\.
 
@@ -33,7 +33,6 @@ You can use DFS Replication to replicate a file share’s data to multiple other
    $Folder = "Name of the DFS Replication folder"
    
    New-DfsReplicationGroup –GroupName $Group
-   Grant-DfsrDelegation –GroupName $Group –AccountName "FSxAdmins" –Force
    New-DfsReplicatedFolder –GroupName $Group –FolderName $Folder
    ```
 
@@ -42,10 +41,11 @@ You can use DFS Replication to replicate a file share’s data to multiple other
 1. Determine the Active Directory computer name associated with the write file system and the first read file system with the following commands:
 
    ```
-   $WriteFSDnsName = "fs-abcdef0123456789.example.com"
-   $ReadFSDnsName = "fs-0123456789abcdef.example.com"
-   $WriteFSComputerName = (Resolve-DnsName ${WriteFSDnsName} -Type CNAME).NameHost
-   $ReadFSComputerName = (Resolve-DnsName ${ReadFSDnsName} -Type CNAME).NameHost
+   $WriteFSDnsName = "DNS name of WriteFS"
+   $ReadFSDnsName = "DNS name of ReadFS"
+   
+   $WriteFSComputerName = (Get-ADObject -Filter "objectClass -eq 'Computer' -and ServicePrincipalName -eq 'HOST/$WriteFSDnsName'").Name
+   $ReadFSComputerName = (Get-ADObject -Filter "objectClass -eq 'Computer' -and ServicePrincipalName -eq 'HOST/$ReadFSDnsName'").Name
    ```
 
 1. Add your first read and write file systems as members of the DFS Replication group with the following commands:
@@ -77,10 +77,11 @@ Finally, you can configure the DFS Replication connections for additional read f
 $Group = "Group"
 $Folder = "Folder"
 
-$WriteFSDnsName = "fs-abcdef0123456789.example.com"
-$ReadFSDnsName = "fs-0123456789abcdef.example.com"
-$WriteFSComputerName = (Resolve-DnsName ${WriteFSDnsName} -Type CNAME).NameHost
-$ReadFSComputerName = (Resolve-DnsName ${ReadFSDnsName} -Type CNAME).NameHost
+$WriteFSDnsName = "DNS name of WriteFS"
+$ReadFSDnsName = "DNS name of ReadFS"
+
+$WriteFSComputerName = (Get-ADObject -Filter "objectClass -eq 'Computer' -and ServicePrincipalName -eq 'HOST/$WriteFSDnsName'").Name
+$ReadFSComputerName = (Get-ADObject -Filter "objectClass -eq 'Computer' -and ServicePrincipalName -eq 'HOST/$ReadFSDnsName'").Name
 
 Add-DfsrMember -GroupName ${Group} -ComputerName ${ReadFSComputerName}
 

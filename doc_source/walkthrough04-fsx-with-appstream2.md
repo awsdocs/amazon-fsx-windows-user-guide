@@ -22,11 +22,11 @@ There are three procedures you'll need to perform to complete this task\.
 
 1. Sign into the AppStream 2\.0 console: [https://console\.aws\.amazon\.com/appstream2](https://console.aws.amazon.com/appstream2)
 
-1. Choose **Directory Configs** from the navigation menu, and create a Directory Config object\. For more information, see [Using Active Directory with AppStream 2\.0](https://docs.aws.amazon.com/appstream2/latest/developerguide/active-directory.html) in the *Amazon AppStream 2\.0 Developer Guide*\.
+1. Choose **Directory Configs** from the navigation menu, and create a Directory Config object\. For more information, see [Using Active Directory with AppStream 2\.0](https://docs.aws.amazon.com/appstream2/latest/developerguide/active-directory.html) in the *Amazon AppStream 2\.0 Administration Guide*\.
 
 1. Choose **Images**, **Image Builder**, and launch a new image builder\.
 
-1. Choose the directory config object created earlier in the image builder launch wizard to join the image builder to your Active Directory\.
+1. Choose the directory config object created earlier in the image builder launch wizard to join the image builder to your Active Directory domain\.
 
 1. Launch the image builder in the same VPC as that of your Amazon FSx file system\. Make sure to associate the image builder with the same AWS Managed Microsoft AD directory to which your Amazon FSx file system is joined\. The VPC security groups that you associate with the image builder must allow access to your Amazon FSx file system\.
 
@@ -56,7 +56,7 @@ There are three procedures you'll need to perform to complete this task\.
 
 1. Create your image and assign it to an AppStream 2\.0 fleet\. Ensure that you also join the AppStream 2\.0 fleet to the same Active Directory domain that you used for image builder\. Launch the fleet in the same VPC that is used by your Amazon FSx file system\. The VPC security groups that you associate with the fleet must provide access to your Amazon FSx file system\.
 
-1. Launch a streaming session using SAML SSO\. To connect to an Active Directory joined fleet, you have to configure single\-sign on federation using a SAML provider\. For more information, see [Single Sign\-on Access to AppStream 2\.0 Using SAML 2\.0](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers.html) in the *Amazon AppStream 2\.0 Developer Guide*\.
+1. Launch a streaming session using SAML SSO\. To connect to an fleet that is joined to Active Directory, configure single sign\-on federation using a SAML provider\. For more information, see [Single Sign\-on Access to AppStream 2\.0 Using SAML 2\.0](https://docs.aws.amazon.com/appstream2/latest/developerguide/external-identity-providers.html) in the *Amazon AppStream 2\.0 Administration Guide*\.
 
 1. Your Amazon FSx file share is mapped to the S: drive letter within the streaming session\.
 

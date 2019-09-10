@@ -1,19 +1,19 @@
-# Using Backups<a name="using-backups"></a>
+# Working with Backups<a name="using-backups"></a>
 
-Creating regular backups for your file system is a best practice that complements the replication that Amazon FSx for Windows File Server performs for your file system\. It also enables you to restore from user modification of data\. Working with Amazon FSx backups is easy, whether it's creating backups, restoring a file system from a backup, or deleting a backup\.
+Creating regular backups for your file system is a best practice that complements the replication that Amazon FSx for Windows File Server performs for your file system\. Amazon FSx backups help support your backup retention and compliance needs\. Working with Amazon FSx backups is easy, whether it's creating backups, restoring a file system from a backup, or deleting a backup\.
 
 With Amazon FSx, backups are file\-system\-consistent, highly durable, and incremental\. To ensure file system consistency, Amazon FSx uses the Volume Shadow Copy Service \(VSS\) in Microsoft Windows\. To ensure high durability, Amazon FSx stores backups in Amazon Simple Storage Service \(Amazon S3\)\. Amazon FSx backups are incremental, which means that only the changes after your most recent backup are saved\. Thus, you can save on backup storage costs by not duplicating data\. Using Amazon FSx, you can create a new file system from a backup, effectively restoring a point\-in\-time snapshot of the file system\.
 
 **Topics**
-+ [Automatic Daily Backups](#automatic-backups)
++ [Working with Automatic Daily Backups](#automatic-backups)
 + [Creating Backups](#creating-backups)
 + [Restoring Backups](#restoring-backups)
 + [Deleting Backups](#delete-backups)
 + [Setting Up a Custom Backup Schedule](custom-backup-schedule.md)
 
-## Automatic Daily Backups<a name="automatic-backups"></a>
+## Working with Automatic Daily Backups<a name="automatic-backups"></a>
 
-Amazon FSx automatically takes backups of your file systems once a day\. These daily backups are taken during the daily backup window that was established when you created the file system\. At some point during the daily backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. When you choose your daily backup window, we recommend that you choose a convenient time of the day outside of the normal operating hours for the applications that will use the file system\.
+Amazon FSx automatically takes backups of your file systems once a day\. These daily backups are taken during the daily backup window that was established when you created the file system\. At some point during the daily backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. When you choose your daily backup window, we recommend that you choose a convenient time of the day\. This time ideally is outside of the normal operating hours for the applications that use the file system\.
 
 Backups are kept for a certain period of time, known as a retention period\. By default, backups are retained for 7 days\. However, you can change the retention period to anywhere in a range of 0–35 days\.
 
@@ -24,7 +24,7 @@ You can use the AWS CLI or one of the AWS SDKs to change the backup window, and 
 
 ## Creating Backups<a name="creating-backups"></a>
 
-Amazon FSx allows you to take additional backups of your file systems at any time using the Amazon FSx Management Console, the AWS CLI, or one of the AWS SDKs\. The easiest way to create a backup is through the console\. The following procedure guides you through how to create a user\-initiated backup in the console for a file system that already exists\.
+Amazon FSx enables you to take additional backups of your file systems at any time\. You can do so using the Amazon FSx Management Console, the AWS CLI, or one of the AWS SDKs\. The easiest way to create a backup is through the console\. The following procedure guides you through how to create a user\-initiated backup in the console for a file system that already exists\.
 
 **To create a file system backup**
 
@@ -34,7 +34,7 @@ Amazon FSx allows you to take additional backups of your file systems at any tim
 
 1. From **Actions**, choose **Create backup**\.
 
-1. In the **Create backup** dialog box that opens, provide a name for your backup\. Backup names can be a maximum of 256 Unicode characters, including letters, whitespace, numbers, and the special characters \. \+ \- = \_ : /
+1. In the **Create backup** dialog box that opens, provide a name for your backup\. Backup names can be a maximum of 256 Unicode characters, including letters, white space, numbers, and the special characters \. \+ \- = \_ : /
 
 1. Choose **Create backup**\.
 

@@ -8,6 +8,7 @@ Following, you can learn how to get started using Amazon FSx\. This getting star
 + [Step 3: Write Data to Your File Share](#getting-started-step3)
 + [Step 4: Back Up Your File System](#getting-started-step4)
 + [Step 5: Clean Up Resources](#getting-started-step5)
++ [Amazon FSx File System Status](file-system-lifecycle-states.md)
 
 ## Step 1: Create Your File System<a name="getting-started-step1"></a>
 
@@ -19,7 +20,7 @@ To create your Amazon FSx file system, you must create your Amazon Elastic Compu
 
 1. From the console dashboard, choose **Create file system** to start the file system creation wizard\.
 
-1. Provide a name for your file system\. You can use a maximum of 256 Unicode letters, whitespace, and numbers, plus the special characters \+ \- = \. \_ : /
+1. Provide a name for your file system\. You can use a maximum of 256 Unicode letters, white space, and numbers, plus the special characters \+ \- = \. \_ : /
 
 1. Provide the **storage capacity** for your file system, in GiB\. This value can be any whole number in the range of 300 to 65,536\.
 
@@ -44,11 +45,13 @@ To create your Amazon FSx file system, you must create your Amazon Elastic Compu
 **Note**  
 In some cases, you might have modified the rules of your AWS Managed Microsoft AD's security group from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. To learn more about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
 
-1. For **Windows authentication**, choose the fully qualified domain name for your AWS Directory Service directory from the list\.
+1. For **Windows authentication**, choose **AWS Managed Microsoft Active Directory** and enter the fully qualified domain name for your AWS Directory Service directory from the list\. 
 
-1. Choose **Review and create**\.
+1. Keep **Encryption** set to off\.
 
-1. Review the settings for your Amazon FSx file system, and choose **Create file system**\.
+1. Choose **Next**\. 
+
+1.  Review the file system configuration on the **Create file system** page, and choose **Create file system**\. 
 
 1. After the file system has been created, choose the file system ID in the **File Systems** dashboard, choose **Attach**, and note the fully qualified domain name for your file system\. You need it in a later step\.
 
@@ -100,7 +103,7 @@ Now that you've had a chance to use your Amazon FSx file system and its file sha
 
 1. From the **Overview** tab for your file system, choose **Create backup**\.
 
-1. In the **Create backup** dialog box that opens, provide a name for your backup\. This name can contain a maximum of 256 Unicode letters and include, whitespace, numbers, and the following special characters: \+ \- = \. \_ : / 
+1. In the **Create backup** dialog box that opens, provide a name for your backup\. This name can contain a maximum of 256 Unicode letters and include white space, numbers, and the following special characters: \+ \- = \. \_ : / 
 
 1. Choose **Create backup**\.
 

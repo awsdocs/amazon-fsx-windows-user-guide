@@ -16,7 +16,7 @@ The following procedure guides you through creating a DFS solution on Amazon FSx
 
 1. Connect to one of the DFS Namespace servers launched in the previous step as a user in the **AWS Delegated Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
-1. Access the DFS management console\. Open the **Start** menu and run **dfsmgmt\.msc**\. This will open the DFS Management GUI tool\.
+1. Access the DFS Management Console\. Open the **Start** menu and run **dfsmgmt\.msc**\. This opens the DFS Management GUI tool\.
 
 1. Choose **Action** then **New Namespace**, type in the computer name of the first DFS Namespace server you launched for **Server** and choose **Next**\.
 

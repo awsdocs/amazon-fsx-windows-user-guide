@@ -6,7 +6,7 @@ Amazon FSx supports a broad set of enterprise Windows workloads with fully manag
 
 With file storage on Amazon FSx, the code, applications, and tools that Windows developers and administrators use today can continue to work unchanged\. Windows applications and workloads ideal for FSx include business applications, home directories, web serving, content management, data analytics, software build setups, and media processing workloads\.
 
-As a fully managed service, Amazon FSx for Windows File Server eliminates the administrative overhead of setting up and provisioning file servers and storage volumes\. Additionally, Amazon FSx keeps Windows software up\-to\-date, detects and addresses hardware failures, and performs backups\. It also provides rich integration with other AWS services like AWS Directory Service for Microsoft Active Directory, Amazon WorkSpaces, AWS Key Management Service, and AWS CloudTrail\.
+As a fully managed service, Amazon FSx for Windows File Server eliminates the administrative overhead of setting up and provisioning file servers and storage volumes\. Additionally, Amazon FSx keeps Windows software up\-to\-date, detects and addresses hardware failures, and performs backups\. It also provides rich integration with other AWS services like [AWS IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html), [AWS Directory Service for Microsoft Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html), [Amazon WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces.html), [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html), and [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)\.
 
 ## Amazon FSx Resources: File Systems and File Shares<a name="fsx-resources"></a>
 
@@ -22,7 +22,7 @@ You can access your file shares from on\-premises compute instances using AWS Di
 
 ## Security and Data Protection<a name="security-considerations"></a>
 
-Amazon FSx provides multiple levels of security and compliance to help ensure that your data is protected\. It automatically encrypts data at rest \(for both file systems and backups\) using keys that you manage in AWS Key Management Service \(AWS KMS\)\. Data in transit is also automatically encrypted using SMB Kerberos session keys\. It has been assessed to comply with ISO and PCI\-DSS certifications, and is HIPAA eligible\.
+Amazon FSx provides multiple levels of security and compliance to help ensure that your data is protected\. It automatically encrypts data at rest \(for both file systems and backups\) using keys that you manage in AWS Key Management Service \(AWS KMS\)\. Data in transit is also automatically encrypted using SMB Kerberos session keys\. It has been assessed to comply with ISO, PCI\-DSS, and SOC certifications, and is HIPAA eligible\.
 
 Amazon FSx provides access control at the file and folder level with Windows access control lists \(ACLs\)\. It provides access control at the file system level using Amazon Virtual Private Cloud \(Amazon VPC\) security groups\. In addition, it provides access control at the API level using AWS Identity and Access Management \(IAM\) access policies\. Users accessing file systems are authenticated with Microsoft Active Directory\. Amazon FSx integrates with AWS CloudTrail to monitor and log your API calls letting you see actions taken by users on your Amazon FSx resources\.
 
@@ -51,8 +51,8 @@ In this guide, we make the following assumptions:
 To create an Amazon FSx file system, you need the following:
 + An AWS account with the permissions necessary to create an Amazon FSx file system and an Amazon EC2 instance\. For more information, see [Setting Up](setting-up.md)\.
 + An Amazon EC2 instance running Microsoft Windows Server in the VPC based on the Amazon VPC service that you want to associate with your Amazon FSx file system\. For information on how to create one, see [Getting Started with Amazon EC2 Windows Instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/EC2_GetStarted.html) in the *Amazon EC2 User Guide for Windows Instances\.*
-+ Amazon FSx works with Microsoft Active Directory to perform user authentication\. You join your FSx file system to an AWS Directory Service for Microsoft Active Directory\. For more information, see [Step 1: Create Your File System](getting-started.md#getting-started-step1)\.
-+ This guide assumes that you haven't changed the rules on the default security group for your VPC based on the Amazon VPC service\. If you have, you need to ensure that you add the necessary rules to allow network traffic from your Amazon EC2 instance to your Amazon FSx file system\. For more details, see [Security](security.md)\.
++ Amazon FSx works with Microsoft Active Directory to perform user authentication and access control\. You join your FSx file system to a Microsoft Active Directory while creating it\. For more information, see [Working with Active Directory in Amazon FSx for Windows File Server](aws-ad-integration-fsxW.md)\.
++ This guide assumes that you haven't changed the rules on the default security group for your VPC based on the Amazon VPC service\. If you have, you need to ensure that you add the necessary rules to allow network traffic from your Amazon EC2 instance to your Amazon FSx file system\. For more details, see [Security in Amazon FSx](security.md)\.
 + Install and configure the AWS Command Line Interface \(AWS CLI\)\. Supported versions are 1\.9\.12 and newer\. For more information, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) in the *AWS Command Line Interface User Guide\.*
 **Note**  
 You can check the version of the AWS CLI you're using with the `aws --version` command\.
@@ -67,8 +67,8 @@ If you are a first\-time user of Amazon FSx, we recommend that you read the foll
 
 1. If you're ready to create your first Amazon FSx file system, try the [Getting Started with Amazon FSx](getting-started.md)\.
 
-1. For information on performance, see [Performance in Amazon FSx for Windows File Server ](performance.md)\.
+1. For information on performance, see [Getting the Best Performance in Amazon FSx for Windows File Server ](performance.md)\.
 
-1. For Amazon FSx security details, see [Security](security.md)\.
+1. For Amazon FSx security details, see [Security in Amazon FSx](security.md)\.
 
 1. For information on the Amazon FSx API, see [Amazon FSx API Reference](https://docs.aws.amazon.com/fsx/latest/APIReference/Welcome.html)\.

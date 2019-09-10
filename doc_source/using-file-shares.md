@@ -12,12 +12,9 @@ To access your file shares, you use the Windows *Map Network Drive* functionalit
 
 Following, you can find procedures for mapping a file share on the different supported compute instances\.
 
-------
-#### [ Windows GUI ]
+### To Map a File Share on an Amazon EC2 Windows Instance \(Console\)<a name="map-file-share-ec2-win-console"></a>
 
-**To map a file share on an Amazon EC2 Windows instance using the GUI**
-
-1. Before you can map a file share on a Windows instance, you must launch the instance and connect it to an AWS Directory Service for Microsoft Active Directory\. To perform this action, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
@@ -27,37 +24,33 @@ Following, you can find procedures for mapping a file share on the different sup
 
 1. On the navigation pane, open the context \(right\-click\) menu for **Network** and choose **Map Network Drive**\.
 
-1. Select a drive letter of your choice for **Drive**\.
+1. Choose a drive letter of your choice for **Drive**\.
 
-1. Type in the fully qualified domain name \(FQDN\) name for your file share, which you construct from the Domain Name Service \(DNS\) name for your file system and the name of your Windows file share\. An example is \\\\fs\-*012345678901234567*\.*ad\-domain*\.com\\share for **Folder**\.
+1. Enter the fully qualified domain name \(FQDN\) name for your file share, which you construct from the Domain Name Service \(DNS\) name for your file system and the name of your Windows file share\. An example is `\\fs-012345678901234567.ad-domain.com\share` for **Folder**\.
 
-1. Choose whether the file share should **Reconnect at sign\-in** and then choose **Finish**\.
+1. Choose an option for **Reconnect at sign\-in**, which indicates whether the file share should reconnect at sign in, and then choose **Finish**\.
 
-------
-#### [ Windows Command Prompt ]
+### To Map a File Share on an Amazon EC2 Windows Instance \(Command Prompt\)<a name="map-file-share-ec2-win-command"></a>
 
-**To map a file share on an Amazon EC2 Windows instance using the command prompt**
-
-1. Launch the EC2 Windows instance and connect it to an AWS Directory Service for Microsoft Active Directory\. To do so, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance as a user in your Active Directory\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. Connect to your instance as a user in your AWS Managed Microsoft AD directory\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. After you are connected, open a command prompt window\.
 
-1. Mount the file share with the following command, with a drive letter of your choice, for example *H*:
+1. Mount the file share with the following command, with a drive letter of your choice, for example `H`\.
 
    ```
    net use DriveLetter: \\fs-012345678901234567.ad-domain.com\share /persistent:yes
    ```
 
-------
-#### [ Linux Mounting ]
+### To Mount a File Share on an Amazon EC2 Linux Instance<a name="map-file-share-ec2-linux-command"></a>
 
-**To mount a file share on an Amazon EC2 Linux instance**
-
-1. Launch the Amazon EC2 Linux instance and connect it to an AWS Directory Service for Microsoft Active Directory\. To perform this action, you must [Manually Join a Linux Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_linux_instance.html) as described in the *AWS Directory Service Administration Guide*\.
+1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+   + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
+   + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
 1. Connect to your instance\. For more information, see [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
@@ -69,27 +62,23 @@ Following, you can find procedures for mapping a file share on the different sup
    sudo yum install cifs-utils
    ```
 
-1. Mount the file share with the following command:
+1. Mount the file share with the following command\.
 
    ```
    sudo mount -t cifs -o vers=3.0,sec=krb5,cruid=user@DOMAIN //fs-012345678901234567.ad-domain.com/share local_path
    ```
 
-------
-
 ## Managing File Shares<a name="managing-file-shares"></a>
 
 Following, you can find a description of the various methods you can use to manage your file shares\. You can manage file shares on your Amazon FSx file system with the **Shared Folders** app\. The Shared Folders tool provides a central location for managing all shared folders on a Windows server\. The following procedures detail how to manage your file shares\.
 
-1. Before you can manage a file share on a Windows instance, you must launch the instance and connect it to an AWS Directory Service for Microsoft Active Directory\. To perform this action, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Using the AWS Directory Service console, add a user to the **AWS Delegated FSx Administrators** group in your domain\. For more information on adding a user to a group, see [Add Users and Groups to AWS Managed Microsoft AD](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_create_users_groups.html)\.
+1. Connect to your instance as a user that is a member of the file system administrators group \(**AWS Delegated FSx Administrators** in AWS Managed AD, and **Domain Admins** or the custom group you specified during creation for file system administration in your self\-managed Microsoft AD\)\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
-1. Connect to your instance as a user in the **AWS Delegated FSx Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
-
-1. Open the **Start** menu and run **fsmgmt\.msc**\. Doing this opens the **Shared Folders** GUI tool\.
+1. Open the **Start** menu and run **fsmgmt\.msc** using `Run As Administrator`\. Doing this opens the **Shared Folders** GUI tool\.
 
 1. Choose **Action**, and then choose **Connect to another computer**\.
 

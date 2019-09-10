@@ -8,9 +8,6 @@ You can monitor file systems using Amazon CloudWatch, which collects and process
 
 As with Amazon EFS, Amazon S3, and Amazon EBS, Amazon FSx CloudWatch metrics are reported as raw *Bytes*\. Bytes are not rounded to either a decimal or binary multiple of the unit\.
 
-**Important**  
-Amazon CloudWatch metrics are available for Amazon FSx for Windows File Server file systems created after May 1, 2019\. If you want to use CloudWatch on a file system created before May 1, 2019, create a new file system from a recent backup\. To learn more, see [Restoring Backups](using-backups.md#restoring-backups)\.
-
 Amazon FSx for Windows File Server publishes the following metrics into the `AWS/FSx` namespace in CloudWatch\. For each metric, Amazon FSx for Windows File Server emits a data point per file system per minute\.
 
 
