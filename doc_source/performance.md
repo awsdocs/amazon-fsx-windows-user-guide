@@ -20,6 +20,8 @@ A file system can always achieve at least its baseline throughput\. File systems
 **Note**  
 These details apply to almost all file system configurations\. However, if configuring high levels of throughput capacity \(file server capacity\) with small amounts of storage, keep in mind that the storage volumes for a file system have a maximum throughput of 750 KBps per GB; for small file systems with high levels of throughput, the storage volume throughput may impact the maximum throughput level your file system can achieve\.
 
+Also note that for SSD based storage, FSx supports 3 IOPS per GB of storage.
+
 ## Higher Throughput with Caching<a name="fsx-higher-throughput"></a>
 
 Amazon FSx also provides in\-memory caching on the Windows file server\. Depending on your workload's access patterns, you may observe even higher levels of throughput \(between 600 MBps and 3 GBps\) by benefiting from this server\-side caching\.
