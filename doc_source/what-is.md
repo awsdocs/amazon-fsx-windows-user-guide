@@ -1,6 +1,6 @@
 # What Is Amazon FSx for Windows File Server?<a name="what-is"></a>
 
-Amazon FSx for Windows File Server provides fully managed Microsoft Windows file servers, backed by a fully native Windows file system\. Amazon FSx for Windows File Server has the features, performance, and compatibility to easily lift and shift enterprise applications to AWS\.
+Amazon FSx for Windows File Server provides fully managed Microsoft Windows file servers, backed by a fully native Windows file system\. Amazon FSx for Windows File Server has the features, performance, and compatibility to easily lift and shift enterprise applications to the AWS cloud\.
 
 Amazon FSx supports a broad set of enterprise Windows workloads with fully managed file storage built on Microsoft Windows Server\. Amazon FSx has native support for Windows file system features and for the industry\-standard Server Message Block \(SMB\) protocol to access file storage over a network\. Amazon FSx is optimized for enterprise applications in the AWS Cloud, with native Windows compatibility, enterprise performance and features, and consistent submillisecond latencies\.
 
@@ -8,11 +8,11 @@ With file storage on Amazon FSx, the code, applications, and tools that Windows 
 
 As a fully managed service, Amazon FSx for Windows File Server eliminates the administrative overhead of setting up and provisioning file servers and storage volumes\. Additionally, Amazon FSx keeps Windows software up\-to\-date, detects and addresses hardware failures, and performs backups\. It also provides rich integration with other AWS services like [AWS IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html), [AWS Directory Service for Microsoft Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html), [Amazon WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces.html), [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html), and [AWS CloudTrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)\.
 
-## Amazon FSx Resources: File Systems and File Shares<a name="fsx-resources"></a>
+## Amazon FSx Resources: File Systems, Backups, and File Shares<a name="fsx-resources"></a>
 
 The primary resources in Amazon FSx are *file systems* and *backups*\. A file system is where you store and access your files and folders\. A file system is made up of a Windows file server and storage volumes, and is accessed with its DNS name\. When you create a file system, you specify an amount of storage capacity \(in GiB\) and an amount of throughput capacity \(in MBps\)\. All storage is SSD\-based, providing consistent submillisecond file operation latencies\.
 
-A Windows file share is a specific folder \(and its subfolders\) within your file system that you make accessible to your compute instances with SMB\. Your file system already comes with a default Windows file share\. You can create and manage as many other Windows file shares as you want using the Windows **Shared Folders** graphical user interface \(GUI\) tool\.
+A Windows file share is a specific folder \(and its subfolders\) within your file system that you make accessible to your compute instances with SMB\. Your file system already comes with a default Windows file share\. You can create and manage as many other Windows file shares as you want using the Shared Folders graphical user interface \(GUI\) tool on Windows\. For more information, see [Using Microsoft Windows File Shares](using-file-shares.md)\.
 
 ### Accessing File Shares<a name="fsx-access-shares"></a>
 
@@ -26,15 +26,19 @@ Amazon FSx provides multiple levels of security and compliance to help ensure th
 
 Amazon FSx provides access control at the file and folder level with Windows access control lists \(ACLs\)\. It provides access control at the file system level using Amazon Virtual Private Cloud \(Amazon VPC\) security groups\. In addition, it provides access control at the API level using AWS Identity and Access Management \(IAM\) access policies\. Users accessing file systems are authenticated with Microsoft Active Directory\. Amazon FSx integrates with AWS CloudTrail to monitor and log your API calls letting you see actions taken by users on your Amazon FSx resources\.
 
-Additionally, it protects your data by taking highly durable backups of your file system automatically on a daily basis and allows you to take additional backups at any point\.
+Additionally, it protects your data by taking highly durable backups of your file system automatically on a daily basis and allows you to take additional backups at any point\. For more information, see [Security in Amazon FSx](security.md)\.
 
-## DFS Support<a name="DFS-support"></a>
+## Availability and Durability<a name="avail_durability"></a>
 
-Amazon FSx supports the use of Microsoft Distributed File System \(DFS\)\. Amazon FSx uses DFS for file system deployments across multiple AZs, organizing data on multiple file systems into one common folder structure, for scale\-out performance\.
+Amazon FSx for Windows File Server oﬀers file systems with two levels of availability and durability\. Single\-AZ file ensure high availability within a single Availability Zone \(AZ\) by automatically detecting and addressing component failures\. In addition, Multi\-AZ file systems provide high availability and failover support across multiple AZs by provisioning and maintaining a standby file server in a separate AZ within an AWS Region\. To learn more about Single\-AZ and Multi\-AZ file system deployments, see [Availability and Durability: Single\-AZ and Multi\-AZ File Systems](high-availability-multiAZ.md)\.
+
+## Managing File Systems<a name="managing-FSxW"></a>
+
+You can administer your Amazon FSx for Windows File Server file systems using custom remote management PowerShell commands, or using the Windows\-native GUI in some cases\. To learn more about managing Amazon FSx file systems, see [Administering File Systems](administering-file-systems.md)\.
 
 ## Pricing for Amazon FSx<a name="pricing"></a>
 
-With Amazon FSx, there are no upfront hardware or software costs, and you pay for only the resources used, with no minimum commitments, setup costs, or additional fees\. For information about the pricing and fees associated with the service, see [Amazon FSx for Windows File Server Pricing](https://aws.amazon.com//fsx/windows/pricing)\.
+With Amazon FSx, there are no upfront hardware or software costs, and you pay for only the resources used, with no minimum commitments, setup costs, or additional fees\. For information about the pricing and fees associated with the service, see [Amazon FSx for Windows File Server Pricing](http://aws.amazon.com/fsx/windows/pricing)\.
 
 ## Assumptions<a name="assumptions"></a>
 
@@ -67,7 +71,7 @@ If you are a first\-time user of Amazon FSx, we recommend that you read the foll
 
 1. If you're ready to create your first Amazon FSx file system, try the [Getting Started with Amazon FSx](getting-started.md)\.
 
-1. For information on performance, see [Getting the Best Performance in Amazon FSx for Windows File Server ](performance.md)\.
+1. For information on performance, see [Amazon FSx for Windows File Server PerformancePerformance](performance.md)\.
 
 1. For Amazon FSx security details, see [Security in Amazon FSx](security.md)\.
 

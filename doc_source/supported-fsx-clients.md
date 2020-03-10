@@ -13,12 +13,12 @@ Amazon FSx supports connecting to your file system from a wide variety of comput
 
 The following AWS compute instances are supported for use with Amazon FSx:
 + Amazon Elastic Compute Cloud \(Amazon EC2\) instances\.
-+ Amazon WorkSpaces instances – to learn more, see the AWS blog post [ Using Amazon FSx for Windows File Server with Amazon WorkSpaces](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-for-windows-file-server-with-amazon-workspaces/)\.
-+ Amazon AppStream 2\.0 instances – to learn more, see the AWS blog post [ Using Amazon FSx with Amazon AppStream 2\.0](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-with-amazon-appstream-2-0/)\. 
-+  VMs running in VMware Cloud on AWS environments – to learn more, see the AWS blog post [Storing and Sharing Files with Amazon FSx for Windows File Server in a VMware Cloud on AWS Environment](http://aws.amazon.com/blogs/apn/storing-and-sharing-files-with-amazon-fsx-in-a-vmware-cloud-on-aws-environment/)\. 
++ Amazon WorkSpaces instances – To learn more, see the AWS blog post [ Using Amazon FSx for Windows File Server with Amazon WorkSpaces](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-for-windows-file-server-with-amazon-workspaces/)\.
++ Amazon AppStream 2\.0 instances – To learn more, see the AWS blog post [ Using Amazon FSx with Amazon AppStream 2\.0](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-with-amazon-appstream-2-0/)\. 
++  VMs running in VMware Cloud on AWS environments – To learn more, see the AWS blog post [Storing and Sharing Files with Amazon FSx for Windows File Server in a VMware Cloud on AWS Environment](http://aws.amazon.com/blogs/apn/storing-and-sharing-files-with-amazon-fsx-in-a-vmware-cloud-on-aws-environment/)\. 
 
 The following operating systems are supported for use with Amazon FSx:
-+ Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, and Windows Server 2016
++ Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, and Windows Server 2019\.
 + Windows Vista, Windows 7, Windows 8, Windows 8\.1, and Windows 10 \(including the Windows 7 and Windows 10 desktop experiences of Amazon WorkSpaces\)
 + Linux, using the `cifs-utils` tool
 
@@ -28,16 +28,18 @@ You can use the following access methods and approaches with Amazon FSx\.
 
 ### Accessing Amazon FSx File Systems Using DNS Names<a name="dns-name"></a>
 
-An Amazon FSx for Windows File Server file system is accessible through an elastic network interface\. This elastic network interface resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. Amazon FSx for Windows File Server provides a DNS name for every file system in the form of `fileservername.domain.com`\. This name maps to the file system's elastic network interface\. The DNS name is composed as follows:
-+ `fileservername` – The file system's AWS resource identifier of the form:
-  + `fs-0123456789abcdef1` in the case where your file system is joined to AWS Managed AD
-  + `AMZNFSX1234ABCD` in the case where your file system is joined to your self\-managed AD
-+ `domain.com` – The Microsoft Active Directory domain name associated with your file system 
+Amazon FSx for Windows File Server provides a Domain Name System \(DNS\) name for every file system\. You access your Amazon FSx for Windows File Server file system by mapping a drive letter on your compute instance to your Amazon FSx file share using this DNS name\. To learn more, see [Using Microsoft Windows File Shares](using-file-shares.md)\.
 
-You access your Amazon FSx for Windows File Server file system using this DNS name\.
+ You can find the DNS name in the Amazon FSx Management Console, the **File systems > Details > Network & Security** section, or in the response of the CreateFileSystem or DescribeFileSystems API command\.
++ For a Single AZ file system joined to an AWS Managed Microsoft Active Directory, the DNS name looks as follows\.
+
+  `fs-0123456789abcdef0.ad-domain.com`
++ For a Single AZ file system joined to a self\-managed AD, and any Multi AZ file system, the DNS name looks as follows\.
+
+  `amznfsxaa11bb22.ad-domain.com`
 
 **Important**  
-To get Kerberos\-based authentication and encryption of data in transit for your SMB sessions, use the DNS name provided by Amazon FSx to access your file system\. 
+To get Kerberos\-based authentication and encryption of data in transit for your SMB sessions, use the file system's DNS name provided by Amazon FSx to access your file system\. 
 
 ### Working with Amazon FSx for Windows File Server File Systems and DFS Namespaces<a name="dfs-namespace"></a>
 
@@ -52,17 +54,18 @@ You can also access file systems created after February 22, 2019, from on\-premi
 **Important**  
 In some cases, you might want to access a file system created before February 22, 2019, from on\-premises resources or from resources in a different VPC, AWS account, or AWS Region\. To do this, create a new file system from a backup of your existing file system\. To learn more about creating and restoring backups, see [Working with Backups](using-backups.md)\. 
 
-### Accessing Amazon FSx for Windows File Server File Systems from On\-Premises<a name="on-premise-access"></a>
-
-Amazon FSx for Windows File Server supports the use of AWS Direct Connect or AWS VPN to access your file systems from your on\-premises compute instances\. With support for AWS Direct Connect, Amazon FSx for Windows File Server enables you to access your file system over a dedicated network connection from your on\-premises environment\. With support for AWS VPN, Amazon FSx for Windows File Server enables you to access your file system from your on\-premises devices over a secure and private tunnel\.
-
-After you connect your on\-premises environment to the VPC associated with your Amazon FSx file system, you can access your file system using its DNS name\. You do so just as you do from compute instances within the VPC\. For more information on AWS Direct Connect, see the *[AWS Direct Connect User Guide](https://docs.aws.amazon.com/directconnect/latest/UserGuide/)\.* For more information on setting up a VPN connection, see [VPN Connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html) in the *Amazon VPC User Guide*\. 
-
 **Note**  
 Amazon FSx can support access from resources outside the VPC associated with your file system\. It can do this if those resources have an IP address in the following private IP version 4 \(IPv4\) address ranges, as specified in [RFC 1918](http://www.faqs.org/rfcs/rfc1918.html):  
 10\.0\.0\.0–10\.255\.255\.255 \(10/8 prefix\)
 172\.16\.0\.0–172\.31\.255\.255 \(172\.16/12 prefix\)
 192\.168\.0\.0–192\.168\.255\.255 \(192\.168/16 prefix\)
+If those resources have a non\-private IP address, you can only access file systems from within the same VPC that the resource resides in\.
+
+### Accessing Amazon FSx for Windows File Server File Systems from On\-Premises<a name="on-premise-access"></a>
+
+Amazon FSx for Windows File Server supports the use of AWS Direct Connect or AWS VPN to access your file systems from your on\-premises compute instances\. With support for AWS Direct Connect, Amazon FSx for Windows File Server enables you to access your file system over a dedicated network connection from your on\-premises environment\. With support for AWS VPN, Amazon FSx for Windows File Server enables you to access your file system from your on\-premises devices over a secure and private tunnel\.
+
+After you connect your on\-premises environment to the VPC associated with your Amazon FSx file system, you can access your file system using its DNS name\. You do so just as you do from compute instances within the VPC\. For more information on AWS Direct Connect, see the *[AWS Direct Connect User Guide](https://docs.aws.amazon.com/directconnect/latest/UserGuide/)\.* For more information on setting up a VPN connection, see [VPN Connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html) in the *Amazon VPC User Guide*\. 
 
 ### Accessing Amazon FSx for Windows File Server File Systems from Another VPC, Account, or AWS Region<a name="different-vpc-account-access"></a>
 

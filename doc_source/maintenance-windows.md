@@ -2,7 +2,7 @@
 
 Amazon FSx for Windows File Server performs routine software patching for the Microsoft Windows Server software it manages\. The maintenance window is your opportunity to control what day and time of the week this software patching occurs\.
 
-Patching occurs infrequently, typically once every several weeks\. Patching should require only a fraction of your 30\-minute maintenance window\. During these few minutes of time, your file system is temporarily unavailable\. 
+Patching occurs infrequently, typically once every several weeks\. Patching should require only a fraction of your 30\-minute maintenance window\. During these few minutes of time, your Single\-AZ file system is temporarily unavailable, and Multi\-AZ file systems automatically fail over and fail back\.
 
 You choose the maintenance window during file system creation\. If you have no time preference, then a 30\-minute default window is assigned\.
 

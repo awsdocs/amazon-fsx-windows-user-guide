@@ -13,12 +13,14 @@ With Amazon FSx, backups are file\-system\-consistent, highly durable, and incre
 
 ## Working with Automatic Daily Backups<a name="automatic-backups"></a>
 
-Amazon FSx automatically takes backups of your file systems once a day\. These daily backups are taken during the daily backup window that was established when you created the file system\. At some point during the daily backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. When you choose your daily backup window, we recommend that you choose a convenient time of the day\. This time ideally is outside of the normal operating hours for the applications that use the file system\.
+By default, Amazon FSx automatically takes backups of your file systems once a day\. These daily backups are taken during the daily backup window that was established when you created the file system\. At some point during the daily backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. When you choose your daily backup window, we recommend that you choose a convenient time of the day\. This time ideally is outside of the normal operating hours for the applications that use the file system\.
 
-Backups are kept for a certain period of time, known as a retention period\. By default, backups are retained for 7 days\. However, you can change the retention period to anywhere in a range of 0–35 days\.
+Automatic daily backups are kept for a certain period of time, known as a retention period\. By default, backups are retained for 7 days\. However, you can change the retention period to anywhere in a range of 0–35 days\.
+
+You can turn off automatic daily backup by setting the retention period to 0 \(zero\) days\.
 
 **Note**  
-Setting the retention period to 0 days means that your file system is never automatically backed up\. We highly recommend that you use automatic backups for file systems that have any level of critical functionality associated with them\.
+Setting the retention period to 0 days means that your file system is never automatically backed up\. We highly recommend that you use automatic daily backups for file systems that have any level of critical functionality associated with them\.
 
 You can use the AWS CLI or one of the AWS SDKs to change the backup window, and backup retention period for your file systems with the `UpdateFileSystem` operation\. For more information, see [Walkthrough 3: Update an Existing File System](walkthrough03-update-file-system.md)\.
 

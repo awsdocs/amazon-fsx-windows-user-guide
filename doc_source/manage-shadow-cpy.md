@@ -1,9 +1,8 @@
-# Managing Shadow Copies<a name="manage-shadow-cpy"></a>
+# Shadow Copies<a name="manage-shadow-cpy"></a>
 
  Using the set of custom PowerShell commands defined by Amazon FSx, you can manage all aspects of shadow copies on your Amazon FSx for Windows File Server file systems\. 
 
 **Topics**
-+ [Using the Amazon FSx Remote PowerShell](#remote-pwrshell)
 + [Setting Shadow Copy Storage](#shadow-copy-storage)
 + [Deleting Shadow Copy Storage, Schedule, and All Shadow Copies](#remove-fsxshadowstorage)
 + [Creating a Custom Shadow Copy Schedule](#shadow-schedules)
@@ -12,68 +11,6 @@
 + [Creating a Shadow Copy](#new-fsxshadow-copy)
 + [Viewing Existing Shadow Copies](#get-fsxshadow-copies)
 + [Deleting Shadow Copies](#remove-fsxshadow-copies)
-
-## Using the Amazon FSx Remote PowerShell<a name="remote-pwrshell"></a>
-
-The custom remote PowerShell that is provided with Amazon FSx enables limited administrative privileges for a file system for users in the file system administrators group\. To start a remote PowerShell session on your Amazon FSx for Windows File Server file system, you need the following: 
-+ You can connect to a Windows compute instance that has network connectivity with your file system\. 
-+ You are logged into the Windows compute instance as a member of the file system administrators group\. In AWS Managed Microsoft AD, that group is **AWS Delegated FSx Administrators**\. In your self\-managed Microsoft AD, that group is **Domain Admins** or the custom group that you specified for administration when you created your file system\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\. 
-+  The file system's security group inbound rules must allow traffic on port 5985\. 
-
-**To initiate a remote PowerShell session on your file system**
-
-1. Connect to a compute instance that has network connectivity with your file system as a user that is a member of the file system administrators group\. 
-
-1.  Open a Windows PowerShell window on the compute instance\. 
-
-1.  Use the following command to open a remote PowerShell session on your Amazon FSx file system\. Replace `FSxFileSystem-DNS-Name` with the DNS name of file system where you want to configure shadow copies\. 
-
-   ```
-   PS C:\Users\delegateadmin> enter-pssession -ComputerName FSxFileSystem-DNS-Name -ConfigurationName FsxRemoteAdmin
-   [fs-1234567890abcef12]: PS>
-   ```
-
- You can run Amazon FSx PowerShell commands on your file system using the `Invoke-Command` cmdlet, as described following\. 
-
- The following example illustrates the syntax required when using `Invoke-Command` cmdlet to run PowerShell commands on an Amazon FSx for Windows File Server file system\. 
-
-```
-PS C:\Users\delegateadmin> Invoke-Command -ComputerName FSxFileSystem-DNS-Name -ConfigurationName FSxRemoteAdmin -scriptblock {fsx-command}
-```
-
-**To run Amazon FSx PowerShell commands using the Invoke\-Command cmdlet**
-+ Use the following command to view all shadow copies on your file system\.
-
-  ```
-  PS C:\Users\delegateadmin> Invoke-Command -ComputerName FSxFileSystem-DNS-Name -ConfigurationName FSxRemoteAdmin -scriptblock {Get-FsxShadowCopies}
-  FSx Shadow Copies: 5 total
-  
-  
-  Shadow Copy ID : {6E26C5AD-CB8C-491E-86EA-5114BD748DA9}
-  Creation Time  : 7/25/2019 7:00:45 AM
-  PSComputerName : fs-0123456789abcdef
-  RunspaceId     : a2920fe7-628f-4f9c-91c0-a24bf8281808
-  
-  Shadow Copy ID : {60E87BE9-172A-408B-B9B1-6FAB8DB35D69}
-  Creation Time  : 7/25/2019 2:03:17 PM
-  PSComputerName : fs-0123456789abcdef
-  RunspaceId     : a2920fe7-628f-4f9c-91c0-a24bf8281808
-  
-  Shadow Copy ID : {454A9F43-136B-4B89-9378-EB519AE25E2B}
-  Creation Time  : 7/26/2019 7:00:03 AM
-  PSComputerName : fs-0123456789abcdef
-  RunspaceId     : a2920fe7-628f-4f9c-91c0-a24bf8281808
-  
-  Shadow Copy ID : {DC7A8386-23DD-4550-963F-274A88186E4E}
-  Creation Time  : 7/26/2019 2:00:02 PM
-  PSComputerName : fs-0123456789abcdef
-  RunspaceId     : a2920fe7-628f-4f9c-91c0-a24bf8281808
-  
-  Shadow Copy ID : {F93B97C6-CA25-4AC1-9C19-9C77A61C5024}
-  Creation Time  : 7/29/2019 6:00:02 AM
-  PSComputerName : fs-0123456789abcdef
-  RunspaceId     : a2920fe7-628f-4f9c-91c0-a24bf8281808
-  ```
 
 ## Setting Shadow Copy Storage<a name="shadow-copy-storage"></a>
 
@@ -93,10 +30,10 @@ Using `-Maxsize`, you can define shadow copy storage as follows:
 
 1.  Open a Windows PowerShell window on the compute instance\. 
 
-1.  Use the following command to open a remote PowerShell session on your Amazon FSx file system\. Replace `FSxFileSystem-DNS-Name` with the DNS name of the file system where you want to configure shadow copies\. 
+1.  Use the following command to open a remote PowerShell session on your Amazon FSx file system\. Replace `FSxFileSystem-Remote-PowerShell-Endpoint` with the Windows Remote PowerShell endpoint of file system that you want to administer\. You can find the Windows Remote PowerShell endpoint in the Amazon FSx console, in the **Network & Security** section of the file system details screen, or in the response of the `DescribeFileSystem` API operation\. 
 
    ```
-   PS C:\Users\delegateadmin> enter-pssession -computername FSxFileSystem-DNS-Name -configurationname fsxremoteadmin
+   PS C:\Users\delegateadmin> enter-pssession -computername FSxFileSystem-Remote-PowerShell-Endpoint -configurationname fsxremoteadmin
    ```
 
 1. Verify that shadow copy storage is not already configured on the file system using the following command\.
@@ -126,7 +63,7 @@ Using `-Maxsize`, you can define shadow copy storage as follows:
 
  You can delete your shadow copy configuration, including all existing shadow copies, along with the shadow copy schedule\. At the same time, you can release the shadow copy storage on the file system\. 
 
-To do this, enter the `Remove-FsxShadowStorage` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Using the Amazon FSx Remote PowerShell](#remote-pwrshell)\. 
+To do this, enter the `Remove-FsxShadowStorage` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
 
 ```
 [fs-0123456789abcdef1]PS>Remove-FsxShadowStorage
@@ -195,7 +132,7 @@ You can also use the `-Default` option to quickly set up a default shadow copy s
 
 ## Viewing Your Shadow Copy Schedule<a name="get-fsxshadowcopy-sched"></a>
 
-To view the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Using the Amazon FSx Remote PowerShell](#remote-pwrshell)\.
+To view the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\.
 
 ```
 [fs-0123456789abcdef1]PS> Get-FsxShadowCopySchedule
@@ -209,7 +146,7 @@ Start Time                Days of week                             WeeksInterval
 
 ## Deleting a Shadow Copy Schedule<a name="remove-fsxshadowcopy-sched"></a>
 
-To delete the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Using the Amazon FSx Remote PowerShell](#remote-pwrshell)\.
+To delete the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\.
 
 ```
 [fs-0123456789abcdef1]PS>Remove-FsxShadowCopySchedule
@@ -223,7 +160,7 @@ Performing the operation "Remove-FsxShadowCopySchedule" on target "Removing FSx 
 
 ## Creating a Shadow Copy<a name="new-fsxshadow-copy"></a>
 
-To manually create a shadow copy, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Using the Amazon FSx Remote PowerShell](#remote-pwrshell)\.
+To manually create a shadow copy, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\.
 
 ```
 [fs-0123456789abcdef1]PS>New-FsxShadowCopy
@@ -233,7 +170,7 @@ Shadow Copy {ABCDEF12-3456-7890-ABCD-EF1234567890} taken successfully
 
 ## Viewing Existing Shadow Copies<a name="get-fsxshadow-copies"></a>
 
-To view the set of existing shadow copies on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Using the Amazon FSx Remote PowerShell](#remote-pwrshell)\. 
+To view the set of existing shadow copies on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
 
 ```
 [fs-0123456789abcdef1]PS>Get-FsxShadowCopies
@@ -247,7 +184,7 @@ Shadow Copy ID                        Creation Time
 
 ## Deleting Shadow Copies<a name="remove-fsxshadow-copies"></a>
 
- You can delete one or more existing shadow copies on your file system using the `Remove-FsxShadowCopies` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Using the Amazon FSx Remote PowerShell](#remote-pwrshell)\. 
+ You can delete one or more existing shadow copies on your file system using the `Remove-FsxShadowCopies` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
 
 Specify which shadow copies to delete by using one of the following required options: 
 +  `-Oldest` deletes the oldest shadow copy 

@@ -3,6 +3,12 @@
 There are a number of potential causes for being unable to access your file system, each with their own resolution, as follows\.
 
 **Potential Cause**  
+The FSx elastic network interface for your file system was modified or deleted\.
+
+**Resolution**  
+You must not modify or delete the FSx elastic network interface\. Modifying or deleting the network interface can cause a permanent loss of connection between your VPC and your file system\. Create a new file system, and do not modify or delete the FSx elastic network interface\. To learn more, see [ File System Access Control with Amazon VPC ](limit-access-security-groups.md)\. 
+
+**Potential Cause**  
 The security group you've specified for your Amazon FSx file system lacks the required inbound rules\.
 
 **Resolution**  
@@ -24,7 +30,7 @@ Make sure that your compute instances are joined to one of two types of director
 The Microsoft Windows file share that you're attempting to access doesn't exist\.
 
 **Resolution**  
-If you're using an existing file share, make sure that the file system DNS name and the share name are correctly specified\. To manage your file shares, see [Managing File Shares](using-file-shares.md#managing-file-shares)\.
+If you're using an existing file share, make sure that the file system DNS name and the share name are correctly specified\. To manage your file shares, see [File Shares](managing-file-shares.md)\.
 
 **Potential Cause**  
 The Active Directory user that you're accessing the file share as lacks the necessary access permissions\.
@@ -36,7 +42,7 @@ Make sure that the access permissions for the file share and Windows access cont
 If you remove **Allow Full control** NTFS ACL permissions for the SYSTEM user on a folder that you shared, that share can become inaccessible\.
 
 **Resolution**  
-Recreate your file share or shares\. For more information, see [Managing File Shares](using-file-shares.md#managing-file-shares)\. After they're recreated, you can map and use the Windows file shares from your compute instance or instances\.
+Recreate your file share or shares\. For more information, see [File Shares](managing-file-shares.md)\. After they're recreated, you can map and use the Windows file shares from your compute instance or instances\.
 
 **Potential Cause**  
 You're using your Amazon FSx file system from on\-premises using AWS Direct Connect or VPN, and you're using a public IP address range for the on\-premises client\.

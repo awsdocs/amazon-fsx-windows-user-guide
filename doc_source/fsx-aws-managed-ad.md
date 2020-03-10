@@ -4,7 +4,11 @@ AWS Directory Service for Microsoft Active Directory \(AWS Managed Microsoft AD\
 
 If your organization is using AWS Managed Microsoft AD to manage identities and devices, we recommend that you integrate your Amazon FSx file system with AWS Managed Microsoft AD\. By doing this, you get a turnkey solution using Amazon FSx with AWS Managed Microsoft AD\. AWS handles the deployment, operation, high availability, reliability, security, and seamless integration of the two services, enabling you to focus on operating your own workload effectively\.
 
-To use Amazon FSx with your AWS Managed Microsoft AD setup, you can use the Amazon FSx console\. When you create a new Amazon FSx for Windows File Server file system in the console, choose **AWS Managed AD** under the **Windows Authentication** section\. You also choose the specific directory that you want to use\. For more information, see [Step 1: Create Your File System](getting-started.md#getting-started-step1)\. 
+To use Amazon FSx with your AWS Managed Microsoft AD setup, you can use the Amazon FSx console\. When you create a new Amazon FSx for Windows File Server file system in the console, choose **AWS Managed AD** under the **Windows Authentication** section\. You also choose the specific directory that you want to use\. For more information, see [Step 1: Create Your File System](getting-started-step1.md)\. 
+
+You do this by establishing a trust relationship between your AWS Managed Microsoft AD and your corporate domain\. For Windows authentication in Amazon FSx, you only need a one\-way directional forest trust, where the AWS managed forest trusts the corporate domain forest\.
+
+Your corporate domain takes the role of the trusted domain, and the AWS Directory Service managed domain takes the role of the trusting domain\. Validated authentication requests travel between the domains in only one direction—allowing accounts in your corporate domain to authenticate against resources shared in the managed domain\. In this case, Amazon FSx interacts only with the managed domain\. The managed domain then passes on the authentication requests to your corporate domain\.
 
 Your organization might manage identities and devices on a self\-managed Active Directory domain \(on\-premises or in the cloud\)\. If so, you can join your Amazon FSx file system directly to your existing, self\-managed AD domain\. For more information, see [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)\. 
 

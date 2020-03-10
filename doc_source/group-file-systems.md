@@ -1,4 +1,4 @@
-# Grouping Multiple File Systems into a Common Namespace<a name="group-file-systems"></a>
+# Scaling Out Storage and Throughput with DFS Namespaces<a name="group-file-systems"></a>
 
 Amazon FSx for Windows File Server supports the use of Microsoft's Distributed File System \(DFS\) Namespaces\. You can use DFS Namespaces to group file shares on multiple file systems into one common folder structure \(a namespace\) that you use to access the entire file dataset\. DFS Namespaces can help you to organize and unify access to your file shares across multiple file systems\. DFS Namespaces can also help to scale file data storage beyond what each file system supports \(64 TB\) for large file datasets—up to hundreds of petabytes\.
 

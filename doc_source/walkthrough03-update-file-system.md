@@ -14,7 +14,7 @@ The following procedures outlines how to update your file system with the AWS CL
 1. Run the following command, replacing the file system ID with the ID for your file system, and the number of days that you want to retain your automatic backups for\.
 
    ```
-   aws fsx update-file-system --file-system-id fs-01234567890123456 --windows-configuration AutomaticBackupRetentionDays=30
+   aws fsx update-file-system --file-system-id fs-0123456789abcdef0 --windows-configuration AutomaticBackupRetentionDays=30
    ```
 
 **To update the daily backup window of your file system**
@@ -24,7 +24,7 @@ The following procedures outlines how to update your file system with the AWS CL
 1. Run the following command, replacing the file system ID with the ID for your file system, and the time with when you want to begin the window\.
 
    ```
-   aws fsx update-file-system --file-system-id fs-01234567890123456 --windows-configuration DailyAutomaticBackupStartTime=01:00
+   aws fsx update-file-system --file-system-id fs-0123456789abcdef0 --windows-configuration DailyAutomaticBackupStartTime=01:00
    ```
 
 **To update the weekly maintenance window of your file system**
@@ -34,5 +34,5 @@ The following procedures outlines how to update your file system with the AWS CL
 1. Run the following command, replacing the file system ID with the ID for your file system, and the date and time with when you want to begin the window\.
 
    ```
-   aws fsx update-file-system --file-system-id fs-01234567890123456 --windows-configuration WeeklyMaintenanceStartTimee=1:01:30
+   aws fsx update-file-system --file-system-id fs-0123456789abcdef0 --windows-configuration WeeklyMaintenanceStartTime=1:01:30
    ```

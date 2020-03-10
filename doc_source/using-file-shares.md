@@ -1,92 +1,256 @@
 # Using Microsoft Windows File Shares<a name="using-file-shares"></a>
 
-A Microsoft Windows *file share* is a specific folder \(and its subfolders\) within your file system that you make accessible to your compute instances with the Server Message Block \(SMB\) protocol\. Your file system comes with a default Windows file share, named **share**\. You can create and manage as many other Windows file shares as you’d like using the Windows **Shared Folders** graphical user interface \(GUI\) tool\.
-
-**Topics**
-+ [Accessing File Shares](#accessing-file-shares)
-+ [Managing File Shares](#managing-file-shares)
+A Microsoft Windows *file share* is a specific folder in your file system, including that folder's subfolders, which you make accessible to your compute instances with the Server Message Block \(SMB\) protocol\. Your file system comes with a default Windows file share, named `share`\. You can create and manage as many other Windows file shares as you want by using the Windows graphical user interface \(GUI\) tool called Shared Folders\.
 
 ## Accessing File Shares<a name="accessing-file-shares"></a>
 
-To access your file shares, you use the Windows *Map Network Drive* functionality to map a drive letter on your compute instance to your Amazon FSx file share\. The process of mapping a file share to a drive on your compute instance, known as mounting a file share in Linux, differs depending on the type of compute instance and the operating system\. After your file share is mapped, your applications and users can access files and folders on your file share as if they are local files and folders\.
+To access your file shares, you use the Windows Map Network Drive functionality to map a drive letter on your compute instance to your Amazon FSx file share\. The process of mapping a file share to a drive on your compute instance is known as mounting a file share in Linux\. This process differs depending on the type of compute instance and the operating system\. After your file share is mapped, your applications and users can access files and folders on your file share as if they are local files and folders\.
 
 Following, you can find procedures for mapping a file share on the different supported compute instances\.
 
-### To Map a File Share on an Amazon EC2 Windows Instance \(Console\)<a name="map-file-share-ec2-win-console"></a>
+**Topics**
++ [Mapping a File Share on an Amazon EC2 Windows Instance](#map-share-windows)
++ [Mounting a File Share on an Amazon EC2 Linux Instance](#map-shares-linux)
++ [Automatically Mount File Shares on an Amazon Linux EC2 Instance Not Joined to Your Active Directory](#automount-fsxw-ec2-linux)
 
-1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+### Mapping a File Share on an Amazon EC2 Windows Instance<a name="map-share-windows"></a>
+
+You can map a file share on an EC2 Windows instance by using the Windows File Explorer or the command prompt\.
+
+#### To Map a File Share on an Amazon EC2 Windows Instance \(Console\)<a name="map-file-share-ec2-win-console"></a>
+
+1. Launch the EC2 Windows instance and connect it to the Microsoft Active Directory that you joined your Amazon FSx file system to\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. Connect to your EC2 Windows instance\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
-1. After you are connected, open File Explorer\.
+1. After you're connected, open File Explorer\.
 
-1. On the navigation pane, open the context \(right\-click\) menu for **Network** and choose **Map Network Drive**\.
+1. In the navigation pane, open the context \(right\-click\) menu for **Network** and choose **Map Network Drive**\.
 
-1. Choose a drive letter of your choice for **Drive**\.
+1. For **Drive**, choose a drive letter\.
 
-1. Enter the fully qualified domain name \(FQDN\) name for your file share, which you construct from the Domain Name Service \(DNS\) name for your file system and the name of your Windows file share\. An example is `\\fs-012345678901234567.ad-domain.com\share` for **Folder**\.
+1. For **Folder**, enter the file system DNS name and the share name\. You can find the DNS name in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & Security** section, or in the response of CreateFileSystem or DescribeFileSystems API command\.
+   + For a Single AZ file system joined to an AWS Managed Microsoft Active Directory, the DNS name looks like this:
 
-1. Choose an option for **Reconnect at sign\-in**, which indicates whether the file share should reconnect at sign in, and then choose **Finish**\.
+     ```
+     fs-0123456789abcdef0.ad-domain.com
+     ```
+   + For a Single AZ file system joined to a self\-managed AD, and any Multi AZ file system, the DNS name looks like this:
 
-### To Map a File Share on an Amazon EC2 Windows Instance \(Command Prompt\)<a name="map-file-share-ec2-win-command"></a>
+     ```
+     amznfsxaa11bb22.ad-domain.com
+     ```
 
-1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
-   + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
-   + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
-
-1. Connect to your instance as a user in your AWS Managed Microsoft AD directory\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
-
-1. After you are connected, open a command prompt window\.
-
-1. Mount the file share with the following command, with a drive letter of your choice, for example `H`\.
+   For example, enter:
 
    ```
-   net use DriveLetter: \\fs-012345678901234567.ad-domain.com\share /persistent:yes
+   \\fs-0123456789abcdef0\.ad-domain.com\share
    ```
 
-### To Mount a File Share on an Amazon EC2 Linux Instance<a name="map-file-share-ec2-linux-command"></a>
+   for **Folder**\.
 
-1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
+1. Choose an option for **Reconnect at sign\-in**, which indicates whether the file share should reconnect at sign\-in, and then choose **Finish**\.
+
+#### To Map a File Share on an Amazon EC2 Windows Instance \(Command Prompt\)<a name="map-file-share-ec2-win-command"></a>
+
+1. Launch the EC2 Windows instance and connect it to the Microsoft Active Directory that you joined your Amazon FSx file system to\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance\. For more information, see [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+1. Connect to your EC2 Windows instance as a user in your AWS Managed Microsoft AD directory\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
-1. After you are connected, open a terminal\.
+1. After you're connected, open a command prompt window\.
+
+1. Mount the file share using a drive letter of your choice, the file system's DNS name, and the share name\. You can find the DNS name in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & Security** section, or in the response of CreateFileSystem or DescribeFileSystems API command\.
+   + For a Single AZ file system joined to an AWS Managed Microsoft Active Directory, the DNS name looks like this:
+
+     ```
+     fs-0123456789abcdef0.ad-domain.com
+     ```
+   + For a Single AZ file system joined to a self\-managed AD, and any Multi AZ file system, the DNS name looks like this:
+
+     ```
+     amznfsxaa11bb22.ad-domain.com
+     ```
+
+   Here's an example command to mount the file share\.
+
+   ```
+   $ net use H: \\amzfsxaa11bb22.ad-domain.com\share /persistent:yes
+   ```
+
+  
+
+### Mounting a File Share on an Amazon EC2 Linux Instance<a name="map-shares-linux"></a>
+
+You can mount an Amazon FSx for Windows File Server file share on an Amazon EC2 Linux instance that is either joined to your Active Directory or not joined\.
+
+#### To Mount a File Share on an Amazon EC2 Linux Instance Joined to Your Active Directory<a name="map-file-share-ec2-linux-kerberos"></a>
+
+1. If you don't already have a running EC2 Linux instance joined to your Microsoft Active Directory, see [Manually Join a Linux Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_linux_instance.html) in the *AWS Directory Service Administration Guide* for the instructions to do so\. 
+
+1. Connect to your EC2 Linux instance\. For more information, see [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. Run the following command to install the `cifs-utils` package\. This package is used to mount network file systems like Amazon FSx on Linux\.
 
    ```
-   sudo yum install cifs-utils
+   $ sudo yum install cifs-utils
+   ```
+
+1. Create the mount point directory **/mnt/fsx**\. This is where you will mount the Amazon FSx file system\.
+
+   ```
+   $ sudo mkdir -p /mnt/fsx
+   ```
+
+1. Authenticate with kerberos using the following command\.
+
+   ```
+   $ kinit
    ```
 
 1. Mount the file share with the following command\.
 
    ```
-   sudo mount -t cifs -o vers=3.0,sec=krb5,cruid=user@DOMAIN //fs-012345678901234567.ad-domain.com/share local_path
+   $ sudo mount -t cifs //file_system_dns_name/file_share mount_point -\-verbose -o vers=3.0,sec=krb5,cruid=ad_user,rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none,ip=preferred-file-server-Ip
    ```
 
-## Managing File Shares<a name="managing-file-shares"></a>
+    You can find the DNS name in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & Security** section, or in the response of CreateFileSystem or DescribeFileSystems API command\.
+   + For a Single AZ file system joined to an AWS Managed Microsoft Active Directory, the DNS name looks like this:
 
-Following, you can find a description of the various methods you can use to manage your file shares\. You can manage file shares on your Amazon FSx file system with the **Shared Folders** app\. The Shared Folders tool provides a central location for managing all shared folders on a Windows server\. The following procedures detail how to manage your file shares\.
+     ```
+     fs-0123456789abcdef0.ad-domain.com
+     ```
+   + For a Single AZ file system joined to a self\-managed AD, and any Multi AZ file system, the DNS name looks like this:
 
-1. Launch the Amazon EC2 instance and connect it to the Microsoft Active Directory to which you've joined your Amazon FSx file system\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
-   + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
-   + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
+     ```
+     amznfsxaa11bb22.ad-domain.com
+     ```
 
-1. Connect to your instance as a user that is a member of the file system administrators group \(**AWS Delegated FSx Administrators** in AWS Managed AD, and **Domain Admins** or the custom group you specified during creation for file system administration in your self\-managed Microsoft AD\)\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+   Replace `CIFSMaxBufSize` with the largest value allowed by your kernel\. Run the following command to get this value\.
 
-1. Open the **Start** menu and run **fsmgmt\.msc** using `Run As Administrator`\. Doing this opens the **Shared Folders** GUI tool\.
+   ```
+   $ modinfo cifs | grep CIFSMaxBufSize
+   parm:           CIFSMaxBufSize:Network buffer size (not including header). Default: 16384 Range: 8192 to 130048 (uint)
+   ```
 
-1. Choose **Action**, and then choose **Connect to another computer**\.
+   The output shows the maximum buffer size is 130048\.
 
-1. For **Another computer**, enter the DNS name of your Amazon FSx file system, for example `fs-012345678901234567.ad-domain.com`
+1. Verify that the file system is mounted by running the following command, which returns only file systems of the Common Internet File System \(CIFS\) type\.
 
-1. Choose **OK**\. An entry for your Amazon FSx file system then appears in the list of **Shared Folders**\.
+   ```
+   $ mount -l -t cifs
+   //fs-0123456789abcdef0/share on /mnt/fsx type cifs (rw,relatime,vers=3.0,sec=krb5,cache=strict,username=user1@CORP.NETWORK.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.2.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
+   ```
 
-Now that you've connected **Shared Folders** to your FSx file system, you can manage the Windows file shares on the file system\. You can do so with the following actions:
-+ **Create a new file share** – From **Shared Folders**, choose **Shares** in the left pane to see the active shares for your Amazon FSx file system\. Choose **New Share** and complete the **Create a Shared Folder** wizard\.
-+ **Modify a file share** – From the **Shared Folders** app, open the context \(right\-click\) menu for the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
-+ **Remove a file share** – From the **Shared Folders** app, open the context \(right\-click\) menu for the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.
+The mount command used in this procedure does the following at the given points:
++ `//file_system_dns_name/file_share` – Specifies the DNS name and share of the file system to mount\.
++ *mount\_point* – the directory on the EC2 instance that you are mounting the file system to\.
++ `-t cifs vers=3.0` – Specifies the type of file system as CIFS and the protocol version as 3\.0\.
++ `sec=krb5` – Specifies to use Kerberos version 5 for authentication\.
++ `cruid=ad_user` – sets the uid of the owner of the credentials cache to the AD directory administrator\.
++ `/mnt/fsx` – Specifies the mount point for the FSx file share on your EC2 instance\.
++ `rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize` – Specifies the read and write buffer size as the maximum allowed by the CIFS protocol\. Replace `CIFSMaxBufSize` with the largest value allowed by your kernel\. Determine the `CIFSMaxBufSize` by running the following command\.
+
+  ```
+  $ modinfo cifs | grep CIFSMaxBufSize
+  parm:           CIFSMaxBufSize:Network buffer size (not including header). Default: 16384 Range: 8192 to 130048 (uint)
+  ```
+
+  The output shows the maximum buffer size is 130048\.
++ `cache=none` – Sets the CIFS cache mode to none, that is to not cache file data at all\.
++ `ip=preferred-file-server-Ip` – sets the destination IP address to that of the file system's preferred file server\.
+
+  You can retrieve the file system's preferred file server IP address as follows:
+  + Using the Amazon FSx management console, in the **Network & security** tab of the **File system details** page
+  + In the response of the `describe-file-systems` CLI command or the equivalent [DescribeFileSystems](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html) API command\.
+
+  
+
+### Automatically Mount File Shares on an Amazon Linux EC2 Instance Not Joined to Your Active Directory<a name="automount-fsxw-ec2-linux"></a>
+
+To automatically mount your Amazon FSx for Windows File Server file share whenever the Amazon EC2 Linux instance to which it's mounted reboots, you add an entry to the `/etc/fstab` file on the EC2 instance\. The `/etc/fstab` file contains information about file systems\. The command mount \-a, which runs during instance startup, mounts the file systems listed in the `/etc/fstab` file\. For an Amazon Linux EC2 instance that is not joined to your Active Directory, you can only mount an Amazon FSx for Windows File Server file share by using it's private IP address\. You can get the file system's private IP address in the Amazon FSx console \([https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\), in the **Network & security** tab, the **Preferred File Server IP Address**\.
+
+The following procedure use Microsoft NTLM authentication\. You mount the file system as a user that is a member of the Microsoft Active Directory domain to which the Amazon FSx for Windows File Server file system is joined\. The credentials for the user account are provided in the text file `creds.txt`\. This file contains the user name, password, and domain for the user\.
+
+```
+$ cat creds.txt
+username=user1
+password=Password123
+domain=EXAMPLE.COM
+```
+
+#### To Automatically Mount a File Share on an Amazon Linux EC2 Instance not Joined to Your Active Directory<a name="automount-ec2-linux-ip"></a>
+
+**To launch and configure the Amazon Linux EC2 instance**
+
+1. Launch an Amazon Linux EC2 instance using the Amazon EC2 console [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\. For more information, see [Launch an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+1. Connect to your instance\. For more information, see [Connect to Your Linux Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstances.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+
+1. Run the following command to install the `cifs-utils` package\. This package is used to mount network file systems like Amazon FSx on Linux\.
+
+   ```
+   $ sudo yum install cifs-utils
+   ```
+
+1. Create the `/mnt/fsx` directory\. This is where you will mount the Amazon FSx file system\.
+
+   ```
+   $ sudo mkdir /mnt/fsx
+   ```
+
+1. Create the `creds.txt` credentials file in the `/home/ec2-user` directory\.
+
+1. Set the file permissions so that only you \(the owner\) can read the file by running the following command\.
+
+   ```
+   $ sudo chmod 700 creds.txt
+   ```
+
+**To automatically mount the file system**
+
+1. You automatically mount a file share not joined to your Active Directory by using its private IP address\. You can get the file system's private IP address from the Amazon FSx console \([https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\), in the **Network & security** tab, the **Preferred File Server IP Address**\.
+
+1. To automatically mount the file share using its private IP address, add the following line to the `/etc/fstab` file\.
+
+   ```
+   //file-system-IP-address/file_share /mnt/fsx cifs vers=3.0,sec=ntlmsspi,cred=/home/ec2-user/creds.txt, rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none
+   ```
+
+   Replace `CIFSMaxBufSize` with the largest value allowed by your kernel\. Run the following command to get this value\.
+
+   ```
+   $ modinfo cifs | grep CIFSMaxBufSize
+   parm:           CIFSMaxBufSize:Network buffer size (not including header). Default: 16384 Range: 8192 to 130048 (uint)
+   ```
+
+   The output shows the maximum buffer size is 130048\.
+
+1. Test the fstab entry by using the `mount` command with the 'fake' option in conjunction with the 'all' and 'verbose' options\.
+
+   ```
+   $ sudo mount -fav
+   home/ec2-user/fsx      : successfully mounted
+   ```
+
+1. To mount the file share, reboot the Amazon EC2 instance\.
+
+1. When the instance is available again, verify that the file system is mounted by running the following command\.
+
+   ```
+   $ sudo mount -l -t cifs
+   //file-system-IP-address/file_share on /mnt/fsx type cifs (rw,relatime,vers=3.0,sec=ntlmsspi,cache=strict,username=user1,domain=CORP.EXAMPLE.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.20.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
+   ```
+
+   The line added to the `/etc/fstab` file in this procedure does the following at the given points:
+   + `//file-system-IP-address/file_share` – Specifies the IP address and share of the Amazon FSx file system you're mounting\.
+   + `/mnt/fsx` – Specifies the mount point for the FSx file system on your EC2 instance\.
+   + `cifs vers=3.0` – Specifies the type of file system as CIFS and the protocol version as 3\.0\.
+   + `sec=ntlmsspi` – Specifies using NT LAN Manager Security Support Provider Interface to facilitate NTLM challenge\-response authentication\.
+   + `cred=/home/ec2-user/creds.txt` – Specifies where to get the user credentials\.
+   + `_netdev` – Tells the operating system that the file system resides on a device that requires network access\. Using this option prevents the instance from mounting the file system until the network service is enabled on the client\.
+   + `0` – Indicates that the file system should be backed up by `dump`, if it's a nonzero value\. For Amazon FSx, this value should be `0`\.
+   + `0` – Specifies the order in which `fsck` checks file systems at boot\. For Amazon FSx file systems, this value should be `0` to indicate that `fsck` shouldn't run at startup\.

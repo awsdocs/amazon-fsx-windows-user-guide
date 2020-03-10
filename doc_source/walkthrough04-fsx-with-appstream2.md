@@ -16,7 +16,7 @@ There are three procedures you'll need to perform to complete this task\.
 
 1. After the file system is available, create a folder for every domain AppStream 2\.0 user within your Amazon FSx file system\. The example following uses the domain user name of the user as the name of the corresponding folder\. Doing this means that you can build the UNC name of the file share to map easily using the Windows environment variable `%username%`\.
 
-1. Share each of these folders out as a shared folder\. For more information, see [Managing File Shares](using-file-shares.md#managing-file-shares)\.
+1. Share each of these folders out as a shared folder\. For more information, see [File Shares](managing-file-shares.md)\.
 
 **To launch a domain\-joined AppStream 2\.0 image builder**
 
@@ -70,7 +70,7 @@ There are three procedures you'll need to perform to complete this task\.
 
 1. Create an Amazon FSx file system\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.
 
-1. Every Amazon FSx file system includes a shared folder by default that can be accessed using the address \\\\*file\-system\-DNS\-name*\\share\. You can use the default share or create a different shared folder\. For more information, see [Managing File Shares](using-file-shares.md#managing-file-shares)\.
+1. Every Amazon FSx file system includes a shared folder by default that can be accessed using the address \\\\*file\-system\-DNS\-name*\\share\. You can use the default share or create a different shared folder\. For more information, see [File Shares](managing-file-shares.md)\.
 
 **To launch an AppStream 2\.0 image builder**
 

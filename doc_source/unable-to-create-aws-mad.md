@@ -6,4 +6,4 @@ Use the following sections to help troubleshoot problems you experience while cr
 VPC security groups and network ACLs aren't using the recommended security group configuration for AWS Managed Microsoft AD\.
 
 **Resolution**  
-Make sure that the VPC security groups and network ACLs are configured using the recommended security group configuration\. To learn more, see [](limit-access-security-groups.md#vpc-sg-step6)\.
+Make sure that the VPC security groups and network ACLs are configured using the recommended security group configuration\. To learn more, see [Creating FSx Security Groups, Step 6](limit-access-security-groups.md#vpc-sg-step6)\.

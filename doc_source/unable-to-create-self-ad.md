@@ -98,8 +98,24 @@ Use the following procedure to troubleshoot and resolve the issue\.
 **Resolution**  
  When creating your file system, Amazon FSx was able to reach your AD domain’s DNS servers and domain controllers, and join the file system successfully to your AD domain\. However, while completing file system creation, Amazon FSx lost connectivity to or membership in your domain\. Use the following to troubleshoot and resolve the issue\.
 
-1.  Ensure that network connectivity continues to exist between your Amazon FSx file system and your Active Directory\. And, ensure that network traffic continues to be allowed between them via routing rules, VPC Security Group rules, VPC Network ACLs, and domain controller firewall rules\. 
+1.  Ensure that network connectivity continues to exist between your Amazon FSx file system and your Active Directory\. And, ensure that network traffic continues to be allowed between them by using routing rules, VPC security group rules, VPC network ACLs, and domain controller firewall rules\. 
 
 1.  Ensure that the computer objects created by Amazon FSx for your file systems in your AD domain are still active, and were not deleted or otherwise manipulated\. 
+
+**Error Message**  
+ File system creation failed\. Amazon FSx is unable to establish a connection with your Microsoft Active Directory domain controller\(s\)\. This is because the service account provided does not have permission to join the file system to the domain with the specified organizational unit \(OU\)\. To fix this problem, delete your file system and create a new one using a service account with permission to create computer objects and reset passwords within the specified organizational unit\. 
+
+**Resolution**  
+Make sure you have delegated the required permissions to the service account that you've provided\. Use the following to troubleshoot and resolve the issue\.
+
+ The service account needs to have, at a minimum, the following permissions: 
++ Be delegated control to create and delete computer objects in the OU that you’re joining the file system to
++ Have the following permissions in the OU that you’re joining the file system to:
+  + Ability to reset passwords
+  + Ability to restrict accounts from reading and writing data
+  + Validated ability to write to the DNS host name 
+  + Validated ability to write to the service principal name 
+
+  To learn more about creating a service account with the correct permissions, see [ Delegating Privileges to Your Amazon FSx Service Account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\.
 
 If you encounter problems not listed here while using Amazon FSx, please ask a question in the [Amazon FSx Forum](https://forums.aws.amazon.com/forum.jspa?forumID=308) or reach out to [AWS Support](https://aws.amazon.com/premiumsupport/)\.

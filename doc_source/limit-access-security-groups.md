@@ -2,6 +2,11 @@
 
 You access your Amazon FSx file system through an elastic network interface\. This network interface resides in the virtual private cloud \(VPC\) based on the Amazon Virtual Private Cloud \(Amazon VPC\) service that you associate with your file system\. You connect to your Amazon FSx file system through its Domain Name Service \(DNS\) name\. The DNS name maps to the private IP address of the file system's elastic network interface in your VPC\. Only resources within the associated VPC, resources connected with the associated VPC by AWS Direct Connect or VPN, or resources within peered VPCs can access your file system's network interface\. For more information, see [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) in the * Amazon VPC User Guide\.* 
 
+**Warning**  
+You must not modify or delete the elastic network interface\(s\) associated with your file system\. Modifying or deleting the network interface can cause a permanent loss of connection between your VPC and your file system\.
+
+Amazon FSx for Windows File Server supports VPC sharing, which enables you to view, create, modify, and delete resources in a shared subnet in a VPC owned by another AWS account\. For more information, see [Working with Shared VPCs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html) in the *Amazon VPC User Guide*\.
+
 ## Amazon VPC Security Groups<a name="fsx-vpc-security-groups"></a>
 
  To further control network traffic going through your file system's elastic network interface within your VPC, you use security groups to limit access to your file systems\. A *security group *is a stateful firewall that controls the traffic to and from its associated network interfaces\. In this case, the associated resource is your file system's network interface\. 
@@ -22,20 +27,20 @@ For more information on security group rules, see [Security Group Rules](https:/
 
 1. For **VPC**, choose the Amazon VPC associated with your file system to create the security group within that VPC\.
 
-1. <a name="vpc-sg-step6"></a>Add the following rules\.
+1. <a name="vpc-sg-step6"></a>Add the following rules to allow outbound network traffic on the following ports: 
 
-   1. Inbound and outbound rules to allow the following ports:
-      + TCP/UDP 445 \(SMB\)
-      + TCP 135 \(RPC\)
-      + TCP/UDP 1024–65535 \(Ephemeral ports for RPC\)
+   1. Add the following inbound and outbound rules to allow the following ports\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/limit-access-security-groups.html)
 
-      From and to IP addresses or security group IDs associated with the following source and destination resources:
-      + Client compute instances from which you want to access the file system\.
-      + Other file servers that you expect this file system to participate with in DFS Replication groups\.
+      Add from and to IP addresses or security group IDs associated with the following source and destination resources:
+      + Client compute instances that you want to access your file system from\.
+      + Other file servers that you expect your file system to communicate with in DFS Replication groups\.
 
-   1. Outbound rules to allow all traffic to the security group ID associated with the AWS Managed Microsoft AD directory to which you're joining your file system\.
+   1. Add outbound rules to allow all traffic to the Active Directory that you're joining your file system to\. To do this, do one of the following:
+      + Allow outbound traffic to the security group ID associated with your AWS Managed AD directory\. 
+      + Allow outbound traffic to the IP addresses associated with your self\-managed Active Directory domain controllers\. 
 **Note**  
-In some cases, you might have modified the rules of your AWS Managed Microsoft AD's security group from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. To learn more about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
+In some cases, you might have modified the rules of your AWS Managed Microsoft AD security group from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. For more information about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
 
 Now that you've created your security group, you can associate it with your Amazon FSx file system's elastic network interface\.
 
@@ -43,13 +48,17 @@ Now that you've created your security group, you can associate it with your Amaz
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
-1. On the console dashboard, select your file system to view its details\.
+1. On the dashboard, choose your file system to view its details\.
 
-1. From the menu, choose the **Network & Security** tab, and choose your file system's network interface ID \(for example, ENI\-01234567890123456\)\.
+1. Choose the **Network & Security** tab, and choose your file system's network interface ID \(for example, **ENI\-01234567890123456**\)\.
 
-1. Choose **Actions**, **Change Security Groups**\.
+1. For **Actions**, choose **Change Security Groups**\.
 
-1. In the **Change Security Groups** dialog box, select the security groups to use, and choose **Save**\.
+1. In the **Change Security Groups** dialog box, choose the security groups to use, and choose **Save**\.
+
+### Disallow Access to a File System<a name="disallow-access"></a>
+
+ To temporarily disallow network access to your file system from all clients, you can remove all the security groups associated with your file system's elastic network interface\(s\) and replace them with a group that has no inbound/outbound rules\. 
 
 ## Amazon VPC Network ACLs<a name="limit-access-acl"></a>
 

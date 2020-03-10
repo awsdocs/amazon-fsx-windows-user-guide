@@ -2,7 +2,7 @@
 
 Amazon FSx for Windows File Server supports the use of the Microsoft Distributed File System \(DFS\)\. By using DFS Namespaces, you can scale out performance \(both read and write\) to serve I/O\-intensive workloads by spreading your file data across multiple Amazon FSx file systems\. At the same time, you can still present a unified view under a common namespace to your applications\. This solution involves dividing your file data into smaller datasets or *shards* and storing them across different file systems\. Applications accessing your data from multiple instances can achieve high levels of performance by reading and writing to these shards in parallel\.
 
-You can use this solution when your workload requires uniformly distributed read/write access to your file data \(for example, if each subset of compute instances accesses a different portion of your file data\)\. Otherwise, if you need a solution targeted at scale\-out read\-heavy workloads that need access to the same file dataset \(for example, workloads for data analytics, video transcoding, machine learning, and artificial intelligence\), see [Scaling Out Read Performance with Read Replicas](scale-out-read.md)\.
+You can use this solution when your workload requires uniformly distributed read/write access to your file data \(for example, if each subset of compute instances accesses a different portion of your file data\)\.
 
 ## Setting Up DFS Namespaces for Scale\-Out Performance<a name="fsx-scaleout-performance"></a>
 
