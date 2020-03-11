@@ -28,6 +28,6 @@ You can now mount your Amazon FSx file system to your Microsoft Windows–based 
      amznfsxaa11bb22.ad-domain.com
      ```
 
-   For example, enter `\\fs-0123456789abcdef0\.ad-domain.com\share`\.
+   For example, enter `\\fs-0123456789abcdef0.ad-domain.com\share`\.
 
 1. Choose whether the file share should **Reconnect at sign\-in** and then choose **Finish**\.
