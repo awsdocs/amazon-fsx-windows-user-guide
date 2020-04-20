@@ -5,7 +5,7 @@ Amazon FSx for Windows File Server provides a Domain Name Service \(DNS\) name f
 You can add a custom DNS name for your Amazon FSx file system within your Microsoft AD directory\. Doing this can make it easier to manage mapping the file shares within your file systems for large organizations or for discrete use cases\. To add a custom DNS name for your file system from a Microsoft Windows Server client that is joined to the same AWS Managed Microsoft AD directory, use the DNS Manager application \(`dnsmgmt.msc`\)\.
 
 **Note**  
-Amazon FSx for Windows File Server supports custom DNS names only on Single\-AZ file systems\. Support for custom DNS names on Multi\-AZ file systems coming soon\.
+Amazon FSx for Windows File Server supports custom DNS names only on Single\-AZ 1 file systems\. Support for custom DNS names on Multi\-AZ and Single\-AZ 2 file systems coming soon\.
 
 **To add a custom DNS name to your Amazon FSx file system**
 

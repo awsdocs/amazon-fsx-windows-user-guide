@@ -16,18 +16,18 @@ You can now mount your Amazon FSx file system to your Microsoft Windows–based 
 
 1. Choose a drive letter of your choice for **Drive**\.
 
-1. For **Folder**, enter the file system DNS name and the share name\. You can find the DNS name in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & Security** section, or in the response of CreateFileSystem or DescribeFileSystems API command\.
-   + For a Single AZ file system joined to a AWS Managed Microsoft Active Directory, the DNS name looks like this:
+1. For **Folder**, enter the file system DNS name and the share name\. The default Amazon FSx share is called `\share`\. You can find the DNS name in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & Security** section, or in the response of CreateFileSystem or DescribeFileSystems API command\.
+   + For a Single\-AZ file system joined to an AWS Managed Microsoft Active Directory, the DNS name looks like this:
 
      ```
      fs-0123456789abcdef0.ad-domain.com
      ```
-   + For a Single AZ file system joined to a self\-managed AD, and any Multi AZ file system, the DNS name looks like this:
+   + For a Single\-AZ file system joined to a self\-managed AD, and any Multi\-AZ file system, the DNS name looks like this:
 
      ```
      amznfsxaa11bb22.ad-domain.com
      ```
 
-   For example, enter `\\fs-0123456789abcdef0\.ad-domain.com\share`\.
+   For example, enter `\\fs-0123456789abcdef0.ad-domain.com\share`\.
 
 1. Choose whether the file share should **Reconnect at sign\-in** and then choose **Finish**\.

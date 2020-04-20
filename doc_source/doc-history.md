@@ -1,11 +1,12 @@
 # Document History<a name="doc-history"></a>
 + **API version:** 
-+ **Latest documentation update:** February 4, 2020
++ **Latest documentation update:** March 26, 2020
 
 The following table describes important changes to the *Amazon FSx Windows User Guide*\. For notifications about documentation updates, you can subscribe to the RSS feed\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support added for hard disk drive \(HDD\) storage](#doc-history) | HDD storage gives you price and performance flexibility when using Amazon FSx for Windows File Server\. For more information, see [ Optimizing Costs with Amazon FSx](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html)\. | March 26, 2020 | 
 | [Support added for file transfer using AWS DataSync](#doc-history) | You can now use AWS DataSync to transfer files to and from your Amazon FSx for Windows File Server\. For more information, see [Migrate Files to Amazon FSx for Windows File Server Using AWS DataSync](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/migrate-files-to-fsx-datasync.html)\. | February 4, 2020 | 
 | [Amazon FSx for Windows File Server releases support for additional Windows file system administration tasks](#doc-history) | You can now manage and administer file shares, data deduplication, storage quotas, and encryption in transit for your file shares using the Amazon FSx CLI for remote management on PowerShell\. For more information, see [Administering File Systems](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/administering-file-systems.html)\. | November 20, 2019 | 
 | [Amazon FSx for Windows File Server releases native Multi\-AZ support](#doc-history) | You can use Multi\-AZ deployment for Amazon FSx for Windows File Server to more easily create file systems with high availability that span multiple Availability Zones \(AZs\)\. For more information, see [Availability and Durability: Single\-AZ and Multi\-AZ File Systems](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html)\. | November 20, 2019 | 

@@ -8,7 +8,7 @@ Use the following to troubleshoot and resolve the issue\.
 
 ****
 
-1.  Verify that you've followed the prerequisites for having network connectivity and routing established between the subnet where you're creating an Amazon FSx file system, and your self\-managed Active Directory\. For more information, see [Prerequisites](self-managed-AD.md#self-manage-prereqs) 
+1.  Verify that you've followed the prerequisites for having network connectivity and routing established between the subnet where you're creating an Amazon FSx file system, and your self\-managed Active Directory\. For more information, see [Prerequisites for Using a Self\-Managed Microsoft AD](self-manage-prereqs.md) 
 
 1.  Verify that you've configured the VPC Security Groups that you've associated with your Amazon FSx file system, along with any VPC Network ACLs, to allow outbound network traffic on all ports\. 
 **Note**  

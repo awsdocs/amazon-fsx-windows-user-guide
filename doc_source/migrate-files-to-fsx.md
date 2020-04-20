@@ -52,7 +52,7 @@ You can migrate existing files to Amazon FSx by using the following procedure\.
    The `ROBOCOPY` command is a flexible file\-transfer utility with multiple options to control the data transfer process\. Because of this `ROBOCOPY` command execution, all the files and directories from the source share are copied to the Amazon FSx target share\. The copy preserves file and folder NTFS ACLs, attributes, time stamps, owner information, and auditing information\.
 
    ```
-   robocopy Y:\ Z:\ /copy:DATSOU /secfix /e /zb /MT:8
+   robocopy Y:\ Z:\ /copy:DATSOU /secfix /e /b /MT:8
    ```
 
    The example command preceding uses the following elements and options:
@@ -67,5 +67,8 @@ You can migrate existing files to Amazon FSx by using the following procedure\.
      + U – auditing information\.
    + /secfix – Fixes file security on all files, even skipped ones\.
    + /e – Copies subdirectories, including empty ones\.
-   + /zb – Copies files in restartable mode\. If access is denied, this option uses the backup and restore privilege in Windows to copy files even if their NTFS ACLs deny permissions to the current user\.
+   + /b – Uses the backup and restore privilege in Windows to copy files even if their NTFS ACLs deny permissions to the current user\.
    + /MT:8 – Specifies how many threads to use for performing multithreaded copies\.
+
+**Note**  
+If you are copying large files over a slow or unreliable connection, you can enable restartable mode by using the /zb option with the robocopy in place of the /b option\. With restartable mode, if the transfer of a large file is interrupted, a subsequent robocopy operation can pick up in the middle of the transfer instead of having to re\-copy the entire file from the beginning\. Enabling restartable mode can reduce the data transfer speed\.

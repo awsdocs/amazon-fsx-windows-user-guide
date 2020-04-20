@@ -1,4 +1,4 @@
-# Scaling Out Performance with Shards<a name="scale-out-performance"></a>
+# Walkthrough 6: Scaling Out Performance with Shards<a name="scale-out-performance"></a>
 
 Amazon FSx for Windows File Server supports the use of the Microsoft Distributed File System \(DFS\)\. By using DFS Namespaces, you can scale out performance \(both read and write\) to serve I/O\-intensive workloads by spreading your file data across multiple Amazon FSx file systems\. At the same time, you can still present a unified view under a common namespace to your applications\. This solution involves dividing your file data into smaller datasets or *shards* and storing them across different file systems\. Applications accessing your data from multiple instances can achieve high levels of performance by reading and writing to these shards in parallel\.
 

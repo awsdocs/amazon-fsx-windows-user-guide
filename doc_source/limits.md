@@ -18,7 +18,8 @@ Following are the quotas for Amazon FSx for Windows File Server for each AWS acc
 | Resource | Default Limit | Can Be Increased Up To | 
 | --- | --- | --- | 
 | Number of file systems | 100 | Thousands | 
-| Total storage for all file systems | 512 TiB | Multiple PiBs | 
+| Total SSD storage for all file systems | 512 TiB | Multiple PiBs | 
+| Total HDD storage for all file systems | 512 TiB | Multiple PiBs | 
 | Total throughput capacity for all file systems | 10 GBps | Hundreds of GBps | 
 | Total number of user\-initiated backups for all file system |  500  | Thousands | 
 
@@ -40,8 +41,9 @@ Following are the quotas on Amazon FSx for Windows File Server resources for eac
 | Resource | Limit per file system | 
 | --- | --- | 
 | Number of tags | 50 | 
-| Minimum storage capacity | 32 GB | 
-| Maximum storage capacity | 64 TB | 
+| Minimum storage capacity, SSD file systems | 300 GiB | 
+| Minimum storage capacity, HDD file systems | 2,000 GiB | 
+| Maximum storage capacity, SSD and HDD | 64 TiB | 
 | Minimum throughput capacity | 8 MBps | 
 | Maximum throughput capacity | 2,048 MBps | 
 | Maximum number of file shares | 100,000 | 
@@ -53,7 +55,7 @@ For information on throughput capacity, see [Amazon FSx for Windows File Server 
 
 In addition, note the following:
 + You can use each AWS Key Management Service \(AWS KMS\) key on up to 125 Amazon FSx file systems\.
-+ For a list of AWS Regions where you can create file systems, see the [AWS General Reference](https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticfilesystem_region)\.
++ For a list of AWS Regions where you can create file systems, see [Amazon FSx Endpoints and Quotas](https://docs.aws.amazon.com/general/latest/gr/fsxn.html) in the *AWS General Reference*\.
 + You map your file shares from Amazon EC2 instances in your virtual private cloud \(VPC\) with their Domain Name Service \(DNS\) names\. You can also map your file share on your EC2\-Classic instances \(which are not in a VPC\), but you must link them to your VPC by using ClassicLink\. For more information about using ClassicLink, see [ClassicLink](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 ## Quotas Specific to Microsoft Windows<a name="ntfs-limits"></a>

@@ -13,7 +13,15 @@ The Amazon FSx CLI for Remote Management on PowerShell uses the following securi
 
 ## Using the CLI for Remote Management on PowerShell<a name="using-rps"></a>
 
-You have two options to run remote management commands on your Amazon FSx file system\. You can establish a long\-running Remote PowerShell session and run the commands inside the session\. Or, you can use the Invoke\-Command to execute a single command or a single block of commands without establishing a long\-running Remote PowerShell session\. If you want to set and pass variables as parameters to the remove management command, you'll need to use `Invoke-Command`\.
+You have two options to run remote management commands on your Amazon FSx file system\. You can establish a long\-running Remote PowerShell session and run the commands inside the session\. Or, you can use the Invoke\-Command to execute a single command or a single block of commands without establishing a long\-running Remote PowerShell session\. If you want to set and pass variables as parameters to the remote management command, you'll need to use `Invoke-Command`\.
+
+To run these commands, you must know the *Windows Remote PowerShell Endpoint* for your file system\. To find this endpoint, follow these steps:
+
+1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
+
+1. Choose your file system\. On the **Network & security** tab, locate the **Windows Remote PowerShell Endpoint**, as shown following\.
+
+![\[FSx console Network & security tab, Windows Remote PowerShell Endpoint.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/FSx-network-sec-tab.png)
 
 **To start a remote PowerShell session on your file system**
 
@@ -21,12 +29,14 @@ You have two options to run remote management commands on your Amazon FSx file s
 
 1.  Open a Windows PowerShell window on the compute instance\. 
 
-1.  Use the following command to open the remote session on your Amazon FSx file system\. Replace `FSxFileSystem-Remote-PowerShell-Endpoint` with the Windows Remote PowerShell endpoint of file system that you want to administer\. You can find the **Windows Remote PowerShell Endpoint** in the Amazon FSx console, in the **Network & Security** section of the file system details screen, or in the response of the `DescribeFileSystems` API operation\.
+1. Use the following command to open the remote session on your Amazon FSx file system\. Replace `FSxFileSystem-Remote-PowerShell-Endpoint` with the Windows Remote PowerShell endpoint of file system that you want to administer\.
 
    ```
    PS C:\Users\delegateadmin> enter-pssession -ComputerName FSxFileSystem-Remote-PowerShell-Endpoint -ConfigurationName FsxRemoteAdmin
    [fs-0123456789abcdef0]: PS>
    ```
+
+   You will be prompted to enter user credentials in a pop\-up\.
 
  You can also run Amazon FSx CLI for remote management CLI on PowerShell commands on your file system using the `Invoke-Command` cmdlet, described following\.
 

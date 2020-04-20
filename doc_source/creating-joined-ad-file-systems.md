@@ -15,7 +15,7 @@ After you specify this information, Amazon FSx joins your new file system to you
 
 ## Before You Begin<a name="b4-you-begin"></a>
 
-Make sure that you have completed the [Prerequisites](self-managed-AD.md#self-manage-prereqs) detailed in [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)\.
+Make sure that you have completed the [Prerequisites for Using a Self\-Managed Microsoft AD](self-manage-prereqs.md) detailed in [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)\.
 
 ## To Create an Amazon FSx for Windows File Server file system joined to a Self\-Managed AD \(Console\)<a name="create-joined-fsx-console"></a>
 

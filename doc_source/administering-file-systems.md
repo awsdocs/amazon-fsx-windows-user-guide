@@ -11,3 +11,4 @@ You can administer your Amazon FSx for Windows File Server file systems using cu
 + [Shadow Copies](manage-shadow-cpy.md)
 + [Encryption in Transit](manage-encrypt-in-transit.md)
 + [Working with Amazon FSx Maintenance Windows](maintenance-windows.md)
++ [Best Practices for Administering Amazon FSx File Systems](admin-best-practices-fsxw.md)

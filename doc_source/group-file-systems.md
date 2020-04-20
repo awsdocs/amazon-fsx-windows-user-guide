@@ -12,7 +12,7 @@ These steps guide you through creating a single namespace \(example\.com\\corp\)
 
 **To group multiple file systems into a common DFS namespace**
 
-1. If you don't already have DFS Namespace servers running, you can launch a pair of highly available DFS Namespace servers using the [setup\-DFSN\-servers\.template](https://s3.amazonaws.com/solution-references/fsx/dfs/setup-DFSN-servers.template) AWS CloudFormation template\. For more information on creating an AWS CloudFormation stack, see [Creating a Stack on the AWS CloudFormation Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in the *AWS CloudFormation User Guide*\.
+1. If you don't already have DFS Namespace servers running, you can launch a pair of highly available DFS Namespace servers using the [setup\-DFSN\-servers\.template](https://solution-references.s3.amazonaws.com/fsx/dfs/setup-DFSN-servers.template) AWS CloudFormation template\. For more information on creating an AWS CloudFormation stack, see [Creating a Stack on the AWS CloudFormation Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in the *AWS CloudFormation User Guide*\.
 
 1. Connect to one of the DFS Namespace servers launched in the previous step as a user in the **AWS Delegated Administrators** group\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 

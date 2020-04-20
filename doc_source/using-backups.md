@@ -6,7 +6,7 @@ With Amazon FSx, backups are file\-system\-consistent, highly durable, and incre
 
 **Topics**
 + [Working with Automatic Daily Backups](#automatic-backups)
-+ [Creating Backups](#creating-backups)
++ [Working with Manual Backups](#manual-backups)
 + [Restoring Backups](#restoring-backups)
 + [Deleting Backups](#delete-backups)
 + [Setting Up a Custom Backup Schedule](custom-backup-schedule.md)
@@ -15,7 +15,7 @@ With Amazon FSx, backups are file\-system\-consistent, highly durable, and incre
 
 By default, Amazon FSx automatically takes backups of your file systems once a day\. These daily backups are taken during the daily backup window that was established when you created the file system\. At some point during the daily backup window, storage I/O might be suspended briefly while the backup process initializes \(typically under a few seconds\)\. When you choose your daily backup window, we recommend that you choose a convenient time of the day\. This time ideally is outside of the normal operating hours for the applications that use the file system\.
 
-Automatic daily backups are kept for a certain period of time, known as a retention period\. By default, backups are retained for 7 days\. However, you can change the retention period to anywhere in a range of 0–35 days\.
+Automatic daily backups are kept for a certain period of time, known as a retention period\. By default, backups are retained for 7 days\. However, you can change the retention period to anywhere in a range of 0–35 days\. Automatic daily backups are deleted when the file system is deleted\.
 
 You can turn off automatic daily backup by setting the retention period to 0 \(zero\) days\.
 
@@ -24,11 +24,15 @@ Setting the retention period to 0 days means that your file system is never auto
 
 You can use the AWS CLI or one of the AWS SDKs to change the backup window, and backup retention period for your file systems with the `UpdateFileSystem` operation\. For more information, see [Walkthrough 3: Update an Existing File System](walkthrough03-update-file-system.md)\.
 
-## Creating Backups<a name="creating-backups"></a>
+## Working with Manual Backups<a name="manual-backups"></a>
 
-Amazon FSx enables you to take additional backups of your file systems at any time\. You can do so using the Amazon FSx Management Console, the AWS CLI, or one of the AWS SDKs\. The easiest way to create a backup is through the console\. The following procedure guides you through how to create a user\-initiated backup in the console for a file system that already exists\.
+Amazon FSx enables you to take additional backups of your file systems at any time\. You can do so using the Amazon FSx Management Console, API, or the AWS Command Line Interface \(CLI\)\. Any backups that you create manually do not expire automatically, and are kept until you manually delete them\. Manual backups are retained after you have deleted the file system\. For more information, see [Deleting Backups](#delete-backups)\.
 
-**To create a file system backup**
+### Creating Manual Backups<a name="creating-backups"></a>
+
+The following procedure guides you through how to create a user\-initiated backup in the Amazon FSx console for an existing file system\.
+
+**To create a manual file system backup**
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
@@ -46,7 +50,9 @@ When you create a user\-initiated backup as this procedure described, it has the
 
 ## Restoring Backups<a name="restoring-backups"></a>
 
-You can use an available backup to create a new file system, effectively restoring a point\-in\-time snapshot of another file system\. You can restore a backup using the console, AWS CLI, or one of the AWS SDKs\. The following procedure guides you through how to restore a backup from the console to create a new file system\. 
+You can use an available backup to create a new file system, effectively restoring a point\-in\-time snapshot of another file system\. You can restore a backup using the console, AWS CLI, or one of the AWS SDKs\. Restoring a backup to a new file system takes the same amount of time as creating a new file system\. The data restored from the backup is lazy\-loaded onto the file system, during which time you will experience slightly higher latency\.
+
+The following procedure guides you through how to restore a backup using the console to create a new file system\.
 
 **To restore a file system from a backup**
 
@@ -56,7 +62,9 @@ You can use an available backup to create a new file system, effectively restori
 
 1. Choose the backup that you want to restore from the **Backups** table, and then choose **Restore backup**\. 
 
-   Doing so opens the file system creation wizard\. This wizard is identical to the standard file system creation wizard, except the **Storage capacity** is already set and can't be changed\. However, you can change the throughput capacity, associated VPC, and other settings\.
+   Doing so opens the file system creation wizard\. This wizard is identical to the standard file system creation wizard, except the **Storage capacity** is already set and can't be changed\. However, you can change the throughput capacity, associated VPC, and other settings, and storage type\. The storage type is set to **SSD** by default, but you can change it to **HDD** under the following conditions:
+   + The file system deployment type is **Multi\-AZ** or **Single\-AZ 2**\.
+   + The storage capacity is at least 2,000 GiB\.
 
 1. Complete the wizard as you do when you create a new file system\.
 

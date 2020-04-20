@@ -10,3 +10,8 @@ Amazon FSx provides you with two options for using your Amazon FSx for Windows F
 Amazon FSx supports [Microsoft Azure Active Directory Domain Services](https://docs.microsoft.com/en-us/azure/active-directory-domain-services/overview) which you can join to a [Microsoft Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis)\.
 
 After you create a joined Active Directory configuration for a file system, you can't change that configuration\. However, you can create a new file system from a backup and change the Active Directory integration configuration for that file system\. This way, you can also change other settings like the maintenance window\. For more information, see [Walkthrough 2: Create a File System from a Backup](walkthrough02-create-from-backup.md)\. 
+
+**Topics**
++ [Using Amazon FSx with AWS Directory Service for Microsoft Active Directory](fsx-aws-managed-ad.md)
++ [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)
++ [Validating Your Active Directory Configuration](validate-ad-config.md)

@@ -29,7 +29,7 @@ To manage file shares on your Amazon FSx file system, you can use the Shared Fol
 
 1. Choose **OK**\. An entry for your Amazon FSx file system then appears in the list for the Shared Folders tool\.
 
-Now that Shared Folders is connected to your Amazon FSx file system, you can manage the Windows file shares on the file system\. You can do so with the following actions:
+Now that Shared Folders is connected to your Amazon FSx file system, you can manage the Windows file shares on the file system\. The default share is called `\share`\. You can do so with the following actions:
 + **Create a new file share** – In the Shared Folders tool, choose **Shares** in the left pane to see the active shares for your Amazon FSx file system\. Choose **New Share** and complete the Create a Shared Folder wizard\.
 + **Modify a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
 + **Remove a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.
@@ -45,7 +45,7 @@ To learn how to use the Amazon FSx CLI for remote management on PowerShell, see 
 
 ### Creating a Continuously Available Share<a name="create-ca-share"></a>
 
-You can only create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell on Multi\-AZ file systems only\. This is because CA shares require a clustered file server set up, available only with Multi\-AZ file systems\. Use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
+You can create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell\. CA shares created on an Amazon FSx for Windows File Server Multi\-AZ file system are highly durable and highly available\. An Amazon FSx Single\-AZ file system is built on a single node cluster\. As a result, CA shares created on a Single\-AZ file system are highly durable, but are not highly available\. Use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
 
 ```
 New-FSxSmbShare -Name "New CA Share" -Path "D:\share\Marketing" -Description "CA share" -ContinuouslyAvailable $True 
@@ -56,10 +56,10 @@ Following are custom remote\-management PowerShell commands that you can use\.
 
 | Share Management Command | Description | 
 | --- | --- | 
-|  New\-FSxSmbShare  |  Creates a new file share\.  | 
-|  Remove\-FSxSmbShare  |  Removes a file share\.  | 
-|  Get\-FSxSmbShare  |  Retrieves existing file shares\.  | 
-|  Set\-FSxSmbShare  |  Sets properties for a share\.  | 
+| New\-FSxSmbShare | Creates a new file share\. | 
+| Remove\-FSxSmbShare | Removes a file share\. | 
+| Get\-FSxSmbShare | Retrieves existing file shares\. | 
+| Set\-FSxSmbShare | Sets properties for a share\. | 
 |  Get\-FSxSmbShareAccess  |  Retrieves the access control list \(ACL\) of a share\.   | 
 |  Grant\-FSxSmbShareAccess  |  Adds an allow access control entry \(ACE\) for a trustee to the security descriptor of a share\.  | 
 |  Revoke\-FSxSmbShareAccess  |  Removes all of the allow ACEs for a trustee from the security descriptor of a share\.  | 
