@@ -1,4 +1,4 @@
-# Compliance Validation for Amazon FSx for Windows File Server<a name="SERVICENAME-compliance"></a>
+# Compliance Validation for Amazon FSx for Windows File Server<a name="fsx-compliance"></a>
 
 Third\-party auditors assess the security and compliance of Amazon FSx for Windows File Server as part of multiple AWS compliance programs\. These include SOC, PCI, ISO, HIPAA, and others\.
 

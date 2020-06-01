@@ -22,7 +22,7 @@ The following procedures detail how you can manage user sessions and open files 
 
 1. For **Action**, choose **Connect to another computer**\.
 
-1. For **Another computer**, enter the DNS name of your Amazon FSx file system, for example `fs-012345678901234567.ad-domain.com`
+1. For **Another computer**, enter the DNS name of your Amazon FSx file system, for example `fs-012345678901234567.ad-domain.com`\.
 
 1. Choose **OK**\. An entry for your Amazon FSx file system then appears in the list for the Shared Folders tool\.
 

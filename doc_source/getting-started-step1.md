@@ -23,28 +23,28 @@ To create your Amazon FSx file system, you must create your Amazon Elastic Compu
 
 1. For **Storage type**, you can choose either **SSD** or **HDD**\. 
 
-   Amazon FSx for Windows File Server offers solid state drive \(SSD\) and hard disk drive \(HDD\) storage types\. **SSD** storage is designed for the highest\-performance and most latency\-sensitive workloads, including databases, media processing workloads, and data analytics applications\. **HDD** storage is designed for a broad spectrum of workloads, including home directories, user and departmental file shares, and content management systems\. For more information, see [Storage Type Options](optimize-fsx-costs.md#storage-type-options)\.
+   Amazon FSx for Windows File Server offers solid state drive \(SSD\) and hard disk drive \(HDD\) storage types\. **SSD** storage is designed for the highest\-performance and most latency\-sensitive workloads, including databases, media processing workloads, and data analytics applications\. **HDD** storage is designed for a broad spectrum of workloads, including home directories, user and departmental file shares, and content management systems\. For more information, see [Optimizing Costs Using Storage Types](optimize-fsx-costs.md#storage-type-options)\.
 
-1. For **Storage capacity**, enter the storage capacity of your file system, in GiB\. If you're using SSD storage, enter any whole number in the range of 32–65,536\. If you're using HDD storage, enter any whole number in the range of 2,000–65,536\.
+1. For **Storage capacity**, enter the storage capacity of your file system, in GiB\. If you're using SSD storage, enter any whole number in the range of 32–65,536\. If you're using HDD storage, enter any whole number in the range of 2,000–65,536\. You can increase the amount of storage capacity as needed at any time after you create the file system\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md)\.
 
-1. Keep **Throughput capacity** at its default setting\. **Throughput capacity** is the sustained speed at which the file server that hosts your file system can serve data\. The **Recommended throughput capacity** setting is based on the amount of storage capacity you choose\. You can't change this value after the file system is created\. If you need more throughput capacity, choose **Specify throughput capacity**, and then choose a value\. 
+1. Keep **Throughput capacity** at its default setting\. **Throughput capacity** is the sustained speed at which the file server that hosts your file system can serve data\. The **Recommended throughput capacity** setting is based on the amount of storage capacity you choose\. If you need more than the recommended throughput capacity, choose **Specify throughput capacity**, and then choose a value\. For more information, see [Amazon FSx for Windows File Server PerformancePerformance](performance.md)\. 
 
-   For more information about throughput capacity and file system performance, see [Amazon FSx for Windows File Server PerformancePerformance](performance.md)\.
+   You can modify the throughput capacity as needed at any time after you create the file system\. For more information, see [Managing Throughput Capacity](managing-throughput-capacity.md)\.
 
 1. In the **Network & security** section, choose the Amazon VPC that you want to associate with your file system\. For this getting started exercise, choose the same Amazon VPC that you chose for your AWS Directory Service directory and your Amazon EC2 instance\.
 
 1. <a name="security_group_setup"></a>For **VPC Security Groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. If you're not using the default security group, make sure that you add the following rules to the security group you're using for this getting started exercise:
-   + Inbound and outbound rules to allow the following ports:
-     + TCP/UDP 445 \(SMB\)
-     + TCP 135 \(RPC\)
-     + TCP/UDP 1024\-65535 \(Ephemeral ports for RPC\)
 
-     From and to IP addresses or security group IDs associated with the following source and destination resources:
-     + Client compute instances from which you want to access the file system\.
-     + Other file servers that you expect this file system to participate with in DFS Replication groups\.
-   + Outbound rules to allow all traffic to the security group ID associated with the AWS Managed Microsoft AD directory that you're joining your file system to\.
+   1. Add the following inbound and outbound rules to allow the following ports\.    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html)
+
+      Add from and to IP addresses or security group IDs associated with the client compute instances that you want to access your file system from\.
+
+   1. Add outbound rules to allow all traffic to the Active Directory that you're joining your file system to\. To do this, do one of the following:
+      + Allow outbound traffic to the security group ID associated with your AWS Managed AD directory\. 
+      + Allow outbound traffic to the IP addresses associated with your self\-managed Active Directory domain controllers\. 
 **Note**  
-In some cases, you might have modified the rules of the security group for your AWS Managed Microsoft AD from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. To learn more about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
+In some cases, you might have modified the rules of your AWS Managed Microsoft AD security group from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. For more information about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
 
    For more information, see [ File System Access Control with Amazon VPC ](limit-access-security-groups.md)\.
 
@@ -54,7 +54,7 @@ In some cases, you might have modified the rules of the security group for your 
 
    If you want to join your file system to a Microsoft Active Directory domain that is managed by AWS, choose **AWS Managed Microsoft Active Directory**, and then choose your AWS Directory Service directory from the list\. For more information, see [Working with Active Directory in Amazon FSx for Windows File Server](aws-ad-integration-fsxW.md)\.
 
-   If you want to join your file system to a self\-managed Microsoft Active Directory domain, choose **Self\-managed Microsoft Active Directory**, and provide the following details for your active directory\.
+   If you want to join your file system to a self\-managed Microsoft Active Directory domain, choose **Self\-managed Microsoft Active Directory**, and provide the following details for your Active Directory\.
    + The fully qualified domain name of your active directory\.
    + **DNS server IP addresses**—the IPv4 addresses of the DNS servers for your domain
    + **Service account username**—the user name of the service account in your existing active directory\. Do not include a domain prefix or suffix\. 

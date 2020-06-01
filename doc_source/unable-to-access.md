@@ -6,16 +6,16 @@ There are a number of potential causes for being unable to access your file syst
 The FSx elastic network interface for your file system was modified or deleted\.
 
 **Resolution**  
-You must not modify or delete the FSx elastic network interface\. Modifying or deleting the network interface can cause a permanent loss of connection between your VPC and your file system\. Create a new file system, and do not modify or delete the FSx elastic network interface\. To learn more, see [ File System Access Control with Amazon VPC ](limit-access-security-groups.md)\. 
+You must not modify or delete the FSx elastic network interface\. Modifying or deleting the network interface can cause a permanent loss of connection between your VPC and your file system\. Create a new file system, and do not modify or delete the FSx elastic network interface\. For more information, see [ File System Access Control with Amazon VPC ](limit-access-security-groups.md)\. 
 
 **Potential Cause**  
-The security group you've specified for your Amazon FSx file system lacks the required inbound rules\.
+The security group that you specified for your Amazon FSx file system lacks the required inbound rules\.
 
 **Resolution**  
 Make sure that your security group has the inbound rules specified in [Amazon VPC Security Groups](limit-access-security-groups.md#fsx-vpc-security-groups)\. 
 
 **Potential Cause**  
-The security group you've associated with your compute instances lacks the required outbound rules\.
+The security group that you associated with your compute instances lacks the required outbound rules\.
 
 **Resolution**  
 Review the outbound rules specified in [Amazon VPC Security Groups](limit-access-security-groups.md#fsx-vpc-security-groups), and make sure that the security group associated with your compute instances has the corresponding outbound rules\.
@@ -42,7 +42,7 @@ Make sure that the access permissions for the file share and Windows access cont
 If you remove **Allow Full control** NTFS ACL permissions for the SYSTEM user on a folder that you shared, that share can become inaccessible\.
 
 **Resolution**  
-Recreate your file share or shares\. For more information, see [File Shares](managing-file-shares.md)\. After they're recreated, you can map and use the Windows file shares from your compute instance or instances\.
+Re\-create your file share or shares\. For more information, see [File Shares](managing-file-shares.md)\. After they're re\-created, you can map and use the Windows file shares from your compute instance or instances\.
 
 **Potential Cause**  
 You're using your Amazon FSx file system from on\-premises using AWS Direct Connect or VPN, and you're using a public IP address range for the on\-premises client\.

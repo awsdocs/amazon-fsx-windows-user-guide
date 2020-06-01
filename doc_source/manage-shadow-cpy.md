@@ -82,7 +82,7 @@ Shadow Storage removed successfully.
 
 ## Creating a Custom Shadow Copy Schedule<a name="shadow-schedules"></a>
 
-Shadow copy schedules use scheduled task triggers in Microsoft Windows to specify when shadow copies are automatically taken\. A shadow copy schedule can have multiple triggers, providing you with a lot of scheduling flexibility\. Only one shadow copy schedule can exist at a time\. 
+Shadow copy schedules use scheduled task triggers in Microsoft Windows to specify when shadow copies are automatically taken\. A shadow copy schedule can have multiple triggers, providing you with a lot of scheduling flexibility\. Only one shadow copy schedule can exist at a time\. Before you can create a shadow copy schedule, you must first set the amount of [shadow copy storage](#shadow-copy-storage)\.
 
 When you run the `Set-FsxShadowCopySchedule` command on a file system, you overwrite any existing shadow copy schedule\. Optionally, you can specify the time zone for a trigger using Windows time zones and the `-TimezoneId` option\. For a list of Windows time zones, see Microsoft's [Default Timezone](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones) documentation or run the following at a Windows command prompt: `tzutil /l`\. To learn more about Windows task triggers, see [Task Triggers](https://docs.microsoft.com/en-us/windows/win32/taskschd/task-triggers) in Microsoft Windows Developer Center documentation\. 
 
@@ -99,10 +99,10 @@ You can also use the `-Default` option to quickly set up a default shadow copy s
    PS C:\Users\delegateadmin> $trigger2 = new-scheduledTaskTrigger -weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -at 18:00
    ```
 
-1.  Use `invoke-command` to run the `scriptblock` command\. Doing so writes a script that sets the shadow copy schedule with the `new-scheduledTaskTrigger` value that you just created\. Replace *`file-system-Id`* with the ID of the file system on which you're setting the shadow copy schedule\. 
+1.  Use `invoke-command` to run the `scriptblock` command\. Doing so writes a script that sets the shadow copy schedule with the `new-scheduledTaskTrigger` value that you just created\. Replace *`FSxFileSystem-Remote-PowerShell-Endpoint`* with the Windows Remote PowerShell endpoint of file system that you want to administer\. You can find the Windows Remote PowerShell endpoint in the Amazon FSx console, in the **Network & Security** section of the file system details screen, or in the response of the `DescribeFileSystem` API operation\.
 
    ```
-   PS C:\Users\delegateadmin> invoke-command -ComputerName file-system-Id -ConfigurationName FSxRemoteAdmin -scriptblock {
+   PS C:\Users\delegateadmin> invoke-command -ComputerName FSxFileSystem-Remote-PowerShell-Endpoint -ConfigurationName FSxRemoteAdmin -scriptblock {
    ```
 
 1.  Enter the following line at the `>>` prompt to set your shadow copy schedule using the `set-fsxshadowcopyschedule` command\.

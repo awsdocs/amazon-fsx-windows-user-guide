@@ -48,7 +48,7 @@ To learn how to use the Amazon FSx CLI for remote management on PowerShell, see 
 You can create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell\. CA shares created on an Amazon FSx for Windows File Server Multi\-AZ file system are highly durable and highly available\. An Amazon FSx Single\-AZ file system is built on a single node cluster\. As a result, CA shares created on a Single\-AZ file system are highly durable, but are not highly available\. Use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
 
 ```
-New-FSxSmbShare -Name "New CA Share" -Path "D:\share\Marketing" -Description "CA share" -ContinuouslyAvailable $True 
+New-FSxSmbShare -Name "New CA Share" -Path "D:\share" -Description "CA share" -ContinuouslyAvailable $True 
 ```
 
 Following are custom remote\-management PowerShell commands that you can use\.
@@ -67,3 +67,20 @@ Following are custom remote\-management PowerShell commands that you can use\.
 |  Unblock\-FSxSmbShareAccess  |  Removes all of the deny ACEs for a trustee from the security descriptor of a share\.  | 
 
 The online help for each command provides a reference of all command options\. To access this help, run the command with a `-?`, for example `New-FSxSmbShare -?`\. 
+
+### Passing Credentials to New\-FSxSmbShare<a name="pass-credentials-to-new-fsxsmbshare"></a>
+
+You can pass credentials to New\-FSxSmbShare so that you can run it in a loop to create hundreds or thousands of shares without having to re\-enter credentials each time\.
+
+Prepare the credential object required to create the file shares on your Amazon FSx for Windows File Server file server using one of the following options\.
++ To generate the credential object interactively, use the following command\.
+
+  ```
+  $credential = Get-Credential
+  ```
++ To generate the credential object using an AWS Secrets Manager resource, use the following command\.
+
+  ```
+  $credential = ConvertFrom-Json -InputObject (Get-SECSecretValue -SecretId $AdminSecret).SecretString
+  $FSxAdminUserCredential = (New-Object PSCredential($credential.UserName,(ConvertTo-SecureString $credential.Password -AsPlainText -Force)))
+  ```

@@ -26,7 +26,7 @@ New-FSxDedupSchedule -Name "CustomOptimization" -Type Optimization -Days Mon,Tue
 }
 ```
 
- This command modifies the default `BackgroundOptimization` schedule to run on days Monday to Wednesday and Saturday, starting the job at 8:00 am each day, with a maximum duration of 9 hours, after which the job will stop if it still running\. 
+ This command modifies the default `BackgroundOptimization` schedule to run on days Monday to Wednesday and Saturday, starting the job at 8:00 am each day, with a maximum duration of 9 hours, after which the job stops if it is still running\. 
 
  To modify the minimum file age before optimizing setting, use the `Set-FSxDedupConfiguration` command\. 
 

@@ -56,11 +56,13 @@ Your file system's storage provides the following levels of disk throughput and 
 | SSD | 750 | 3,000 | 
 | HDD | 12 baseline; 80 burst \(up to a max\. of 1 GB/s per file system\)  | 12 baseline; 80 burst | 
 
-### Impact of throughput capacity on performance<a name="impact-throughput-cap-performance"></a>
+You can increase a file system's storage capacity at any time\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md)\.
+
+### Impact of Throughput Capacity on Performance<a name="impact-throughput-cap-performance"></a>
 
 Every Amazon FSx file system has a throughput capacity that you configure when the file system is created\. The throughput capacity determines the level of network I/O performance, that is, the speed at which the file server hosting your file system can serve file data over the network to clients accessing it\. Higher levels of throughput capacity come with more memory for caching data on the file server, and higher levels of disk I/O performance supported by the file server\.
 
- When you create a file system using the AWS Management Console, Amazon FSx automatically picks the recommended throughput capacity level for your file system based on the amount of storage capacity you select\. While the recommended throughput capacity should be sufficient for most workloads, you have the option to override the recommendation and select a specific throughput capacity level to meet your application's needs\. 
+ When you create a file system using the AWS Management Console, Amazon FSx automatically picks the recommended throughput capacity level for your file system based on the amount of storage capacity you select\. While the recommended throughput capacity should be sufficient for most workloads, you have the option to override the recommendation and select a specific throughput capacity level to meet your application's needs\. You can increase or decrease the amount of throughput capacity at any time after you create it\. For more information, see [Managing Throughput Capacity](managing-throughput-capacity.md)\. 
 
 The following table shows the full set of specifications for throughput capacity, along with baseline and burst levels, and amount of memory for caching on the file server\. 
 
@@ -78,4 +80,4 @@ The following example illustrates how storage capacity and throughput capacity i
 
 ## Measuring Performance Using CloudWatch Metrics<a name="measure-performance-cw"></a>
 
-You can use Amazon CloudWatch to measure and monitor your file system's throughput and IOPS\. For more information, see [How to Use Amazon FSx for Windows File Server Metrics](monitoring_overview.md#how_to_use_metrics)\.
+You can use Amazon CloudWatch to measure and monitor your file system's throughput and IOPS\. For more information, see [How to Use Amazon FSx for Windows File Server Metrics](how_to_use_metrics.md)\.

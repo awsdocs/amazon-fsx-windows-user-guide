@@ -36,7 +36,7 @@
    PS C:\> @("IP_ADDRESS_1", "IP_ADDRESS_2") | Test-FSxADControllerConnection
    ```
 
-   The following is an example of a successful test reult\.
+   The following is an example of a successful test result\.
 
    ```
    PS C:\> $Result

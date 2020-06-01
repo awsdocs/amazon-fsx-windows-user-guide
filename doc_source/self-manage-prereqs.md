@@ -2,7 +2,7 @@
 
 Before you create an Amazon FSx file system joined to your self\-managed Microsoft AD domain, make sure that you have created and set up the following requirements:
 + An on\-premises or other self\-managed Microsoft AD that the Amazon FSx file system is to join, with the following configuration:
-  +  The domain functional level of your AD domain controller is at Windows Server 2008 R2 or higher
+  +  The domain functional level of your AD domain controller is at Windows Server 2008 R2 or higher\.
   +  DNS server IP addresses and AD domain controller IP addresses that are either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created or in the following private IP address ranges, as specified in [RFC 1918](http://www.faqs.org/rfcs/rfc1918.html):
     + 10\.0\.0\.0–10\.255\.255\.255 \(10/8 prefix\)
     + 172\.16\.0\.0–172\.31\.255\.255 \(172\.16/12 prefix\)
@@ -13,8 +13,11 @@ Before you create an Amazon FSx file system joined to your self\-managed Microso
   + Connectivity configured between the VPC based on Amazon VPC where you want to create the file system and your self\-managed Active Directory\. You can set up connectivity using AWS Direct Connect, AWS VPN, VPC peering, or AWS Transit Gateway\.
   +  VPC Security Groups that you've associated with your Amazon FSx file system, along with any VPC Network ACLs, configured to allow outbound network traffic on the following ports:     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html)
-**Note**  
-Allowing outbound traffic on TCP port 9839 is required for Multi\-AZ file system deployments\.
+**Important**  
+Allowing outbound traffic on TCP port 9389 is required for Single\-AZ 2 and all Multi\-AZ file system deployments\.
+  + Add outbound rules to allow all traffic to the Active Directory that you're joining your file system to\. To do this, do one of the following:
+    + Allow outbound traffic to the security group ID associated with your AWS Managed AD directory\. 
+    + Allow outbound traffic to the IP addresses associated with your self\-managed Active Directory domain controllers\. 
   +  Windows Firewall on your Active Directory domain controllers configured to allow inbound traffic on the above mentioned ports from the subnet\(s\) where you'd like to have your Amazon FSx file system\. 
 
      In the case where the domain controllers are in AWS, the VPC Security Groups that you've associated with them, along with any VPC Network ACLs, configured to allow inbound traffic on the above mentioned ports\.

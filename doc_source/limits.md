@@ -41,7 +41,7 @@ Following are the quotas on Amazon FSx for Windows File Server resources for eac
 | Resource | Limit per file system | 
 | --- | --- | 
 | Number of tags | 50 | 
-| Minimum storage capacity, SSD file systems | 300 GiB | 
+| Minimum storage capacity, SSD file systems | 32 GiB | 
 | Minimum storage capacity, HDD file systems | 2,000 GiB | 
 | Maximum storage capacity, SSD and HDD | 64 TiB | 
 | Minimum throughput capacity | 8 MBps | 

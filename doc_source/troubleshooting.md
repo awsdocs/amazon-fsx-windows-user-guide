@@ -8,5 +8,6 @@ If you encounter problems not listed following while using Amazon FSx, try askin
 + [You Can't Access Your File System](unable-to-access.md)
 + [Trying to Create an Amazon FSx File System Fails](unable-to-create-fs.md)
 + [File System Is In a Misconfigured State](misconfigured-ad-config.md)
-+ [You can't Access Your File System Using Remote PowerShell](remote-pwr-shell.md)
-+ [You can't configure Microsoft Distributed File System Replication \(DFS\-R\) on a Multi\-AZ or Single\-AZ 2 File System](dfs-r.md)
++ [You Can't Access Your File System Using Remote PowerShell](remote-pwr-shell.md)
++ [You Can't Configure DFS\-R on a Multi\-AZ or Single\-AZ 2 File System](dfs-r.md)
++ [Troubleshooting Failed Storage and Throughput Updates](admin-actions-ts.md)

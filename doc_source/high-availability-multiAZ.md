@@ -10,6 +10,20 @@ Multi\-AZ file systems support all the availability and durability features of S
 
 Multi\-AZ file systems are ideal for business\-critical workloads that require high availability to shared Windows file data\. Examples of these include business applications, web serving environments, and Microsoft SQL Server\. Single\-AZ file systems offer a lower price point for workloads that don’t require the high availability of a Multi\-AZ solution and that can recover from the most recent file system backup if data is lost\. Amazon FSx takes automatic daily backups of all file systems by default\.
 
+### Feature Support by Deployment Types<a name="deployment-type-features-summary"></a>
+
+The following table summarizes features supported by the Amazon FSx for Windows File Server file system deployment types:
+
+
+| Deployment type | SSD storage | HDD storage |  DFS namespaces | DFS replication | Custom DNS name | CA shares | 
+| --- | --- | --- | --- | --- | --- | --- | 
+| Single\-AZ 1 | ✓  |  | ✓ | ✓ | ✓ |  | 
+| Single\-AZ 2 | ✓ | ✓ | ✓ |  | Coming soon | ✓\* | 
+| Multi\-AZ | ✓ | ✓ | ✓ |  | Coming soon | ✓\* | 
+
+**Note**  
+\* While you can create CA shares on Single\-AZ 2 file systems, you should use CA shares on Multi\-AZ file systems for SQL Server HA deployments\.
+
 ## Failover Process for Amazon FSx for Windows File Server<a name="MulitAZ-Failover"></a>
 
 Multi\-AZ file systems automatically fail over from the preferred file server to the standby file server if any of the following conditions occur:
@@ -47,7 +61,7 @@ You must not modify or delete the elastic network interfaces associated with you
 The following table summarizes the subnet, elastic network interface, and IP address resources for Amazon FSx for Windows File Server file system deployment types:
 
 
-| File system | Number of subnets | Number of elastic network interfaces | Number of IP addresses | 
+| File system deployment type | Number of subnets | Number of elastic network interfaces | Number of IP addresses | 
 | --- | --- | --- | --- | 
 | Single\-AZ 2 | 1 | 1 | 2 | 
 | Single\-AZ 1 | 1 | 1 | 1 | 

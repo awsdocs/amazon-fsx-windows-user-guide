@@ -10,9 +10,11 @@ As a fully managed service, Amazon FSx for Windows File Server eliminates the ad
 
 ## Amazon FSx for Windows File Server Resources: File Systems, Backups, and File Shares<a name="fsx-resources"></a>
 
-The primary resources in Amazon FSx are *file systems* and *backups*\. A file system is where you store and access your files and folders\. A file system is made up of a Windows file server and storage volumes, and is accessed with its DNS name\. When you create a file system, you specify an amount of storage capacity \(in GiB\) and an amount of throughput capacity \(in MBps\)\.
+The primary resources in Amazon FSx are *file systems* and *backups*\. A file system is where you store and access your files and folders\. A file system is made up of a Windows file server and storage volumes, and is accessed with its DNS name\. When you create a file system, you specify an amount of storage capacity \(in GiB\) and an amount of throughput capacity \(in MB/s\)\. You can modify these properties as your needs change\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md) and [Managing Throughput Capacity](managing-throughput-capacity.md)\. 
 
-A Windows file share is a specific folder \(and its subfolders\) within your file system that you make accessible to your compute instances with SMB\. Your file system already comes with a default Windows file share\. You can create and manage as many other Windows file shares as you want using the Shared Folders graphical user interface \(GUI\) tool on Windows\. For more information, see [Using Microsoft Windows File Shares](using-file-shares.md)\.
+Amazon FSx for Windows File Server backups are file\-system\-consistent, highly durable, and incremental\. To ensure file system consistency, Amazon FSx uses the Volume Shadow Copy Service \(VSS\) in Microsoft Windows\. Automatic daily backups are turned on by default when you create a file system, and you can also take additional manual backups at anytime\. For more information, see [Working with Backups](using-backups.md),
+
+A Windows file share is a specific folder \(and its subfolders\) within your file system that you make accessible to your compute instances with SMB\. Your file system already comes with a default Windows file share called `\share`\. You can create and manage as many other Windows file shares as you want by using the Shared Folders graphical user interface \(GUI\) tool on Windows\. For more information, see [Using Microsoft Windows File Shares](using-file-shares.md)\.
 
 ### Accessing File Shares<a name="fsx-access-shares"></a>
 
@@ -38,7 +40,9 @@ You can administer your Amazon FSx for Windows File Server file systems using cu
 
 ## Price and Performance Flexibility<a name="price-perf-flexibility"></a>
 
-Amazon FSx for Windows File Server gives you the price and performance flexibility by offering both solid state drive \(SSD\) and hard disk drive \(HDD\) storage types\. HDD storage is designed for a broad spectrum of workloads, including home directories, user and departmental shares, and content management systems\. SSD storage is designed for the highest\-performance and most latency\-sensitive workloads, including databases, media processing workloads, and data analytics applications\. With Amazon FSx for Windows File Server, you can provision file system storage and throughput independently to achieve the right mix of cost and performance\. For more information, see [Optimizing Costs with Amazon FSx](optimize-fsx-costs.md)\.
+Amazon FSx for Windows File Server gives you the price and performance flexibility by offering both solid state drive \(SSD\) and hard disk drive \(HDD\) storage types\. HDD storage is designed for a broad spectrum of workloads, including home directories, user and departmental shares, and content management systems\. SSD storage is designed for the highest\-performance and most latency\-sensitive workloads, including databases, media processing workloads, and data analytics applications\. 
+
+With Amazon FSx for Windows File Server, you can provision file system storage and throughput independently to achieve the right mix of cost and performance\. You can modify your file system's storage and throughput capacities to meet changing workload needs, so that you pay only for what you need\. For more information, see [Optimizing Costs with Amazon FSx](optimize-fsx-costs.md)\.
 
 ## Pricing for Amazon FSx<a name="pricing"></a>
 

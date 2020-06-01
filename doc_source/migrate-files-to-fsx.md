@@ -13,6 +13,18 @@ Before you begin, make sure that you do the following:
 + Note the location \(for example, `\\Source\Share`\) of the file share \(either on\-premises or in AWS\) that contains the existing files you want to transfer over to Amazon FSx\.
 + Note the location \(for example, `\\Target\Share`\) of the file share on your Amazon FSx file system to which you want to transfer over your existing files\.
 
+The following table summarizes the source and destination file system accessibility requirements for three migration user access models\.
+
+
+| Migration user access model | Source file system accessibility requirements | Destination FSx file server accessibility requirements | 
+| --- | --- | --- | 
+| Direct read/write permissions model | The user needs to have at least read permissions \(NTFS ACLs\) on the files and folders being migrated\. | The user needs to have at least write permissions \(NTFS ACLs\) on the files and folders being migrated\. | 
+| Backup/restore privilege model to override access permissions | The user needs to be a member of the on\-premises AD's Backup Operators group, and use the /b flag with RoboCopy\. | The user needs to be a member of the FSx file system's administrators group\*, and use the /b flag with RoboCopy\. | 
+| Domain administrator \(full\) privilege model to override access permissions | The user needs to be a member of the on\-premises AD's Domain Admins group\. | The user needs to be a member of the FSx file system's administrators group\*, and use the /b flag with RoboCopy | 
+
+**Note**  
+\* For file systems joined to an AWS Managed Microsoft AD, the FSx file system administrators group is **AWS Delegated FSx Administrators**\. In your self\-managed Microsoft AD, the FSx file system administrators group is **Domain Admins** or the custom group that you specified for administration when you created your file system\.
+
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/fsx-migrate-existing.png)
 
 ## How to Migrate Existing Files to Amazon FSx Using Robocopy<a name="fsx-migrate-procedure"></a>
@@ -37,6 +49,8 @@ You can migrate existing files to Amazon FSx by using the following procedure\.
    ```
 
 1. Map the target file share on your Amazon FSx file system to a different drive letter \(for example, *Z*:\) on your Amazon EC2 instance as follows\. As part of this, you provide credentials for a user account that is a member of your on\-premises AD's domain administrators group and your Amazon FSx file system’s administrators group\. For file systems joined to an AWS Managed Microsoft AD, that group is **AWS Delegated FSx**** Administrators**\. In your self\-managed Microsoft AD, that group is **Domain Admins** or the custom group that you specified for administration when you created your file system\.
+
+   For more information, see the table of [source and destination file system accessibilty requirements](#role-access-table) in the [Prerequisites](#fsx-migrate-prereqs)\.
 
    ```
    C:\>net use Z: \\amznfsxabcdef1.mydata.com\share /user:mydata.com\Administrator

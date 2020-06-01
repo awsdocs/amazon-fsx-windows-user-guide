@@ -15,4 +15,4 @@ Following, you can find a description of security considerations for working wit
 + [File\- and Folder\-Level Access Control Using Windows ACLs](limit-access-file-folder.md)
 + [File System Access Control with Amazon VPC](limit-access-security-groups.md)
 + [Resource Administration Access Control with IAM for Amazon FSx](access-control-overview.md)
-+ [Compliance Validation for Amazon FSx for Windows File Server](SERVICENAME-compliance.md)
++ [Compliance Validation for Amazon FSx for Windows File Server](fsx-compliance.md)

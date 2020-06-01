@@ -23,11 +23,15 @@ Make sure that you have completed the [Prerequisites for Using a Self\-Managed M
 
 1. On the dashboard, choose **Create file system** to start the file system creation wizard\. 
 
+1. Choose **Amazon FSx for Windows File Server** and then choose **Next**\. The **Create file system page appears\.**
+
 1. Provide a name for your file system\. You can use a maximum of 256 Unicode letters, white space, and numbers, plus the special characters \+ \- = \. \_ : /
 
-1. Enter the **Storage capacity** for your file system, in GiB\. This value can be any whole number in the range of 300 to 65,536\.
+1. For **Storage capacity**, enter the storage capacity of your file system, in GiB\. If you're using SSD storage, enter any whole number in the range of 32–65,536\. If you're using HDD storage, enter any whole number in the range of 2,000–65,536\. You can increase the amount of storage capacity as needed at any time after you create the file system\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md)\.
 
-1. Choose your throughput capacity\. The **Recommended throughput capacity** value is based on your chosen storage capacity\. You can change this level to more megabytes per second as needed at creation\. To do this, choose a throughput capacity from the box\.
+1. Keep **Throughput capacity** at its default setting\. **Throughput capacity** is the sustained speed at which the file server that hosts your file system can serve data\. The **Recommended throughput capacity** setting is based on the amount of storage capacity you choose\. If you need more than the recommended throughput capacity, choose **Specify throughput capacity**, and then choose a value\. For more information, see [Amazon FSx for Windows File Server PerformancePerformance](performance.md)\. 
+
+   You can modify the throughput capacity as needed at any time after you create the file system\. For more information, see [Managing Throughput Capacity](managing-throughput-capacity.md)\.
 
 1. Choose the VPC that you want to associate with your file system\. For the purposes of this getting started exercise, choose the same VPC as for your AWS Directory Service directory and Amazon EC2 instance\.
 
@@ -35,7 +39,7 @@ Make sure that you have completed the [Prerequisites for Using a Self\-Managed M
 
 1. For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. If you're not using the default security group, make sure that you add the following rules to the security group that you use for this exercise:
    + Inbound and outbound rules to allow the following ports:
-     + TCP/UDP 445 \(SMB\)
+     + TCP 445 \(SMB\)
      + TCP 135 \(RPC\)
      + TCP/UDP 1024\-65535 \(Ephemeral ports for RPC\)
 
@@ -50,16 +54,18 @@ Make sure that you have completed the [Prerequisites for Using a Self\-Managed M
 **Note**  
 Domain name must not be in the Single Label Domain \(SLD\) format\. Amazon FSx currently does not support SLD domains\.
 
-1.  \(Optional\) Enter a value for **Organizational Unit** for the self\-managed Microsoft AD directory\. 
+1. Optionally, enter a value for **Organizational Unit** for the self\-managed Microsoft AD directory\.
+**Note**  
+If the service account in your self\-managed Microsoft AD does not have permissions on the default OU, then you must enter an OU\.
 
 1. Enter at least one, and no more that two, values for **DNS Server IP Addresses** for the self\-managed Microsoft AD directory\. 
 
-1.  Enter a string value for **Service account username** for the account on your self\-managed AD domain, such as `ServiceAcct`\. Amazon FSx uses this user name to join to your Microsoft AD domain\. 
+1. Enter a string value for **Service account username** for the account on your self\-managed AD domain, such as `ServiceAcct`\. Amazon FSx uses this user name to join to your Microsoft AD domain\.
 **Important**  
  DO NOT include a domain prefix \(`corp.com\ServiceAcct`\) or domain suffix \(`ServiceAcct@corp.com`\) when entering the **Service account username**\.   
- DO NOT use the Distinguished Name \(DN\) when entering the **Service account username** \(CN=ServiceAcct,OU=example,DC=corp,DC=com\)\. 
+ DO NOT use the Distinguished Name \(DN\) when entering the **Service account username** \(`CN=ServiceAcct,OU=example,DC=corp,DC=com`\)\. 
 
-1.  Enter a value for **Service account password** for the account on your self\-managed AD domain\. Amazon FSx uses this password to join to your Microsoft AD domain\. 
+1. Enter a value for **Service account password** for the account on your self\-managed AD domain\. Amazon FSx uses this password to join to your Microsoft AD domain\. 
 
 1.  Re\-enter the password to confirm it in **Confirm password**\. 
 
@@ -81,7 +87,7 @@ create-file-system \
 --storage-capacity 300 \
 --security-group-ids security-group-id \
 --subnet-ids subnet-id\
---windows-configuration SelfManagedActveDirectoryConfiguration='{DomainName="corp.example.com", \
+--windows-configuration SelfManagedActiveDirectoryConfiguration='{DomainName="corp.example.com", \
 OrganizationalUnitDistinguishedName="OU=FileSystems,DC=corp,DC=example,DC=com",FileSystemAdministratorsGroup="FSxAdmins", \
 UserName="FSxService",Password="password", \
    DnsIps=["10.0.1.18"]}',ThroughputCapacity=8
