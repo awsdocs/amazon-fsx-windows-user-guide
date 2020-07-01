@@ -298,7 +298,7 @@ domain=EXAMPLE.COM
 1. To automatically mount the file share using its private IP address, add the following line to the `/etc/fstab` file\.
 
    ```
-   //file-system-IP-address/file_share /mnt/fsx cifs vers=3.0,sec=ntlmsspi,cred=/home/ec2-user/creds.txt, rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none
+   //file-system-IP-address/file_share /mnt/fsx cifs vers=3.0,sec=ntlmsspi,cred=/home/ec2-user/creds.txt,rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none
    ```
 
    Replace `CIFSMaxBufSize` with the largest value allowed by your kernel\. Run the following command to get this value\.
