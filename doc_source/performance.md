@@ -66,7 +66,29 @@ Every Amazon FSx file system has a throughput capacity that you configure when t
 
 The following table shows the full set of specifications for throughput capacity, along with baseline and burst levels, and amount of memory for caching on the file server\. 
 
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/performance.html)
+
+| FSx throughput capacity \(MBps\) | Network throughput capacity \(MBps\) | Network IOPS | Memory \(GB\) – for caching | Disk throughput \(MBps\) | Disk IOPS | 
+| --- |--- |--- |--- |--- |--- |
+| **** | **Baseline** | **Burst** | **** | **** | **Baseline** | **Burst** | **** | 
+| --- |--- |--- |--- |--- |--- |--- |--- |
+| 8 | 8 | 600 | Thousands baseline; tens of thousands burst | 0\.5 | 8 | 260 |  Hundreds to thousands baseline; tens of thousands burst  | 
+| --- |--- |--- |--- |--- |--- |--- |--- |
+| 16 | 16 | 600 | 1 | 16 | 260 | 
+| --- |--- |--- |--- |--- |--- |
+| 32 | 32 | 600 | 2 | 32 | 260 | 
+| --- |--- |--- |--- |--- |--- |
+| 64 | 64 | 600 | Tens of thousands baseline | 4 | 64 | 350 | 
+| --- |--- |--- |--- |--- |--- |--- |
+| 128 | 150 | 1,250 | 8 | 128 | 600 | 
+| --- |--- |--- |--- |--- |--- |
+| 256 | 300 | 1,250 | Hundreds of thousands baseline | 16 | 256 | 600 | Tens of thousands baseline | 
+| --- |--- |--- |--- |--- |--- |--- |--- |
+| 512 | 600 | 1,250 | 32 | 512 |  –  | 
+| --- |--- |--- |--- |--- |--- |
+| 1,024 | 1,500 |  –  | 64 | 1,024 |  –  | 
+| --- |--- |--- |--- |--- |--- |
+| 2,048 | 3,125 |  –  | 128 | 2,048 |  –  | 
+| --- |--- |--- |--- |--- |--- |
 
 ### Example: Storage Capacity and Throughput Capacity<a name="throughput-example-fsxw"></a>
 

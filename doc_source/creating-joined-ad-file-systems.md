@@ -54,9 +54,9 @@ Make sure that you have completed the [Prerequisites for Using a Self\-Managed M
 **Note**  
 Domain name must not be in the Single Label Domain \(SLD\) format\. Amazon FSx currently does not support SLD domains\.
 
-1. Optionally, enter a value for **Organizational Unit** for the self\-managed Microsoft AD directory\.
+1. Enter a value for **Organizational Unit** for the self\-managed Microsoft AD directory\.
 **Note**  
-If the service account in your self\-managed Microsoft AD does not have permissions on the default OU, then you must enter an OU\.
+Ensure that the service account you provided has permissions delegated to the OU that you specify here or to the default OU if you don’t specify one\.
 
 1. Enter at least one, and no more that two, values for **DNS Server IP Addresses** for the self\-managed Microsoft AD directory\. 
 

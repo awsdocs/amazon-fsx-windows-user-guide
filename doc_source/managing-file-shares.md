@@ -31,6 +31,14 @@ To manage file shares on your Amazon FSx file system, you can use the Shared Fol
 
 Now that Shared Folders is connected to your Amazon FSx file system, you can manage the Windows file shares on the file system\. The default share is called `\share`\. You can do so with the following actions:
 + **Create a new file share** – In the Shared Folders tool, choose **Shares** in the left pane to see the active shares for your Amazon FSx file system\. Choose **New Share** and complete the Create a Shared Folder wizard\.
+
+  You have to create the local folder prior to creating the new file share\. You can do so as follows: 
+  + Using the Shared Folders tool: click on "Browse" when specifying local folder path and click on "Make new folder" to create the local folder\.
+  + Using command line:
+
+    ```
+    New-Item -Type Directory -Path \\amznfsxabcd0123.corp.example.com\D$\MyNewShare
+    ```
 + **Modify a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
 + **Remove a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.
 

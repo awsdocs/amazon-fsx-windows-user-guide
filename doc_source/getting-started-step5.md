@@ -24,7 +24,7 @@ New file systems can be created from backups\. We recommend that you create a fi
 
    1. The file system is now being deleted, and its status in the dashboard changes to **DELETING**\. When the file system has been deleted, it no longer appears in the dashboard\.
 
-   1. Now you can delete any manually created backups for your file system\. From the right\-side navigation, choose **Backups**\.
+   1. Now you can delete any manually created backups for your file system\. From the left\-side navigation, choose **Backups**\.
 
    1. From the dashboard, choose any backups that have the same **File system ID** as the file system that you deleted, and choose **Delete backup**\.
 

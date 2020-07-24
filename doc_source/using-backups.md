@@ -61,7 +61,7 @@ You can only restore your backup to a file system of the same storage capacity a
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
-1. From the console dashboard, choose **Backups** from the right side navigation\.
+1. From the console dashboard, choose **Backups** from the left side navigation\.
 
 1. Choose the backup that you want to restore from the **Backups** table, and then choose **Restore backup**\. 
 

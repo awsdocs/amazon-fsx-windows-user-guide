@@ -25,11 +25,20 @@ Following are the quotas for Amazon FSx for Windows File Server for each AWS acc
 
 **To request a quota increase**
 
-1. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and then choose **Create Case**\.
+1. Open the [AWS Support Center](https://console.aws.amazon.com/support/home#/) page, sign in if necessary, and then choose **Create case**\.
 
-1. Under **Regarding**, choose **Service Limit Increase**\.
+1. For **Create case**, choose **Account and billing support**\.
 
-1. Under **Limit Type**, choose the type of limit to increase, fill in the necessary fields in the form, and then choose your preferred method of contact\.
+1. In the **Case details** panel make the following entries:
+   + For **Type** choose **Account**\.
+   + For **Category** choose **Other Account Issues**\.
+   + For **Subject** enter **Amazon FSx for Windows File Server service limit increase request**\.
+   + Provide a detailed **Description** of your request, including:
+     + The FSx quota that you want increased, and the value you want it increased to, if known\.
+     + The reason why you are seeking the quota increase\.
+     + The file system id and region for each file system you are requesting an increase for\.
+
+1. Provide your preferred **Contact options** and choose **Submit**\.
 
 ## Resource Quotas for Each File System<a name="limits-MFS-resources-file-system"></a>
 

@@ -39,7 +39,7 @@ Amazon FSx for Windows File Server provides a Domain Name System \(DNS\) name fo
   `amznfsxaa11bb22.ad-domain.com`
 
 **Important**  
-To get Kerberos\-based authentication and encryption of data in transit for your SMB sessions, use the file system's DNS name provided by Amazon FSx to access your file system\. 
+To get Kerberos\-based authentication and encryption of data in transit for your SMB sessions, use the file system's DNS name provided by Amazon FSx to access your file system\. If you have an external trust configured between your AWS managed Microsoft AD and your on premise AD, in order to use the Amazon FSx Remote Powershell with Kerberos authentication, you need to configure a local group policy on the client for forest search order\. For more information, see the Microsoft documentation [Configure Kerberos Forest Search Order \(KFSO\)](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/hh921473(v=ws.10)?redirectedfrom=MSDN)\.
 
 ### Working with Amazon FSx for Windows File Server File Systems and DFS Namespaces<a name="dfs-namespace"></a>
 

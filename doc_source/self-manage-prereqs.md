@@ -3,10 +3,13 @@
 Before you create an Amazon FSx file system joined to your self\-managed Microsoft AD domain, make sure that you have created and set up the following requirements:
 + An on\-premises or other self\-managed Microsoft AD that the Amazon FSx file system is to join, with the following configuration:
   +  The domain functional level of your AD domain controller is at Windows Server 2008 R2 or higher\.
-  +  DNS server IP addresses and AD domain controller IP addresses that are either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created or in the following private IP address ranges, as specified in [RFC 1918](http://www.faqs.org/rfcs/rfc1918.html):
-    + 10\.0\.0\.0–10\.255\.255\.255 \(10/8 prefix\)
-    + 172\.16\.0\.0–172\.31\.255\.255 \(172\.16/12 prefix\)
-    + 192\.168\.0\.0–192\.168\.255\.255 \(192\.168/16 prefix\)
+  + DNS server IP addresses and AD domain controller IP addresses that are in one of the following:
+    + The same subnet\(s\) as the one in which your Amazon FSx file system is being created
+    + The primary VPC CIDR range of the VPC in which your Amazon FSx file system is being created 
+    + The following private IP address ranges, as specified in [RFC 1918](http://www.faqs.org/rfcs/rfc1918.html):
+      + 10\.0\.0\.0–10\.255\.255\.255 \(10/8 prefix\)
+      + 172\.16\.0\.0–172\.31\.255\.255 \(172\.16/12 prefix\)
+      + 192\.168\.0\.0–192\.168\.255\.255 \(192\.168/16 prefix\)
   +  Domain name that is not in the Single Label Domain \(SLD\) format\. Amazon FSx does not support SLD domains\. 
   + If you have Active Directory sites defined, you must make sure that the subnets in the VPC associated with your Amazon FSx file system are defined in an Active Directory site, and that no conflicts exist between the subnets in your VPC and the subnets in your other sites\.
 + The following network configurations:

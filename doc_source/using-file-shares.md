@@ -114,7 +114,7 @@ You can mount an Amazon FSx for Windows File Server file share on an Amazon EC2 
 1. Mount the file share with the following command\.
 
    ```
-   $ sudo mount -t cifs //file_system_dns_name/file_share mount_point -\-verbose -o vers=3.0,sec=krb5,cruid=ad_user,rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none,ip=preferred-file-server-Ip
+   $ sudo mount -t cifs //file_system_dns_name/file_share mount_point --verbose -o vers=3.0,sec=krb5,cruid=ad_user,rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none,ip=preferred-file-server-Ip
    ```
 
     You can find the DNS name in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & Security** section, or in the response of CreateFileSystem or DescribeFileSystems API command\.
@@ -298,7 +298,7 @@ domain=EXAMPLE.COM
 1. To automatically mount the file share using its private IP address, add the following line to the `/etc/fstab` file\.
 
    ```
-   //file-system-IP-address/file_share /mnt/fsx cifs vers=3.0,sec=ntlmsspi,cred=/home/ec2-user/creds.txt, rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none
+   //file-system-IP-address/file_share /mnt/fsx cifs vers=3.0,sec=ntlmsspi,cred=/home/ec2-user/creds.txt,rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize,cache=none
    ```
 
    Replace `CIFSMaxBufSize` with the largest value allowed by your kernel\. Run the following command to get this value\.
