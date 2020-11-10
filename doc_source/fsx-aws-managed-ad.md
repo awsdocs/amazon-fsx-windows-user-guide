@@ -10,26 +10,18 @@ Your organization might manage identities and devices on a self\-managed Active 
 
 Additionally, you can also set up your system to benefit from a resource forest isolation model\. In this model, you isolate your resources, including your Amazon FSx file systems, into a separate AD forest from the one where your users are\. 
 
-**Important**  
-For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain name cannot exceed 47 characters\.
-
 ## Networking Prerequisites<a name="rfim-networking-requirements"></a>
 
 Before you create an Amazon FSx for Windows File Server file system joined to your AWS Microsoft Managed AD domain, make sure that you have created and set up the following network configurations:
-+ For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. Please ensure that the security group and the VPC Network ACLs for the subnet\(s\) where you're creating your FSx file system allow traffic on the ports and in the directions shown in the following diagram\.  
-![\[Amazon FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
-
-  The following table identifies the role of each port\.    
++  VPC Security Groups that you've associated with your Amazon FSx file system, along with any VPC Network ACLs, configured to allow outbound network traffic on the following ports:     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/fsx-aws-managed-ad.html)
 **Important**  
 Allowing outbound traffic on TCP port 9389 is required for Single\-AZ 2 and all Multi\-AZ file system deployments\.
-**Note**  
-If you're using VPC network ACLs, you must also allow outbound traffic on dynamic ports \(49152\-65535\) from your FSx file system\.
++ Ensure that you *do not* delete or modify VPC security groups or ENIs created by the Managed AD service on your behalf\.
++ Add outbound rules to allow all traffic to the Active Directory that you're joining your file system to\. To do this, allow outbound traffic to the security group ID associated with your AWS Microsoft Managed AD directory\. 
 + If you are connecting your Amazon FSx file system to an AWS Managed Microsoft AD in a different VPC or account, then ensure connectivity between that VPC and the Amazon VPC where you want to create the file system\. For more information, see [Using Amazon FSx with AWS Managed Microsoft AD in a Different VPC or Account](shared-mad.md)\.
-**Important**  
-While Amazon VPC security groups require ports to be opened only in the direction that network traffic is initiated, VPC network ACLs require ports to be open in both directions\.
 
-Use the [Amazon FSx Network Validation tool](validate-ad-domain-controllers.md#test-ad-controller-connectivity) to validate connectivity to your Active Directory domain controllers\.
+Use the [Amazon FSx Network Validation tool](validate-ad-config.md#test-ad-network-config) to test these network settings\.
 
 ## Using a Resource Forest Isolation Model<a name="using-a-rfim"></a>
 
@@ -39,7 +31,7 @@ Your corporate domain takes the role of the trusted domain, and the AWS Director
 
 ## Test Your Active Directory Configuration<a name="test-ad-config"></a>
 
-Before creating your Amazon FSx file system, we recommend that you validate the connectivity to your Active Directory domain controllers using the Amazon FSx Network Validation tool\. For more information, see [Validating connectivity to your Active Directory domain controllers](validate-ad-domain-controllers.md)\.
+Before creating your Amazon FSx file system, we recommend that you validate your Active Directory configuration using the Amazon FSx Network Validation tool\. For more information, see [Validating Your Active Directory Configuration](validate-ad-config.md)\.
 
 The following related resources can help you as you use AWS Directory Service for Microsoft Active Directory with Amazon FSx for Windows File Server:
 + [What Is AWS Directory Service](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html) in the *AWS Directory Service Administration Guide*

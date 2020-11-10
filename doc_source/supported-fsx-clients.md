@@ -13,7 +13,6 @@ Amazon FSx supports connecting to your file system from a wide variety of comput
 
 The following AWS compute instances are supported for use with Amazon FSx:
 + Amazon Elastic Compute Cloud \(Amazon EC2\) instances\.
-+ Amazon Elastic Container Service \(Amazon ECS\) containers\. For more information, see [ Amazon FSx for Windows File Server volumes](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/wfsx-volumes.html) in the *Amazon Elastic Container Service Developer Guide*\.
 + Amazon WorkSpaces instances – To learn more, see the AWS blog post [ Using Amazon FSx for Windows File Server with Amazon WorkSpaces](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-for-windows-file-server-with-amazon-workspaces/)\.
 + Amazon AppStream 2\.0 instances – To learn more, see the AWS blog post [ Using Amazon FSx with Amazon AppStream 2\.0](http://aws.amazon.com/blogs/desktop-and-application-streaming/using-amazon-fsx-with-amazon-appstream-2-0/)\. 
 +  VMs running in VMware Cloud on AWS environments – To learn more, see the AWS blog post [Storing and Sharing Files with Amazon FSx for Windows File Server in a VMware Cloud on AWS Environment](http://aws.amazon.com/blogs/apn/storing-and-sharing-files-with-amazon-fsx-in-a-vmware-cloud-on-aws-environment/)\. 
@@ -27,46 +26,24 @@ The following operating systems are supported for use with Amazon FSx:
 
 You can use the following access methods and approaches with Amazon FSx\.
 
-### Accessing file systems using their default DNS names<a name="dns-name"></a>
+### Accessing Amazon FSx File Systems Using DNS Names<a name="dns-name"></a>
 
 Amazon FSx for Windows File Server provides a Domain Name System \(DNS\) name for every file system\. You access your Amazon FSx for Windows File Server file system by mapping a drive letter on your compute instance to your Amazon FSx file share using this DNS name\. To learn more, see [Using Microsoft Windows File Shares](using-file-shares.md)\.
 
+ You can find the DNS name in the Amazon FSx Management Console, the **File systems > Details > Network & Security** section, or in the response of the CreateFileSystem or DescribeFileSystems API command\.
++ For a Single AZ file system joined to an AWS Managed Microsoft Active Directory, the DNS name looks as follows\.
+
+  `fs-0123456789abcdef0.ad-domain.com`
++ For a Single AZ file system joined to a self\-managed AD, and any Multi AZ file system, the DNS name looks as follows\.
+
+  `amznfsxaa11bb22.ad-domain.com`
+
 **Important**  
-Amazon FSx only registers DNS records for a file system if you are using Microsoft DNS as the default DNS\. If you are using a third\-party DNS, you must manually set up DNS entries for your Amazon FSx file systems\. For information about choosing the correct IP addresses to use for the file system, see [Obtaining the correct file system IP addresses to use for DNS](file-system-ip-addresses-for-dns.md)\.
+To get Kerberos\-based authentication and encryption of data in transit for your SMB sessions, use the file system's DNS name provided by Amazon FSx to access your file system\. If you have an external trust configured between your AWS managed Microsoft AD and your on premise AD, in order to use the Amazon FSx Remote Powershell with Kerberos authentication, you need to configure a local group policy on the client for forest search order\. For more information, see the Microsoft documentation [Configure Kerberos Forest Search Order \(KFSO\)](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/hh921473(v=ws.10)?redirectedfrom=MSDN)\.
 
- To find the DNS name:
-+ In the Amazon FSx console, choose **File systems**, and then choose **Details**\. View the DNS name in the **Network & Security** section\.
-+ Or, view it in the response of the CreateFileSystem or DescribeFileSystems API command\.
+### Working with Amazon FSx for Windows File Server File Systems and DFS Namespaces<a name="dfs-namespace"></a>
 
-For all Single\-AZ file systems joined to an AWS Managed Microsoft Active Directory, the DNS name looks like the following: `fs-0123456789abcdef0.ad-domain.com`
-
-For all Single\-AZ file systems joined to a self\-managed Active Directory, and any Multi\-AZ file system, the DNS name looks like the following: `amznfsxaa11bb22.ad-domain.com`
-
-#### Using DNS names with Kerberos authentication<a name="kerberos-with-dns-name"></a>
-
-We recommend that you use Kerberos\-based authentication and encryption in transit with Amazon FSx\. Kerberos provides the most secure authentication for clients accessing your file system\. To enable Kerberos\-based authentication and encryption of data in transit for your SMB sessions, use the file system's DNS name provided by Amazon FSx to access your file system\. 
-
-If you have an external trust configured between your AWS Managed Microsoft Active Directory and your on\-premises Active Directory, to use the Amazon FSx Remote PowerShell with Kerberos authentication, you must configure a local group policy on the client for forest search order\. For more information, see [Configure Kerberos Forest Search Order \(KFSO\)](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/hh921473(v=ws.10)?redirectedfrom=MSDN) in the Microsoft documentation\.
-
-### Accessing file systems using DNS aliases<a name="dns-aliases"></a>
-
-Amazon FSx for Windows File Server provides a DNS name for every file system that you can use to access your file shares\. You can also enable access to Amazon FSx from DNS names other than the default DNS name that Amazon FSx creates by registering aliases for your Amazon FSx for Windows File Server file systems\. 
-
-Using DNS aliases, you can move your Windows file share data to Amazon FSx and continue using your existing DNS names to access data on Amazon FSx\. DNS aliases also allow you to use meaningful names that make it easier to administer tools and applications to connect to your Amazon FSx file systems\. For more information, see [Managing DNS aliases](managing-dns-aliases.md)\.
-
-#### Using DNS aliases with Kerberos authentication<a name="kerberos-with-aliases"></a>
-
-We recommend that you use Kerberos\-based authentication and encryption in transit with Amazon FSx\. Kerberos provides the most secure authentication for clients accessing your file system\. To enable Kerberos authentication for clients that access Amazon FSx using a DNS alias, you must add service principal names \(SPNs\) that correspond to the DNS alias on your Amazon FSx file system’s Active Directory computer object\. 
-
-You can optionally enforce clients that access the file system using a DNS alias to use Kerberos authentication and encryption by setting the following Group Policy Objects \(GPOs\) in your Active Directory:
-+ **Restrict NTLM: Outgoing NTLM traffic to remote servers** \- Use this policy setting to deny or audit outgoing NTLM traffic from a computer to any remote server running the Windows operating system\.
-+ **Restrict NTLM: Add remote server exceptions for NTLM authentication** \- Use this policy setting to create an exception list of remote servers to which client devices are allowed to use NTLM authentication if the *Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers* policy setting is configured\.
-
-For more information, see [Walkthrough 5: Using DNS aliases to access your file system](walkthrough05-file-system-custom-CNAME.md)\. 
-
-### Working with Amazon FSx for Windows File Server file systems and DFS namespaces<a name="dfs-namespace"></a>
-
-Amazon FSx for Windows File Server supports the use of Microsoft Distributed File System \(DFS\) Namespaces\. You can use DFS Namespaces to organize file shares on multiple file systems into one common folder structure \(a namespace\) that you use to access the entire file dataset\. You can use a name in your DFS Namespace to access your Amazon FSx file system by configuring its link target to be the file system's DNS name\. For more information, see [Grouping Multiple File Systems with DFS Namespaces](group-file-systems.md)\.
+Amazon FSx for Windows File Server supports the use of Microsoft Distributed File System \(DFS\) Namespaces\. You can use DFS Namespaces to organize file shares on multiple file systems into one common folder structure \(a namespace\) that you use to access the entire file dataset\. You can use a name in your DFS Namespace to access your Amazon FSx file system by configuring its link target to be the file system's DNS name\.
 
 ## Supported Environments<a name="access-environments"></a>
 

@@ -3,7 +3,7 @@
 As you need additional storage, you can increase the storage capacity that is configured on your Amazon FSx for Windows File Server file system\. You can do so using the Amazon FSx console, the Amazon FSx API, or the AWS Command Line Interface \(AWS CLI\)\. 
 
 **Note**  
-Increasing storage capacity is not available for file systems created before June 1, 2020 or file systems restored from a backup belonging to a file system that was created before June 23, 2019\.
+Support for file systems created before June 1, 2020, is coming soon\.
 
 When you increase the storage capacity of your Amazon FSx file system, behind the scenes, Amazon FSx adds a new, larger set of disks to your file system\. The new capacity is available for use within minutes\. When the new storage capacity becomes available, you are billed only for the new storage capacity\. 
 
@@ -193,4 +193,4 @@ The `ProgressPercent` property displays the progress of the storage optimization
             ]
 ```
 
-For information about troubleshooting failed actions, see [Troubleshooting failed storage and throughput updates](admin-actions-ts.md)\.
+For information about troubleshooting failed actions, see [Troubleshooting Failed Storage and Throughput Updates](admin-actions-ts.md)\.

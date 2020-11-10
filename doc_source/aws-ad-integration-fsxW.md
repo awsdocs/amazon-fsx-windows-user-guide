@@ -17,3 +17,4 @@ Amazon FSx does not support [Active Directory Connector](https://docs.aws.amazon
 **Topics**
 + [Using Amazon FSx with AWS Directory Service for Microsoft Active Directory](fsx-aws-managed-ad.md)
 + [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)
++ [Validating Your Active Directory Configuration](validate-ad-config.md)

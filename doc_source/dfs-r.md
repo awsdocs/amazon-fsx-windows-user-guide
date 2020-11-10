@@ -1,4 +1,4 @@
-# You can't configure DFS\-R on a Multi\-AZ or Single\-AZ 2 file system<a name="dfs-r"></a>
+# You Can't Configure DFS\-R on a Multi\-AZ or Single\-AZ 2 File System<a name="dfs-r"></a>
 
 Microsoft Distributed File System Replication \(DFS\-R\) is not supported on Multi\-AZ and Single\-AZ 2 file systems\.
 

@@ -9,22 +9,20 @@ You choose the maintenance window during file system creation\. If you have no t
 **Note**  
 To ensure data integrity during maintenance activity, Amazon FSx for Windows File Server completes any pending write operations to the underlying storage volumes hosting your file system before maintenance begins\.
 
-You can use the Amazon FSx Management Console, AWS CLI, AWS API, or one of the AWS SDKs to change the maintenance window for your file systems\. 
+You can use the Amazon FSx Management Console, AWS CLI or one of the AWS SDKs to change the maintenance window for your file systems\. 
 
-**To change the weekly maintenance window \(Console\)**
+**To change the maintenance window using the console**
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
 1. Choose **File systems** in the left hand navigation column\.
 
-1. Choose the file system that you want to change the weekly maintenance window for\. The file system details page displays\.
+1. Choose the file system that you want to changes the maintenance window for\. The file system details page displays\.
 
-1. Choose **Administration** to display the file system administration **Settings** panel\.
+1. Choose the **Maintenance** tab\. The maintenance window **Settings** panel displays\.
 
-1. Choose **Update** to display the **Change maintenance window** window\.
+1. Choose **Edit** and enter the new day and time that you want the maintenance window to start\.
 
-1.  Enter the new day and time that you want the weekly maintenance window to start\.
+1. Choose **Save** to save your changes\. The new maintenance start time is displayed in the **Settings** panel\.
 
-1. Choose **Save** to save your changes\. The new maintenance start time is displayed in the **Administration Settings** panel\.
-
-To change the weekly maintenance window using the CLI or API using the [UpdateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html) operation, see [Walkthrough 3: Update an Existing File System](walkthrough03-update-file-system.md)\.
+To change the maintenance window using the CLI or API using the [UpdateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html) operation, see [Walkthrough 3: Update an Existing File System](walkthrough03-update-file-system.md)\.

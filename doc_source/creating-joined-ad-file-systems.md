@@ -13,9 +13,6 @@ Optionally, you can also specify the following:
 
 After you specify this information, Amazon FSx joins your new file system to your self\-managed AD domain using the service account that you provided\. 
 
-**Important**  
-Amazon FSx only registers DNS records for a file system if the AD domain that you are joining it to is using Microsoft DNS as the default DNS\. If you are using a third\-party DNS, you will need to manually setup DNS entries for your Amazon FSx file systems after you create your file system\. For more information on choosing the correct IP addresses to use for the file system, see [Obtaining the correct file system IP addresses to use for DNS](file-system-ip-addresses-for-dns.md)\.
-
 ## Before You Begin<a name="b4-you-begin"></a>
 
 Make sure that you have completed the [Prerequisites for Using a Self\-Managed Microsoft AD](self-manage-prereqs.md) detailed in [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)\.
@@ -40,29 +37,22 @@ Make sure that you have completed the [Prerequisites for Using a Self\-Managed M
 
 1. Choose any value for **Availability Zones** and **Subnet**\.
 
-1. For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. Please ensure that the security group and the VPC Network ACLs for the subnet\(s\) where you're creating your FSx file system allow traffic on the ports and and in the directions shown in the following diagram\.  
-![\[Amazon FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
+1. For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. If you're not using the default security group, make sure that you add the following rules to the security group that you use for this exercise:
+   + Inbound and outbound rules to allow the following ports:
+     + TCP 445 \(SMB\)
+     + TCP 135 \(RPC\)
+     + TCP/UDP 1024\-65535 \(Ephemeral ports for RPC\)
 
-   The following table identifies the role of each port\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/creating-joined-ad-file-systems.html)
-**Important**  
-Allowing outbound traffic on TCP port 9389 is required for Single\-AZ 2 and all Multi\-AZ file system deployments\.
-**Note**  
-If you're using VPC network ACLs, you must also allow outbound traffic on dynamic ports \(49152\-65535\) from your FSx file system\.
+     From and to IP addresses or security group IDs associated with the following source and destination resources:
+     + Client compute instances from which you want to access the file system\.
+     + Other file servers that you expect this file system to participate with in DFS Replication groups\.
    + Outbound rules to allow all traffic to the IP addresses associated with the DNS servers and domain controllers for your self\-managed Microsoft AD domain\. For more information, see [Microsoft's documentation on configuring your firewall for Active Directory communication](https://support.microsoft.com/en-us/help/179442/how-to-configure-a-firewall-for-domains-and-trusts)\.
-   + Ensure that these traffic rules are also mirrored on the firewalls that apply to each of the AD domain controllers, DNS servers, FSx clients and FSx administrators\.
-**Note**  
- If you have Active Directory sites defined, you must ensure that the subnet\(s\) in the VPC associated with your Amazon FSx file system are defined in an Active Directory site, and that no conflicts exist between the subnet\(s\) in your VPC and the subnets in your other sites\. You can view and change these settings using the Active Directory Sites and Services MMC snap\-in\. 
-**Important**  
-While Amazon VPC security groups require ports to be opened only in the direction that network traffic is initiated, most Windows firewalls and VPC network ACLs require ports to be open in both directions\.
 
 1. For **Windows authentication**, choose **Self\-managed Microsoft Active Directory**\. 
 
 1.  Enter a value for **Fully qualified domain name** for the self\-managed Microsoft AD directory\. 
 **Note**  
 Domain name must not be in the Single Label Domain \(SLD\) format\. Amazon FSx currently does not support SLD domains\.
-**Important**  
-For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain name cannot exceed 47 characters\.
 
 1. Enter a value for **Organizational Unit** for the self\-managed Microsoft AD directory\.
 **Note**  
@@ -102,6 +92,3 @@ OrganizationalUnitDistinguishedName="OU=FileSystems,DC=corp,DC=example,DC=com",F
 UserName="FSxService",Password="password", \
    DnsIps=["10.0.1.18"]}',ThroughputCapacity=8
 ```
-
-**Important**  
-Do not move computer objects that Amazon FSx creates in the OU after your file system is created\. Doing so will cause your file system to become misconfigured\.

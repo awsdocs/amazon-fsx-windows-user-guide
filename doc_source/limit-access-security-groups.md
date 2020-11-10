@@ -29,19 +29,16 @@ For more information on security group rules, see [Security Group Rules](https:/
 
 1. <a name="vpc-sg-step6"></a>Add the following rules to allow outbound network traffic on the following ports: 
 
-   1. For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. Please ensure that the security group and the VPC Network ACLs for the subnet\(s\) where you're creating your FSx file system allow traffic on the ports and and in the directions shown in the following diagram\.  
-![\[Amazon FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
-
-      The following table identifies the role of each port\.    
+   1. Add the following inbound and outbound rules to allow the following ports\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/limit-access-security-groups.html)
-**Important**  
-Allowing outbound traffic on TCP port 9389 is required for Single\-AZ 2 and all Multi\-AZ file system deployments\.
 
-   1. Ensure that these traffic rules are also mirrored on the firewalls that apply to each of the AD domain controllers, DNS servers, FSx clients and FSx administrators\.
-**Important**  
-While Amazon VPC security groups require ports to be opened only in the direction that network traffic is initiated, most Windows firewalls and VPC network ACLs require ports to be open in both directions\.
-**Note**  
- If you have Active Directory sites defined, you must be sure that the subnet\(s\) in the VPC associated with your Amazon FSx file system are defined in an Active Directory site, and that no conflicts exist between the subnet\(s\) in your VPC and the subnets in your other sites\. You can view and change these settings using the Active Directory Sites and Services MMC snap\-in\. 
+      Add from and to IP addresses or security group IDs associated with the following source and destination resources:
+      + Client compute instances that you want to access your file system from\.
+      + Other file servers that you expect your file system to communicate with in DFS Replication groups\.
+
+   1. Add outbound rules to allow all traffic to the Active Directory that you're joining your file system to\. To do this, do one of the following:
+      + Allow outbound traffic to the security group ID associated with your AWS Managed AD directory\. 
+      + Allow outbound traffic to the IP addresses associated with your self\-managed Active Directory domain controllers\. 
 **Note**  
 In some cases, you might have modified the rules of your AWS Managed Microsoft AD security group from the default settings\. If so, make sure that this security group has the required inbound rules to allow traffic from your Amazon FSx file system\. For more information about the required inbound rules, see [AWS Managed Microsoft AD Prerequisites](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_prereqs.html) in the *AWS Directory Service Administration Guide*\.
 

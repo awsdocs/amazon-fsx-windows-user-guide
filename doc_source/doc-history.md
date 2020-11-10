@@ -1,14 +1,11 @@
 # Document History<a name="doc-history"></a>
-+ **API version: **2018\-03\-01
-+ **Latest documentation update: **November 9, 2020
++ **API version:** 
++ **Latest documentation update:** March 26, 2020
 
 The following table describes important changes to the *Amazon FSx Windows User Guide*\. For notifications about documentation updates, you can subscribe to the RSS feed\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
-| [Support added for using DNS aliases](#doc-history) | You can now associate DNS aliases with your Amazon FSx for Windows File Server file systems that you can use to access the data on your file system\. For more information, see [Managing DNS aliases](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html) and [ Walkthrough 5: Using DNS aliases to access your file system](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html)\. | November 9, 2020 | 
-| [Support added for Amazon Elastic Container Service](#doc-history) | You can now use Amazon FSx for Windows File Server with Amazon ECS\. For more information, see [ Supported Clients](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/supported-fsx-clients.html#supported-clients-fsx)\. | November 9, 2020 | 
-| [Amazon FSx is now integrated with AWS Backup](#doc-history) | You can now use AWS Backup to back up and restore your FSx file systems in addition to using native Amazon FSx backups\. For more information, see [Using AWS Backup with Amazon FSx](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#aws-backup-and-fsx)\. | November 9, 2020 | 
 | [Support added for throughput capacity scaling](#doc-history) | You can now modify the throughput capacity for existing Amazon FSx for Windows File Server file systems as your throughput requirements evolve\. For more information, see [Managing Throughput Capacity](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html)\. | June 1, 2020 | 
 | [Support added for storage capacity scaling](#doc-history) | You can now increase the storage capacity for existing Amazon FSx for Windows File Server file systems as your storage requirements evolve\. For more information, see [Managing Storage Capacity](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)\. | June 1, 2020 | 
 | [Support added for hard disk drive \(HDD\) storage](#doc-history) | HDD storage gives you price and performance flexibility when using Amazon FSx for Windows File Server\. For more information, see [ Optimizing Costs with Amazon FSx](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html)\. | March 26, 2020 | 

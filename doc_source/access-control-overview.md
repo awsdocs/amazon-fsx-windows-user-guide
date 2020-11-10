@@ -9,9 +9,10 @@ When granting permissions, you decide who is getting the permissions, the resour
 
 **Topics**
 + [Amazon FSx for Windows File Server Resources and Operations](#access-control-resources)
-+ [Understanding Resource Ownership](#access-control-owner)
-+ [Managing Access to Amazon FSx Resources](access-control-manage-access-intro.md)
 + [Using Service\-Linked Roles for Amazon FSx](using-service-linked-roles.md)
++ [Understanding Resource Ownership](#access-control-owner)
++ [Managing Access to Resources](#access-control-manage-access-intro)
++ [Amazon FSx API Permissions: Actions, Resources, and Conditions Reference](fsx-api-permissions-ref.md)
 
 ## Amazon FSx for Windows File Server Resources and Operations<a name="access-control-resources"></a>
 
@@ -35,3 +36,14 @@ The AWS account owns the resources that are created in the account, regardless o
 + If you use the root account credentials of your AWS account to create a file system, your AWS account is the owner of the resource \(in Amazon FSx, the resource is the file system\)\.
 + If you create an IAM user in your AWS account and grant permissions to create a file system to that user, the user can create a file system\. However, your AWS account, to which the user belongs, owns the file system resource\.
 + If you create an IAM role in your AWS account with permissions to create a file system, anyone who can assume the role can create a file system\. Your AWS account, to which the role belongs, owns the file system resource\. 
+
+## Managing Access to Resources<a name="access-control-manage-access-intro"></a>
+
+A *permissions policy* describes who has access to what\. The following section explains the available options for creating permissions policies\.
+
+**Note**  
+This section discusses using IAM in the context of Amazon FSx for Windows File Server\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+
+Policies attached to an IAM identity are referred to as *identity\-based* policies \(IAM policies\) and policies attached to a resource are referred to as *resource\-based* policies\. Amazon FSx for Windows File Server supports only identity\-based policies \(IAM policies\)\. 
+
+**Topics**

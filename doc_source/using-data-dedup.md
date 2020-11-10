@@ -14,11 +14,11 @@ You enable data deduplication on an Amazon FSx for Windows File Server file shar
 PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com -ConfigurationName FSxRemoteAdmin -ScriptBlock {Enable-FsxDedup }
 ```
 
-When you enable data deduplication, a default data dedup schedule is in place\. The schedule uses Coordinated Universal Time \(UTC\)\. Also, the minimum file age before optimizing is set to 3 days\.
+When you enable data deduplication, a default data dedup schedule is in place\. Also, the minimum file age before optimizing is set to 3 days\.
 
 ## Setting a Data Deduplication Schedule<a name="set-dedup-sched"></a>
 
-Even though the default schedule works well in most cases, you can modify an existing deduplication schedule by using the `Set-FsxDedupSchedule`, shown as follows\. Data deduplication schedules use UTC time\.
+Even though the default schedule works well in most cases, you can modify an existing deduplication schedule by using the `Set-FsxDedupSchedule`, shown as follows\.
 
 ```
 PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com -ConfigurationName FSxRemoteAdmin -ScriptBlock {   
@@ -26,7 +26,7 @@ New-FSxDedupSchedule -Name "CustomOptimization" -Type Optimization -Days Mon,Tue
 }
 ```
 
- This command modifies the default `BackgroundOptimization` schedule to run on days Monday to Wednesday and Saturday, starting the job at 8:00 am \(UTC\) each day, with a maximum duration of 9 hours, after which the job stops if it is still running\. 
+ This command modifies the default `BackgroundOptimization` schedule to run on days Monday to Wednesday and Saturday, starting the job at 8:00 am each day, with a maximum duration of 9 hours, after which the job stops if it is still running\. 
 
  To modify the minimum file age before optimizing setting, use the `Set-FSxDedupConfiguration` command\. 
 

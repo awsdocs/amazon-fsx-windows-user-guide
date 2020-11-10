@@ -21,7 +21,7 @@ Following are the quotas for Amazon FSx for Windows File Server for each AWS acc
 | Total SSD storage for all file systems | 512 TiB | Multiple PiBs | 
 | Total HDD storage for all file systems | 512 TiB | Multiple PiBs | 
 | Total throughput capacity for all file systems | 10 GBps | Hundreds of GBps | 
-| Total number of user\-initiated backups for all file systems |  500  | Thousands | 
+| Total number of user\-initiated backups for all file system |  500  | Thousands | 
 
 **To request a quota increase**
 
@@ -56,7 +56,7 @@ Following are the quotas on Amazon FSx for Windows File Server resources for eac
 | Minimum throughput capacity | 8 MBps | 
 | Maximum throughput capacity | 2,048 MBps | 
 | Maximum number of file shares | 100,000 | 
-| Retention period for automated backups | 90 days | 
+| Retention period for automated backups | 35 days | 
 
 For information on throughput capacity, see [Amazon FSx for Windows File Server PerformancePerformance](performance.md)\.
 

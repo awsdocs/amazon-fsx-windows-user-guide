@@ -16,7 +16,7 @@ The following procedures detail how you can manage user sessions and open files 
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance as a user that is a member of the file system administrators group\. In AWS Managed Microsoft Active Directory, this group is called AWS Delegated FSx Administrators\. In your self\-managed Microsoft Active Directory, this group is called Domain Admins or the custom name for the administrators group that you provided during creation\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. Connect to your instance as a user that is a member of the file system administrators group\. In AWS Managed AD, this group is called AWS Delegated FSx Administrators\. In your self\-managed Microsoft AD, this group is called Domain Admins or the custom name for the administrators group that you provided during creation\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. Open the **Start** menu and run **fsmgmt\.msc** using `Run As Administrator`\. Doing this opens the Shared Folders GUI tool\.
 

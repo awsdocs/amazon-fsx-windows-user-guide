@@ -18,8 +18,8 @@ The following table summarizes features supported by the Amazon FSx for Windows 
 | Deployment type | SSD storage | HDD storage |  DFS namespaces | DFS replication | Custom DNS name | CA shares | 
 | --- | --- | --- | --- | --- | --- | --- | 
 | Single\-AZ 1 | ✓  |  | ✓ | ✓ | ✓ |  | 
-| Single\-AZ 2 | ✓ | ✓ | ✓ |  |  | ✓\* | 
-| Multi\-AZ | ✓ | ✓ | ✓ |  |  | ✓\* | 
+| Single\-AZ 2 | ✓ | ✓ | ✓ |  | Coming soon | ✓\* | 
+| Multi\-AZ | ✓ | ✓ | ✓ |  | Coming soon | ✓\* | 
 
 **Note**  
 \* While you can create CA shares on Single\-AZ 2 file systems, you should use CA shares on Multi\-AZ file systems for SQL Server HA deployments\.
@@ -40,12 +40,6 @@ Multi\-AZ file systems automatically fail over from the preferred file server to
 ### Failover Experience on Linux Clients<a name="linux-failover"></a>
 
  Linux clients do not support automatic DNS\-based failover\. Therefore, they don't automatically connect to the standby file server during a failover\. They will automatically resume file system operations after the Multi\-AZ file system has failed back to the file server in the preferred subnet\.
-
-### Testing failover on a file system<a name="testing-failover"></a>
-
- You can test failover your Multi\-AZ file system by modifying its throughput capacity\. When you modify your file system's throughput capacity, Amazon FSx switches out the file system's file server\. Multi\-AZ file systems automatically fail over to the secondary server while Amazon FSx replaces the preferred server file server first\. Then the file system automatically fails back to the new primary server and Amazon FSx replaces the secondary file server\. 
-
- You can monitor the progress of the throughput capacity update request in the Amazon FSx console, the CLI, and the API\. Once the update has completed successfully, your file system has failed over to the secondary server, and failed back to the primary server\. For more information about modifying your file system's throughput capacity and monitoring the progress of the request, see [Managing Throughput Capacity](managing-throughput-capacity.md)\.
 
 ## Working with Single and Multi\-AZ File System Resources<a name="single-multi-az-resources"></a>
 
