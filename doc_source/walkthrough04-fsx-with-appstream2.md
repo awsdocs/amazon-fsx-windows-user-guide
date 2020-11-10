@@ -36,12 +36,22 @@ There are three procedures you'll need to perform to complete this task\.
 
 **To link Amazon FSx file shares with AppStream 2\.0**
 
-1. In the image builder, create a batch script with the following command and store it in a known file location \(for example: C:\\Scripts\\map\-fs\.bat\)\. The following example uses S: as the drive letter to map the shared folder on your Amazon FSx file system\. You use the DNS name of your Amazon FSx file system in this script, which you can get from the file system details view in the Amazon FSx console\.
+1. In the image builder, create a batch script with the following command and store it in a known file location \(for example: C:\\Scripts\\map\-fs\.bat\)\. The following example uses S: as the drive letter to map the shared folder on your Amazon FSx file system\. You use the DNS name of your Amazon FSx file system or a DNS alias associated with the file system in this script, which you can get from the file system details view in the Amazon FSx console\.
+
+   If you're using the file system's DNS name:
 
    ```
    @echo off
    net use S: /delete 
    net use S: \\file-system-DNS-name\users\%username%
+   ```
+
+   If you're using a DNS alias associated with the file system:
+
+   ```
+   @echo off
+   net use S: /delete 
+   net use S: \\fqdn-DNS-alias\users\%username%
    ```
 
 1. Open a PowerShell prompt and run `gpedit.msc`\.
@@ -70,7 +80,7 @@ There are three procedures you'll need to perform to complete this task\.
 
 1. Create an Amazon FSx file system\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.
 
-1. Every Amazon FSx file system includes a shared folder by default that can be accessed using the address \\\\*file\-system\-DNS\-name*\\share\. You can use the default share or create a different shared folder\. For more information, see [File Shares](managing-file-shares.md)\.
+1. Every Amazon FSx file system includes a shared folder by default that you can access using the address \\\\*file\-system\-DNS\-name*\\share, or \\\\*fqdn\-DNS\-alias*\\share if you are using DNS aliases\. You can use the default share or create a different shared folder\. For more information, see [File Shares](managing-file-shares.md)\.
 
 **To launch an AppStream 2\.0 image builder**
 
@@ -82,12 +92,22 @@ There are three procedures you'll need to perform to complete this task\.
 
 **To link the shared folder with AppStream 2\.0**
 
-1. Create a batch script, as described in the previous procedure, to automatically mount the shared folder whenever a user launches a streaming session\. To complete the script, you need the file systems DNS name \(which you can obtain from the file system details view in the Amazon FSx Console\), and credentials for accessing the shared folder\.
+1. Create a batch script, as described in the previous procedure, to automatically mount the shared folder whenever a user launches a streaming session\. To complete the script, you need the file system's DNS name or a DNS alias that is associated with the file system \(which you can obtain from the file system details view in the Amazon FSx Console\), and credentials for accessing the shared folder\.
+
+   If you're using the file system's DNS name:
 
    ```
    @echo off
    net use S: /delete
    net use S: \\file-system-DNS-name\share /user:username password
+   ```
+
+   If you're using a DNS alias associated with the file system:
+
+   ```
+   @echo off
+   net use S: /delete
+   net use S: \\fqdn-DNS-alias\share /user:username password
    ```
 
 1. Create a Group Policy to execute this batch script at every user logon\. You can follow the same instructions as described in the previous section\.

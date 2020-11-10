@@ -6,7 +6,7 @@ For information about configuring and using Amazon FSx to reduce the complexity 
 
 ## Using Amazon FSx for Active SQL Server Data Files<a name="active-data-files"></a>
 
-Microsoft SQL Server can be deployed with an SMB file share as the storage option for active data files\. Amazon FSx is optimized to provide shared storage for SQL Server databases by supporting continuously available \(CA\) file shares\. These file shares are designed for applications like SQL Server that require uninterrupted access to shared file data\. While you can create CA shares on Single\-AZ 2 file systems, you should use CA shares on Multi\-AZ file systems for SQL Server HA deployments\. 
+Microsoft SQL Server can be deployed with an SMB file share as the storage option for active data files\. Amazon FSx is optimized to provide shared storage for SQL Server databases by supporting continuously available \(CA\) file shares\. These file shares are designed for applications like SQL Server that require uninterrupted access to shared file data\. While you can create CA shares on Single\-AZ 2 file systems, it is required that you use CA shares on Multi\-AZ file systems for SQL Server HA deployments\. 
 
 ### Create a Continuously Available Share<a name="ca-share"></a>
 

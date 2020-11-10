@@ -1,6 +1,9 @@
-# Migrating File Share Configurations to Amazon FSx<a name="migrate-file-share-config-to-fsx"></a>
+# Migrating file share configurations to Amazon FSx<a name="migrate-file-share-config-to-fsx"></a>
 
-You can migrate an existing file share configuration to Amazon FSx by using the following procedure\. In this procedure, the source file server is the file server whose file share configuration you wish to migrate to Amazon FSx\.
+You can migrate an existing file share configuration to Amazon FSx by using the following procedure\. In this procedure, the source file server is the file server whose file share configuration you want to migrate to Amazon FSx\.
+
+**Note**  
+First migrate your files to Amazon FSx before migrating your file share configuration\. For more information, see [Migrating existing file storage to Amazon FSx for Windows File Server](migrate-files-fsx.md)\.
 
 **To migrate existing file shares to Amazon FSx for Windows File Server**
 
@@ -39,17 +42,14 @@ You can migrate an existing file share configuration to Amazon FSx by using the 
 1. Migrate the file share configuration to your Amazon FSx file server using the following script\.
 
    ```
-   $params = @{}
    $FSxAcceptedParameters = ("ContinuouslyAvailable", "Description", "ConcurrentUserLimit", "CATimeout", "FolderEnumerationMode", "CachingMode", "FullAccess", "ChangeAccess", "ReadAccess", "NoAccess", "SecurityDescriptor", "Path", "Name", "EncryptData")
    ForEach ($item in $shares) {
-       $i = $shares.IndexOf($item);
-       $params[$i] = @{};
+       $param = @{};
        Foreach ($property in $item.psObject.properties) {
            if ($property.Name -In $FSxAcceptedParameters) {
-               $params[$i][$property.Name] = $property.Value
+               $param[$property.Name] = $property.Value
            }
        }
-       $param=$params[$i];    
        Invoke-Command -ConfigurationName FSxRemoteAdmin -ComputerName amznfsxxxxxxxxx.corp.com -ErrorVariable errmsg -ScriptBlock { New-FSxSmbShare -Credential $Using:credential @Using:param }
    }
    ```

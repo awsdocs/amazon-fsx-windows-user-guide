@@ -2,7 +2,7 @@
 
 Amazon FSx for Windows File Server provides fully managed Microsoft Windows file servers, backed by a fully native Windows file system\. Amazon FSx for Windows File Server has the features, performance, and compatibility to easily lift and shift enterprise applications to the AWS Cloud\.
 
-Amazon FSx supports a broad set of enterprise Windows workloads with fully managed file storage built on Microsoft Windows Server\. Amazon FSx has native support for Windows file system features and for the industry\-standard Server Message Block \(SMB\) protocol to access file storage over a network\. Amazon FSx is optimized for enterprise applications in the AWS Cloud, with native Windows compatibility, enterprise performance and features, and consistent submillisecond latencies\.
+Amazon FSx supports a broad set of enterprise Windows workloads with fully managed file storage built on Microsoft Windows Server\. Amazon FSx has native support for Windows file system features and for the industry\-standard Server Message Block \(SMB\) protocol to access file storage over a network\. Amazon FSx is optimized for enterprise applications in the AWS Cloud, with native Windows compatibility, enterprise performance and features, and consistent sub\-millisecond latencies\.
 
 With file storage on Amazon FSx, the code, applications, and tools that Windows developers and administrators use today can continue to work unchanged\. Windows applications and workloads ideal for Amazon FSx include business applications, home directories, web serving, content management, data analytics, software build setups, and media processing workloads\.
 
@@ -10,11 +10,13 @@ As a fully managed service, Amazon FSx for Windows File Server eliminates the ad
 
 ## Amazon FSx for Windows File Server Resources: File Systems, Backups, and File Shares<a name="fsx-resources"></a>
 
-The primary resources in Amazon FSx are *file systems* and *backups*\. A file system is where you store and access your files and folders\. A file system is made up of a Windows file server and storage volumes, and is accessed with its DNS name\. When you create a file system, you specify an amount of storage capacity \(in GiB\) and an amount of throughput capacity \(in MB/s\)\. You can modify these properties as your needs change\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md) and [Managing Throughput Capacity](managing-throughput-capacity.md)\. 
+The primary resources in Amazon FSx are *file systems* and *backups*\. A file system is where you store and access your files and folders\. A file system is made up of one or more Windows file servers and storage volumes\. When you create a file system, you specify an amount of storage capacity \(in GiB\) and an amount of throughput capacity \(in MB/s\)\. You can modify these properties as your needs change after you create the file system\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md) and [Managing Throughput Capacity](managing-throughput-capacity.md)\. 
 
-Amazon FSx for Windows File Server backups are file\-system\-consistent, highly durable, and incremental\. To ensure file system consistency, Amazon FSx uses the Volume Shadow Copy Service \(VSS\) in Microsoft Windows\. Automatic daily backups are turned on by default when you create a file system, and you can also take additional manual backups at anytime\. For more information, see [Working with Backups](using-backups.md),
+Amazon FSx for Windows File Server backups are file\-system\-consistent, highly durable, and incremental\. To ensure file system consistency, Amazon FSx uses the Volume Shadow Copy Service \(VSS\) in Microsoft Windows\. Automatic daily backups are turned on by default when you create a file system, and you can also take additional manual backups at any time\. For more information, see [Working with Backups](using-backups.md),
 
 A Windows file share is a specific folder \(and its subfolders\) within your file system that you make accessible to your compute instances with SMB\. Your file system already comes with a default Windows file share called `\share`\. You can create and manage as many other Windows file shares as you want by using the Shared Folders graphical user interface \(GUI\) tool on Windows\. For more information, see [Using Microsoft Windows File Shares](using-file-shares.md)\.
+
+File shares are accessed using either the file system's DNS name or DNS aliases that you associate with the file system\. For more information, see [Managing DNS aliases](managing-dns-aliases.md)\.
 
 ### Accessing File Shares<a name="fsx-access-shares"></a>
 

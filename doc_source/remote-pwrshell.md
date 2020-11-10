@@ -13,7 +13,10 @@ The Amazon FSx CLI for Remote Management on PowerShell uses the following securi
 
 ## Using the CLI for Remote Management on PowerShell<a name="using-rps"></a>
 
-You have two options to run remote management commands on your Amazon FSx file system\. You can establish a long\-running Remote PowerShell session and run the commands inside the session\. Or, you can use the `Invoke-Command` to execute a single command or a single block of commands without establishing a long\-running Remote PowerShell session\. If you want to set and pass variables as parameters to the remote management command, you need to use `Invoke-Command`\.
+You have two options to run remote management commands on your Amazon FSx file system\. You can establish a long\-running Remote PowerShell session and run the commands inside the session\. Or, you can use the `Invoke-Command` to run a single command or a single block of commands without establishing a long\-running Remote PowerShell session\. If you want to set and pass variables as parameters to the remote management command, you need to use `Invoke-Command`\.
+
+**Note**  
+For Multi\-AZ file systems, you can only use the Amazon FSx CLI for Remote Management while the file system is on its preferred file server\. For more information, see [Availability and Durability: Single\-AZ and Multi\-AZ File Systems](high-availability-multiAZ.md)\.
 
 To run these commands, you must know the *Windows Remote PowerShell Endpoint* for your file system\. To find this endpoint, follow these steps:
 

@@ -17,7 +17,7 @@ To manage file shares on your Amazon FSx file system, you can use the Shared Fol
    + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
    + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
-1. Connect to your instance as a user that is a member of the file system administrators group\. In AWS Managed AD, this group is called AWS Delegated FSx Administrators\. In your self\-managed Microsoft AD, this group is called Domain Admins or the custom name for the administrators group that you provided during creation\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
+1. Connect to your instance as a user that is a member of the file system administrators group\. In AWS Managed Microsoft Active Directory, this group is called AWS Delegated FSx Administrators\. In your self\-managed Microsoft Active Directory, this group is called Domain Admins or the custom name for the administrators group that you provided during creation\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
 1. Open the **Start** menu and run **fsmgmt\.msc** using **Run As Administrator**\. Doing this opens the Shared Folders GUI tool\.
 
@@ -37,7 +37,7 @@ Now that Shared Folders is connected to your Amazon FSx file system, you can man
   + Using command line:
 
     ```
-    New-Item -Type Directory -Path \\amznfsxabcd0123.corp.example.com\D$\MyNewShare
+    New-Item -Type Directory -Path \\amznfsxabcd0123.corp.example.com\D$\share\MyNewShare
     ```
 + **Modify a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
 + **Remove a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.
@@ -56,7 +56,7 @@ To learn how to use the Amazon FSx CLI for remote management on PowerShell, see 
 You can create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell\. CA shares created on an Amazon FSx for Windows File Server Multi\-AZ file system are highly durable and highly available\. An Amazon FSx Single\-AZ file system is built on a single node cluster\. As a result, CA shares created on a Single\-AZ file system are highly durable, but are not highly available\. Use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
 
 ```
-New-FSxSmbShare -Name "New CA Share" -Path "D:\share" -Description "CA share" -ContinuouslyAvailable $True 
+New-FSxSmbShare -Name "New CA Share" -Path "D:\share\new-share" -Description "CA share" -ContinuouslyAvailable $True 
 ```
 
 Following are custom remote\-management PowerShell commands that you can use\.

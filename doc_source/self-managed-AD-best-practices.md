@@ -40,6 +40,9 @@ Perform this procedure on a machine that is joined to your directory and has the
 
 1. Close the Active Directory User and Computers MMC snap\-in\.
 
+**Important**  
+Do not move computer objects that Amazon FSx creates in the OU after your file system is created\. Doing so will cause your file system to become misconfigured\.
+
 ## Keeping Your Active Directory Configuration Updated with Amazon FSx<a name="keep-ad-config-updated"></a>
 
 To help ensure continued, uninterrupted availability of your Amazon FSx file system, update the file system's self\-managed Active Directory \(AD\) configuration any time that you make changes to your self\-managed AD setup\. 
@@ -48,7 +51,7 @@ For example, suppose that your AD uses a time\-based password reset policy\. In 
 
 When you update the self\-managed AD configuration for your Amazon FSx file system, your file system's state switches from **Available** to **Updating** while the update is applied\. Verify that the state switches back to **Available** after the update has been applied – note that the update can take up to several minutes to complete\.
 
-If there's an issue with the updated self\-managed AD configuration, the file system state switches to **Misconfigured**\. This state shows an error message and recommended action beside the file system description in the console, API, and CLI\. If an issue happens, take the recommended corrective action to provide the correct configuration properties\. If the issue is resolved, verify that your file system's state changes to **Updating** and eventually to **Available**\. To learn more about troubleshooting possible self\-managed AD misconfigurations, see [File System Is In a Misconfigured State](misconfigured-ad-config.md)\. 
+If there's an issue with the updated self\-managed AD configuration, the file system state switches to **Misconfigured**\. This state shows an error message and recommended action beside the file system description in the console, API, and CLI\. If an issue happens, take the recommended corrective action to provide the correct configuration properties\. If the issue is resolved, verify that your file system's state changes to **Updating** and eventually to **Available**\. To learn more about troubleshooting possible self\-managed AD misconfigurations, see [File system is in a misconfigured state](misconfigured-ad-config.md)\. 
 
 ## Using Security Groups to Limit Traffic Within Your VPC<a name="least-privilege-sg-rules"></a>
 

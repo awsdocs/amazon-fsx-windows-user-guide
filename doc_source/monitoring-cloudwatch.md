@@ -18,4 +18,4 @@ Amazon FSx for Windows File Server publishes the following metrics into the `AWS
 
 ## Amazon FSx for Windows File Server Dimensions<a name="fsx-dimensions"></a>
 
-Amazon FSx for Windows File Server metrics use the `FSx` namespace and provide metrics for a single dimension, `FileSystemId`\. You can find a file system's ID using the [aws fsx describe\-file\-systems](https://docs.aws.amazon.com/cli/latest/reference/fsx/describe-file-systems.html) AWS CLI command or the [DescribeFileSystems](https://docs.aws.amazon.com/v2/documentation/api/latest/reference/fsx/describe-file-systems.html) API command\. A file system ID takes the form of *fs\-0123456789abcdef0*\.
+Amazon FSx for Windows File Server metrics use the `FSx` namespace and provide metrics for a single dimension, `FileSystemId`\. You can find a file system's ID using the [aws fsx describe\-file\-systems](https://docs.aws.amazon.com/cli/latest/reference/fsx/describe-file-systems.html) AWS CLI command or the [DescribeFileSystems](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html) API command\. A file system ID takes the form of *fs\-0123456789abcdef0*\.
