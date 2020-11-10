@@ -8,7 +8,7 @@ If your organization is subject to corporate or regulatory policies that require
 
 For more information on encryption with Amazon FSx for Windows File Server, see these related topics:
 + [Create Your Amazon FSx for Windows File Server File System](getting-started-step1.md)
-+ [Amazon FSx API Permissions: Actions, Resources, and Conditions Reference](fsx-api-permissions-ref.md)
++ [Amazon FSx API Permissions: Actions, Resources, and Conditions Reference](access-control-manage-access-intro.md#fsx-api-permissions-ref)
 
 **Topics**
 + [When to Use Encryption](#whenencrypt)

@@ -1,4 +1,13 @@
-# Amazon FSx API Permissions: Actions, Resources, and Conditions Reference<a name="fsx-api-permissions-ref"></a>
+# Managing Access to Amazon FSx Resources<a name="access-control-manage-access-intro"></a>
+
+A *permissions policy* describes who has access to what\. The following section explains the available options for creating permissions policies\.
+
+**Note**  
+This section discusses using IAM in the context of Amazon FSx for Windows File Server\. It doesn't provide detailed information about the IAM service\. For complete IAM documentation, see [What Is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the *IAM User Guide*\. For information about IAM policy syntax and descriptions, see [AWS IAM Policy Reference](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in the *IAM User Guide*\.
+
+Policies attached to an IAM identity are referred to as *identity\-based* policies \(IAM policies\) and policies attached to a resource are referred to as *resource\-based* policies\. Amazon FSx for Windows File Server supports only identity\-based policies \(IAM policies\)\. 
+
+## Amazon FSx API Permissions: Actions, Resources, and Conditions Reference<a name="fsx-api-permissions-ref"></a>
 
 When you are setting up access control and writing a permissions policy that you can attach to an IAM identity \(identity\-based policies\), you can use the following table as a reference\. The table includes each Amazon FSx API operation, the corresponding actions for which you can grant permissions to perform the action, and the AWS resource for which you can grant the permissions\. You specify the actions in the policy's `Action` field, and you specify the resource value in the policy's `Resource` field\. 
 

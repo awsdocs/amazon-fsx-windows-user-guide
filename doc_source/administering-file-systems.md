@@ -4,6 +4,7 @@ You can administer your Amazon FSx for Windows File Server file systems using cu
 
 **Topics**
 + [Getting Started with the Amazon FSx CLI for Remote Management on PowerShell](remote-pwrshell.md)
++ [Managing DNS aliases](managing-dns-aliases.md)
 + [File Shares](managing-file-shares.md)
 + [User Sessions and Open Files](manage-sessions-and-files.md)
 + [Data Deduplication](using-data-dedup.md)

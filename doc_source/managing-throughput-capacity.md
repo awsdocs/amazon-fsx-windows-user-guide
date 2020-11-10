@@ -33,7 +33,7 @@ You can modify a file system's throughput capacity using the Amazon FSx console,
    The **Update throughput capacity** window appears\.
 
 1. Choose the new value for **Throughput capacity** from the list\.  
-![\[Console screenshot showing the Update throughput capacity window\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/update-throughput-capacity-modal.png)
+![\[Console screen shot showing the Update throughput capacity window\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/update-throughput-capacity-modal.png)
 
 1. Choose **Update** to initiate the throughput capacity update\.
 **Note**  
@@ -59,12 +59,12 @@ You can monitor the progress of a throughput capacity modification using the Ama
 
 In the **Updates** tab in the **File system details** window, you can view the 10 most recent update actions for each update action type\.
 
-![\[Console screenshot showing the file system updates window.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/fs-updates-panel.png)
+![\[Console screen shot showing the file system updates window.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/fs-updates-panel.png)
 
 For throughput capacity update actions, you can view the following information\.
 
 ****Update type****  
-Supported types are **Throughput capacity**, **Storage capacity**, and **Storage optimizatin**\.
+Supported types are **Throughput capacity**, **Storage capacity**, and **Storage optimization**\.
 
 ****Target value****  
 The desired value to change the file system's throughput capacity to\.
@@ -121,4 +121,4 @@ When Amazon FSx completes processing the action successfully, the status changes
 ]
 ```
 
-If the throughput capacity modification fails, the status changes to `FAILED`, and the `FailureDetails` property provides information about the failure\. For information about troubleshooting failed actions, see [Troubleshooting Failed Storage and Throughput Updates](admin-actions-ts.md)\.
+If the throughput capacity modification fails, the status changes to `FAILED`, and the `FailureDetails` property provides information about the failure\. For information about troubleshooting failed actions, see [Troubleshooting failed storage and throughput updates](admin-actions-ts.md)\.

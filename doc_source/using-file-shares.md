@@ -31,7 +31,7 @@ You can map a file share on an EC2 Windows instance by using the Windows File Ex
 
 1. For **Drive**, choose a drive letter\.
 
-1. For **Folder**, enter the file system DNS name and the share name\. You can find the DNS name in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & Security** section, or in the response of CreateFileSystem or DescribeFileSystems API command\.
+1. For **Folder**, enter either the file system's DNS name or a DNS alias associated with the file system, and the share name\. You can find the file system's DNS name and any associated DNS aliases in the Amazon FSx console, [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/), **Windows File Server > Network & security** section, or in the response of the [https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileSystem.html](https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileSystem.html) or [https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html) API operations\. For more information on using DNS aliases, see [Managing DNS aliases](managing-dns-aliases.md)\.
    + For a Single AZ file system joined to an AWS Managed Microsoft Active Directory, the DNS name looks like this:
 
      ```
@@ -43,10 +43,26 @@ You can map a file share on an EC2 Windows instance by using the Windows File Ex
      amznfsxaa11bb22.ad-domain.com
      ```
 
-   For example, enter:
+   For example, to use a Single AZ file system's DNS name, enter:
 
    ```
-   \\fs-0123456789abcdef0\.ad-domain.com\share
+   \\fs-0123456789abcdef0.ad-domain.com\share
+   ```
+
+   for **Folder**\.
+
+   To use a Multi AZ file system's DNS name, enter:
+
+   ```
+   \\famznfsxaa11bb22.ad-domain.com\share
+   ```
+
+   for **Folder**\.
+
+   To use a DNS alias associated with the file system, enter:
+
+   ```
+   \\fqdn-dns-alias\share
    ```
 
    for **Folder**\.

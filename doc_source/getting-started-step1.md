@@ -33,7 +33,7 @@ To create your Amazon FSx file system, you must create your Amazon Elastic Compu
 
 1. In the **Network & security** section, choose the Amazon VPC that you want to associate with your file system\. For this getting started exercise, choose the same Amazon VPC that you chose for your AWS Directory Service directory and your Amazon EC2 instance\.
 
-1. <a name="security_group_setup"></a>For **VPC Security Groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. If you're not using the default security group, make sure that you add the following rules to the security group you're using for this getting started exercise:
+1. <a name="security_group_setup"></a>For **VPC Security Groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. If you're not using the default security group, make sure that you add the following rules to the security group that you use for this exercise:
 
    1. Add the following inbound and outbound rules to allow the following ports\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/getting-started-step1.html)
@@ -55,20 +55,26 @@ In some cases, you might have modified the rules of your AWS Managed Microsoft A
    If you want to join your file system to a Microsoft Active Directory domain that is managed by AWS, choose **AWS Managed Microsoft Active Directory**, and then choose your AWS Directory Service directory from the list\. For more information, see [Working with Active Directory in Amazon FSx for Windows File Server](aws-ad-integration-fsxW.md)\.
 
    If you want to join your file system to a self\-managed Microsoft Active Directory domain, choose **Self\-managed Microsoft Active Directory**, and provide the following details for your Active Directory\.
-   + The fully qualified domain name of your active directory\.
+   + The fully qualified domain name of your Active Directory\.
+**Important**  
+For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain name cannot exceed 47 characters\. This limitation applies to both AWS managed and self\-managed Active Directory domain names\.
    + **DNS server IP addresses**—the IPv4 addresses of the DNS servers for your domain
-   + **Service account username**—the user name of the service account in your existing active directory\. Do not include a domain prefix or suffix\. 
+   + **Service account username**—the user name of the service account in your existing Active Directory\. Do not include a domain prefix or suffix\. 
    + **Service account password**—the password for the service account\.
    + **Confirm password**—the password for the service account\.
    + \(Optional\) **Organizational Unit \(OU\)**—the distinguished path name of the organizational unit in which you want to join you file system\.
-   + \(Optional\) **Delegated file system administrators group**— the name of the group in your active directory that can administer your file system\. The default group is 'Domain Admins'\.
+   + \(Optional\) **Delegated file system administrators group**— the name of the group in your Active Directory that can administer your file system\. The default group is 'Domain Admins'\.
 
 1. For **Encryption**, keep the default **Encryption key** setting of **aws/fsx \(default\)**\.
 
+1. For **Access \- optional**, enter any DNS aliases that you want to associate with the file system\. Each alias name must be formatted as a fully qualified domain name \(FQDN\)\. For more information, see [Managing DNS aliases](managing-dns-aliases.md)\.
+
 1. Keep the default settings for **Maintenance preferences**\.
 
-1. For **Tags\-Optional**, enter a key and value to add tags to your file system\. A tag is a case\-sensitive key\-value pair that helps you manage, filter, and search for your file system and choose **Next**\.
+1. For **Tags \- optional**, enter a key and value to add tags to your file system\. A tag is a case\-sensitive key\-value pair that helps you manage, filter, and search for your file system\. 
+
+   Choose **Next**\.
 
 1. Review the file system configuration shown on the **Create file system** page\. For your reference, note which file system settings you can modify after file system is created\. Choose **Create file system**\. 
 
-1. After the file system has been created, choose the file system ID in the **File Systems** dashboard, then choose **Attach**, and note the fully qualified domain name for your file system\. You will need it in a later step\.
+1. After Amazon FSx creates the file system, choose the file system ID in the **File Systems** dashboard\. Choose **Attach**, and note the fully qualified domain name for your file system\. You will need it in a later step\.

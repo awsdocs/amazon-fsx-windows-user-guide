@@ -4,12 +4,17 @@ Your organization might manage identities and devices on a self\-managed Active 
 +  A fully qualified domain name of your self\-managed directory 
 **Note**  
 Domain name must not be in the Single Label Domain \(SLD\) format\. Amazon FSx currently does not support SLD domains\.
+**Note**  
+For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain name cannot exceed 47 characters\.
 +  IP addresses of the DNS servers for your domain 
 +  User name and password for a service account on your AD domain, for Amazon FSx to use to join the file system to your AD domain 
 +  \(Optional\) The Organizational Unit \(OU\) in your domain in which you want your file system to be joined
 + \(Optional\) The domain group to which you want to delegate authority to perform administrative actions on your file system\. For example, this domain group might manage Windows file shares, manage ACLs on the file system's root folder, take ownership of files and folders, and so on\. If you don’t specify this group, Amazon FSx delegates this authority to the Domain Admins group in your AD domain by default\. 
 
   For more information, see [Joining an Amazon FSx File System to a Self\-Managed Microsoft Active Directory Domain](creating-joined-ad-file-systems.md)\.
+
+**Important**  
+Amazon FSx only registers DNS records for a file system if you are using Microsoft DNS as the default DNS service\. If you are using a third\-party DNS, you will need to manually setup DNS entries for your Amazon FSx file systems after you create them\.
 
  When you join your file system directly to your self\-managed AD, your Amazon FSx for Windows File Server resides in the same AD forest \(the top\-most logical container in an AD configuration that contains domains, users, and computers\) and in the same AD domain as your users and existing resources \(including existing file servers\)\. 
 
@@ -19,4 +24,6 @@ If you’d like to beneﬁt from a resource forest isolation model, where you is
 **Topics**
 + [Prerequisites for Using a Self\-Managed Microsoft AD](self-manage-prereqs.md)
 + [Best Practices for Joining Amazon FSx for Windows File Server File Systems to a Self\-managed Microsoft Active Directory Domain](self-managed-AD-best-practices.md)
++ [Validating Your Active Directory Configuration](validate-ad-config.md)
 + [Joining an Amazon FSx File System to a Self\-Managed Microsoft Active Directory Domain](creating-joined-ad-file-systems.md)
++ [Obtaining the correct file system IP addresses to use for DNS](file-system-ip-addresses-for-dns.md)

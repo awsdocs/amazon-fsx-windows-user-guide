@@ -2,9 +2,9 @@
 
 You can see Amazon FSx metrics for CloudWatch in the following ways\. 
 + The Amazon FSx console\.
-+ The the CloudWatch console\.
-+ The CloudWatch CLI \(Command Line Interface\)\.
-+ The the CloudWatch API\.
++ The CloudWatch console\.
++ The CloudWatch CLI \(command line interface\)\.
++ The CloudWatch API\.
 
 The following procedures show you how to access the metrics using these various tools\.
 
@@ -26,7 +26,7 @@ The following procedures show you how to access the metrics using these various 
 
 1. Select the **FSx** namespace\.
 
-1. \(Optional\) To view a metric, type its name in the search field\.
+1. \(Optional\) To view a metric, enter its name in the search field\.
 
 1. \(Optional\) To filter by dimension, select **FileSystemId**\.
 

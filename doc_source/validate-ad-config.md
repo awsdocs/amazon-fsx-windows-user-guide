@@ -4,7 +4,7 @@
 
 **To validate your Active Directory configuration**
 
-1. Launch an Amazon EC2 Windows instance in the same subnet and with the same Amazon VPC security groups that you will use for your Amazon FSx for Windows File Server file system\.
+1. Launch an Amazon EC2 Windows instance in the same subnet and with the same Amazon VPC security groups that you will use for your Amazon FSx for Windows File Server file system\. Please ensure that your EC2 instance has the required `AmazonEC2ReadOnlyAccess` IAM permissions\. You can validate EC2 instance role permissions using the IAM policy simulator\. For more information, see [Testing IAM Policies with the IAM Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) in the *IAM User Guide*\.
 
 1. Join your EC2 Windows instance to your Active Directory\. For more information, see [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html) in the *AWS Directory Service Administration Guide*\.
 
@@ -136,4 +136,4 @@
    0
    ```
 
-   If you receive warnings or errors when you run the validation tool, refer to the Troubleshooting guide included in the validation tool package \(`TROUBLESHOOTING.md`\) and [Troubleshooting Problems for Amazon FSx](troubleshooting.md) in the Amazon FSx for Windows File Server documentation\. 
+   If you receive warnings or errors when you run the validation tool, refer to the Troubleshooting guide included in the validation tool package \(`TROUBLESHOOTING.md`\) and [Troubleshooting Amazon FSx](troubleshooting.md)\. 
