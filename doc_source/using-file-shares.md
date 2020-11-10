@@ -208,7 +208,7 @@ domain=EXAMPLE.COM
    $ sudo yum install cifs-utils
    ```
 
-1. Create the mount point **/mnt/fsxx** where you plan to mount the Amazon FSx file system\.
+1. Create the mount point **/mnt/fsx** where you plan to mount the Amazon FSx file system\.
 
    ```
    $ sudo mkdir -p /mnt/fsx
