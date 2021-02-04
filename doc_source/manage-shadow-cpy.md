@@ -28,9 +28,9 @@ Using `-Maxsize`, you can define shadow copy storage as follows:
 
 1. Connect to a compute instance that has network connectivity with your file system as a user that is a member of the file system administrators group\. In AWS Managed Microsoft AD, that group is **AWS Delegated FSx Administrators**\. In your self\-managed Microsoft AD, that group is **Domain Admins** or the custom group that you specified for administration when you created your file system\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\. 
 
-1.  Open a Windows PowerShell window on the compute instance\. 
+1. Open a Windows PowerShell window on the compute instance\. 
 
-1.  Use the following command to open a remote PowerShell session on your Amazon FSx file system\. Replace `FSxFileSystem-Remote-PowerShell-Endpoint` with the Windows Remote PowerShell endpoint of file system that you want to administer\. You can find the Windows Remote PowerShell endpoint in the Amazon FSx console, in the **Network & Security** section of the file system details screen, or in the response of the `DescribeFileSystem` API operation\. 
+1. Use the following command to open a remote PowerShell session on your Amazon FSx file system\. Replace `FSxFileSystem-Remote-PowerShell-Endpoint` with the Windows Remote PowerShell endpoint of file system that you want to administer\. You can find the Windows Remote PowerShell endpoint in the Amazon FSx console, in the **Network & Security** section of the file system details screen, or in the response of the `DescribeFileSystem` API operation\. 
 
    ```
    PS C:\Users\delegateadmin> enter-pssession -computername FSxFileSystem-Remote-PowerShell-Endpoint -configurationname fsxremoteadmin
@@ -43,7 +43,7 @@ Using `-Maxsize`, you can define shadow copy storage as follows:
    No Fsx Shadow Storage Configured
    ```
 
-1.  Set the amount of shadow storage to 10 percent of the volume using the `-Default` option\. 
+1. Set the amount of shadow storage to 10 percent of the volume using the `-Default` option\. 
 
    ```
    [fs-1234567890abcef12]: PS>Set-FsxShadowStorage -Default
@@ -90,28 +90,28 @@ You can also use the `-Default` option to quickly set up a default shadow copy s
 
 **To create a custom shadow copy schedule**
 
-1. Create a set of Windows scheduled task triggers to define when shadow copies are taken in the shadow copy schedule\. Use the `new-scheduledTaskTrigger` command in a PowerShell on your local machine to set multiple triggers\. 
+1. Create a set of Windows scheduled task triggers to define when shadow copies are taken in the shadow copy schedule\. Use the `New-ScheduledTaskTrigger` command in a PowerShell on your local machine to set multiple triggers\. 
 
    This following example creates a custom shadow copy schedule that takes shadow copies every Monday–Friday, at 6:00 AM and at 6:00 PM UTC\. By default, times are in UTC, unless you specify a time zone in the Windows scheduled task triggers you create\. 
 
    ```
-   PS C:\Users\delegateadmin> $trigger1 = new-scheduledTaskTrigger -weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -at 06:00
-   PS C:\Users\delegateadmin> $trigger2 = new-scheduledTaskTrigger -weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -at 18:00
+   PS C:\Users\delegateadmin> $trigger1 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -at 06:00
+   PS C:\Users\delegateadmin> $trigger2 = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -at 18:00
    ```
 
-1.  Use `invoke-command` to run the `scriptblock` command\. Doing so writes a script that sets the shadow copy schedule with the `new-scheduledTaskTrigger` value that you just created\. Replace *`FSxFileSystem-Remote-PowerShell-Endpoint`* with the Windows Remote PowerShell endpoint of file system that you want to administer\. You can find the Windows Remote PowerShell endpoint in the Amazon FSx console, in the **Network & Security** section of the file system details screen, or in the response of the `DescribeFileSystem` API operation\.
+1. Create a local `scriptblock` variable to set your shadow copy schedule using the `Set-FSxShadowCopySchedule` command with the `New-ScheduledTaskTrigger` values that you just created\.
 
    ```
-   PS C:\Users\delegateadmin> invoke-command -ComputerName FSxFileSystem-Remote-PowerShell-Endpoint -ConfigurationName FSxRemoteAdmin -scriptblock {
+   PS C:\Users\delegateadmin> $script = { Set-FSxShadowCopySchedule -ScheduledTaskTriggers $Using:trigger1,$Using:trigger2 -Confirm:$false }
    ```
 
-1.  Enter the following line at the `>>` prompt to set your shadow copy schedule using the `set-fsxshadowcopyschedule` command\.
+1. Use `Invoke-Command` to set the shadow copy schedule with the `scriptblock` command\. Replace *`FSxFileSystem-Remote-PowerShell-Endpoint`* with the Windows Remote PowerShell endpoint of file system that you want to administer\. You can find the Windows Remote PowerShell endpoint in the Amazon FSx console, in the **Network & Security** section of the file system details screen, or in the response of the `DescribeFileSystem` API operation\.
 
    ```
-   >> set-fsxshadowcopyschedule -scheduledtasktriggers $Using:trigger1,$Using:trigger2 -Confirm:$false }
+   PS C:\Users\delegateadmin> Invoke-Command -ComputerName FSxFileSystem-Remote-PowerShell-Endpoint -ConfigurationName FSxRemoteAdmin -scriptblock $script
    ```
-
-    The response displays the shadow copy schedule that you configured on the file system\. 
+   
+   The response displays the shadow copy schedule that you configured on the file system\. 
 
    ```
    FSx Shadow Copy Schedule
