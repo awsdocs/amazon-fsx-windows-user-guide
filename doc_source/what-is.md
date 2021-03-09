@@ -10,7 +10,7 @@ As a fully managed service, Amazon FSx for Windows File Server eliminates the ad
 
 ## Amazon FSx for Windows File Server Resources: File Systems, Backups, and File Shares<a name="fsx-resources"></a>
 
-The primary resources in Amazon FSx are *file systems* and *backups*\. A file system is where you store and access your files and folders\. A file system is made up of one or more Windows file servers and storage volumes\. When you create a file system, you specify an amount of storage capacity \(in GiB\) and an amount of throughput capacity \(in MB/s\)\. You can modify these properties as your needs change after you create the file system\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md) and [Managing Throughput Capacity](managing-throughput-capacity.md)\. 
+The primary resources in Amazon FSx are *file systems* and *backups*\. A file system is where you store and access your files and folders\. A file system is made up of one or more Windows file servers and storage volumes\. When you create a file system, you specify an amount of storage capacity \(in GiB\) and an amount of throughput capacity \(in MB/s\)\. You can modify these properties as your needs change after you create the file system\. For more information, see [Managing storage capacity](managing-storage-capacity.md) and [Managing Throughput Capacity](managing-throughput-capacity.md)\. 
 
 Amazon FSx for Windows File Server backups are file\-system\-consistent, highly durable, and incremental\. To ensure file system consistency, Amazon FSx uses the Volume Shadow Copy Service \(VSS\) in Microsoft Windows\. Automatic daily backups are turned on by default when you create a file system, and you can also take additional manual backups at any time\. For more information, see [Working with Backups](using-backups.md),
 
@@ -22,7 +22,7 @@ File shares are accessed using either the file system's DNS name or DNS aliases 
 
 Amazon FSx is accessible from compute instances with the SMB protocol \(supporting versions 2\.0 to 3\.1\.1\)\. You can access your shares from all Windows versions starting from Windows Server 2008 and Windows 7, and also from current versions of Linux\. You can map your Amazon FSx file shares on Amazon Elastic Compute Cloud \(Amazon EC2\) instances, and on Amazon WorkSpaces instances, Amazon AppStream 2\.0 instances, and VMware Cloud on AWS VMs\. 
 
-You can access your file shares from on\-premises compute instances using AWS Direct Connect or AWS VPN\. In addition to accessing file shares that are in the same VPC, AWS account, and AWS Region as the file system, you can also access your shares on compute instances that are in a different Amazon VPC, account, or Region\. You do so using VPC peering or transit gateways\. For more information, see [Supported Access Methods](supported-fsx-clients.md#access-methods)\. 
+You can access your file shares from on\-premises compute instances using AWS Direct Connect or AWS VPN\. In addition to accessing file shares that are in the same VPC, AWS account, and AWS Region as the file system, you can also access your shares on compute instances that are in a different Amazon VPC, account, or Region\. You do so using VPC peering or transit gateways\. For more information, see [Supported access methods](supported-fsx-clients.md#access-methods)\. 
 
 ## Security and Data Protection<a name="security-considerations"></a>
 
@@ -45,6 +45,8 @@ You can administer your Amazon FSx for Windows File Server file systems using cu
 Amazon FSx for Windows File Server gives you the price and performance flexibility by offering both solid state drive \(SSD\) and hard disk drive \(HDD\) storage types\. HDD storage is designed for a broad spectrum of workloads, including home directories, user and departmental shares, and content management systems\. SSD storage is designed for the highest\-performance and most latency\-sensitive workloads, including databases, media processing workloads, and data analytics applications\. 
 
 With Amazon FSx for Windows File Server, you can provision file system storage and throughput independently to achieve the right mix of cost and performance\. You can modify your file system's storage and throughput capacities to meet changing workload needs, so that you pay only for what you need\. For more information, see [Optimizing Costs with Amazon FSx](optimize-fsx-costs.md)\.
+
+
 
 ## Pricing for Amazon FSx<a name="pricing"></a>
 

@@ -15,11 +15,11 @@ Multi\-AZ file systems are ideal for business\-critical workloads that require h
 The following table summarizes features supported by the Amazon FSx for Windows File Server file system deployment types:
 
 
-| Deployment type | SSD storage | HDD storage |  DFS namespaces | DFS replication | Custom DNS name | CA shares | 
+| Deployment type | SSD storage | HDD storage |  DFS namespaces | DFS replication | Custom DNS names | CA shares | 
 | --- | --- | --- | --- | --- | --- | --- | 
 | Single\-AZ 1 | ✓  |  | ✓ | ✓ | ✓ |  | 
-| Single\-AZ 2 | ✓ | ✓ | ✓ |  |  | ✓\* | 
-| Multi\-AZ | ✓ | ✓ | ✓ |  |  | ✓\* | 
+| Single\-AZ 2 | ✓ | ✓ | ✓ |  | ✓ | ✓\* | 
+| Multi\-AZ | ✓ | ✓ | ✓ |  | ✓ | ✓\* | 
 
 **Note**  
 \* While you can create CA shares on Single\-AZ 2 file systems, you should use CA shares on Multi\-AZ file systems for SQL Server HA deployments\.
@@ -72,3 +72,6 @@ The following table summarizes the subnet, elastic network interface, and IP add
 | Single\-AZ 2 | 1 | 1 | 2 | 
 | Single\-AZ 1 | 1 | 1 | 1 | 
 | Multi\-AZ | 2 | 2 | 4 | 
+
+**Important**  
+Amazon FSx doesn't support accessing file systems from, or exposing file system to the public Internet\. If an Elastic IP address, which is a public IP address reachable from the Internet, gets attached to a file system's elastic network interface, Amazon FSx automatically detaches it\.

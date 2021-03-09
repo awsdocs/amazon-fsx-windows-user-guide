@@ -2,6 +2,12 @@
 
 Amazon FSx for Windows File Server provides a default Domain Name System \(DNS\) name for every file system that you can use to access the data on your file system\. You can also access your file systems using a DNS alias of your choosing\. With DNS aliases, you can continue using existing DNS names to access data stored on Amazon FSx when migrating file system storage from on\-premises to Amazon FSx, without needing to update any tools or applications\. For more information, see [Migrating existing file storage to Amazon FSx](migrate-to-fsx.md)\. 
 
+**Note**  
+Support for DNS aliases is available on Amazon FSx for Windows File Server file systems created after 12:00 pm ET on November 9, 2020\. To use DNS aliases on a file system created before 12:00 pm ET on November 9, 2020, do the following:  
+Take a backup of the existing file system\. For more information, see [Working with user\-initiated backups](using-backups.md#user-initiated-backups)\.
+Restore the backup to a new file system\. For more information, see [Restoring Backups](using-backups.md#restoring-backups)\.
+Once the new file system is available, you will be able to use DNS aliases to access it, using the information provided in this section\.
+
 You can associate DNS aliases with existing Amazon FSx for Windows File Server file systems, when you create new file systems, and when you create a new file system from a backup\. You can associate up to 50 DNS aliases with a file system at any one time\. 
 
 In addition to associating DNS aliases with your file system, for clients to connect to the file system using the DNS aliases, you also must do the following:
@@ -61,7 +67,7 @@ DNS aliases can have one of the following values:
 
 You can associate DNS aliases when creating a new file system from scratch, or when creating a file system from a backup\.
 
-### To associate DNS aliases when creating a new Amazon FSx file system \(console\)<a name="w118aac27b9c31b5b1"></a>
+### To associate DNS aliases when creating a new Amazon FSx file system \(console\)<a name="w157aac27b9c33b5b1"></a>
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
@@ -72,7 +78,7 @@ You can associate DNS aliases when creating a new file system from scratch, or w
 
 1. When the file system is **Available**, you can access it using the DNS alias by configuring service principal names \(SPNs\) and updating or creating a DNS CNAME record for the alias\. For more information, see [Walkthrough 5: Using DNS aliases to access your file system](walkthrough05-file-system-custom-CNAME.md)\.
 
-### To associate DNS aliases when creating a new Amazon FSx file system \(CLI\)<a name="w118aac27b9c31b5b3"></a>
+### To associate DNS aliases when creating a new Amazon FSx file system \(CLI\)<a name="w157aac27b9c33b5b3"></a>
 
 1. When creating a new file system, use the [Alias](https://docs.aws.amazon.com/fsx/latest/APIReference/API_Alias.html) property with the [CreateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileSystem.html) API operation to associate DNS aliases with the new file system\.
 
@@ -87,7 +93,7 @@ You can associate DNS aliases when creating a new file system from scratch, or w
 
 1. When the file system is **Available**, you can access it using the DNS alias by configuring service principal names \(SPNs\) and updating or creating a DNS CNAME record for the alias\. For more information, see [Walkthrough 5: Using DNS aliases to access your file system](walkthrough05-file-system-custom-CNAME.md)\.
 
-### To associate or disassociate DNS aliases when creating a new Amazon FSx file system from a backup \(CLI\)<a name="w118aac27b9c31b5b5"></a>
+### To associate or disassociate DNS aliases when creating a new Amazon FSx file system from a backup \(CLI\)<a name="w157aac27b9c33b5b5"></a>
 
 1. When creating a new file system from a backup of an existing file system, you can use the [Aliases](https://docs.aws.amazon.com/fsx/latest/APIReference/API_Aliases.html) property with the [CreateFileSystemFromBackup](https://docs.aws.amazon.com/fsx/latest/APIReference/API_CreateFileSystemFromBackup.html) API operation as follows:
    + Any aliases associated with the backup are associated with the new file system by default\.
@@ -112,7 +118,7 @@ You can associate DNS aliases when creating a new file system from scratch, or w
 
 You can add and remove aliases on existing file systems\.
 
-### To manage DNS aliases on an existing file system \(console\)<a name="w118aac27b9c33b5b1"></a>
+### To manage DNS aliases on an existing file system \(console\)<a name="w157aac27b9c35b5b1"></a>
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
@@ -127,7 +133,7 @@ You can add and remove aliases on existing file systems\.
 
 1. When the alias is **Available**, you can access your file system using the DNS alias by configuring service principal names \(SPNs\) and updating or creating a DNS CNAME record for the alias\. For more information, see [Walkthrough 5: Using DNS aliases to access your file system](walkthrough05-file-system-custom-CNAME.md)\.
 
-### To associate DNS aliases with an existing file system \(CLI\)<a name="w118aac27b9c33b5b3"></a>
+### To associate DNS aliases with an existing file system \(CLI\)<a name="w157aac27b9c35b5b3"></a>
 
 1. Use the `associate-file-system-aliases` CLI command or the [AssociateFileSystemAliases](https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html) API operation to associate DNS aliases with an existing file system\. 
 
@@ -160,7 +166,7 @@ You can add and remove aliases on existing file systems\.
 
 1. When the `Lifecycle` has a value of AVAILABLE \(a process that takes up to 2\.5 minutes\), you can access your file system using the DNS alias by configuring service principal names \(SPNs\) and updating or creating a DNS CNAME record for the alias\. For more information, see [Walkthrough 5: Using DNS aliases to access your file system](walkthrough05-file-system-custom-CNAME.md)\.
 
-### To disassociate DNS aliases from a file system \(CLI\)<a name="w118aac27b9c33b5b5"></a>
+### To disassociate DNS aliases from a file system \(CLI\)<a name="w157aac27b9c35b5b5"></a>
 + Use the `disassociate-file-system-aliases` CLI command or the [DisassociateFileSystemAliases](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html) API operation to disassociate DNS aliases from an existing file system\. 
 
   The following command disassociates one alias from a file system\.

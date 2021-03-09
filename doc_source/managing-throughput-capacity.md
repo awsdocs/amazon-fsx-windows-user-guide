@@ -121,4 +121,4 @@ When Amazon FSx completes processing the action successfully, the status changes
 ]
 ```
 
-If the throughput capacity modification fails, the status changes to `FAILED`, and the `FailureDetails` property provides information about the failure\. For information about troubleshooting failed actions, see [Troubleshooting failed storage and throughput updates](admin-actions-ts.md)\.
+If the throughput capacity modification fails, the status changes to `FAILED`, and the `FailureDetails` property provides information about the failure\. For information about troubleshooting failed actions, see [Storage or throughput capacity updates fail](admin-actions-ts.md)\.

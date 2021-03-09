@@ -41,6 +41,8 @@ Now that Shared Folders is connected to your Amazon FSx file system, you can man
     ```
 + **Modify a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
 + **Remove a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.
+**Note**  
+Removing file shares from the GUI is possible only you connected to **fsmgmt\.msc** using the DNS Name of the Amazon FSx file system\. If you connected using the IP address or DNS alias name of the file system, the **Stop Sharing** option won't work and the file share isn't removed\.
 
 ## Using PowerShell to Manage File Shares<a name="manage-file-shares-pwrshell"></a>
 

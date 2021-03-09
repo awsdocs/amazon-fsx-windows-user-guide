@@ -1,11 +1,13 @@
 # Document History<a name="doc-history"></a>
 + **API version: **2018\-03\-01
-+ **Latest documentation update: **November 9, 2020
++ **Latest documentation update: **February 17, 2021
 
 The following table describes important changes to the *Amazon FSx Windows User Guide*\. For notifications about documentation updates, you can subscribe to the RSS feed\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Automatically increase a file system's storage capacity](#doc-history) | Use an AWS\-developed customizable AWS CloudFormation template to automatically increase your file system's stoage capacity when it's capacity reaches a threshold that you specify\. For more information, see [Increasing storage capacity dynamically](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html#automate-storage-capacity-increase)\. | February 17, 2021 | 
+| [Support added for client access using non\-private IP addresses](#doc-history) | You can access Amazon FSx for Windows File Server file systems with on\-premises clients using non\-private IP addresses\. For more information, see [Supported environments](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/supported-fsx-clients.html#access-environments)\. You can join Amazon FSx for Windows File Server file system to a self\-managed Microsoft Active Directory with DNS servers and AD domain controllers that use non\-private IP addresses\. For more information, see [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)\. | December 17, 2020 | 
 | [Support added for using DNS aliases](#doc-history) | You can now associate DNS aliases with your Amazon FSx for Windows File Server file systems that you can use to access the data on your file system\. For more information, see [Managing DNS aliases](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html) and [ Walkthrough 5: Using DNS aliases to access your file system](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html)\. | November 9, 2020 | 
 | [Support added for Amazon Elastic Container Service](#doc-history) | You can now use Amazon FSx for Windows File Server with Amazon ECS\. For more information, see [ Supported Clients](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/supported-fsx-clients.html#supported-clients-fsx)\. | November 9, 2020 | 
 | [Amazon FSx is now integrated with AWS Backup](#doc-history) | You can now use AWS Backup to back up and restore your FSx file systems in addition to using native Amazon FSx backups\. For more information, see [Using AWS Backup with Amazon FSx](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#aws-backup-and-fsx)\. | November 9, 2020 | 

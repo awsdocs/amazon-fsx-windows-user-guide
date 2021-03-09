@@ -7,6 +7,9 @@ Domain name must not be in the Single Label Domain \(SLD\) format\. Amazon FSx c
 **Note**  
 For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain name cannot exceed 47 characters\.
 +  IP addresses of the DNS servers for your domain 
+
+  The DNS server IP addresses and AD domain controller IP addresses must meet the following requirements:    
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
 +  User name and password for a service account on your AD domain, for Amazon FSx to use to join the file system to your AD domain 
 +  \(Optional\) The Organizational Unit \(OU\) in your domain in which you want your file system to be joined
 + \(Optional\) The domain group to which you want to delegate authority to perform administrative actions on your file system\. For example, this domain group might manage Windows file shares, manage ACLs on the file system's root folder, take ownership of files and folders, and so on\. If you don’t specify this group, Amazon FSx delegates this authority to the Domain Admins group in your AD domain by default\. 

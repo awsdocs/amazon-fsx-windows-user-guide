@@ -22,7 +22,7 @@ The following procedure guides you through the process of creating a new file sy
 
 1. From the table on the dashboard, choose the backup that you want to use for creating a new file system\.
 **Note**  
-You can only restore your backup to a file system of the same storage capacity as the original\. You can increase your restored file system's storage capacity after it becomes available\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md)\.
+You can only restore your backup to a file system of the same storage capacity as the original\. You can increase your restored file system's storage capacity after it becomes available\. For more information, see [Managing storage capacity](managing-storage-capacity.md)\.
 
 1. Choose **Restore backup**\. This will begin the create file system wizard\.
 

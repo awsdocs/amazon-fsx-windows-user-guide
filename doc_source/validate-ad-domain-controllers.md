@@ -14,17 +14,25 @@
 
    To test whether the required Active Directory module for Windows PowerShell is installed, use the following test command\.
 
+   
+
    ```
    PS C:\> Import-Module ActiveDirectory
    ```
 
+   
+
    If above returns an error, install it using the following command\.
+
+   
 
    ```
    PS C:\> Install-WindowsFeature RSAT-AD-PowerShell
    ```
 
 1. Download the network validation tool using the following command\. 
+
+   
 
    ```
    PS C:\> Invoke-WebRequest "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/samples/AmazonFSxADValidation.zip" -OutFile "AmazonFSxADValidation.zip"

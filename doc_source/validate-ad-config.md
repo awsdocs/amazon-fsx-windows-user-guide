@@ -14,17 +14,25 @@
 
    To test whether the required Active Directory module for Windows PowerShell is installed, use the following test command\.
 
+   
+
    ```
    PS C:\> Import-Module ActiveDirectory
    ```
 
+   
+
    If above returns an error, install it using the following command\.
+
+   
 
    ```
    PS C:\> Install-WindowsFeature RSAT-AD-PowerShell
    ```
 
 1. Download the network validation tool using the following command\. 
+
+   
 
    ```
    PS C:\> Invoke-WebRequest "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/samples/AmazonFSxADValidation.zip" -OutFile "AmazonFSxADValidation.zip"
@@ -44,7 +52,7 @@
 
 1. Set required parameters by substituting into the following command your:
    + Active Directory domain name \(*DOMAINNAME\.COM*\)
-   + Service account username \(*SERVICE\_ACCOUNT\_USER*\)
+   + Service account sAMAccountName \(*SERVICE\_ACCOUNT\_USER*\)\. The name is truncated if it is longer than 16 characters\.
    + Service account password \(*SERVICE\_ACCOUNT\_PASSWORD*\)
    + DNS server IP addresses \(*IP\_ADDRESS\_1*, *IP\_ADDRESS\_2*\)
    + Subnet ID\(s\) for subnets where you plan to create your Amazon FSx file system \(*SUBNET\_1*, *SUBNET\_2*, for example, `subnet-04431191671ac0d19`\)\.

@@ -4,6 +4,7 @@
 
 **Topics**
 + [Setting Shadow Copy Storage](#shadow-copy-storage)
++ [Viewing Your Shadow Copy Storage](#get-fsxshadowstorage)
 + [Deleting Shadow Copy Storage, Schedule, and All Shadow Copies](#remove-fsxshadowstorage)
 + [Creating a Custom Shadow Copy Schedule](#shadow-schedules)
 + [Viewing Your Shadow Copy Schedule](#get-fsxshadowcopy-sched)
@@ -14,13 +15,13 @@
 
 ## Setting Shadow Copy Storage<a name="shadow-copy-storage"></a>
 
- Shadow copies consume storage space on the same file system of which the shadow copies are taken\. When you configure shadow copy storage, you define the maximum amount of storage that shadow copies can consume on the file system using the `Set-FsxShadowStorage` custom PowerShell command\. You specify the maximum size that shadow copies can grow to using the `-Maxsize` or the `-Default` command options\. 
+Shadow copies consume storage space on the same file system of which the shadow copies are taken\. When you configure shadow copy storage, you define the maximum amount of storage that shadow copies can consume on the file system using the `Set-FsxShadowStorage` custom PowerShell command\. You specify the maximum size that shadow copies can grow to using the `-Maxsize` or the `-Default` command options\. 
 
 Using `-Maxsize`, you can define shadow copy storage as follows: 
 + In bytes: `Set-FsxShadowStorage -Maxsize 2500000000` 
 + In kilobytes, megabytes, gigabytes, or other units: `Set-FsxShadowStorage -Maxsize (2500MB)` or `Set-FsxShadowStorage -Maxsize (2.5GB)` 
 + As a percentage of the overall storage: `Set-FsxShadowStorage -Maxsize "20%"` 
-+ As undefined: `Set-FsxShadowStorage -Maxsize "UNBOUNDED"` 
++ As unbounded: `Set-FsxShadowStorage -Maxsize "UNBOUNDED"` 
 
  Use `-Default` to set shadow storage to use up to 10 percent of the file system: `Set-FsxShadowStorage -Default`\. To learn more about using the default option, see [Setting Up Shadow Copies Using Default Settings](shadow-copies-fsxW.md#setting-up-fsx-shadow-copies)\. 
 
@@ -54,10 +55,28 @@ Using `-Maxsize`, you can define shadow copy storage as follows:
                 0         0  32530536858
    ```
 
-    The output shows the shadow storage configuration, as follows: 
-   +  `AllocatedSpace` – the amount of storage on the file system in bytes currently allocated to shadow copies\. Initially, this value is 0\. 
-   +  `UsedSpace` – the amount of storage currently used by shadow copies\. Initially, this value is 0\. 
-   +  `MaxSpace` `-` the maximum amount of storage space to which shadow storage can grow\. This is the value that you just set\. 
+## Viewing Your Shadow Copy Storage<a name="get-fsxshadowstorage"></a>
+
+ You can view the amount of storage currently consumed by shadow copies on your file system using the `Get-FsxShadowStorage` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
+
+```
+[fs-1234567890abcef12]: PS>Get-FsxShadowStorage
+FSx Shadow Storage Configuration
+
+AllocatedSpace UsedSpace     MaxSpace
+-------------- ---------     --------
+    1619869696  14417920  32530536858
+```
+
+ The output shows the shadow storage configuration, as follows: 
++  `AllocatedSpace` – the amount of storage on the file system in bytes currently allocated to shadow copies\. Initially, this value is 0\. 
++  `UsedSpace` – the amount of storage, in bytes, currently used by shadow copies\. Initially, this value is 0\. 
++  `MaxSpace` – the maximum amount of storage, in bytes, to which shadow storage can grow\. This is the value that you set for [shadow copy storage](#shadow-copy-storage) using the `Set-FsxShadowStorage` command\.
+
+When the `UsedSpace` amount reaches the maximum shadow copy storage amount configured \(`MaxSpace`\), the next shadow copy that you take replaces the oldest shadow copy\. If you don't want to lose your oldest shadow copies, monitor your shadow copy storage to make sure that you have sufficient storage space for new shadow copies\. If you need more space, you can [delete existing shadow copies](#remove-fsxshadow-copies) or increase the maximum amount of [shadow copy storage](#shadow-copy-storage)\.
+
+**Note**  
+When shadow copies are automatically or manually created, they use as a storage limit the amount of shadow copy storage that you configured\. Shadow copies don't use the available storage space shown by the CloudWatch `FreeStorageCapacity` metric as a storage limit\.
 
 ## Deleting Shadow Copy Storage, Schedule, and All Shadow Copies<a name="remove-fsxshadowstorage"></a>
 

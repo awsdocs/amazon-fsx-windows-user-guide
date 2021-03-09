@@ -2,13 +2,26 @@
 
 There are a number of potential causes for being unable to access your file system, each with their own resolution, as follows\.
 
+**Topics**
++ [The file system elastic network interface was modified or deleted](#eni-deleted)
++ [The Elastic IP address attached to the file system elastic network interface was deleted](#eni-epi-removed)
++ [The file system security group lacks the required inbound or outbound rules\.](#sg-lacks-inbound-rules)
++ [The compute instance's security group lacks the required outbound rules](#compute-instance-lacks-inbound-rules)
++ [Compute instance not joined to an Active Directory](#fs-not-joined-to-ad)
++ [The file share doesn't exist](#file-share-doesnt-exist)
++ [Active Directory user lacks required permissions](#ad-user-lacks-permission)
++ [Allow Full control NTFS ACL permissions removed](#removed-allow-full-control)
++ [Can't access a file system using an on\-premises client](#non-private-ips-onprem)
++ [New file system is not registered in DNS](#fs-dns-not-registered)
++ [Can't access the file system using a DNS alias](#cant-connect-using-dns-alias)
+
 ## The file system elastic network interface was modified or deleted<a name="eni-deleted"></a>
 
 You must not modify or delete the file system's elastic network interface\. Modifying or deleting the network interface can cause a permanent loss of connection between your VPC and your file system\. Create a new file system, and do not modify or delete the Amazon FSx elastic network interface\. For more information, see [ File System Access Control with Amazon VPC ](limit-access-security-groups.md)\. 
 
 ## The Elastic IP address attached to the file system elastic network interface was deleted<a name="eni-epi-removed"></a>
 
-Amazon FSx doesn't support accessing file systems from the public internet\. Amazon FSx automatically detaches any Elastic IP address, which is a public IP address reachable from the internet, that gets attached to a file system's elastic network interface\. For more information, see [Supported Clients, Access Methods, and Environments for Amazon FSx for Windows File ServerSupported Clients, Access Methods, and Environments](supported-fsx-clients.md)\.
+Amazon FSx doesn't support accessing file systems from the public internet\. Amazon FSx automatically detaches any Elastic IP address, which is a public IP address reachable from the internet, that gets attached to a file system's elastic network interface\. For more information, see [Supported clients, access methods, and environments for Amazon FSx for Windows File ServerSupported clients, access methods, and environments](supported-fsx-clients.md)\.
 
 ## The file system security group lacks the required inbound or outbound rules\.<a name="sg-lacks-inbound-rules"></a>
 
@@ -48,7 +61,9 @@ You will need to re\-create the affected file share\. For more information, see 
 
 You're using your Amazon FSx file system from on\-premises using AWS Direct Connect or VPN, and you're using a non\-private IP address range for the on\-premises client\.
 
-Use a private IP address range for the on\-premises client\. For more information, see [Accessing Amazon FSx for Windows File Server File Systems from On\-Premises](supported-fsx-clients.md#on-premise-access)\.
+Amazon FSx only supports access from on\-premises clients with non\-private IP addresses on file systems created after December 17, 2020\.
+
+If you need to access your Amazon FSx for Windows File Server file system that was created before December 17, 2020 using a non\-private IP address range, you can create a new file system by restoring a backup of the file system\. For more information, see [Working with Backups](using-backups.md)\.
 
 ## New file system is not registered in DNS<a name="fs-dns-not-registered"></a>
 

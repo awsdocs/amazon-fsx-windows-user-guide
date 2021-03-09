@@ -12,7 +12,7 @@ A DNS alias name has to meet the following requirements:
 
 For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters \(a\-z\), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes\.
 
-The following procedures describe how to associate DNS aliases with your existing Amazon FSx for Windows File Server file systems using the Amazon FSx console, CLI, and API\. For more information about associating DNS aliases when creating new file systems, including new file systems from a backup, see [Associating DNS aliases when creating a new file system](managing-dns-aliases.md#add-alias-new-filesystem)\.
+The following procedures describe how to associate DNS aliases with your existing Amazon FSx for Windows File Server file systems using the Amazon FSx console, CLI, and API\. For more information about associating DNS aliases when creating new file systems, including new file systems from a backup, see [Associating DNS aliases when creating a new file system](managing-dns-aliases.md#add-alias-new-filesystem)\.<a name="associate-dns-alias"></a>
 
 **To associate DNS aliases with an existing file system \(console\)**
 

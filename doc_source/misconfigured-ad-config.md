@@ -2,7 +2,14 @@
 
 An Amazon FSx for Windows File Server file system can get into a **Misconfigured** state due to a number of reasons\. This can happen when you update your file system's self\-managed Active Directory configuration\.
 
-## Misconfigured file system: Amazon FSx can't reach either the DNS servers or domain controllers for your domain\.<a name="w118aac41c13b7"></a>
+**Topics**
++ [Misconfigured file system: Amazon FSx can't reach either the DNS servers or domain controllers for your domain\.](#w157aac41c13b7)
++ [Misconfigured file system: The service account credentials are invalid](#w157aac41c13b9)
++ [Misconfigured file system: The service account provided doesn't have permission to join the file system to the domain](#w157aac41c13c11)
++ [Misconfigured file system: The service account can't join any more computers to domain](#w157aac41c13c13)
++ [Misconfigured file system: The service account doesn't have access to the OU](#w157aac41c13c15)
+
+## Misconfigured file system: Amazon FSx can't reach either the DNS servers or domain controllers for your domain\.<a name="w157aac41c13b7"></a>
 
 A file system will go into a `Misconfigured` state when Amazon FSx can't communicate with your Microsoft Active Directory domain controller or controllers\.
 
@@ -22,7 +29,7 @@ To resolve this situation, do the following:
 
    You can also use the Amazon FSx CLI `update-file-system` command or the API operation [UpdateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html)\.
 
-## Misconfigured file system: The service account credentials are invalid<a name="w118aac41c13b9"></a>
+## Misconfigured file system: The service account credentials are invalid<a name="w157aac41c13b9"></a>
 
 Amazon FSx can't establish a connection with your Microsoft Active Directory domain controller or controllers\. This is because the service account credentials provided are invalid\. For more information, see [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)\. 
 
@@ -38,7 +45,7 @@ To resolve the misconfiguration, do the following:
 
    You can also use the Amazon FSx API operation `update-file-system`\. To learn more, see the [UpdateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html) in the *Amazon FSx API Reference*\.
 
-## Misconfigured file system: The service account provided doesn't have permission to join the file system to the domain<a name="w118aac41c13c11"></a>
+## Misconfigured file system: The service account provided doesn't have permission to join the file system to the domain<a name="w157aac41c13c11"></a>
 
 Amazon FSx can't establish a connection to your Microsoft Active Directory domain controllers\. This is because the service account provided doesn't have permission to join the file system to the domain with the specified OU\. 
 
@@ -54,7 +61,7 @@ To resolve the misconfiguration, do the following:
 
    You can also use the Amazon FSx API operation `update-file-system`\. To learn more, see the [UpdateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html) in the *Amazon FSx API Reference*\.
 
-## Misconfigured file system: The service account can't join any more computers to domain<a name="w118aac41c13c13"></a>
+## Misconfigured file system: The service account can't join any more computers to domain<a name="w157aac41c13c13"></a>
 
 Amazon FSx can't establish a connection to your Microsoft Active Directory domain controllers\. In this case, this is because the service account provided has reached the maximum number of computers that it can join to the domain\. 
 
@@ -70,7 +77,7 @@ To resolve the misconfiguration, do the following:
 
    You can also use the Amazon FSx API operation `update-file-system`\. To learn more, see the [UpdateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html) in the *Amazon FSx API Reference*\.
 
-## Misconfigured file system: The service account doesn't have access to the OU<a name="w118aac41c13c15"></a>
+## Misconfigured file system: The service account doesn't have access to the OU<a name="w157aac41c13c15"></a>
 
 Amazon FSx can't establish a connection to your Microsoft Active Directory domain controllers because the service account provided doesn't have access to the OU specified\. 
 

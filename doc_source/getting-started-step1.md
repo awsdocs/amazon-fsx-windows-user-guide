@@ -25,7 +25,7 @@ To create your Amazon FSx file system, you must create your Amazon Elastic Compu
 
    Amazon FSx for Windows File Server offers solid state drive \(SSD\) and hard disk drive \(HDD\) storage types\. **SSD** storage is designed for the highest\-performance and most latency\-sensitive workloads, including databases, media processing workloads, and data analytics applications\. **HDD** storage is designed for a broad spectrum of workloads, including home directories, user and departmental file shares, and content management systems\. For more information, see [Optimizing Costs Using Storage Types](optimize-fsx-costs.md#storage-type-options)\.
 
-1. For **Storage capacity**, enter the storage capacity of your file system, in GiB\. If you're using SSD storage, enter any whole number in the range of 32–65,536\. If you're using HDD storage, enter any whole number in the range of 2,000–65,536\. You can increase the amount of storage capacity as needed at any time after you create the file system\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md)\.
+1. For **Storage capacity**, enter the storage capacity of your file system, in GiB\. If you're using SSD storage, enter any whole number in the range of 32–65,536\. If you're using HDD storage, enter any whole number in the range of 2,000–65,536\. You can increase the amount of storage capacity as needed at any time after you create the file system\. For more information, see [Managing storage capacity](managing-storage-capacity.md)\.
 
 1. Keep **Throughput capacity** at its default setting\. **Throughput capacity** is the sustained speed at which the file server that hosts your file system can serve data\. The **Recommended throughput capacity** setting is based on the amount of storage capacity you choose\. If you need more than the recommended throughput capacity, choose **Specify throughput capacity**, and then choose a value\. For more information, see [Amazon FSx for Windows File Server PerformancePerformance](performance.md)\. 
 
@@ -69,7 +69,7 @@ For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain nam
 
 1. For **Access \- optional**, enter any DNS aliases that you want to associate with the file system\. Each alias name must be formatted as a fully qualified domain name \(FQDN\)\. For more information, see [Managing DNS aliases](managing-dns-aliases.md)\.
 
-1. Keep the default settings for **Maintenance preferences**\.
+1. For **Backup and maintenance \- optional**, keep the default settings\.
 
 1. For **Tags \- optional**, enter a key and value to add tags to your file system\. A tag is a case\-sensitive key\-value pair that helps you manage, filter, and search for your file system\. 
 

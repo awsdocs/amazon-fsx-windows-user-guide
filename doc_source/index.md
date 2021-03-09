@@ -1,7 +1,7 @@
 # Amazon FSx for Windows File Server Windows User Guide
 
 -----
-*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -24,7 +24,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Step 5: Transfer Files to or from Amazon FSx for Windows File Server Using AWS DataSync](use-data-sync.md)
    + [Step 6: Clean Up Resources](getting-started-step5.md)
    + [Amazon FSx File System Status](file-system-lifecycle-states.md)
-+ [Supported Clients, Access Methods, and Environments for Amazon FSx for Windows File Server](supported-fsx-clients.md)
++ [Supported clients, access methods, and environments for Amazon FSx for Windows File Server](supported-fsx-clients.md)
 + [Availability and Durability: Single-AZ and Multi-AZ File Systems](high-availability-multiAZ.md)
 + [Optimizing Costs with Amazon FSx](optimize-fsx-costs.md)
 + [Working with Active Directory in Amazon FSx for Windows File Server](aws-ad-integration-fsxW.md)
@@ -46,9 +46,9 @@ Amazon's trademarks and trade dress may not be used in
    + [Migrating DNS configuration to use Amazon FSx](migrate-dns-config.md)
    + [Cutting over to Amazon FSx](cutover-to-fsx.md)
 + [Using Amazon FSx for Windows File Server with Microsoft SQL Server](sql-server.md)
-+ [Protecting Your Data with Shadow Copies and Backups](data-protection.md)
-   + [Working with Shadow Copies](shadow-copies-fsxW.md)
++ [Protecting Your Data with Backups and Shadow Copies](data-protection.md)
    + [Working with Backups](using-backups.md)
+   + [Working with Shadow Copies](shadow-copies-fsxW.md)
 + [Administering File Systems](administering-file-systems.md)
    + [Getting Started with the Amazon FSx CLI for Remote Management on PowerShell](remote-pwrshell.md)
    + [Managing DNS aliases](managing-dns-aliases.md)
@@ -58,7 +58,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Storage Quotas](managing-user-quotas.md)
    + [Shadow Copies](manage-shadow-cpy.md)
    + [Encryption in Transit](manage-encrypt-in-transit.md)
-   + [Managing Storage Capacity](managing-storage-capacity.md)
+   + [Managing storage capacity](managing-storage-capacity.md)
    + [Managing Throughput Capacity](managing-throughput-capacity.md)
    + [Working with Amazon FSx Maintenance Windows](maintenance-windows.md)
    + [Best Practices for Administering Amazon FSx File Systems](admin-best-practices-fsxw.md)
@@ -95,9 +95,11 @@ Amazon's trademarks and trade dress may not be used in
       + [Troubleshooting file systems joined to an AWS Managed Microsoft Active Directory](unable-to-create-aws-mad.md)
       + [Troubleshooting file systems joined to a self-managed Active Directory](unable-to-create-fs-self-ad.md)
    + [File system is in a misconfigured state](misconfigured-ad-config.md)
-   + [You can't access your file system using Remote PowerShell](remote-pwr-shell.md)
+   + [Troubleshooting using Remote Power Shell on Amazon FSx for Windows File Server](remote-pwr-shell.md)
    + [You can't configure DFS-R on a Multi-AZ or Single-AZ 2 file system](dfs-r.md)
-   + [Troubleshooting failed storage and throughput updates](admin-actions-ts.md)
+   + [Storage or throughput capacity updates fail](admin-actions-ts.md)
    + [Switching storage type to HDD while restoring a backup fails](create-fs-from-backup-fails.md)
+   + [Troubleshooting shadow copies](shadow-copy-ts.md)
+   + [Troubleshooting data deduplication](data-dedup-ts.md)
 + [Additional information](additional-info.md)
 + [Document History](doc-history.md)

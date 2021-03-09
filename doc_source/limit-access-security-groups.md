@@ -29,7 +29,7 @@ For more information on security group rules, see [Security Group Rules](https:/
 
 1. <a name="vpc-sg-step6"></a>Add the following rules to allow outbound network traffic on the following ports: 
 
-   1. For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. Please ensure that the security group and the VPC Network ACLs for the subnet\(s\) where you're creating your FSx file system allow traffic on the ports and and in the directions shown in the following diagram\.  
+   1. For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. Please ensure that the security group and the VPC Network ACLs for the subnet\(s\) where you're creating your FSx file system allow traffic on the ports and in the directions shown in the following diagram\.  
 ![\[Amazon FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
 
       The following table identifies the role of each port\.    

@@ -56,7 +56,7 @@ Your file system's storage provides the following levels of disk throughput and 
 | SSD | 750 | 3,000 | 
 | HDD | 12 baseline; 80 burst \(up to a max\. of 1 GB/s per file system\)  | 12 baseline; 80 burst | 
 
-You can increase a file system's storage capacity at any time\. For more information, see [Managing Storage Capacity](managing-storage-capacity.md)\.
+You can increase a file system's storage capacity at any time\. For more information, see [Managing storage capacity](managing-storage-capacity.md)\.
 
 ### Impact of Throughput Capacity on Performance<a name="impact-throughput-cap-performance"></a>
 
