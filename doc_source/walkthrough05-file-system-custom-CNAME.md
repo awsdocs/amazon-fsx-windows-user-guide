@@ -147,7 +147,7 @@ Setting an SPN for your Amazon FSx file system will fail if an SPN for the DNS a
 
    ```
    ## Verify SPNs on FSx file system AD computer object
-   $FileSystemDnsName = "file_system_dns_name"
+   $FSxDnsName = "file_system_dns_name"
    $FileSystemHost = (Resolve-DnsName ${FSxDnsName} | Where Type -eq 'A')[0].Name.Split(".")[0]
    $FSxAdComputer = (Get-AdComputer -Identity ${FileSystemHost})
    SetSpn /L ${FSxAdComputer}.Name
