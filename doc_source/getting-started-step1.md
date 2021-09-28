@@ -63,7 +63,7 @@ For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain nam
    + **Service account password**—the password for the service account\.
    + **Confirm password**—the password for the service account\.
    + \(Optional\) **Organizational Unit \(OU\)**—the distinguished path name of the organizational unit in which you want to join you file system\.
-   + \(Optional\) **Delegated file system administrators group**— the name of the group in your Active Directory that can administer your file system\. The default group is 'Domain Admins'\.
+   + \(Optional\) **Delegated file system administrators group**— the name of the group in your Active Directory that can administer your file system\. The default group is 'Domain Admins'\.  This value cannot be changed after the file system has been created.
 
 1. For **Encryption**, keep the default **Encryption key** setting of **aws/fsx \(default\)**\.
 
