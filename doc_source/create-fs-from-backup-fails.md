@@ -12,4 +12,4 @@ Use the following procedure to resolve this issue\.
 
 1. Take a user\-initiated backup of the file system\. For more information, see [Working with user\-initiated backups](using-backups.md#user-initiated-backups)\.
 
-1. Restore the user\-initiated backup to a new file system using HDD storage\. For more information, see [Restoring Backups](using-backups.md#restoring-backups)\.
+1. Restore the user\-initiated backup to a new file system using HDD storage\. For more information, see [Restoring backups](using-backups.md#restoring-backups)\.

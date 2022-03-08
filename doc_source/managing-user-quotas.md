@@ -1,4 +1,4 @@
-# Storage Quotas<a name="managing-user-quotas"></a>
+# Storage quotas<a name="managing-user-quotas"></a>
 
 You can configure user storage quotas on your file systems to limit how much data storage that users can consume\. After you set quotas, you can track quota status to monitor usage and see when users surpass their quotas\. 
 
@@ -12,14 +12,14 @@ You can configure default quotas that are applied to new users who access a file
 
 Storage consumption at a user level is tracked based on file ownership\. Storage consumption is calculated using logical file size, not the actual physical storage space that files occupy\. User storage quotas are tracked at the time when data is written to a file\. 
 
-## Managing User Storage Quotas<a name="managing-storage-quotas"></a>
+## Managing user storage quotas<a name="managing-storage-quotas"></a>
 
-You can manage user storage quotas on your file system using the Amazon FSx CLI for remote management on PowerShell\. To learn how to use this CLI, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
+You can manage user storage quotas on your file system using the Amazon FSx CLI for remote management on PowerShell\. To learn how to use this CLI, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\. 
 
 Following are commands that you can use to manage user storage quotas\.
 
 
-| User Storage Quotas Command | Description | 
+| User storage quotas command | Description | 
 | --- | --- | 
 |  Enable\-FSxUserQuotas  |  Starts tracking or enforcing user storage quotas, or both\.  | 
 |  Disable\-FSxUserQuotas  |  Stops tracking and enforcement for user storage quotas\.   | 

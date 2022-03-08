@@ -1,8 +1,8 @@
-# Availability and Durability: Single\-AZ and Multi\-AZ File Systems<a name="high-availability-multiAZ"></a>
+# Availability and durability: Single\-AZ and Multi\-AZ file systems<a name="high-availability-multiAZ"></a>
 
 Amazon FSx for Windows File Server offers two file system deployment types: Single\-AZ and Multi\-AZ\.
 
-## Choosing Single\-AZ or Multi\-AZ File System Deployment<a name="single-or-multi-az"></a>
+## Choosing Single\-AZ or Multi\-AZ file system deployment<a name="single-or-multi-az"></a>
 
 With Single\-AZ file systems, Amazon FSx automatically replicates your data within an Availability Zone \(AZ\) to protect it from component failure\. It continuously monitors for hardware failures and automatically replaces infrastructure components in the event of a failure\. Amazon FSx also uses the Windows Volume Shadow Copy Service to make highly durable backups of your file system daily and store them in Amazon S3\. You can make additional backups at any point\. *Single\-AZ 2* is the latest generation of Single\-AZ file systems, and it supports both SSD and HDD storage\. *Single\-AZ 1* file systems support SSD storage, Microsoft Distributed File System Replication \(DFSR\), and the use of custom DNS names\.
 
@@ -10,9 +10,9 @@ Multi\-AZ file systems support all the availability and durability features of S
 
 Multi\-AZ file systems are ideal for business\-critical workloads that require high availability to shared Windows file data\. Examples of these include business applications, web serving environments, and Microsoft SQL Server\. Single\-AZ file systems offer a lower price point for workloads that don’t require the high availability of a Multi\-AZ solution and that can recover from the most recent file system backup if data is lost\. Amazon FSx takes automatic daily backups of all file systems by default\.
 
-### Feature Support by Deployment Types<a name="deployment-type-features-summary"></a>
+### Feature support by deployment types<a name="deployment-type-features-summary"></a>
 
-The following table summarizes features supported by the Amazon FSx for Windows File Server file system deployment types:
+The following table summarizes features supported by the FSx for Windows File Server file system deployment types:
 
 
 | Deployment type | SSD storage | HDD storage |  DFS namespaces | DFS replication | Custom DNS names | CA shares | 
@@ -24,20 +24,20 @@ The following table summarizes features supported by the Amazon FSx for Windows 
 **Note**  
 \* While you can create CA shares on Single\-AZ 2 file systems, you should use CA shares on Multi\-AZ file systems for SQL Server HA deployments\.
 
-## Failover Process for Amazon FSx for Windows File Server<a name="MulitAZ-Failover"></a>
+## Failover process for FSx for Windows File Server<a name="MulitAZ-Failover"></a>
 
 Multi\-AZ file systems automatically fail over from the preferred file server to the standby file server if any of the following conditions occur:
 + An Availability Zone outage occurs\.
 + The preferred file server becomes unavailable\.
 + The preferred file server undergoes planned maintenance\.
 
- When failing over from one file server to another, the new active file server automatically begins serving all file system read and write requests\. When the resources in the preferred subnet are available, Amazon FSx automatically fails back to the preferred file server in the preferred subnet\. A failover typically completes in less than 30 seconds from the detection of the failure on the active file server to the promotion of the standby file server to active status\. Failback to the original Multi\-AZ configuration also completes in less than 30 seconds, and only occurs once the file server in the preferred subnet is fully recovered\. 
+ When failing over from one file server to another, the new active file server automatically begins serving all file system read and write requests\. When the resources in the preferred subnet are available, Amazon FSx automatically fails back to the preferred file server in the preferred subnet\. A failover typically completes in less than 30 seconds from the detection of the failure on the active file server to the promotion of the standby file server to active status\. Failback to the original Multi\-AZ configuration also completes in less than 30 seconds, and only occurs once the file server in the preferred subnet is fully recovered\. During this 30\-second period, I/O may be paused\.
 
-### Failover Experience on Windows Clients<a name="windows-failover"></a>
+### Failover experience on Windows clients<a name="windows-failover"></a>
 
  When failing over from one file server to another, the new active file server automatically begins serving all file system read and write requests\. After the resources in the preferred subnet are available, Amazon FSx automatically fails back to the preferred file server in the preferred subnet\. Because the file system's DNS name remains the same, failovers are transparent to Windows applications, which resume file system operations without manual intervention\. A failover typically completes in less than 30 seconds from the detection of the failure on the active file server to the promotion of the standby file server to active status\. Failback to the original Multi\-AZ configuration also completes in less than 30 seconds, and only occurs after the file server in the preferred subnet is fully recovered\. 
 
-### Failover Experience on Linux Clients<a name="linux-failover"></a>
+### Failover experience on Linux clients<a name="linux-failover"></a>
 
  Linux clients do not support automatic DNS\-based failover\. Therefore, they don't automatically connect to the standby file server during a failover\. They will automatically resume file system operations after the Multi\-AZ file system has failed back to the file server in the preferred subnet\.
 
@@ -45,9 +45,9 @@ Multi\-AZ file systems automatically fail over from the preferred file server to
 
  You can test failover your Multi\-AZ file system by modifying its throughput capacity\. When you modify your file system's throughput capacity, Amazon FSx switches out the file system's file server\. Multi\-AZ file systems automatically fail over to the secondary server while Amazon FSx replaces the preferred server file server first\. Then the file system automatically fails back to the new primary server and Amazon FSx replaces the secondary file server\. 
 
- You can monitor the progress of the throughput capacity update request in the Amazon FSx console, the CLI, and the API\. Once the update has completed successfully, your file system has failed over to the secondary server, and failed back to the primary server\. For more information about modifying your file system's throughput capacity and monitoring the progress of the request, see [Managing Throughput Capacity](managing-throughput-capacity.md)\.
+ You can monitor the progress of the throughput capacity update request in the Amazon FSx console, the CLI, and the API\. Once the update has completed successfully, your file system has failed over to the secondary server, and failed back to the primary server\. For more information about modifying your file system's throughput capacity and monitoring the progress of the request, see [Managing throughput capacity](managing-throughput-capacity.md)\.
 
-## Working with Single and Multi\-AZ File System Resources<a name="single-multi-az-resources"></a>
+## Working with Single and Multi\-AZ file system resources<a name="single-multi-az-resources"></a>
 
 ### Subnets<a name="fs-subnets"></a>
 
@@ -57,14 +57,14 @@ When you create a Multi\-AZ file system, you specify two subnets, one for the pr
 
 For in\-AWS applications, we recommend that you launch your clients in the same Availability Zone as your preferred file server to reduce cross\-AZ data transfer costs and minimize latency\.
 
-### File System Elastic Network Interfaces<a name="file-system-eni-fsxw"></a>
+### File system elastic network interfaces<a name="file-system-eni-fsxw"></a>
 
- When you create an Amazon FSx file system, Amazon FSx provisions one or more [elastic network interfaces](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) in the [Amazon Virtual Private Cloud \(VPC\)](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) that you associate with your file system\. The network interface allows your client to communicate with the Amazon FSx for Windows File Server file system\. The network interface is considered to be within the service scope of Amazon FSx, despite being part of your account's VPC\. Multi\-AZ file systems have two elastic network interfaces, one for each file server\. Single\-AZ file systems have one elastic network interface\. 
+ When you create an Amazon FSx file system, Amazon FSx provisions one or more [elastic network interfaces](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ElasticNetworkInterfaces.html) in the [Amazon Virtual Private Cloud \(VPC\)](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) that you associate with your file system\. The network interface allows your client to communicate with the FSx for Windows File Server file system\. The network interface is considered to be within the service scope of Amazon FSx, despite being part of your account's VPC\. Multi\-AZ file systems have two elastic network interfaces, one for each file server\. Single\-AZ file systems have one elastic network interface\. 
 
 **Warning**  
 You must not modify or delete the elastic network interfaces associated with your file system\. Modifying or deleting the network interface can cause a permanent loss of connection between your VPC and your file system\.
 
-The following table summarizes the subnet, elastic network interface, and IP address resources for Amazon FSx for Windows File Server file system deployment types:
+The following table summarizes the subnet, elastic network interface, and IP address resources for FSx for Windows File Server file system deployment types:
 
 
 | File system deployment type | Number of subnets | Number of elastic network interfaces | Number of IP addresses | 

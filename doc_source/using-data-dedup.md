@@ -1,14 +1,16 @@
-# Data Deduplication<a name="using-data-dedup"></a>
+# Data deduplication<a name="using-data-dedup"></a>
 
 Large datasets often have redundant data, which increases the data storage costs\. For example, with user file shares, multiple users can store many copies or versions of the same file\. With software development shares, many binaries remain unchanged from build to build\. 
 
-You can reduce your data storage costs by turning on data deduplication for your file system\. *Data deduplication *reduces or eliminates redundant data by storing duplicated portions of the dataset only once\. Because data deduplication runs as a background process, it doesn't significantly affect your file system's performance\. It's also transparent to your users and connected clients\. After data deduplication is enabled, it continually and automatically scans and optimizes your file system in the background\.
+You can reduce your data storage costs by turning on data deduplication for your file system\. *Data deduplication *reduces or eliminates redundant data by storing duplicated portions of the dataset only once\. Data compression is enabled by default when you use data deduplication, further reducing the amount of data storage by compressing the data after deduplication\. Data deduplication runs as a background process that continually and automatically scans and optimizes your file system, and it is transparent to your users and connected clients\.
 
-The storage savings that you can achieve with data deduplication depends on the nature of your dataset, including how much duplication exists across files\. Typical savings average 50–60 percent for general\-purpose file shares\. Within shares, savings range from 30–50 percent for user documents to 70–80 percent for software development datasets\.
+The storage savings that you can achieve with data deduplication depends on the nature of your dataset, including how much duplication exists across files\. Typical savings average 50–60 percent for general\-purpose file shares\. Within shares, savings range from 30–50 percent for user documents to 70–80 percent for software development datasets\. You can measure potential deduplication savings using the `Measure-FSxDedupFileMetadata` command described below\.
 
-For more information about how to implement and manage data deduplication, see the Microsoft [Understanding Data Deduplication](https://docs.microsoft.com/en-us/windows-server/storage/data-deduplication/understand) documentation\.
+You can also customize data deduplication to meet your specific storage needs\. For example, you can configure deduplication to run only on certain file types, or you can create a custom job schedule\. Because deduplication jobs can consume file server resources, we recommend monitoring the status of your deduplication jobs using the `Get-FSxDedupStatus` command described below\.
 
-## Enabling Data Deduplication<a name="enable-dedup"></a>
+For more information about data deduplication, see the Microsoft [Understanding Data Deduplication](https://docs.microsoft.com/en-us/windows-server/storage/data-deduplication/understand) documentation\.
+
+## Enabling data deduplication<a name="enable-dedup"></a>
 
 You enable data deduplication on an Amazon FSx for Windows File Server file share using the `Enable-FSxDedup` command, as follows\.
 
@@ -16,12 +18,12 @@ You enable data deduplication on an Amazon FSx for Windows File Server file shar
 PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com -ConfigurationName FSxRemoteAdmin -ScriptBlock {Enable-FsxDedup }
 ```
 
-When you enable data deduplication, a default data dedup schedule is in place\. The schedule uses Coordinated Universal Time \(UTC\)\. Also, the minimum file age before optimizing is set to 3 days\.
+When you enable data deduplication, a default data dedup schedule is in place\. The schedule uses Coordinated Universal Time \(UTC\)\. Also, the minimum file age before optimizing is set to 3 days\. Data compression after deduplication is also enabled by default\.
 
 **Note**  
 When you increase a file system's storage capacity, Amazon FSx cancels existing data deduplication jobs during the storage optimization process that migrates data from the old disks to the new, larger disks\. During this period, the `OptimizedFilesSavingsRate` value is 0\. Amazon FSx resumes data deduplication once the storage capacity increase optimization job completes\. For more information about increasing storage capacity and storage optimization, see [Managing storage capacity](managing-storage-capacity.md)\.
 
-## Creating a Data Deduplication Schedule<a name="new-dedup-sched"></a>
+## Creating a data deduplication schedule<a name="new-dedup-sched"></a>
 
 Even though the default schedule works well in most cases, you can create a new deduplication schedule by using the `New-FsxDedupSchedule` command, shown as follows\. Data deduplication schedules use UTC time\.
 
@@ -33,7 +35,7 @@ New-FSxDedupSchedule -Name "CustomOptimization" -Type Optimization -Days Mon,Wed
 
  This command creates a schedule named `CustomOptimization` that runs on days Monday, Wednesday, and Saturday, starting the job at 8:00 am \(UTC\) each day, with a maximum duration of 7 hours, after which the job stops if it is still running\.
 
-## Modifying a Data Deduplication Schedule<a name="set-dedup-sched"></a>
+## Modifying a data deduplication schedule<a name="set-dedup-sched"></a>
 
 You can modify an existing deduplication schedule by using the `Set-FsxDedupSchedule` command, shown as follows\.
 
@@ -47,7 +49,7 @@ Set-FSxDedupSchedule -Name "CustomOptimization" -Type Optimization -Days Mon,Tue
 
  To modify the minimum file age before optimizing setting, use the `Set-FSxDedupConfiguration` command\. 
 
-## Retrieving the Data Deduplication Schedules<a name="get-dedup-sched"></a>
+## Retrieving the data deduplication schedules<a name="get-dedup-sched"></a>
 
 You can retrieve the data dedup schedules for a file system using the `Get-FSxDedupSchedule` command, as follows\.
 
@@ -57,7 +59,7 @@ PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com
 
 The output lists the dedup schedules and their configurations\.
 
-## Retrieving the Dedup Configuration<a name="get-dedup-config"></a>
+## Retrieving the dedup configuration<a name="get-dedup-config"></a>
 
 You can retrieve the data dedup configuration for a file system using the `Get-FsxDedupConfiguration` command, as follows\.
 
@@ -67,7 +69,7 @@ PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com
 
 The output lists the dedup configuration parameters and their current values\.
 
-## Viewing the Amount of Saved Space<a name="get-dedup-status"></a>
+## Viewing the amount of saved space<a name="get-dedup-status"></a>
 
 To view the amount of disk space you are saving from running data deduplication, use the `Get-FSxDedupStatus` command, as follows\.
 
@@ -83,18 +85,18 @@ OptimizedFilesCount OptimizedFilesSize SavedSpace OptimizedFilesSavingsRate
 **Note**  
 The values shown in the command response for following parameters are not reliable, and you should not use these values: Capacity, FreeSpace, UsedSpace, UnoptimizedSize, and SavingsRate\.
 
-## Managing Data Deduplication<a name="managing-data-dedup"></a>
+## Managing data deduplication<a name="managing-data-dedup"></a>
 
-You can manage data deduplication on your file system using the Amazon FSx CLI for remote management on PowerShell\. To learn how to use this CLI, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
+You can manage data deduplication on your file system using the Amazon FSx CLI for remote management on PowerShell\. To learn how to use this CLI, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\. 
 
 Following are commands that you can use for data deduplication\. 
 
 
-| Data Deduplication Command | Description | 
+| Data deduplication command | Description | 
 | --- | --- | 
-|  Enable\-FSxDedup  |  Enables data deduplication on the file share\.  | 
+|  Enable\-FSxDedup  |  Enables data deduplication on the file share\. Data compression after deduplication is enabled by default when you enable data deduplication\.  | 
 |  Disable\-FSxDedup  |  Disables data deduplication on the file share\.  | 
-|  Get\-FSxDedupConfiguration  |  Retrieves deduplication configuration information, including Minimum file size and age for optimization, Compression settings, and Excluded file types and folders\.  | 
+|  Get\-FSxDedupConfiguration  |  Retrieves deduplication configuration information, including Minimum file size and age for optimization, compression settings, and Excluded file types and folders\.  | 
 | Set\-FSxDedupConfiguration | Changes the deduplication configuration settings, including minimum file size and age for optimization, compression settings, and excluded file types and folders\. | 
 | Get\-FSxDedupStatus |  Retrieves the deduplication status, and includes read\-only properties that describe optimization savings and status on the file system, times, and completion status for the last jobs on the file system\.  | 
 | Get\-FSxDedupMetadata | Retrieves deduplication optimization metadata\. | 

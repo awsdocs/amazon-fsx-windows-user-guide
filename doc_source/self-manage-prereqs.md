@@ -1,4 +1,4 @@
-# Prerequisites for Using a Self\-Managed Microsoft AD<a name="self-manage-prereqs"></a>
+# Prerequisites for using a self\-managed Microsoft AD<a name="self-manage-prereqs"></a>
 
 Before you create an Amazon FSx file system joined to your self\-managed Microsoft AD domain, make sure that you have created and set up the following requirements:
 + An on\-premises or other self\-managed Microsoft AD that the Amazon FSx file system is to join, with the following configuration:
@@ -6,14 +6,14 @@ Before you create an Amazon FSx file system joined to your self\-managed Microso
   + DNS server IP addresses and AD domain controller IP addresses as follows, depending on when your file system was created:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html)
 
-    If you need to access your Amazon FSx for Windows File Server file system that was created before December 17, 2020 using a non\-private IP address range, you can create a new file system by restoring a backup of the file system\. For more information, see [Working with Backups](using-backups.md)\.
+    If you need to access your FSx for Windows File Server file system that was created before December 17, 2020 using a non\-private IP address range, you can create a new file system by restoring a backup of the file system\. For more information, see [Working with backups](using-backups.md)\.
   +  Domain name that is not in the Single Label Domain \(SLD\) format\. Amazon FSx does not support SLD domains\. 
   + For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain name cannot exceed 47 characters\.
   + If you have Active Directory sites defined, you must make sure that the subnets in the VPC associated with your Amazon FSx file system are defined in an Active Directory site, and that no conflicts exist between the subnets in your VPC and the subnets in your other sites\.
 + The following network configurations:
   + Connectivity configured between the Amazon VPC where you want to create the file system and your self\-managed Active Directory\. You can set up connectivity using AWS Direct Connect, AWS VPN, VPC peering, or AWS Transit Gateway\.
   + For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. Please ensure that the security group and the VPC Network ACLs for the subnet\(s\) where you're creating your FSx file system allow traffic on the ports and in the directions shown in the following diagram\.  
-![\[Amazon FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
+![\[FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
 
     The following table identifies the role of each port\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-manage-prereqs.html)
@@ -38,12 +38,12 @@ While Amazon VPC security groups require ports to be opened only in the directio
 
   These represent the minimum set of permissions that are required to join computer objects to your Active Directory\. For more information, see the Microsoft Windows Server documentation topic [ Error: Access is denied when non\-administrator users who have been delegated control try to join computers to a domain controller](https://support.microsoft.com/en-us/help/932455/error-message-when-non-administrator-users-who-have-been-delegated-con)\.
 
-To learn more about creating a service account with the correct permissions, see [ Delegating Privileges to Your Amazon FSx Service Account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\.
+To learn more about creating a service account with the correct permissions, see [ Delegating privileges to your Amazon FSx service account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\.
 
 **Note**  
-Amazon FSx requires a valid service account throughout the lifetime of your Amazon FSx file system\. Amazon FSx must be able to fully manage the file system and perform tasks that require unjoining and rejoining your AD domain using, such as replacing a failed file server or patching Windows Server software\. Please keep your Active Directory configuration, including the service account credentials, updated with Amazon FSx\. To learn how, see [Keeping Your Active Directory Configuration Updated with Amazon FSx](self-managed-AD-best-practices.md#keep-ad-config-updated)\.
+Amazon FSx requires a valid service account throughout the lifetime of your Amazon FSx file system\. Amazon FSx must be able to fully manage the file system and perform tasks that require unjoining and rejoining your AD domain using, such as replacing a failed file server or patching Windows Server software\. Please keep your Active Directory configuration, including the service account credentials, updated with Amazon FSx\. To learn how, see [Keeping your Active Directory configuration updated with Amazon FSx](self-managed-AD-best-practices.md#keep-ad-config-updated)\.
 
- If this is your first time using AWS and Amazon FSx for Windows File Server, make sure to set up before starting\. For more information, see [Setting Up](setting-up.md)\. 
+ If this is your first time using AWS and FSx for Windows File Server, make sure to set up before starting\. For more information, see [Setting up](setting-up.md)\. 
 
 **Important**  
 Do not move computer objects that Amazon FSx creates in the OU after your file system is created\. Doing so will cause your file system to become misconfigured\.

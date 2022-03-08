@@ -1,10 +1,10 @@
-# Validating Your Active Directory Configuration<a name="validate-ad-config"></a>
+# Validating your Active Directory configuration<a name="validate-ad-config"></a>
 
- Before you create an Amazon FSx for Windows File Server file system joined to your Active Directory, we recommend that you validate your Active Directory configuration using the Amazon FSx Active Directory Validation tool\. <a name="test-ad-network-config"></a>
+ Before you create an FSx for Windows File Server file system joined to your Active Directory, we recommend that you validate your Active Directory configuration using the Amazon FSx Active Directory Validation tool\. <a name="test-ad-network-config"></a>
 
 **To validate your Active Directory configuration**
 
-1. Launch an Amazon EC2 Windows instance in the same subnet and with the same Amazon VPC security groups that you will use for your Amazon FSx for Windows File Server file system\. Please ensure that your EC2 instance has the required `AmazonEC2ReadOnlyAccess` IAM permissions\. You can validate EC2 instance role permissions using the IAM policy simulator\. For more information, see [Testing IAM Policies with the IAM Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) in the *IAM User Guide*\.
+1. Launch an Amazon EC2 Windows instance in the same subnet and with the same Amazon VPC security groups that you will use for your FSx for Windows File Server file system\. Please ensure that your EC2 instance has the required `AmazonEC2ReadOnlyAccess` IAM permissions\. You can validate EC2 instance role permissions using the IAM policy simulator\. For more information, see [Testing IAM Policies with the IAM Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) in the *IAM User Guide*\.
 
 1. Join your EC2 Windows instance to your Active Directory\. For more information, see [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html) in the *AWS Directory Service Administration Guide*\.
 
@@ -44,7 +44,7 @@
    PS C:\> Expand-Archive -Path "AmazonFSxADValidation.zip"
    ```
 
-1. Add the AmazonFSxADValidation module to the current session\.
+1. Add the `AmazonFSxADValidation` module to the current session\.
 
    ```
    PS C:\> Import-Module .\AmazonFSxADValidation
@@ -52,16 +52,23 @@
 
 1. Set required parameters by substituting into the following command your:
    + Active Directory domain name \(*DOMAINNAME\.COM*\)
-   + Service account sAMAccountName \(*SERVICE\_ACCOUNT\_USER*\)\. The name is truncated if it is longer than 16 characters\.
-   + Service account password \(*SERVICE\_ACCOUNT\_PASSWORD*\)
+   + Prepare the `$Credential` object for the service account password using one of the following options\.
+     + To generate the credential object interactively, use the following command\.
+
+       ```
+       $Credential = Get-Credential
+       ```
+     + To generate the credential object using an AWS Secrets Manager resource, use the following command\.
+
+       ```
+       $Secret = ConvertFrom-Json -InputObject (Get-SECSecretValue -SecretId $AdminSecret).SecretString
+       $Credential = (New-Object PSCredential($Secret.UserName,(ConvertTo-SecureString $Secret.Password -AsPlainText -Force)))
+       ```
    + DNS server IP addresses \(*IP\_ADDRESS\_1*, *IP\_ADDRESS\_2*\)
    + Subnet ID\(s\) for subnets where you plan to create your Amazon FSx file system \(*SUBNET\_1*, *SUBNET\_2*, for example, `subnet-04431191671ac0d19`\)\.
 
    ```
-   PS C:\> # Credential for Amazon FSx service account
-   $Password = ConvertTo-SecureString 'SERVICE_ACCOUNT_PASSWORD' -AsPlainText -Force
-   $Credential = New-Object System.Management.Automation.PSCredential ('SERVICE_ACCOUNT_USER', $Password)
-   
+   PS C:\> 
    $FSxADValidationArgs = @{
        # DNS root of ActiveDirectory domain
        DomainDNSRoot = 'DOMAINNAME.COM'

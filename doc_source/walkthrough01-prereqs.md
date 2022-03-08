@@ -1,14 +1,14 @@
-# Walkthrough 1: Prerequisites for Getting Started<a name="walkthrough01-prereqs"></a>
+# Walkthrough 1: Prerequisites for getting started<a name="walkthrough01-prereqs"></a>
 
 Before you can complete the getting started exercise, you must already have a Microsoft Windows–based Amazon EC2 instance joined to your AWS Directory Service directory\. You must also be signed into the instance over Windows Remote Desktop Protocol as the Admin user for your directory\. The following walkthrough shows you how to perform these necessary prerequisite actions\.
 
 **Topics**
-+ [Step 1: Set Up Active Directory](#prereq-step1)
-+ [Step 2: Launch a Windows Instance in the Amazon EC2 Console](#prereqs-step2)
-+ [Step 3: Connect to Your Instance](#prereqs-step3)
-+ [Step 4: Join Your Instance to Your AWS Directory Service Directory](#prereqs-step4)
++ [Step 1: Set up Active Directory](#prereq-step1)
++ [Step 2: Launch a Windows instance in the Amazon EC2 console](#prereqs-step2)
++ [Step 3: Connect to your instance](#prereqs-step3)
++ [Step 4: Join your instance to your AWS Directory Service directory](#prereqs-step4)
 
-## Step 1: Set Up Active Directory<a name="prereq-step1"></a>
+## Step 1: Set up Active Directory<a name="prereq-step1"></a>
 
 With Amazon FSx, you can operate fully managed file storage for Windows\-based workloads\. Likewise, AWS Directory Service provides fully managed directories to use in your workload deployment\. If you have an existing corporate AD domain running in AWS in a virtual private cloud \(VPC\) using EC2 instances, you can enable user\-based authentication and access control\. You do this by establishing a trust relationship between your AWS Managed Microsoft AD and your corporate domain\. For Windows authentication in Amazon FSx, you only need a one\-way directional forest trust, where the AWS managed forest trusts the corporate domain forest\.
 
@@ -25,7 +25,7 @@ Your Active Directory security group must enable inbound access from the Amazon 
 Remember the password you assign to your Admin user; you need it later in this getting started exercise\. If you forget the password, you need to repeat steps in this exercise with the new AWS Directory Service directory and Admin user\.
 + If you have an existing AD, create a trust relationship between your AWS Managed Microsoft AD and your existing AD\. For more information, see [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide\.*
 
-## Step 2: Launch a Windows Instance in the Amazon EC2 Console<a name="prereqs-step2"></a>
+## Step 2: Launch a Windows instance in the Amazon EC2 console<a name="prereqs-step2"></a>
 
 You can launch a Windows instance using the AWS Management Console as described in the following procedure\. This is intended to help you launch your first instance quickly, so it doesn't cover all possible options\. For more information about the advanced options, see [Launching an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html)\.
 
@@ -70,7 +70,7 @@ Make a note of the ID of the security group that was created when you launched t
 
 Now that your instance is launched, you can connect to your instance\.
 
-## Step 3: Connect to Your Instance<a name="prereqs-step3"></a>
+## Step 3: Connect to your instance<a name="prereqs-step3"></a>
 
 To connect to a Windows instance, you must retrieve the initial administrator password and then specify this password when you connect to your instance using Remote Desktop\.
 
@@ -118,7 +118,7 @@ Sometimes copying and pasting content can corrupt data\. If you encounter a "Pas
 
 Now that you're connected to your instance, you can join the instance to your AWS Directory Service directory\.
 
-## Step 4: Join Your Instance to Your AWS Directory Service Directory<a name="prereqs-step4"></a>
+## Step 4: Join your instance to your AWS Directory Service directory<a name="prereqs-step4"></a>
 
 The following procedure shows you how to manually join an existing Amazon EC2 Windows instance to your AWS Directory Service directory\. 
 
@@ -160,4 +160,4 @@ You can enter either the fully qualified name of your domain or the NetBios name
 
 1. Reconnect to your instance over RDP, and sign into the instance using the user name and password for your AWS Directory Service directory's Admin user\.
 
-Now that your instance has been joined to the domain, you're ready to create your Amazon FSx file system\. You can then go on to finish the other tasks in the getting started exercise\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.
+Now that your instance has been joined to the domain, you're ready to create your Amazon FSx file system\. You can then go on to finish the other tasks in the getting started exercise\. For more information, see [Getting started with Amazon FSx](getting-started.md)\.

@@ -43,7 +43,7 @@ Make sure that your compute instances are joined to one of two types of director
 
 The Microsoft Windows file share that you're attempting to access doesn't exist\.
 
-If you're using an existing file share, make sure that the file system DNS name and the share name are correctly specified\. To manage your file shares, see [File Shares](managing-file-shares.md)\.
+If you're using an existing file share, make sure that the file system DNS name and the share name are correctly specified\. To manage your file shares, see [File shares](managing-file-shares.md)\.
 
 ## Active Directory user lacks required permissions<a name="ad-user-lacks-permission"></a>
 
@@ -53,9 +53,9 @@ Make sure that the access permissions for the file share and Windows access cont
 
 ## Allow Full control NTFS ACL permissions removed<a name="removed-allow-full-control"></a>
 
-If you remove **Allow Full control** NTFS ACL permissions for the SYSTEM user on a folder that you shared, that share can become inaccessible\.
+If you remove **Allow Full control** NTFS ACL permissions for the SYSTEM user on a folder that you shared, that share can become inaccessible and any file system backups taken from that point onwards may not be usable\.
 
-You will need to re\-create the affected file share\. For more information, see [File Shares](managing-file-shares.md)\. After you recreate the folder or share, you can map and use the Windows file shares from your compute instances\.
+You will need to re\-create the affected file share\. For more information, see [File shares](managing-file-shares.md)\. After you recreate the folder or share, you can map and use the Windows file shares from your compute instances\.
 
 ## Can't access a file system using an on\-premises client<a name="non-private-ips-onprem"></a>
 
@@ -63,7 +63,7 @@ You're using your Amazon FSx file system from on\-premises using AWS Direct Conn
 
 Amazon FSx only supports access from on\-premises clients with non\-private IP addresses on file systems created after December 17, 2020\.
 
-If you need to access your Amazon FSx for Windows File Server file system that was created before December 17, 2020 using a non\-private IP address range, you can create a new file system by restoring a backup of the file system\. For more information, see [Working with Backups](using-backups.md)\.
+If you need to access your FSx for Windows File Server file system that was created before December 17, 2020 using a non\-private IP address range, you can create a new file system by restoring a backup of the file system\. For more information, see [Working with backups](using-backups.md)\.
 
 ## New file system is not registered in DNS<a name="fs-dns-not-registered"></a>
 
@@ -75,10 +75,10 @@ Amazon FSx does not register file systems in DNS if your network uses a third\-p
 
 1. In the **Network & security** tab do one of the following:
    + For a Single\-AZ 1 file system:
-     + In the **Subnet** panel, choose the elastic network interface shown under **Network interface** to open the **Network Interfaces** page in the Amazon EC2 console\.
+     + In the **Subnet** panel, choose the elastic network interface shown under **Network interface** to open the **Network Interfaces** page in the Amazon EC2 \.
      + The IP address for the Single\-AZ 1 file system to use is shown in the **Primary private IPv4 IP** column\.
    + For a Single\-AZ 2 or Multi\-AZ file system:
-     + In the **Preferred subnet** panel, choose the elastic network interface shown under **Network interface** to open the **Network Interfaces** page in the Amazon EC2 console\.
+     + In the **Preferred subnet** panel, choose the elastic network interface shown under **Network interface** to open the **Network Interfaces** page in the Amazon EC2 \.
      + The IP address for the preferred subnet to use is shown in the **Secondary private IPv4 IP** column\.
      + In the Amazon FSx **Standby subnet** panel, choose the elastic network interface shown under **Network interface** to open the **Network Interfaces** page in the Amazon EC2 console\.
      + The IP address for the standby subnet to use is shown in the **Secondary private IPv4 IP** column\.

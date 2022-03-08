@@ -3,9 +3,9 @@
 You can migrate an existing file share configuration to Amazon FSx by using the following procedure\. In this procedure, the source file server is the file server whose file share configuration you want to migrate to Amazon FSx\.
 
 **Note**  
-First migrate your files to Amazon FSx before migrating your file share configuration\. For more information, see [Migrating existing file storage to Amazon FSx for Windows File Server](migrate-files-fsx.md)\.
+First migrate your files to Amazon FSx before migrating your file share configuration\. For more information, see [Migrating existing file storage to FSx for Windows File Server](migrate-files-fsx.md)\.
 
-**To migrate existing file shares to Amazon FSx for Windows File Server**
+**To migrate existing file shares to FSx for Windows File Server**
 
 1. On the source file server, choose **Run as Administrator** from the context menu\. Open **Windows PowerShell** as an administrator\.
 
@@ -18,13 +18,13 @@ First migrate your files to Amazon FSx before migrating your file share configur
 
 1. Edit the `SmbShares.xml` file, replacing all references to F: \(your drive letter\) to D: as Amazon FSx file systems reside on D:\.
 
-1. Import the existing file share configuration to Amazon FSx for Windows File Server\. On a client that has access to your destination Amazon FSx file system and the source file server, copy the saved file share configuration\. Then import it into a variable by using the following command\.
+1. Import the existing file share configuration to FSx for Windows File Server\. On a client that has access to your destination Amazon FSx file system and the source file server, copy the saved file share configuration\. Then import it into a variable by using the following command\.
 
    ```
    $shares = Import-Clixml -Path F:\SmbShares.xml
    ```
 
-1. Prepare the credential object required to create the file shares on your Amazon FSx for Windows File Server file server using one of the following options\.
+1. Prepare the credential object required to create the file shares on your FSx for Windows File Server file server using one of the following options\.
 
    To generate the credential object interactively, use the following command\.
 

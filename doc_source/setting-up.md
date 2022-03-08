@@ -1,12 +1,12 @@
-# Setting Up<a name="setting-up"></a>
+# Setting up<a name="setting-up"></a>
 
 Before you use Amazon FSx for the first time, complete the following tasks:
 
-1. [Sign Up for AWS](#setting-up-signup)
+1. [Sign up for AWS](#setting-up-signup)
 
-1. [Create an IAM User](#setting-up-iam)
+1. [Create an IAM user](#setting-up-iam)
 
-## Sign Up for AWS<a name="setting-up-signup"></a>
+## Sign up for AWS<a name="setting-up-signup"></a>
 
 When you sign up for Amazon Web Services \(AWS\), your AWS account is automatically signed up for all services in AWS, including Amazon FSx\.
 
@@ -22,7 +22,7 @@ If you have an AWS account already, skip to the next task\. If you don't have an
 
 Note your AWS account number, because you need it for the next task\.
 
-## Create an IAM User<a name="setting-up-iam"></a>
+## Create an IAM user<a name="setting-up-iam"></a>
 
 Services in AWS, such as Amazon FSx, require that you provide credentials when you access them, so that the service can determine whether you have permissions to access its resources\. AWS recommends that you don't use the root credentials of your AWS account to make requests\. Instead, create an AWS Identity and Access Management \(IAM\) user and grant that user full access\. We call these users administrator users\.
 
@@ -34,7 +34,7 @@ If you signed up for AWS but have not created an IAM user for yourself, you can 
 
 1. Sign in to the [IAM console](https://console.aws.amazon.com/iam/) as the account owner by choosing **Root user** and entering your AWS account email address\. On the next page, enter your password\.
 **Note**  
-We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
+We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user that follows and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
 
 1. In the navigation pane, choose **Users** and then choose **Add user**\.
 
@@ -52,7 +52,7 @@ We strongly recommend that you adhere to the best practice of using the **Admini
 
 1. In the **Create group** dialog box, for **Group name** enter **Administrators**\.
 
-1. Choose **Filter policies**, and then select **AWS managed \-job function** to filter the table contents\.
+1. Choose **Filter policies**, and then select **AWS managed \- job function** to filter the table contents\.
 
 1. In the policy list, select the check box for **AdministratorAccess**\. Then choose **Create group**\.
 **Note**  
@@ -84,6 +84,6 @@ https://your_account_alias.signin.aws.amazon.com/console/
 
 To verify the sign\-in link for IAM users for your account, open the IAM console and check under **AWS Account Alias** on the dashboard\.
 
-## Next Step<a name="setting-up-next-step"></a>
+## Next step<a name="setting-up-next-step"></a>
 
-[Getting Started with Amazon FSx](getting-started.md)
+[Getting started with Amazon FSx](getting-started.md)

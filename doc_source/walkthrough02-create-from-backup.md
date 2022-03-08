@@ -1,4 +1,4 @@
-# Walkthrough 2: Create a File System from a Backup<a name="walkthrough02-create-from-backup"></a>
+# Walkthrough 2: Create a file system from a backup<a name="walkthrough02-create-from-backup"></a>
 
 With Amazon FSx, you can create a file system from a backup\. When you do so, you can change any of the following elements to better suit the use case you have for your newly created file system:
 + Storage type
@@ -12,7 +12,7 @@ With Amazon FSx, you can create a file system from a backup\. When you do so, yo
 + Daily automatic backup start time
 + Weekly maintenance window
 
-The following procedure guides you through the process of creating a new file system from a backup\. Before you can create this file system, you must have an existing backup\. For more information, see [Working with Backups](using-backups.md)
+The following procedure guides you through the process of creating a new file system from a backup\. Before you can create this file system, you must have an existing backup\. For more information, see [Working with backups](using-backups.md)
 
 **To create a file system from an existing backup**
 

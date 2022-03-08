@@ -1,8 +1,8 @@
 # Migrating DNS configuration to use Amazon FSx<a name="migrate-dns-config"></a>
 
-Amazon FSx for Windows File Server provides a default Domain Name System \(DNS\) name for every file system that you can use to access the data on your file system\. You can also access your file systems using any DNS name of your choosing by configuring the alternate DNS name as a DNS alias for your Amazon FSx file system\. 
+FSx for Windows File Server provides a default Domain Name System \(DNS\) name for every file system that you can use to access the data on your file system\. You can also access your file systems using any DNS name of your choosing by configuring the alternate DNS name as a DNS alias for your Amazon FSx file system\. 
 
-With DNS aliases, you can continue to use your existing DNS names to access data stored on Amazon FSx when migrating file system storage from on\-premises to Amazon FSx\. This helps eliminate the need to update any tools or applications that use your DNS names when migrating to Amazon FSx\. You can associate DNS aliases with existing Amazon FSx for Windows File Server file systems, when you create new file systems, and when you create a new file system from a backup\. You can associate up to 50 DNS aliases with a file system at any one time\. For more information, see [Managing DNS aliases](managing-dns-aliases.md)\. 
+With DNS aliases, you can continue to use your existing DNS names to access data stored on Amazon FSx when migrating file system storage from on\-premises to Amazon FSx\. This helps eliminate the need to update any tools or applications that use your DNS names when migrating to Amazon FSx\. You can associate DNS aliases with existing FSx for Windows File Server file systems, when you create new file systems, and when you create a new file system from a backup\. You can associate up to 50 DNS aliases with a file system at any one time\. For more information, see [Managing DNS aliases](managing-dns-aliases.md)\. 
 
 A DNS alias name has to meet the following requirements:
 + Must be formatted as a fully qualified domain name \(FQDN\), for example, `accounting.example.com`\.
@@ -12,7 +12,7 @@ A DNS alias name has to meet the following requirements:
 
 For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters \(a\-z\), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes\.
 
-The following procedures describe how to associate DNS aliases with your existing Amazon FSx for Windows File Server file systems using the Amazon FSx console, CLI, and API\. For more information about associating DNS aliases when creating new file systems, including new file systems from a backup, see [Associating DNS aliases when creating a new file system](managing-dns-aliases.md#add-alias-new-filesystem)\.<a name="associate-dns-alias"></a>
+The following procedures describe how to associate DNS aliases with your existing FSx for Windows File Server file systems using the Amazon FSx console, CLI, and API\. For more information about associating DNS aliases when creating new file systems, including new file systems from a backup, see [Associating DNS aliases when creating a new file system](managing-dns-aliases.md#add-alias-new-filesystem)\.<a name="associate-dns-alias"></a>
 
 **To associate DNS aliases with an existing file system \(console\)**
 
@@ -21,7 +21,7 @@ The following procedures describe how to associate DNS aliases with your existin
 1. Navigate to **File systems**, and choose the Windows file system that you want to associate your DNS aliases with\.
 
 1. On the **Network & security** tab, choose **Manage** for **DNS aliases** to open the **Manage DNS aliases** dialog box\.  
-![\[FSx console Manage DNS aliases window, use this window for associating and disassociating DNS aliases with an Amazon FSx for Windows File Server file system.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/FSxW-manage-aliases.png)
+![\[FSx console Manage DNS aliases window, use this window for associating and disassociating DNS aliases with an FSx for Windows File Server file system.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/FSxW-manage-aliases.png)
 
 1. In the **Associate new aliases** box, enter the DNS aliases that you want to associate\.
 

@@ -1,10 +1,10 @@
 # Validating connectivity to your Active Directory domain controllers<a name="validate-ad-domain-controllers"></a>
 
- Before you create an Amazon FSx for Windows File Server file system joined to your Active Directory, use the Amazon FSx Active Directory Validation tool to validate the connectivity to your Active Directory domain\. You can use this test whether you are using Amazon FSx for Windows File Server with AWS Managed Microsoft Active Directory or with a self\-managed Active Directory configuration\. The Domain Controller Network Connectivity test \(Test\-FSxADControllerConnection\) does not run the full suite of network connectivity checks against every domain controller in the domain\. Instead, use this test to run network connectivity validation against a specific set of domain controllers\. <a name="test-ad-controller-connectivity"></a>
+ Before you create an FSx for Windows File Server file system joined to your Active Directory, use the Amazon FSx Active Directory Validation tool to validate the connectivity to your Active Directory domain\. You can use this test whether you are using FSx for Windows File Server with AWS Managed Microsoft Active Directory or with a self\-managed Active Directory configuration\. The Domain Controller Network Connectivity test \(Test\-FSxADControllerConnection\) does not run the full suite of network connectivity checks against every domain controller in the domain\. Instead, use this test to run network connectivity validation against a specific set of domain controllers\. <a name="test-ad-controller-connectivity"></a>
 
 **To validate connectivity to your Active Directory domain controllers**
 
-1. Launch an Amazon EC2 Windows instance in the same subnet and with the same Amazon VPC security groups that you will use for your Amazon FSx for Windows File Server file system\. For Multi\-AZ deployment types, use the subnet for the preferred active file server\. 
+1. Launch an Amazon EC2 Windows instance in the same subnet and with the same Amazon VPC security groups that you will use for your FSx for Windows File Server file system\. For Multi\-AZ deployment types, use the subnet for the preferred active file server\. 
 
 1. Join your EC2 Windows instance to your Active Directory\. For more information, see [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html) in the *AWS Directory Service Administration Guide*\.
 

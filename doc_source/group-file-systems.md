@@ -1,10 +1,13 @@
-# Grouping Multiple File Systems with DFS Namespaces<a name="group-file-systems"></a>
+# Grouping multiple file systems with DFS Namespaces<a name="group-file-systems"></a>
 
 Amazon FSx for Windows File Server supports the use of Microsoft's Distributed File System \(DFS\) Namespaces\. You can use DFS Namespaces to group file shares on multiple file systems into one common folder structure \(a namespace\) that you use to access the entire file dataset\. DFS Namespaces can help you to organize and unify access to your file shares across multiple file systems\. DFS Namespaces can also help to scale file data storage beyond what each file system supports \(64 TB\) for large file datasets—up to hundreds of petabytes\.
 
-## Setting Up DFS Namespaces for Grouping Multiple File Systems<a name="group-fsx-namespace"></a>
+## Setting up DFS Namespaces for grouping multiple file systems<a name="group-fsx-namespace"></a>
 
 You can use DFS Namespaces to group multiple file systems under a single namespace\. In the example that follows, the domain\-based namespace \(example\.com\\corp\) is created on two namespace servers, consolidating file shares stored on multiple Amazon FSx file systems \(finance, marketing, sales, home\_directories\)\. This allows your users to access file shares using a common namespace\. Given this, they don't need to specify file\-system DNS names for each of the file systems hosting the file shares\.
+
+**Note**  
+Amazon FSx cannot be added to the root of the DFS share path\.
 
 These steps guide you through creating a single namespace \(example\.com\\corp\) on two namespace servers\. You also set up four file shares under the namespace, each transparently redirecting users to shares hosted on separate Amazon FSx file systems\. 
 

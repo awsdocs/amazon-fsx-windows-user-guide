@@ -1,6 +1,6 @@
 # Walkthrough 5: Using DNS aliases to access your file system<a name="walkthrough05-file-system-custom-CNAME"></a>
 
-Amazon FSx for Windows File Server provides a default Domain Name System \(DNS\) name for every file system that you can use to access the data on your file system\. You can also access your file systems using a DNS alias of your choosing\. With DNS aliases, you can continue using existing DNS names to access data stored on Amazon FSx when migrating file system storage from on\-premises to Amazon FSx, without needing to update any tools or applications\. You can associate up to 50 DNS aliases with a file system at any one time\. 
+FSx for Windows File Server provides a default Domain Name System \(DNS\) name for every file system that you can use to access the data on your file system\. You can also access your file systems using a DNS alias of your choosing\. With DNS aliases, you can continue using existing DNS names to access data stored on Amazon FSx when migrating file system storage from on\-premises to Amazon FSx, without needing to update any tools or applications\. You can associate up to 50 DNS aliases with a file system at any one time\. 
 
 To access your Amazon FSx file systems using DNS aliases, you must perform the following three steps:
 
@@ -18,7 +18,7 @@ To access your Amazon FSx file systems using DNS aliases, you must perform the f
 
 ## Step 1: Associate DNS aliases with your Amazon FSx file system<a name="step1-assign-dns-alias"></a>
 
-You can associate DNS aliases with existing Amazon FSx for Windows File Server file systems, when you create new file systems, and when you create a new file system from a backup using the Amazon FSx console, CLI, and API\. 
+You can associate DNS aliases with existing FSx for Windows File Server file systems, when you create new file systems, and when you create a new file system from a backup using the Amazon FSx console, CLI, and API\. 
 
 This procedure describes how to associate DNS aliases when creating a new file system using the Amazon FSx console\. For information about associating DNS aliases with existing file systems, and details about using the CLI and API, see [Managing DNS aliases](managing-dns-aliases.md)\.
 
@@ -26,7 +26,7 @@ This procedure describes how to associate DNS aliases when creating a new file s
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
-1. Follow the procedure for creating a new file system as described in [Step 1: Create Your File System](getting-started-step1.md) of the Getting Started section\.
+1. Follow the procedure for creating a new file system as described in [Step 1: Create your file system](getting-started-step1.md) of the Getting Started section\.
 
 1. In the **Access \- optional** section of the **Create file system** wizard, enter the DNS aliases that you want to associate with your file system\.   
 ![\[\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/FSxW-create-fs-Access-aliases.png)
@@ -147,8 +147,8 @@ Setting an SPN for your Amazon FSx file system will fail if an SPN for the DNS a
 
    ```
    ## Verify SPNs on FSx file system AD computer object
-   $FSxDnsName = "file_system_dns_name"
-   $FileSystemHost = (Resolve-DnsName ${FSxDnsName} | Where Type -eq 'A')[0].Name.Split(".")[0]
+   $FileSystemDnsName = "file_system_dns_name"
+   $FileSystemHost = (Resolve-DnsName ${FileSystemDnsName} | Where Type -eq 'A')[0].Name.Split(".")[0]
    $FSxAdComputer = (Get-AdComputer -Identity ${FileSystemHost})
    SetSpn /L ${FSxAdComputer}.Name
    ```
@@ -165,7 +165,7 @@ The `dnsserver` and `activedirectory` Windows modules are required to run the co
 
 **To install the required PowerShell cmdlets**
 
-1. Log on to a Windows instance joined to the Active Directory that your Amazon FSx file system is joined to as a user that is a member of a group that has DNS administration permissions \(**AWS Delegated Domain Name System Administrators** in AWS Managed Active Directory, and **Domain Admins** or another group to which you've delegated DNS administration permissions in your self\-managed Active Directory\)\. 
+1. Log on to a Windows instance joined to the Active Directory that your Amazon FSx file system is joined to as a user that is a member of a group that has DNS administration permissions \(**AWSAWS Delegated Domain Name System Administrators** in AWS Managed Active Directory, and **Domain Admins** or another group to which you've delegated DNS administration permissions in your self\-managed Active Directory\)\. 
 
    For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 

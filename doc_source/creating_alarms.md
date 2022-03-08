@@ -1,4 +1,4 @@
-# Creating CloudWatch Alarms to Monitor Amazon FSx<a name="creating_alarms"></a>
+# Creating CloudWatch alarms to monitor Amazon FSx<a name="creating_alarms"></a>
 
 You can create a CloudWatch alarm that sends an Amazon SNS message when the alarm changes state\. An alarm watches a single metric over a time period you specify, and performs one or more actions based on the value of the metric relative to a given threshold over a number of time periods\. The action is a notification sent to an Amazon SNS topic or Auto Scaling policy\.
 
@@ -25,6 +25,8 @@ The following procedures describe how to create alarms for Amazon FSx using the 
 1. Choose **File System Metrics**, choose the metric you want to set the alarm for, and then choose **Select metric**\.
 
 1. In the **Conditions** section, choose the conditions you want for the alarm, and choose **Next**\.
+**Note**  
+Metrics may not be published during file system maintenance for Single\-AZ file systems\. To prevent unnecessary and misleading alarm condition changes and to configure your alarms so that they are resilient to missing data points, see [ Configuring how CloudWatch alarms treat missing data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the *Amazon CloudWatch User Guide*\.
 
 1. If you want CloudWatch to send you an email or SNS notification when the alarm state triggers the action, choose an alarm state for **Whenever this alarm state is**\. 
 

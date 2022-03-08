@@ -1,4 +1,4 @@
-# Accessing CloudWatch Metrics<a name="accessingmetrics"></a>
+# Accessing CloudWatch metrics<a name="accessingmetrics"></a>
 
 You can see Amazon FSx metrics for CloudWatch in the following ways\. 
 + The Amazon FSx console\.
@@ -20,7 +20,7 @@ The following procedures show you how to access the metrics using these various 
 
 **To view metrics using the CloudWatch console**
 
-1. Open the CloudWatch console at [https://console\.aws\.amazon\.com/cloudwatch/](https://console.aws.amazon.com/cloudwatch)\.
+1. Open the [CloudWatch console](https://console.aws.amazon.com/cloudwatch)\.
 
 1. In the navigation pane, choose **Metrics**\. 
 

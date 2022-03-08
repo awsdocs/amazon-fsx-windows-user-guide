@@ -3,10 +3,10 @@
 This section provides a reference of supported, but deprecated Amazon FSx features\.
 
 **Topics**
-+ [Setting Up a Custom Backup Schedule](#custom-backup-schedule)
++ [Setting up a custom backup schedule](#custom-backup-schedule)
 + [Using Microsoft Distributed File System Replication](#using-dfsr)
 
-## Setting Up a Custom Backup Schedule<a name="custom-backup-schedule"></a>
+## Setting up a custom backup schedule<a name="custom-backup-schedule"></a>
 
 We recommend using AWS Backup to set up a custom backup schedule for your file system\. The information provided here is for reference purposes if you need to schedule backups more frequently than you can when using AWS Backup\.
 
@@ -22,7 +22,7 @@ The solution automatically deploys all the components needed, and takes in the f
 
 For more information on CRON schedule patterns, see [Schedule Expressions for Rules](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html) in the Amazon CloudWatch User Guide\.
 
-### Architecture Overview<a name="fsx-custom-backup-overview"></a>
+### Architecture overview<a name="fsx-custom-backup-overview"></a>
 
 Deploying this solution builds the following resources in the AWS Cloud\.
 
@@ -38,13 +38,13 @@ This solution does the following:
 
 1. The backup manager sends a notification message to the Amazon SNS queue on a successful backup if you choose the option to be notified during the initial deployment\. A notification is always sent in the event of a failure\.
 
-### AWS CloudFormation Template<a name="fsx-custom-backup-template"></a>
+### AWS CloudFormation template<a name="fsx-custom-backup-template"></a>
 
 This solution uses AWS CloudFormation to automate the deployment of the Amazon FSx custom backup scheduling solution\. To use this solution, download the [fsx\-scheduled\-backup\.template](https://s3.amazonaws.com/solution-references/fsx/backup/fsx-scheduled-backup.template) AWS CloudFormation template\.
 
-### Automated Deployment<a name="fsx-custom-backup-deployment"></a>
+### Automated deployment<a name="fsx-custom-backup-deployment"></a>
 
-The following procedure configures and deploys this custom backup scheduling solution\. It takes about five minutes to deploy\. Before you start, you must have the ID of an Amazon FSx file system running in an Amazon Virtual Private Cloud \(Amazon VPC\) in your AWS account\. For more information on creating these resources, see [Getting Started with Amazon FSx](getting-started.md)\.
+The following procedure configures and deploys this custom backup scheduling solution\. It takes about five minutes to deploy\. Before you start, you must have the ID of an Amazon FSx file system running in an Amazon Virtual Private Cloud \(Amazon VPC\) in your AWS account\. For more information on creating these resources, see [Getting started with Amazon FSx](getting-started.md)\.
 
 **Note**  
 Implementing this solution incurs billing for the associated AWS services\. For more information, see the pricing details pages for those services\.
@@ -69,7 +69,7 @@ By default, this template launches in the US East \(N\. Virginia\) AWS Region\. 
 
 You can view the status of the stack in the AWS CloudFormation console in the **Status** column\. You should see a status of **CREATE\_COMPLETE** in about five minutes\.
 
-### Additional Options<a name="fsx-custom-backup-supplemental"></a>
+### Additional options<a name="fsx-custom-backup-supplemental"></a>
 
 You can use the Lambda function created by this solution to perform custom scheduled backups of more than one Amazon FSx file system\. The file system ID is passed to the Amazon FSx function in the input JSON for the CloudWatch event\. The default JSON passed to the Lambda function is as follows, where the values for `FileSystemId` and `SuccessNotification` are passed from the parameters specified when launching the AWS CloudFormation stack\.
 
@@ -89,13 +89,13 @@ Any additional CloudWatch Event rules you create manually aren't part of the Ama
 ## Using Microsoft Distributed File System Replication<a name="using-dfsr"></a>
 
 **Note**  
-To implement high availability for an Amazon FSx for Windows File Server, we recommend using Amazon FSx Multi\-AZ\. For more information about Amazon FSx Multi\-AZ, see [Availability and Durability: Single\-AZ and Multi\-AZ File Systems](high-availability-multiAZ.md)
+To implement high availability for an FSx for Windows File Server, we recommend using Amazon FSx Multi\-AZ\. For more information about Amazon FSx Multi\-AZ, see [Availability and durability: Single\-AZ and Multi\-AZ file systems](high-availability-multiAZ.md)
 
 Amazon FSx supports the use of the Microsoft Distributed File System \(DFS\) for file system deployments across multiple Availability Zones \(AZs\) to get Multi\-AZ availability and durability\. Using DFS Replication, you can automatically replicate data between two file systems\. Using DFS Namespaces, you can configure one file system as your primary and the other as your standby, with automatic failover to the standby if the primary becomes unresponsive\. 
 
 Before using DFS Replication, take the following steps:
 + Set up your security groups as described in [Step 8](getting-started-step1.md#security_group_setup) of Getting Started with Amazon FSx\.
-+ Create two Amazon FSx file systems in different AZs within an AWS Region\. For more information on creating your file systems, see [Step 3: Write Data to Your File Share](getting-started-step3.md)\.
++ Create two Amazon FSx file systems in different AZs within an AWS Region\. For more information on creating your file systems, see [Step 3: Write data to your file share](getting-started-step3.md)\.
 + Ensure that both file systems are in the same AWS Directory Service for Microsoft Active Directory\.
 + After the file systems are created, note their file system IDs for later on\.
 
@@ -108,7 +108,7 @@ In the following topics, you can find a description of how to set up and use DFS
 You can use DFS Replication to automatically replicate data between two Amazon FSx file systems\. This replication is bidirectional, meaning that you can write to either file system and the changes are replicated to the other\.
 
 **Important**  
- You can't use the DFS Management UI in the Microsoft Windows Administrative Tools \(dfsmgmt\.msc\) to configure DFS Replication on your Amazon FSx for Windows File Server file system\. 
+ You can't use the DFS Management UI in the Microsoft Windows Administrative Tools \(dfsmgmt\.msc\) to configure DFS Replication on your FSx for Windows File Server file system\. 
 
 #### To Set Up DFS Replication \(Scripted\)<a name="win-server-2016-scripted.title"></a>
 

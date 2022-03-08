@@ -1,9 +1,12 @@
 # Managing storage capacity<a name="managing-storage-capacity"></a>
 
-As you need additional storage, you can increase the storage capacity that is configured on your Amazon FSx for Windows File Server file system\. You can do so using the Amazon FSx console, the Amazon FSx API, or the AWS Command Line Interface \(AWS CLI\)\. 
+As you need additional storage, you can increase the storage capacity that is configured on your FSx for Windows File Server file system\. You can do so using the Amazon FSx console, the Amazon FSx API, or the AWS Command Line Interface \(AWS CLI\)\. 
 
 **Note**  
-Increasing storage capacity is not available for file systems created before June 1, 2020 or file systems restored from a backup belonging to a file system that was created before June 23, 2019\.
+You can only *increase* the amount of storage capacity for a file system; you cannot decrease storage capacity\.
+
+**Note**  
+Increasing storage capacity is not available for file systems created before June 23, 2019 or file systems restored from a backup belonging to a file system that was created before June 23, 2019\.
 
 When you increase the storage capacity of your Amazon FSx file system, behind the scenes, Amazon FSx adds a new, larger set of disks to your file system\. The new capacity is available for use within minutes\. When the new storage capacity becomes available, you are billed only for the new storage capacity\. 
 
@@ -11,7 +14,7 @@ Amazon FSx runs a storage optimization process in the background to transparentl
 
 The following illustration shows the four main steps of the process that Amazon FSx uses when increasing a file system's storage capacity\.
 
-![\[Diagram of 4 steps: 1. storage capacity increase request, 2. FSx adds new larger disks, 3. FSx migrates data, and 4. FSx removes old disks.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/storage-scaling-flow-stacked-double.png)
+![\[Diagram of 4 steps: 1. storage capacity increase request, 2. FSx adds new larger disks, 3. FSx migrates data, and 4. FSx removes old disks.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/storage-scaling-flow.png)
 
 You can track the storage optimization progress at any time using the Amazon FSx console, CLI, and API\. For more information, see [Monitoring storage capacity increases](#monitoring-storage-capacity-increase)\.
 
@@ -21,7 +24,7 @@ You can track the storage optimization progress at any time using the Amazon FSx
 + [Storage capacity increases and file system performance](#storage-capacity-increase-and-performance)
 + [How to increase storage capacity](#increase-storage-capacity)
 + [Monitoring storage capacity increases](#monitoring-storage-capacity-increase)
-+ [Increasing the storage capacity of an Amazon FSx for Windows File Server file system dynamically](#automate-storage-capacity-increase)
++ [Increasing the storage capacity of an FSx for Windows File Server file system dynamically](#automate-storage-capacity-increase)
 
 ## Important points to know when increasing storage capacity<a name="storage-capacity-important-to-know"></a>
 
@@ -29,7 +32,7 @@ You can track the storage optimization progress at any time using the Amazon FSx
 + **Increase only** – You can only *increase* the amount of storage capacity for a file system; you cannot decrease storage capacity\.
 + **Minimum increase** – Each storage capacity increase must be a minimum of 10 percent of the file system's current storage capacity, up to the maximum allowed value of 65,536 GiB\.
 + **Minimum throughput capacity** – To increase storage capacity, a file system must have a minimum throughput capacity of 16 MB/s\. This is because the storage optimization step is a throughput\-intensive process\.
-+ **Time between increases** – You can't make further storage capacity increases on a file system until 6 hours after the last increase was requested, or until the storage optimization process has completed, whichever time is longer\.
++ **Time between increases** – You can't make further storage capacity increases on a file system until 6 hours after the last increase was requested, or until the storage optimization process has completed, whichever time is longer\. Storage optimization can take from a few hours up to a few days to complete\. To minimize the time it takes for storage optimization to complete, we recommend increasing your file system's throughput capacity before increasing storage capacity \(the throughput capacity can be scaled back down after storage scaling completes\), and increasing storage capacity when there is minimal traffic on the file system\.
 
 ## When to increase storage capacity<a name="when-to-modify-storage-capacity"></a>
 
@@ -39,7 +42,7 @@ You can automatically increase your file system's storage capacity when the amou
 
 ## Storage capacity increases and file system performance<a name="storage-capacity-increase-and-performance"></a>
 
-Most workloads experience minimal performance impact while Amazon FSx runs the storage optimization process in the background after the new storage capacity is available\. Write\-heavy applications with large active datasets could temporarily experience up to a one\-half reduction in the write performance\. For these cases, you can first increase your file system's throughput capacity *before* increasing storage capacity\. This enables you to continue providing the same level of throughput to meet your application’s performance needs\. For more information, see [Managing Throughput Capacity](managing-throughput-capacity.md)\.
+Most workloads experience minimal performance impact while Amazon FSx runs the storage optimization process in the background after the new storage capacity is available\. Write\-heavy applications with large active datasets could temporarily experience up to a one\-half reduction in the write performance\. For these cases, you can first increase your file system's throughput capacity *before* increasing storage capacity\. This enables you to continue providing the same level of throughput to meet your application’s performance needs\. For more information, see [Managing throughput capacity](managing-throughput-capacity.md)\.
 
 ## How to increase storage capacity<a name="increase-storage-capacity"></a>
 
@@ -68,7 +71,7 @@ The desired capacity value must be at least 10 percent larger than the current v
 
 ### To increase storage capacity for a file system \(CLI\)<a name="increase-storage-console"></a>
 
-To increase the storage capacity for an Amazon FSx for Windows File Server file system, use the AWS CLI command [update\-file\-system](https://docs.aws.amazon.com/cli/latest/reference/fsx/update-file-system.html)\. Set the following parameters:
+To increase the storage capacity for an FSx for Windows File Server file system, use the AWS CLI command [update\-file\-system](https://docs.aws.amazon.com/cli/latest/reference/fsx/update-file-system.html)\. Set the following parameters:
 + `--file-system-id` to the ID of the file system you are updating\.
 + `--storage-capacity` to a value that is at least 10 percent greater than the current value\.
 
@@ -200,9 +203,9 @@ The `ProgressPercent` property displays the progress of the storage optimization
 
 For information about troubleshooting failed actions, see [Storage or throughput capacity updates fail](admin-actions-ts.md)\.
 
-## Increasing the storage capacity of an Amazon FSx for Windows File Server file system dynamically<a name="automate-storage-capacity-increase"></a>
+## Increasing the storage capacity of an FSx for Windows File Server file system dynamically<a name="automate-storage-capacity-increase"></a>
 
-You can use the following solution to dynamically increase the storage capacity of an Amazon FSx for Windows File Server file system when the amount of free storage capacity falls below a defined threshold that you specify\. This AWS CloudFormation template automatically deploys all the components that are required to define the free storage capacity threshold, the Amazon CloudWatch alarm based on this threshold, and the AWS Lambda function that increases the file system’s storage capacity\.
+You can use the following solution to dynamically increase the storage capacity of an FSx for Windows File Server file system when the amount of free storage capacity falls below a defined threshold that you specify\. This AWS CloudFormation template automatically deploys all the components that are required to define the free storage capacity threshold, the Amazon CloudWatch alarm based on this threshold, and the AWS Lambda function that increases the file system’s storage capacity\.
 
 The solution automatically deploys all the components needed, and takes in the following parameters:
 + The file system ID
@@ -221,7 +224,7 @@ The solution automatically deploys all the components needed, and takes in the f
 
 Deploying this solution builds the following resources in the AWS Cloud\.
 
-![\[Architecture diagram of the solution to automatically increase the storage capacity of an Amazon FSx for Windows File Server file system.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/auto-storage-increase-architecture.png)
+![\[Architecture diagram of the solution to automatically increase the storage capacity of an FSx for Windows File Server file system.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/auto-storage-increase-architecture.png)
 
 The diagram illustrates the following steps:
 
@@ -241,7 +244,7 @@ To receive notifications about the actions that are performed as a response to t
 
 ### AWS CloudFormation template<a name="storage-capacity-CFN-template"></a>
 
-This solution uses AWS CloudFormation to automate deploying the components that are used to automatically increase the storage capacity of an Amazon FSx for Windows File Server file system\. To use this solution, download the [IncreaseFSxSize](https://s3.amazonaws.com/solution-references/fsx/DynamicScaling/IncreaseFSxSize.yaml) AWS CloudFormation template\.
+This solution uses AWS CloudFormation to automate deploying the components that are used to automatically increase the storage capacity of an FSx for Windows File Server file system\. To use this solution, download the [IncreaseFSxSize](https://s3.amazonaws.com/solution-references/fsx/DynamicScaling/IncreaseFSxSize.yaml) AWS CloudFormation template\.
 
 The template uses the **Parameters** described as follows\. Review the template parameters and their default values, and modify them for the needs of your file system\.
 
@@ -268,12 +271,12 @@ No default value\. Specifies the amount by which to increase the storage capacit
 
 ### Automated deployment with AWS CloudFormation<a name="fsx-dynamic-storage-increase-deployment"></a>
 
-The following procedure configures and deploys an AWS CloudFormation stack to automatically increase the storage capacity of an Amazon FSx for Windows File Server file system\. It takes about 5 minutes to deploy\. 
+The following procedure configures and deploys an AWS CloudFormation stack to automatically increase the storage capacity of an FSx for Windows File Server file system\. It takes about 5 minutes to deploy\. 
 
 **Note**  
 Implementing this solution incurs billing for the associated AWS services\. For more information, see the pricing details pages for those services\.
 
-Before you start, you must have the ID of the Amazon FSx file system running in an Amazon Virtual Private Cloud \(Amazon VPC\) in your AWS account\. For more information about creating Amazon FSx resources, see [Getting Started with Amazon FSx](getting-started.md)\.
+Before you start, you must have the ID of the Amazon FSx file system running in an Amazon Virtual Private Cloud \(Amazon VPC\) in your AWS account\. For more information about creating Amazon FSx resources, see [Getting started with Amazon FSx](getting-started.md)\.
 
 **To launch the automatic storage capacity increase solution stack**
 

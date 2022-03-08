@@ -1,6 +1,6 @@
-# Using Amazon FSx for Windows File Server with Microsoft SQL Server<a name="sql-server"></a>
+# Using FSx for Windows File Server with Microsoft SQL Server<a name="sql-server"></a>
 
-High availability \(HA\) Microsoft SQL Server is typically deployed across multiple database nodes in a Windows Server Failover Cluster \(WSFC\), with each node having access to shared file storage\. You can use Amazon FSx for Windows File Server as shared storage for High Availability \(HA\) Microsoft SQL Server deployments in two ways: as storage for active data files and as an SMB file share witness\.
+High availability \(HA\) Microsoft SQL Server is typically deployed across multiple database nodes in a Windows Server Failover Cluster \(WSFC\), with each node having access to shared file storage\. You can use FSx for Windows File Server as shared storage for High Availability \(HA\) Microsoft SQL Server deployments in two ways: as storage for active data files and as an SMB file share witness\.
 
 For information about configuring and using Amazon FSx to reduce the complexity and costs for your SQL Server high availability deployments, see [Simplify your Microsoft SQL Server high availability deployments using Amazon FSx for Windows File Server](http://aws.amazon.com/blogs/storage/simplify-your-microsoft-sql-server-high-availability-deployments-using-amazon-fsx-for-windows-file-server/) on the *AWS Storage Blog*\.
 
@@ -10,7 +10,7 @@ Microsoft SQL Server can be deployed with an SMB file share as the storage optio
 
 ### Create a Continuously Available Share<a name="ca-share"></a>
 
-You can create CA shares using the Amazon FSx CLI for Remote Management on PowerShell\. To specify that the share is a continuously available share, use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True`\. To learn more about creating a new CA share, see [Creating a Continuously Available Share](managing-file-shares.md#create-ca-share)\.
+You can create CA shares using the Amazon FSx CLI for Remote Management on PowerShell\. To specify that the share is a continuously available share, use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True`\. To learn more about creating a new CA share, see [Creating a continuously available share](managing-file-shares.md#create-ca-share)\.
 
 ## Using Amazon FSx as an SMB File Share Witness<a name="smb-share-witness"></a>
 

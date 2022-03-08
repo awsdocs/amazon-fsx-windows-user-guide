@@ -1,19 +1,19 @@
-# Shadow Copies<a name="manage-shadow-cpy"></a>
+# Shadow copies<a name="manage-shadow-cpy"></a>
 
- Using the set of custom PowerShell commands defined by Amazon FSx, you can manage all aspects of shadow copies on your Amazon FSx for Windows File Server file systems\. 
+ Using the set of custom PowerShell commands defined by Amazon FSx, you can manage all aspects of shadow copies on your FSx for Windows File Server file systems\. 
 
 **Topics**
-+ [Setting Shadow Copy Storage](#shadow-copy-storage)
-+ [Viewing Your Shadow Copy Storage](#get-fsxshadowstorage)
-+ [Deleting Shadow Copy Storage, Schedule, and All Shadow Copies](#remove-fsxshadowstorage)
-+ [Creating a Custom Shadow Copy Schedule](#shadow-schedules)
-+ [Viewing Your Shadow Copy Schedule](#get-fsxshadowcopy-sched)
-+ [Deleting a Shadow Copy Schedule](#remove-fsxshadowcopy-sched)
-+ [Creating a Shadow Copy](#new-fsxshadow-copy)
-+ [Viewing Existing Shadow Copies](#get-fsxshadow-copies)
-+ [Deleting Shadow Copies](#remove-fsxshadow-copies)
++ [Setting shadow copy storage](#shadow-copy-storage)
++ [Viewing your shadow copy storage](#get-fsxshadowstorage)
++ [Deleting shadow copy storage, schedule, and all shadow copies](#remove-fsxshadowstorage)
++ [Creating a custom shadow copy schedule](#shadow-schedules)
++ [Viewing your shadow copy schedule](#get-fsxshadowcopy-sched)
++ [Deleting a shadow copy schedule](#remove-fsxshadowcopy-sched)
++ [Creating a shadow copy](#new-fsxshadow-copy)
++ [Viewing existing shadow copies](#get-fsxshadow-copies)
++ [Deleting shadow copies](#remove-fsxshadow-copies)
 
-## Setting Shadow Copy Storage<a name="shadow-copy-storage"></a>
+## Setting shadow copy storage<a name="shadow-copy-storage"></a>
 
 Shadow copies consume storage space on the same file system of which the shadow copies are taken\. When you configure shadow copy storage, you define the maximum amount of storage that shadow copies can consume on the file system using the `Set-FsxShadowStorage` custom PowerShell command\. You specify the maximum size that shadow copies can grow to using the `-Maxsize` or the `-Default` command options\. 
 
@@ -23,9 +23,9 @@ Using `-Maxsize`, you can define shadow copy storage as follows:
 + As a percentage of the overall storage: `Set-FsxShadowStorage -Maxsize "20%"` 
 + As unbounded: `Set-FsxShadowStorage -Maxsize "UNBOUNDED"` 
 
- Use `-Default` to set shadow storage to use up to 10 percent of the file system: `Set-FsxShadowStorage -Default`\. To learn more about using the default option, see [Setting Up Shadow Copies Using Default Settings](shadow-copies-fsxW.md#setting-up-fsx-shadow-copies)\. 
+ Use `-Default` to set shadow storage to use up to 10 percent of the file system: `Set-FsxShadowStorage -Default`\. To learn more about using the default option, see [Setting up shadow copies using default settings](shadow-copies-fsxW.md#setting-up-fsx-shadow-copies)\. 
 
-**To set the amount of shadow copy storage on an Amazon FSx for Windows File Server file system**
+**To set the amount of shadow copy storage on an FSx for Windows File Server file system**
 
 1. Connect to a compute instance that has network connectivity with your file system as a user that is a member of the file system administrators group\. In AWS Managed Microsoft AD, that group is **AWS Delegated FSx Administrators**\. In your self\-managed Microsoft AD, that group is **Domain Admins** or the custom group that you specified for administration when you created your file system\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\. 
 
@@ -55,9 +55,9 @@ Using `-Maxsize`, you can define shadow copy storage as follows:
                 0         0  32530536858
    ```
 
-## Viewing Your Shadow Copy Storage<a name="get-fsxshadowstorage"></a>
+## Viewing your shadow copy storage<a name="get-fsxshadowstorage"></a>
 
- You can view the amount of storage currently consumed by shadow copies on your file system using the `Get-FsxShadowStorage` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
+ You can view the amount of storage currently consumed by shadow copies on your file system using the `Get-FsxShadowStorage` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\. 
 
 ```
 [fs-1234567890abcef12]: PS>Get-FsxShadowStorage
@@ -78,11 +78,11 @@ When the `UsedSpace` amount reaches the maximum shadow copy storage amount confi
 **Note**  
 When shadow copies are automatically or manually created, they use as a storage limit the amount of shadow copy storage that you configured\. Shadow copies don't use the available storage space shown by the CloudWatch `FreeStorageCapacity` metric as a storage limit\.
 
-## Deleting Shadow Copy Storage, Schedule, and All Shadow Copies<a name="remove-fsxshadowstorage"></a>
+## Deleting shadow copy storage, schedule, and all shadow copies<a name="remove-fsxshadowstorage"></a>
 
  You can delete your shadow copy configuration, including all existing shadow copies, along with the shadow copy schedule\. At the same time, you can release the shadow copy storage on the file system\. 
 
-To do this, enter the `Remove-FsxShadowStorage` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
+To do this, enter the `Remove-FsxShadowStorage` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\. 
 
 ```
 [fs-0123456789abcdef1]PS>Remove-FsxShadowStorage
@@ -99,13 +99,13 @@ Removing Shadow Storage
 Shadow Storage removed successfully.
 ```
 
-## Creating a Custom Shadow Copy Schedule<a name="shadow-schedules"></a>
+## Creating a custom shadow copy schedule<a name="shadow-schedules"></a>
 
 Shadow copy schedules use scheduled task triggers in Microsoft Windows to specify when shadow copies are automatically taken\. A shadow copy schedule can have multiple triggers, providing you with a lot of scheduling flexibility\. Only one shadow copy schedule can exist at a time\. Before you can create a shadow copy schedule, you must first set the amount of [shadow copy storage](#shadow-copy-storage)\.
 
 When you run the `Set-FsxShadowCopySchedule` command on a file system, you overwrite any existing shadow copy schedule\. Optionally, you can specify the time zone for a trigger using Windows time zones and the `-TimezoneId` option\. For a list of Windows time zones, see Microsoft's [Default Timezone](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones) documentation or run the following at a Windows command prompt: `tzutil /l`\. To learn more about Windows task triggers, see [Task Triggers](https://docs.microsoft.com/en-us/windows/win32/taskschd/task-triggers) in Microsoft Windows Developer Center documentation\. 
 
-You can also use the `-Default` option to quickly set up a default shadow copy schedule\. To learn more, see [Setting Up Shadow Copies Using Default Settings](shadow-copies-fsxW.md#setting-up-fsx-shadow-copies)\. 
+You can also use the `-Default` option to quickly set up a default shadow copy schedule\. To learn more, see [Setting up shadow copies using default settings](shadow-copies-fsxW.md#setting-up-fsx-shadow-copies)\. 
 
 **To create a custom shadow copy schedule**
 
@@ -149,9 +149,9 @@ You can also use the `-Default` option to quickly set up a default shadow copy s
    RunspaceId     : 12345678-90ab-cdef-1234-567890abcdef
    ```
 
-## Viewing Your Shadow Copy Schedule<a name="get-fsxshadowcopy-sched"></a>
+## Viewing your shadow copy schedule<a name="get-fsxshadowcopy-sched"></a>
 
-To view the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\.
+To view the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\.
 
 ```
 [fs-0123456789abcdef1]PS> Get-FsxShadowCopySchedule
@@ -163,9 +163,9 @@ Start Time                Days of week                             WeeksInterval
 2019-07-16T12:00:00+00:00 Monday,Tuesday,Wednesday,Thursday,Friday             1
 ```
 
-## Deleting a Shadow Copy Schedule<a name="remove-fsxshadowcopy-sched"></a>
+## Deleting a shadow copy schedule<a name="remove-fsxshadowcopy-sched"></a>
 
-To delete the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\.
+To delete the existing shadow copy schedule on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\.
 
 ```
 [fs-0123456789abcdef1]PS>Remove-FsxShadowCopySchedule
@@ -177,9 +177,9 @@ Performing the operation "Remove-FsxShadowCopySchedule" on target "Removing FSx 
 [fs-0123456789abcdef1]PS>
 ```
 
-## Creating a Shadow Copy<a name="new-fsxshadow-copy"></a>
+## Creating a shadow copy<a name="new-fsxshadow-copy"></a>
 
-To manually create a shadow copy, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\.
+To manually create a shadow copy, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\.
 
 ```
 [fs-0123456789abcdef1]PS>New-FsxShadowCopy
@@ -187,9 +187,9 @@ To manually create a shadow copy, enter the following command in a remote PowerS
 Shadow Copy {ABCDEF12-3456-7890-ABCD-EF1234567890} taken successfully
 ```
 
-## Viewing Existing Shadow Copies<a name="get-fsxshadow-copies"></a>
+## Viewing existing shadow copies<a name="get-fsxshadow-copies"></a>
 
-To view the set of existing shadow copies on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
+To view the set of existing shadow copies on your file system, enter the following command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\. 
 
 ```
 [fs-0123456789abcdef1]PS>Get-FsxShadowCopies
@@ -201,9 +201,9 @@ Shadow Copy ID                        Creation Time
 {FEDCBA21-6543-0987-0987-EF3214567892} 6/19/2019 11:24:19 AM
 ```
 
-## Deleting Shadow Copies<a name="remove-fsxshadow-copies"></a>
+## Deleting shadow copies<a name="remove-fsxshadow-copies"></a>
 
- You can delete one or more existing shadow copies on your file system using the `Remove-FsxShadowCopies` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\. 
+ You can delete one or more existing shadow copies on your file system using the `Remove-FsxShadowCopies` command in a remote PowerShell session on your file system\. For instructions on launching a remote PowerShell session on your file system, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\. 
 
 Specify which shadow copies to delete by using one of the following required options: 
 +  `-Oldest` deletes the oldest shadow copy 

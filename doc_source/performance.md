@@ -1,11 +1,11 @@
-# Amazon FSx for Windows File Server Performance<a name="performance"></a>
+# FSx for Windows File Server performance<a name="performance"></a>
 
-Amazon FSx for Windows File Server offers file systems to meet a variety of performance needs\. Following is an overview of Amazon FSx file system performance, with a discussion of the available performance and throughput options and useful performance tips\.
+FSx for Windows File Server offers file systems to meet a variety of performance needs\. Following is an overview of Amazon FSx file system performance, with a discussion of the available performance and throughput options and useful performance tips\.
 
 **Topics**
 + [Overview](#perf-overview)
-+ [Performance Details](#performance-details-fsxw)
-+ [Measuring Performance Using CloudWatch Metrics](#measure-performance-cw)
++ [Performance details](#performance-details-fsxw)
++ [Measuring performance using CloudWatch metrics](#measure-performance-cw)
 
 ## Overview<a name="perf-overview"></a>
 
@@ -13,25 +13,25 @@ File system performance is measured by its latency, throughput, and I/O operatio
 
 ### Latency<a name="latency-fsxW"></a>
 
- Amazon FSx for Windows File Server file servers employ a fast, in\-memory cache to achieve consistent sub\-millisecond latencies for actively accessed data\. For data that is not in the in\-memory cache, that is, for file operations that need to be served by performing I/O on the underlying storage volumes, Amazon FSx provides sub\-millisecond file operation latencies with solid state drive \(SSD\) storage, and single\-digit millisecond latencies with hard disk drive \(HDD\) storage\. 
+ FSx for Windows File Server file servers employ a fast, in\-memory cache to achieve consistent sub\-millisecond latencies for actively accessed data\. For data that is not in the in\-memory cache, that is, for file operations that need to be served by performing I/O on the underlying storage volumes, Amazon FSx provides sub\-millisecond file operation latencies with solid state drive \(SSD\) storage, and single\-digit millisecond latencies with hard disk drive \(HDD\) storage\. 
 
 ### Throughput and IOPS<a name="throughput-and-iops-fsxw"></a>
 
  Amazon FSx file systems provide up to multiple GB/s of throughput and hundreds of thousands of IOPS\. The specific amount of throughput and IOPS that your workload can drive on your file system depends on the throughput capacity and storage capacity configuration of your file system, along with the nature of your workload, including the size of the active working set\. 
 
-### Single\-Client Performance<a name="single-client-performance"></a>
+### Single\-client performance<a name="single-client-performance"></a>
 
 With Amazon FSx, you can get up to the full throughput and IOPS levels for your file system from a single client accessing it\. Amazon FSx supports *SMB Multichannel*\. This feature enables it to provide up to multiple GB/s throughput and hundreds of thousands of IOPS for a single client accessing your file system\. SMB Multichannel uses multiple network connections between the client and server simultaneously to aggregate network bandwidth for maximal utilization\.
 
-## Performance Details<a name="performance-details-fsxw"></a>
+## Performance details<a name="performance-details-fsxw"></a>
 
 To understand the Amazon FSx performance model in detail, you can examine the architectural components of an Amazon FSx file system\. Your client compute instances, whether they exist in AWS or on\-premises, access your file system through an elastic network interface \(ENI\)\. This network interface resides in the Amazon VPC that you associate with your file system\. Behind the file system ENI is the Windows file server that is serving data over the network to the clients accessing the file system\. Amazon FSx provides a fast in\-memory cache on the file server to enhance performance for the most frequently accessed data\. Behind the file server are the storage volumes, or disks, hosting your file system data\. 
 
 These components are illustrated in the following diagram\.
 
-![\[Amazon FSx for Windows File Server architecture.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/perf-architecture-fsxW.png)
+![\[FSx for Windows File Server architecture.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/perf-architecture-fsxW.png)
 
- Corresponding with these architectural components–network interface, in\-memory cache, and storage volumes–are the three primary performance characteristics of an Amazon FSx for Windows File Server file system that determine the overall throughput and IOPS performance\.
+ Corresponding with these architectural components–network interface, in\-memory cache, and storage volumes–are the three primary performance characteristics of an FSx for Windows File Server file system that determine the overall throughput and IOPS performance\.
 + Network I/O performance: throughput/IOPS of requests between the clients and the file server \(in aggregate\)
 + In\-memory cache size on the file server: size of active working set that can be accommodated for caching
 + Disk I/O performance: throughput/IOPS of requests between the file server and the storage volumes
@@ -40,7 +40,7 @@ There are two factors that determine these performance characteristics for your 
 
 File\-based workloads are typically spiky, characterized by short, intense periods of high I/O with plenty of idle time between bursts\. To support spiky workloads, in addition to the baseline speeds that a file system can sustain 24/7, Amazon FSx provides the capability to burst to higher speeds for periods of time for both network I/O and disk I/O operations\. Amazon FSx uses a network I/O credit mechanism to allocate throughput and IOPS based on average utilization — file systems accrue credits when their throughput and IOPS usage is below their baseline limits, and can use these credits when they perform I/O operations\. 
 
-### Impact of Storage Capacity on Performance<a name="storage-capacity-and-performance"></a>
+### Impact of storage capacity on performance<a name="storage-capacity-and-performance"></a>
 
 The type and amount of storage capacity impacts the performance of your file system\. You need to configure the type and amount of storage capacity necessary for your file system to deliver the desired performance levels for your workload\.
 
@@ -51,46 +51,45 @@ The maximum disk throughput and IOPS levels your file system can achieve is the 
 Your file system's storage provides the following levels of disk throughput and IOPS:
 
 
-| Storage type | Disk throughput \(MB/s per TiB of storage\) | Disk IOPS \(IOPs per TiB of storage\) | 
+| Storage type | Disk throughput \(Megabytes/second per TiB of storage\) | Disk IOPS \(IOPs per TiB of storage\) | 
 | --- | --- | --- | 
 | SSD | 750 | 3,000 | 
 | HDD | 12 baseline; 80 burst \(up to a max\. of 1 GB/s per file system\)  | 12 baseline; 80 burst | 
 
 You can increase a file system's storage capacity at any time\. For more information, see [Managing storage capacity](managing-storage-capacity.md)\.
 
-### Impact of Throughput Capacity on Performance<a name="impact-throughput-cap-performance"></a>
+### Impact of throughput capacity on performance<a name="impact-throughput-cap-performance"></a>
 
 Every Amazon FSx file system has a throughput capacity that you configure when the file system is created\. The throughput capacity determines the level of network I/O performance, that is, the speed at which the file server hosting your file system can serve file data over the network to clients accessing it\. Higher levels of throughput capacity come with more memory for caching data on the file server, and higher levels of disk I/O performance supported by the file server\.
 
- When you create a file system using the AWS Management Console, Amazon FSx automatically picks the recommended throughput capacity level for your file system based on the amount of storage capacity you select\. While the recommended throughput capacity should be sufficient for most workloads, you have the option to override the recommendation and select a specific throughput capacity level to meet your application's needs\. You can increase or decrease the amount of throughput capacity at any time after you create it\. For more information, see [Managing Throughput Capacity](managing-throughput-capacity.md)\. 
+ When you create a file system using the Amazon Web Services Management Console, Amazon FSx automatically picks the recommended throughput capacity level for your file system based on the amount of storage capacity you select\. While the recommended throughput capacity should be sufficient for most workloads, you have the option to override the recommendation and select a specific throughput capacity level to meet your application's needs\. You can increase or decrease the amount of throughput capacity at any time after you create it\. For more information, see [Managing throughput capacity](managing-throughput-capacity.md)\. 
 
-The following table shows the full set of specifications for throughput capacity, along with baseline and burst levels, and amount of memory for caching on the file server\. 
+The following table shows the full set of specifications for throughput capacity, along with baseline and burst levels, and amount of memory on the file server \(memory that is available for caching, and for performing background activities such as data deduplication and shadow copies\)\. 
+
+**Note**  
+The following table shows the set of choices you have for selecting the throughput capacity for your file system while using the Amazon FSx console\. While you can select lower levels \(8 MBps or 16 MBps\) for throughput capacity when you use the Amazon FSx API or CLI, keep in mind that the 8 MBps and 16 MBps levels are meant for test and development workloads, not for production workloads\. 8 MBps and 16 MBps throughput capacities do not support file access auditing\.
 
 
-| FSx throughput capacity \(MBps\) | Network throughput capacity \(MBps\) | Network IOPS | Memory \(GB\) – for caching | Disk throughput \(MBps\) | Disk IOPS | 
+| FSx throughput capacity \(MBps\) | Network throughput capacity \(MBps\) | Network IOPS | Memory \(GB\) | Disk throughput \(MBps\) | Disk IOPS | 
 | --- |--- |--- |--- |--- |--- |
-| **** | **Baseline** | **Burst** | **** | **** | **Baseline** | **Burst** | **** | 
+| **** | **Baseline** | **Burst \(for a few minutes a day\)** | **** | **** | **Baseline** | **Burst \(for 30 mins a day\)** | **Baseline** | **Burst \(for 30 mins a day\)** | 
+| --- |--- |--- |--- |--- |--- |--- |--- |--- |
+| 32 | 32 | 600 | Thousands | 4 | 32 | 260 | 2K | 12K | 
+| --- |--- |--- |--- |--- |--- |--- |--- |--- |
+| 64 | 64 | 600 | Tens of thousands | 8 | 64 | 350 | 4K | 16K | 
+| --- |--- |--- |--- |--- |--- |--- |--- |--- |
+| 128 | 150 | 1,250 | 8 | 128 | 600 | 6K | 20K | 
 | --- |--- |--- |--- |--- |--- |--- |--- |
-| 8 | 8 | 600 | Thousands baseline; tens of thousands burst | 0\.5 | 8 | 260 |  Hundreds to thousands baseline; tens of thousands burst  | 
+| 256 | 300 | 1,250 | Hundreds of thousands | 16 | 256 | 600 | 10K | 20K | 
+| --- |--- |--- |--- |--- |--- |--- |--- |--- |
+| 512 | 600 | 1,250 | 32 | 512 |  –  | 20K |  –  | 
 | --- |--- |--- |--- |--- |--- |--- |--- |
-| 16 | 16 | 600 | 1 | 16 | 260 | 
-| --- |--- |--- |--- |--- |--- |
-| 32 | 32 | 600 | 2 | 32 | 260 | 
-| --- |--- |--- |--- |--- |--- |
-| 64 | 64 | 600 | Tens of thousands baseline | 4 | 64 | 350 | 
-| --- |--- |--- |--- |--- |--- |--- |
-| 128 | 150 | 1,250 | 8 | 128 | 600 | 
-| --- |--- |--- |--- |--- |--- |
-| 256 | 300 | 1,250 | Hundreds of thousands baseline | 16 | 256 | 600 | Tens of thousands baseline | 
+| 1,024 | 1,500 |  –  | 72 | 1,024 |  –  | 40K |  –  | 
 | --- |--- |--- |--- |--- |--- |--- |--- |
-| 512 | 600 | 1,250 | 32 | 512 |  –  | 
-| --- |--- |--- |--- |--- |--- |
-| 1,024 | 1,500 |  –  | 64 | 1,024 |  –  | 
-| --- |--- |--- |--- |--- |--- |
-| 2,048 | 3,125 |  –  | 128 | 2,048 |  –  | 
-| --- |--- |--- |--- |--- |--- |
+| 2,048 | 3,125 |  –  | 144 | 2,048 |  –  | 80K |  –  | 
+| --- |--- |--- |--- |--- |--- |--- |--- |
 
-### Example: Storage Capacity and Throughput Capacity<a name="throughput-example-fsxw"></a>
+### Example: storage capacity and throughput capacity<a name="throughput-example-fsxw"></a>
 
 The following example illustrates how storage capacity and throughput capacity impact file system performance\. 
 
@@ -100,6 +99,6 @@ The following example illustrates how storage capacity and throughput capacity i
 
  Your workload accessing the file system will therefore be able to drive up to 32 MBps baseline and 600 MBps burst throughput for file operations performed on actively accessed data cached in the file server in\-memory cache, and up to 24 MBps baseline and 160 MBps burst throughput for file operations that need to go all the way to the disk, for example, due to cache misses\. 
 
-## Measuring Performance Using CloudWatch Metrics<a name="measure-performance-cw"></a>
+## Measuring performance using CloudWatch metrics<a name="measure-performance-cw"></a>
 
-You can use Amazon CloudWatch to measure and monitor your file system's throughput and IOPS\. For more information, see [How to Use Amazon FSx for Windows File Server Metrics](how_to_use_metrics.md)\.
+You can use Amazon CloudWatch to measure and monitor your file system's throughput and IOPS\. For more information, see [How to use FSx for Windows File Server metrics](how_to_use_metrics.md)\.

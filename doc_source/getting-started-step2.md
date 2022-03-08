@@ -1,4 +1,4 @@
-# Step 2: Map Your File Share to an EC2 Instance Running Windows Server<a name="getting-started-step2"></a>
+# Step 2: Map your file share to an EC2 instance running Windows Server<a name="getting-started-step2"></a>
 
 You can now mount your Amazon FSx file system to your Microsoft Windows–based Amazon EC2 instance joined to your AWS Directory Service directory\. The name of your file share is not the same as the name of your file system\.
 

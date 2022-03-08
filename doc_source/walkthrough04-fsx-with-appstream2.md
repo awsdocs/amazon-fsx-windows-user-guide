@@ -4,7 +4,7 @@ By supporting the Server Message Block \(SMB\) protocol, Amazon FSx for Windows 
 
 Use this walkthrough as a guide through how to use Amazon FSx with AppStream 2\.0 for two use cases: providing personal persistent storage to each user and providing a shared folder across users to access common files\.
 
-## Providing Personal Persistent Storage to Each User<a name="fsx-personal-persistent"></a>
+## Providing personal persistent storage to each user<a name="fsx-personal-persistent"></a>
 
 You can use Amazon FSx to provide every user in your organization a unique storage drive within AppStream 2\.0 streaming sessions\. A user will have permissions to access only their folder\. The drive is automatically mounted at the start of a streaming session and files added or updated to the drive are automatically persisted between streaming sessions\.
 
@@ -12,11 +12,11 @@ There are three procedures you'll need to perform to complete this task\.
 
 **To create home folders for domain users using Amazon FSx**
 
-1. Create an Amazon FSx file system\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.
+1. Create an Amazon FSx file system\. For more information, see [Getting started with Amazon FSx](getting-started.md)\.
 
 1. After the file system is available, create a folder for every domain AppStream 2\.0 user within your Amazon FSx file system\. The example following uses the domain user name of the user as the name of the corresponding folder\. Doing this means that you can build the UNC name of the file share to map easily using the Windows environment variable `%username%`\.
 
-1. Share each of these folders out as a shared folder\. For more information, see [File Shares](managing-file-shares.md)\.
+1. Share each of these folders out as a shared folder\. For more information, see [File shares](managing-file-shares.md)\.
 
 **To launch a domain\-joined AppStream 2\.0 image builder**
 
@@ -70,7 +70,7 @@ There are three procedures you'll need to perform to complete this task\.
 
 1. Your Amazon FSx file share is mapped to the S: drive letter within the streaming session\.
 
-## Providing a Shared Folder Across Users<a name="fsx-shared-folder"></a>
+## Providing a shared folder across users<a name="fsx-shared-folder"></a>
 
 You can use Amazon FSx to provide a shared folder to users in your organization\. A shared folder can be used to maintain common files \(for example, demo files, code examples, instruction manuals, etc\.\) needed by all users\.
 
@@ -78,9 +78,9 @@ There are three procedures you'll need to perform to complete this task\.
 
 **To create a shared folder using Amazon FSx**
 
-1. Create an Amazon FSx file system\. For more information, see [Getting Started with Amazon FSx](getting-started.md)\.
+1. Create an Amazon FSx file system\. For more information, see [Getting started with Amazon FSx](getting-started.md)\.
 
-1. Every Amazon FSx file system includes a shared folder by default that you can access using the address \\\\*file\-system\-DNS\-name*\\share, or \\\\*fqdn\-DNS\-alias*\\share if you are using DNS aliases\. You can use the default share or create a different shared folder\. For more information, see [File Shares](managing-file-shares.md)\.
+1. Every Amazon FSx file system includes a shared folder by default that you can access using the address \\\\*file\-system\-DNS\-name*\\share, or \\\\*fqdn\-DNS\-alias*\\share if you are using DNS aliases\. You can use the default share or create a different shared folder\. For more information, see [File shares](managing-file-shares.md)\.
 
 **To launch an AppStream 2\.0 image builder**
 

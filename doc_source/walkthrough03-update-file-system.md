@@ -1,4 +1,4 @@
-# Walkthrough 3: Update an Existing File System<a name="walkthrough03-update-file-system"></a>
+# Walkthrough 3: Update an existing file system<a name="walkthrough03-update-file-system"></a>
 
 There are three elements that you can update with the procedures in this walkthrough\. All other elements of your file system that you can update, you can do so from the console\. These procedures assume you have the AWS CLI installed and configured on your local computer\. For more information, see [Install](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) and [Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) in the *AWS Command Line Interface User Guide*\.
 + **AutomaticBackupRetentionDays** – the number of days that you want to retain automatic backups for your file system\.

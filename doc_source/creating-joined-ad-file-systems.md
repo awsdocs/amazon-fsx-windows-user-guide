@@ -1,6 +1,6 @@
-# Joining an Amazon FSx File System to a Self\-Managed Microsoft Active Directory Domain<a name="creating-joined-ad-file-systems"></a>
+# Joining an Amazon FSx file system to a self\-managed Microsoft Active Directory domain<a name="creating-joined-ad-file-systems"></a>
 
-When you create a new Amazon FSx for Windows File Server file system, you can configure Microsoft Active Directory integration so that it joins to your self\-managed Microsoft Active Directory domain\. To do this, provide the following information for your Microsoft AD: 
+When you create a new FSx for Windows File Server file system, you can configure Microsoft Active Directory integration so that it joins to your self\-managed Microsoft Active Directory domain\. To do this, provide the following information for your Microsoft AD: 
 + The fully qualified domain name of your on\-premises Microsoft AD directory\. 
 **Note**  
 Amazon FSx currently does not support Single Label Domain \(SLD\) domains\.
@@ -16,32 +16,32 @@ After you specify this information, Amazon FSx joins your new file system to you
 **Important**  
 Amazon FSx only registers DNS records for a file system if the AD domain that you are joining it to is using Microsoft DNS as the default DNS\. If you are using a third\-party DNS, you will need to manually setup DNS entries for your Amazon FSx file systems after you create your file system\. For more information on choosing the correct IP addresses to use for the file system, see [Obtaining the correct file system IP addresses to use for DNS](file-system-ip-addresses-for-dns.md)\.
 
-## Before You Begin<a name="b4-you-begin"></a>
+## Before you begin<a name="b4-you-begin"></a>
 
-Make sure that you have completed the [Prerequisites for Using a Self\-Managed Microsoft AD](self-manage-prereqs.md) detailed in [Using Amazon FSx with Your Self\-Managed Microsoft Active Directory](self-managed-AD.md)\.
+Make sure that you have completed the [Prerequisites for using a self\-managed Microsoft AD](self-manage-prereqs.md) detailed in [Using Amazon FSx with your self\-managed Microsoft Active Directory](self-managed-AD.md)\.
 
-## To Create an Amazon FSx for Windows File Server file system joined to a Self\-Managed AD \(Console\)<a name="create-joined-fsx-console"></a>
+## To create an FSx for Windows File Server file system joined to a self\-managed AD \(Console\)<a name="create-joined-fsx-console"></a>
 
 1. Open the Amazon FSx console at [https://console\.aws\.amazon\.com/fsx/](https://console.aws.amazon.com/fsx/)\.
 
 1. On the dashboard, choose **Create file system** to start the file system creation wizard\. 
 
-1. Choose **Amazon FSx for Windows File Server** and then choose **Next**\. The **Create file system page appears\.**
+1. Choose **FSx for Windows File Server** and then choose **Next**\. The **Create file system page appears\.**
 
 1. Provide a name for your file system\. You can use a maximum of 256 Unicode letters, white space, and numbers, plus the special characters \+ \- = \. \_ : /
 
 1. For **Storage capacity**, enter the storage capacity of your file system, in GiB\. If you're using SSD storage, enter any whole number in the range of 32–65,536\. If you're using HDD storage, enter any whole number in the range of 2,000–65,536\. You can increase the amount of storage capacity as needed at any time after you create the file system\. For more information, see [Managing storage capacity](managing-storage-capacity.md)\.
 
-1. Keep **Throughput capacity** at its default setting\. **Throughput capacity** is the sustained speed at which the file server that hosts your file system can serve data\. The **Recommended throughput capacity** setting is based on the amount of storage capacity you choose\. If you need more than the recommended throughput capacity, choose **Specify throughput capacity**, and then choose a value\. For more information, see [Amazon FSx for Windows File Server PerformancePerformance](performance.md)\. 
+1. Keep **Throughput capacity** at its default setting\. **Throughput capacity** is the sustained speed at which the file server that hosts your file system can serve data\. The **Recommended throughput capacity** setting is based on the amount of storage capacity you choose\. If you need more than the recommended throughput capacity, choose **Specify throughput capacity**, and then choose a value\. For more information, see [FSx for Windows File Server performancePerformance](performance.md)\. 
 
-   You can modify the throughput capacity as needed at any time after you create the file system\. For more information, see [Managing Throughput Capacity](managing-throughput-capacity.md)\.
+   You can modify the throughput capacity as needed at any time after you create the file system\. For more information, see [Managing throughput capacity](managing-throughput-capacity.md)\.
 
 1. Choose the VPC that you want to associate with your file system\. For the purposes of this getting started exercise, choose the same VPC as for your AWS Directory Service directory and Amazon EC2 instance\.
 
 1. Choose any value for **Availability Zones** and **Subnet**\.
 
 1. For **VPC security groups**, the default security group for your default Amazon VPC is already added to your file system in the console\. Please ensure that the security group and the VPC Network ACLs for the subnet\(s\) where you're creating your FSx file system allow traffic on the ports and and in the directions shown in the following diagram\.  
-![\[Amazon FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
+![\[FSx for Windows File Server port configuration requirements for VPC security groups and network ACLs for the subnets where the file system is being created.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/Windows-port-requirements.png)
 
    The following table identifies the role of each port\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/creating-joined-ad-file-systems.html)
@@ -68,7 +68,7 @@ For Single\-AZ 2 and all Multi\-AZ file systems, the Active Directory domain nam
 **Note**  
 Ensure that the service account you provided has permissions delegated to the OU that you specify here or to the default OU if you don’t specify one\.
 
-1. Enter at least one, and no more that two, values for **DNS Server IP Addresses** for the self\-managed Microsoft AD directory\. 
+1. Enter at least one, and no more than two, values for **DNS Server IP Addresses** for the self\-managed Microsoft AD directory\. 
 
 1. Enter a string value for **Service account username** for the account on your self\-managed AD domain, such as `ServiceAcct`\. Amazon FSx uses this user name to join to your Microsoft AD domain\.
 **Important**  
@@ -86,9 +86,9 @@ Ensure that the service account you provided has permissions delegated to the OU
  DO NOT include a domain prefix \(corp\.com\\FSxAdmins\) or domain suffix \(FSxAdmins@corp\.com\) when providing the group name parameter\.   
  DO NOT use the Distinguished Name \(DN\) for the group\. An example of a distinguished name is CN=FSxAdmins,OU=example,DC=corp,DC=com\. 
 
-## To Create an Amazon FSx for Windows File Server File System Joined to a Self\-managed AD \(AWS CLI\)<a name="create-joined-fsx-cli"></a>
+## To create an FSx for Windows File Server file system joined to a self\-managed AD \(AWS CLI\)<a name="create-joined-fsx-cli"></a>
 
- The following example creates an Amazon FSx for Windows File Server file system with a `SelfManagedActiveDirectoryConfiguration` in the `us-east-2` Availability Zone\. 
+ The following example creates an FSx for Windows File Server file system with a `SelfManagedActiveDirectoryConfiguration` in the `us-east-2` Availability Zone\. 
 
 ```
 aws fsx --region us-east-2 \

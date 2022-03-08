@@ -1,6 +1,6 @@
 # File\- and Folder\-Level Access Control Using Windows ACLs<a name="limit-access-file-folder"></a>
 
-Amazon FSx for Windows File Server supports identity\-based authentication over the Server Message Block \(SMB\) protocol through Microsoft Active Directory\. Active Directory is the Microsoft directory service to store information about objects on the network and make this information easy for administrators and users to find and use\. These objects typically include shared resources such as file servers, and the network user and computer accounts\. To learn more about Active Directory support in Amazon FSx, see [Working with Active Directory in Amazon FSx for Windows File Server](aws-ad-integration-fsxW.md)\.
+Amazon FSx for Windows File Server supports identity\-based authentication over the Server Message Block \(SMB\) protocol through Microsoft Active Directory\. Active Directory is the Microsoft directory service to store information about objects on the network and make this information easy for administrators and users to find and use\. These objects typically include shared resources such as file servers, and the network user and computer accounts\. To learn more about Active Directory support in Amazon FSx, see [Working with Microsoft Active Directory in FSx for Windows File Server](aws-ad-integration-fsxW.md)\.
 
 Your domain\-joined compute instances can access Amazon FSx file shares using Active Directory credentials\. You use standard Windows access control lists \(ACLs\) for fine\-grained file\- and folder\-level access control\. Amazon FSx file systems automatically verify the credentials of users accessing file system data to enforce these Windows ACLs\.
 
@@ -9,10 +9,10 @@ Your domain\-joined compute instances can access Amazon FSx file shares using Ac
 
 |  | 
 | --- |
-|  Amazon FSx requires that the SYSTEM user have **Full control** NTFS ACL permissions on all folders within your file system\. Do not change the NTFS ACL permissions for this user on your folders\. Doing so can make your file share inaccessible\.  | 
+|  Amazon FSx requires that the SYSTEM user have **Full control** NTFS ACL permissions on all folders within your file system\. Do not change the NTFS ACL permissions for this user on your folders\. Doing so can make your file share inaccessible and prevent file system backups from being usable\.   | 
 
 ## Related Links<a name="ad-related-topics"></a>
 + [What Is AWS Directory Service?](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html) in the AWS Directory Service Administration Guide\.
 + [Create Your AWS Managed Microsoft AD directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_create_directory.html) in the *AWS Directory Service Administration Guide*\.
 + [When to Create a Trust Relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_setup_trust.html) in the *AWS Directory Service Administration Guide*\.
-+ [Walkthrough 1: Prerequisites for Getting Started](walkthrough01-prereqs.md)\.
++ [Walkthrough 1: Prerequisites for getting started](walkthrough01-prereqs.md)\.

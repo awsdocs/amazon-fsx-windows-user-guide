@@ -1,4 +1,4 @@
-# Step 4: Back Up Your File System<a name="getting-started-step4"></a>
+# Step 4: Back up your file system<a name="getting-started-step4"></a>
 
 Now that you've had a chance to use your Amazon FSx file system and its file shares, you can back it up\. By default, daily backups are created automatically during your file system's 30\-minute backup window\. However you can create a user\-initiated backup at any time\. Backups have additional costs associated with them\. For more information on backup pricing, see [Pricing](https://aws.amazon.com/fsx/windows/pricing)\.
 

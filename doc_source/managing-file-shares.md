@@ -1,21 +1,24 @@
-# File Shares<a name="managing-file-shares"></a>
+# File shares<a name="managing-file-shares"></a>
 
 You can manage file shares and perform the following tasks\.
 + Create a new file share
 + Modify a file share
 + Remove a file share
 
-You can use the Windows\-native Shared Folders GUI and the Amazon FSx CLI for remote management on PowerShell to manage file shares on your Amazon FSx for Windows File Server file system\.
+You can use the Windows\-native Shared Folders GUI and the Amazon FSx CLI for remote management on PowerShell to manage file shares on your FSx for Windows File Server file system\.
 
-## Using the GUI to Manage File Shares<a name="shared-folders-tool"></a>
+**Warning**  
+Amazon FSx requires that the SYSTEM user has **Full control** NTFS ACL permissions on every folder on which you create an SMB file share\. Do not change the NTFS ACL permissions for this user on your folders, as doing so can make your file shares inaccessible\.
+
+## Using the GUI to manage file shares<a name="shared-folders-tool"></a>
 
 To manage file shares on your Amazon FSx file system, you can use the Shared Folders GUI\. The Shared Folders GUI provides a central location for managing all shared folders on a Windows server\. The following procedures detail how to manage your file shares\.
 
-**To connect Shared Folders to your FSx file system**
+**To connect shared folders to your FSx file system**
 
 1. Launch your Amazon EC2 instance and connect it to the Microsoft Active Directory that your Amazon FSx file system is joined to\. To do this, choose one of the following procedures from the *AWS Directory Service Administration Guide*:
-   + [Seamlessly Join a Windows EC2 Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
-   + [Manually Join a Windows Instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
+   + [Seamlessly join a Windows EC2 instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/launching_instance.html)
+   + [Manually join a Windows instance](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/join_windows_instance.html)
 
 1. Connect to your instance as a user that is a member of the file system administrators group\. In AWS Managed Microsoft Active Directory, this group is called AWS Delegated FSx Administrators\. In your self\-managed Microsoft Active Directory, this group is called Domain Admins or the custom name for the administrators group that you provided during creation\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
@@ -42,23 +45,20 @@ Now that Shared Folders is connected to your Amazon FSx file system, you can man
 + **Modify a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to modify in the right pane, and choose **Properties**\. Modify the properties and choose **OK**\.
 + **Remove a file share** – In the Shared Folders tool, open the context \(right\-click\) menu for the file share that you want to remove in the right pane, and then choose **Stop Sharing**\.
 **Note**  
-Removing file shares from the GUI is possible only you connected to **fsmgmt\.msc** using the DNS Name of the Amazon FSx file system\. If you connected using the IP address or DNS alias name of the file system, the **Stop Sharing** option won't work and the file share isn't removed\.
+For Single\-AZ 2 and Multi\-AZ file systems, removing file shares or modifying file shares \(including updating permissions, user limits, and other properties\) using the Shared Folders GUI tool is possible only if you connect to **fsmgmt\.msc** using the DNS Name of the Amazon FSx file system\. The Shared Folders GUI tool does not support these actions if you connect using the IP address or DNS alias name of the file system\.
 
-## Using PowerShell to Manage File Shares<a name="manage-file-shares-pwrshell"></a>
+## Using PowerShell to manage file shares<a name="manage-file-shares-pwrshell"></a>
 
 You can manage file shares using custom remote\-management commands for PowerShell\. These commands can help you more easily automate these tasks:
 + Migration of file shares on existing file servers to Amazon FSx
 + Synchronization of file shares across AWS Regions for disaster recovery
 + Programmatic management of file shares for ongoing workflows, such as team file\-share provisioning
 
-To learn how to use the Amazon FSx CLI for remote management on PowerShell, see [Getting Started with the Amazon FSx CLI for Remote Management on PowerShellGetting Started](remote-pwrshell.md)\.
+To learn how to use the Amazon FSx CLI for remote management on PowerShell, see [Getting started with the Amazon FSx CLI for remote management on PowerShellGetting started](remote-pwrshell.md)\.
 
-### Creating a Continuously Available Share<a name="create-ca-share"></a>
+### Creating a continuously available share<a name="create-ca-share"></a>
 
-**Note**
-Continuously available shares are enabled by default in a Multi\-AZ file system deployment type so the continuously available share instructions apply only to Single\-AZ file systems, typically database servers\. For Multi\-AZ file systems you can use the standard Windows file sharing tools such as **fsmgmt\.msc** and **New\-SMBShare** and your file system will remain continuously available\.
-
-You can create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell\. CA shares created on an Amazon FSx for Windows File Server Multi\-AZ file system are highly durable and highly available\. An Amazon FSx Single\-AZ file system is built on a single node cluster\. As a result, CA shares created on a Single\-AZ file system are highly durable, but are not highly available\. Use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
+You can create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell\. CA shares created on an FSx for Windows File Server Multi\-AZ file system are highly durable and highly available\. An Amazon FSx Single\-AZ file system is built on a single node cluster\. As a result, CA shares created on a Single\-AZ file system are highly durable, but are not highly available\. Use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
 
 ```
 New-FSxSmbShare -Name "New CA Share" -Path "D:\share\new-share" -Description "CA share" -ContinuouslyAvailable $True 
@@ -81,11 +81,11 @@ Following are custom remote\-management PowerShell commands that you can use\.
 
 The online help for each command provides a reference of all command options\. To access this help, run the command with a `-?`, for example `New-FSxSmbShare -?`\. 
 
-### Passing Credentials to New\-FSxSmbShare<a name="pass-credentials-to-new-fsxsmbshare"></a>
+### Passing credentials to New\-FSxSmbShare<a name="pass-credentials-to-new-fsxsmbshare"></a>
 
 You can pass credentials to New\-FSxSmbShare so that you can run it in a loop to create hundreds or thousands of shares without having to re\-enter credentials each time\.
 
-Prepare the credential object required to create the file shares on your Amazon FSx for Windows File Server file server using one of the following options\.
+Prepare the credential object required to create the file shares on your FSx for Windows File Server file server using one of the following options\.
 + To generate the credential object interactively, use the following command\.
 
   ```

@@ -1,6 +1,6 @@
 # Cutting over to Amazon FSx<a name="cutover-to-fsx"></a>
 
-To cut over to your Amazon FSx for Windows File Server file system, you perform the following steps:
+To cut over to your FSx for Windows File Server file system, you perform the following steps:
 + Prepare for the cut over\.
   + Temporarily disconnect SMB clients from the original file system\.
   + Perform a final file and file share configuration sync\.
@@ -18,7 +18,7 @@ The procedures to perform each of these steps are provided in the following sect
 
 To prepare for the cutover to your Amazon FSx file system, you must do the following:
 + Disconnect all clients that write to the original file system\.
-+ Perform a final file sync using AWS DataSync or Robocopy\. For more information, see [Migrating existing file storage to Amazon FSx for Windows File Server](migrate-files-fsx.md)\. 
++ Perform a final file sync using AWS DataSync or Robocopy\. For more information, see [Migrating existing file storage to FSx for Windows File Server](migrate-files-fsx.md)\. 
 + Perform a final file share configuration sync\. For more information, see [Migrating file share configurations to Amazon FSx](migrate-file-share-config-to-fsx.md)\.
 
 ## Configure SPNs for Kerberos authentication<a name="configure-spns"></a>
@@ -113,8 +113,8 @@ Setting an SPN for your Amazon FSx file system will fail if an SPN for the DNS a
 
    ```
    ## Verify SPNs on FSx file system AD computer object
-   $FSxDnsName = "file_system_dns_name"
-   $FileSystemHost = (Resolve-DnsName ${FSxDnsName} | Where Type -eq 'A')[0].Name.Split(".")[0]
+   $FileSystemDnsName = "file_system_dns_name"
+   $FileSystemHost = (Resolve-DnsName ${FileSystemDnsName} | Where Type -eq 'A')[0].Name.Split(".")[0]
    $FSxAdComputer = (Get-AdComputer -Identity ${FileSystemHost})
    SetSpn /L ${FSxAdComputer}.Name
    ```

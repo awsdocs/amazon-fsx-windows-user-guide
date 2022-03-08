@@ -1,4 +1,4 @@
-# Step 3: Write Data to Your File Share<a name="getting-started-step3"></a>
+# Step 3: Write data to your file share<a name="getting-started-step3"></a>
 
 Now that you've mapped your file share to your instance, you can use your file share like any other directory in your Windows environment\.
 
