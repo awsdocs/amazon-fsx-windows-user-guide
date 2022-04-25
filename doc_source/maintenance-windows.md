@@ -28,3 +28,6 @@ You can use the Amazon FSx Management Console, AWS CLI, AWS API, or one of the A
 1. Choose **Save** to save your changes\. The new maintenance start time is displayed in the **Administration Settings** panel\.
 
 To change the weekly maintenance window using the CLI or API using the [UpdateFileSystem](https://docs.aws.amazon.com/fsx/latest/APIReference/API_UpdateFileSystem.html) operation, see [Walkthrough 3: Update an existing file system](walkthrough03-update-file-system.md)\.
+
+**Note**
+For your security, there may be rare occasions when an emergent patch must be deployed outside your selected maintenance window. We recommend using Multi-AZ filesystems to ensure highest availability of your data.
