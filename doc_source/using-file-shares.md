@@ -94,6 +94,8 @@ You can map a file share on an EC2 Windows instance by using the Windows File Ex
    $ net use H: \\amzfsxaa11bb22.ad-domain.com\share /persistent:yes
    ```
 
+   Instead of the `net use` command, you can also use any supported PowerShell command to mount a file share\.
+
   
 
 ### Mounting a file share on an Amazon EC2 Mac instance<a name="map-share-mac"></a>
@@ -218,7 +220,7 @@ The following commands specify parameters such as SMB protocol, caching, and rea
 
    ```
    $ mount -l -t cifs
-   //fs-0123456789abcdef0/share on /mnt/fsx type cifs (rw,relatime,vers=SMB_version,sec=krb5,cache=strict,username=user1@CORP.NETWORK.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.2.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
+   //fs-0123456789abcdef0/share on /mnt/fsx type cifs (rw,relatime,vers=SMB_version,sec=krb5,cache=cache_mode,username=user1@CORP.NETWORK.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.2.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
    ```
 
 The mount command used in this procedure does the following at the given points:
@@ -226,6 +228,7 @@ The mount command used in this procedure does the following at the given points:
 + *mount\_point* – The directory on the EC2 instance that you are mounting the file system to\.
 + `-t cifs vers=SMB_version` – Specifies the type of file system as CIFS and the SMB protocol version\. Amazon FSx for Windows File Server supports SMB versions 2\.0 through 3\.1\.1\.
 + `sec=krb5` – Specifies to use Kerberos version 5 for authentication\.
++ `cache=cache_mode` – Sets the cache mode\. This option for CIFS cache can impact performance, and you should test which settings work best \(and review Linux documentation\) for your kernel and workload\. Options `strict` and `none` are recommended, because `loose` can cause data inconsistency due to the looser protocol semantics\.
 + `cruid=ad_user` – Sets the uid of the owner of the credentials cache to the AD directory administrator\.
 + `/mnt/fsx` – Specifies the mount point for the Amazon FSx file share on your EC2 instance\.
 + `rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize` – Specifies the read and write buffer size as the maximum allowed by the CIFS protocol\. Replace `CIFSMaxBufSize` with the largest value allowed by your kernel\. Determine the `CIFSMaxBufSize` by running the following command\.
@@ -236,7 +239,6 @@ The mount command used in this procedure does the following at the given points:
   ```
 
   The output shows that the maximum buffer size is 130048\.
-+ `cache=none` – Sets the CIFS cache mode to none, that is, to not cache file data at all\.
 + `ip=preferred-file-server-Ip` – Sets the destination IP address to that of the file system's preferred file server\.
 
   You can retrieve the file system's preferred file server IP address as follows:
@@ -305,13 +307,14 @@ domain=EXAMPLE.COM
 
    ```
    $ mount -l -t cifs
-   //file-system-IP-address/file_share on /mnt/fsx type cifs (rw,relatime,vers=SMB_version,sec=ntlmsspi,cache=strict,username=user1,domain=CORP.EXAMPLE.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.2.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
+   //file-system-IP-address/file_share on /mnt/fsx type cifs (rw,relatime,vers=SMB_version,sec=ntlmsspi,cache=cache_mode,username=user1,domain=CORP.EXAMPLE.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.2.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
    ```
 
 The mount command used in this procedure does the following at the given points:
 + `//file-system-IP-address/file_share` – Specifies the IP address and share of the file system to mount\.
 + `-t cifs vers=SMB_version` – Specifies the type of file system as CIFS and the SMB protocol version\. Amazon FSx for Windows File Server supports SMB versions 2\.0 through 3\.1\.1\.
 + `sec=ntlmsspi` – Specifies to use NT LAN Manager Security Support Provider Interface \(NTLMSSPI\) for authentication\.
++ `cache=cache_mode` – Sets the cache mode\. This option for CIFS cache can impact performance, and you should test which settings work best \(and review Linux documentation\) for your kernel and workload\. Options `strict` and `none` are recommended, because `loose` can cause data inconsistency due to the looser protocol semantics\.
 + `cred=/home/ec2-user/creds.txt` – Specifies where to get the user credentials\.
 + `/mnt/fsx` – Specifies the mount point for the Amazon FSx file share on your EC2 instance\.
 + `rsize=CIFSMaxBufSize,wsize=CIFSMaxBufSize` – Specifies the read and write buffer size as the maximum allowed by the CIFS protocol\. Replace `CIFSMaxBufSize` with the largest value allowed by your kernel\. Determine the `CIFSMaxBufSize` by running the following command\.
@@ -322,7 +325,6 @@ The mount command used in this procedure does the following at the given points:
   ```
 
   The output shows that the maximum buffer size is 130048\.
-+ `cache=none` – Sets the CIFS cache mode to none, that is not to cache file data at all\.
 
   
 
@@ -401,7 +403,7 @@ domain=EXAMPLE.COM
 
    ```
    $ sudo mount -l -t cifs
-   //file-system-IP-address/file_share on /mnt/fsx type cifs (rw,relatime,vers=SMB_version,sec=ntlmsspi,cache=strict,username=user1,domain=CORP.EXAMPLE.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.20.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
+   //file-system-IP-address/file_share on /mnt/fsx type cifs (rw,relatime,vers=SMB_version,sec=ntlmsspi,cache=cache_code,username=user1,domain=CORP.EXAMPLE.COM,uid=0,noforceuid,gid=0,noforcegid,addr=192.0.20.0,file_mode=0755,dir_mode=0755,soft,nounix,serverino,mapposix,rsize=1048576,wsize=1048576,echo_interval=60,actimeo=1)
    ```
 
    The line added to the `/etc/fstab` file in this procedure does the following at the given points:
@@ -409,6 +411,7 @@ domain=EXAMPLE.COM
    + `/mnt/fsx` – Specifies the mount point for the Amazon FSx file system on your EC2 instance\.
    + `cifs vers=SMB_version` – Specifies the type of file system as CIFS and the SMB protocol version\. Amazon FSx for Windows File Server supports SMB versions 2\.0 through 3\.1\.1\.
    + `sec=ntlmsspi` – Specifies using NT LAN Manager Security Support Provider Interface to facilitate NTLM challenge\-response authentication\.
+   + `cache=cache_mode` – Sets the cache mode\. This option for CIFS cache can impact performance, and you should test which settings work best \(and review Linux documentation\) for your kernel and workload\. Options `strict` and `none` are recommended, because `loose` can cause data inconsistency due to the looser protocol semantics\.
    + `cred=/home/ec2-user/creds.txt` – Specifies where to get the user credentials\.
    + `_netdev` – Tells the operating system that the file system resides on a device that requires network access\. Using this option prevents the instance from mounting the file system until the network service is enabled on the client\.
    + `0` – Indicates that the file system should be backed up by `dump`, if it's a nonzero value\. For Amazon FSx, this value should be `0`\.

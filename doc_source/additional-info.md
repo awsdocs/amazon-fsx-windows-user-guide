@@ -40,7 +40,7 @@ This solution does the following:
 
 ### AWS CloudFormation template<a name="fsx-custom-backup-template"></a>
 
-This solution uses AWS CloudFormation to automate the deployment of the Amazon FSx custom backup scheduling solution\. To use this solution, download the [fsx\-scheduled\-backup\.template](https://s3.amazonaws.com/solution-references/fsx/backup/fsx-scheduled-backup.template) AWS CloudFormation template\.
+This solution uses AWS CloudFormation to automate the deployment of the Amazon FSx custom backup scheduling solution\. To use this solution, download the [fsx\-scheduled\-backup\.template](https://s3.amazonaws.com/solution-references/fsx/backup/fsx-scheduled-backup.template?versionId=jS8qpvWUjSn_YH6dZ6gBUFmfq2wQAM_Y) AWS CloudFormation template\.
 
 ### Automated deployment<a name="fsx-custom-backup-deployment"></a>
 
@@ -51,7 +51,7 @@ Implementing this solution incurs billing for the associated AWS services\. For 
 
 **To launch the custom backup solution stack**
 
-1. Download the [fsx\-scheduled\-backup\.template](https://s3.amazonaws.com/solution-references/fsx/backup/fsx-scheduled-backup.template) AWS CloudFormation template\. For more information on creating an AWS CloudFormation stack, see [Creating a Stack on the AWS CloudFormation Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in the *AWS CloudFormation User Guide*\.
+1. Download the [fsx\-scheduled\-backup\.template](https://s3.amazonaws.com/solution-references/fsx/backup/fsx-scheduled-backup.template?versionId=jS8qpvWUjSn_YH6dZ6gBUFmfq2wQAM_Y) AWS CloudFormation template\. For more information on creating an AWS CloudFormation stack, see [Creating a Stack on the AWS CloudFormation Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) in the *AWS CloudFormation User Guide*\.
 **Note**  
 By default, this template launches in the US East \(N\. Virginia\) AWS Region\. Amazon FSx is currently only available in specific AWS Regions\. You must launch this solution in an AWS Region where Amazon FSx is available\. For more information, see the Amazon FSx section of [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) in the *AWS General Reference\. *
 

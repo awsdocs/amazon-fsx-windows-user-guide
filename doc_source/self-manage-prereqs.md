@@ -43,6 +43,9 @@ To learn more about creating a service account with the correct permissions, see
 **Note**  
 Amazon FSx requires a valid service account throughout the lifetime of your Amazon FSx file system\. Amazon FSx must be able to fully manage the file system and perform tasks that require unjoining and rejoining your AD domain using, such as replacing a failed file server or patching Windows Server software\. Please keep your Active Directory configuration, including the service account credentials, updated with Amazon FSx\. To learn how, see [Keeping your Active Directory configuration updated with Amazon FSx](self-managed-AD-best-practices.md#keep-ad-config-updated)\.
 
+**Note**  
+Amazon FSx requires connectivity to all domain controllers in your AD environment\. If you have multiple domain controllers, ensure that all of them meet the requirements above, and ensure that any changes to your service account are propagated to all domain controllers\. You can validate your AD configuration \(including testing connectivity of multiple domain controllers\) using the [Amazon FSx Active Directory Validation tool](validate-ad-config.md)\.
+
  If this is your first time using AWS and FSx for Windows File Server, make sure to set up before starting\. For more information, see [Setting up](setting-up.md)\. 
 
 **Important**  

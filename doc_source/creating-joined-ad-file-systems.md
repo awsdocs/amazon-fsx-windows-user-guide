@@ -79,7 +79,7 @@ Ensure that the service account you provided has permissions delegated to the OU
 
 1.  Re\-enter the password to confirm it in **Confirm password**\. 
 
-1. \(Optional\) Specify a value for **Delegated file system administrators group** in your domain\. This group has the delegated authority to perform administrative tasks on your file system\. If none is provided, Amazon FSx attempts to use the Builtin Domain Admins group\.
+1. For **Delegated file system administrators group**, specify the `Domain Admins` group or a custom delegated file system administrators group \(if you've created one\)\. The group you specify should have the delegated authority to perform administrative tasks on your file system\. If you don't provide a value, Amazon FSx uses the Builtin `Domain Admins` group\.
 **Important**  
  If you do not provide a **Delegated file system administrators group**, by default Amazon FSx attempts to use the Builtin Domain Admins group in your AD domain\. If the name of this Builtin group has been changed or if you’re using a different group for domain administration, you must provide that name for the group here\. 
 **Important**  

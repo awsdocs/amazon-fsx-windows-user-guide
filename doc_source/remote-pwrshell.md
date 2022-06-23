@@ -28,7 +28,7 @@ To run these commands, you must know the *Windows Remote PowerShell Endpoint* fo
 
 **To start a remote PowerShell session on your file system**
 
-1. Connect to a compute instance that has network connectivity with your file system as a user that is a member of the file system administrators group\. 
+1. Connect to a compute instance that has network connectivity with your file system as a user that is a member of the delegated FSx Administrators Group that you chose when provisioning the file system\.
 
 1.  Open a Windows PowerShell window on the compute instance\. 
 
@@ -39,7 +39,7 @@ To run these commands, you must know the *Windows Remote PowerShell Endpoint* fo
    [fs-0123456789abcdef0]: PS>
    ```
 
-   You are prompted to enter user credentials in a pop\-up\.
+   If your instance is not part of the Amazon FSx AD domain, you are prompted to enter user credentials in a pop\-up\. If your instance is joined to the domain, you will not be asked for credentials\.
 
  You can also run Amazon FSx CLI for remote management CLI on PowerShell commands on your file system using the `Invoke-Command` cmdlet, described following\.
 

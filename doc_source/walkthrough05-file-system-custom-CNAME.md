@@ -18,7 +18,7 @@ To access your Amazon FSx file systems using DNS aliases, you must perform the f
 
 ## Step 1: Associate DNS aliases with your Amazon FSx file system<a name="step1-assign-dns-alias"></a>
 
-You can associate DNS aliases with existing FSx for Windows File Server file systems, when you create new file systems, and when you create a new file system from a backup using the Amazon FSx console, CLI, and API\. 
+You can associate DNS aliases with existing FSx for Windows File Server file systems, when you create new file systems, and when you create a new file system from a backup using the Amazon FSx console, CLI, and API\. If you are creating an alias with a different domain name input the full name, including parent domain, to associate an alias\.
 
 This procedure describes how to associate DNS aliases when creating a new file system using the Amazon FSx console\. For information about associating DNS aliases with existing file systems, and details about using the CLI and API, see [Managing DNS aliases](managing-dns-aliases.md)\.
 
@@ -212,13 +212,15 @@ You can enforce Kerberos authentication when accessing the file system by settin
 + **Restrict NTLM: Outgoing NTLM traffic to remote servers** \- Use this policy setting to deny or audit outgoing NTLM traffic from a computer to any remote server running the Windows operating system\.
 + **Restrict NTLM: Add remote server exceptions for NTLM authentication** \- Use this policy setting to create an exception list of remote servers to which client devices are allowed to use NTLM authentication if the *Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers* policy setting is configured\.
 
-1. Log on to a Windows instance joined to the Active Directory to which your Amazon FSx file system is joined as an administrator\.
+1. Log on to a Windows instance joined to the Active Directory to which your Amazon FSx file system is joined as an administrator\. If you are configuring a self\-managed Active Directory, apply these steps directly to your Active Directory\.
 
 1. Choose **Start**, choose **Administrative Tools**, and then choose **Group Policy Management**\.
 
 1. Choose **Group Policy Objects**\.
 
-1. Locate the **Network Security: Restrict NTLM: Outgoing NTLM traffic to remote servers** policy\. In the **Local security setting** tab, open the context \(right\-click\) menu, and choose **Properties**\.
+1. If your Group Policy Object does not already exist, create it\.
+
+1. Locate the existing **Network Security: Restrict NTLM: Outgoing NTLM traffic to remote servers** policy\. \(If there is no existing policy, create a new policy\.\) In the **Local security setting** tab, open the context \(right\-click\) menu, and choose **Properties**\.
 
 1. Choose **Deny all**\.
 

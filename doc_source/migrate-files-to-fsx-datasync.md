@@ -14,6 +14,8 @@ DataSync accesses your FSx for Windows File Server using the Server Message Bloc
 
 To migrate data into your Amazon FSx for Windows File Server setup, you need a server and network that meet the DataSync requirements\. To learn more, see [Requirements for DataSync](https://docs.aws.amazon.com/datasync/latest/userguide/requirements.html) in the *AWS DataSync User Guide*\.
 
+If are using HDD storage and will be performing large data transfers with DataSync, we recommend that you switch to using SSD storage\. For more information, see [Best practices for migrating existing file storage to FSx for Windows File Server](migrate-files-fsx.md#migrate-best-practices)\.
+
 When you have the DataSync requirements in place, you can begin transfer as discussed following\.
 
 ## Basic steps for migrating files using DataSync<a name="migrate-data-sync-basic-steps"></a>
@@ -24,6 +26,6 @@ To transfer files from a source location to a destination location using DataSyn
 + Create and configure a task\.
 + Run the task to transfer files from the source to the destination\.
 
-To learn how to transfer files from an existing on\-premises file system to your FSx for Windows File Server, see [Data Transfer Between Self\-Managed Storage and AWS](https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-works.html#onprem-aws), [Creating a Location for SMB](https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html), and [Creating a Location for Amazon FSx for Windows File Server](https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html) in the *AWS DataSync User Guide*\.
+To learn how to transfer files from an existing on\-premises file system to your FSx for Windows File Server, see [Data transfer between self\-managed storage and AWS](https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-works.html#onprem-aws), [Creating a location for SMB](https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html), and [Creating a location for Amazon FSx for Windows File Server](https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html) in the *AWS DataSync User Guide*\.
 
-To learn how to transfer files from an existing in\-cloud file system to your FSx for Windows File Server, see [Deploy Your Agent as an Amazon EC2 Instance to Access In\-Cloud File Systems](https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#ec2-deploy-agent) in the *AWS DataSync User Guide*\.  
+To learn how to transfer files from an existing in\-cloud file system to your FSx for Windows File Server, see [Deploy your agent as an Amazon EC2 instance](https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#ec2-deploy-agent) in the *AWS DataSync User Guide*\.  

@@ -58,11 +58,13 @@ To learn how to use the Amazon FSx CLI for remote management on PowerShell, see 
 
 ### Creating a continuously available share<a name="create-ca-share"></a>
 
-You can create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell\. CA shares created on an FSx for Windows File Server Multi\-AZ file system are highly durable and highly available\. An Amazon FSx Single\-AZ file system is built on a single node cluster\. As a result, CA shares created on a Single\-AZ file system are highly durable, but are not highly available\. Use the `New-FSxSmbShare` with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
+You can create continuously available \(CA\) shares using the Amazon FSx CLI for Remote Management on PowerShell\. CA shares created on an FSx for Windows File Server Multi\-AZ file system are highly durable and highly available\. An Amazon FSx Single\-AZ file system is built on a single node cluster\. As a result, CA shares created on a Single\-AZ file system are highly durable, but are not highly available\. Use the `New-FSxSmbShare` command with the `-ContinuouslyAvailable` option set to `$True` to specify that the share is a continuously available share\. The following is an example command to create a CA share\. 
 
 ```
 New-FSxSmbShare -Name "New CA Share" -Path "D:\share\new-share" -Description "CA share" -ContinuouslyAvailable $True 
 ```
+
+You can modify the `-ContinuouslyAvailable` option on an existing file share using the `Set-FSxSmbShare` command\.
 
 Following are custom remote\-management PowerShell commands that you can use\.
 

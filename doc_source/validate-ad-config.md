@@ -83,7 +83,9 @@
    }
    ```
 
-1. \(Optional\) Set Organizational Unit, Delegated Administrators group, and enable service account permission validation by following instructions in the included `README.md` file prior to running the validation tool\.
+1. \(Optional\) Set Organizational Unit, Delegated Administrators group, DomainControllersMaxCount, and enable service account permission validation by following instructions in the included `README.md` file prior to running the validation tool\.
+**Note**  
+The Builtin `Domain Admins` group has a different name if the operating system is not in English\. For example, the group is named `Administrateurs du domaine` in the French OS version\. If you don't specify a value, the default `Domain Admins` group name is used and the file system creation fails\.
 
 1. Run the validation tool by using this command\.
 
@@ -96,7 +98,7 @@
    ```
    Test 1 - Validate EC2 Subnets ...
    ...
-   Test 16 - Validate 'Delete Computer Objects' permission ...
+   Test 17 - Validate 'Delete Computer Objects' permission ...
    
    Test computer object amznfsxtestd53f deleted!
    ...

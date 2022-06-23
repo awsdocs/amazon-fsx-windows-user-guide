@@ -10,6 +10,9 @@ You can also customize data deduplication to meet your specific storage needs\. 
 
 For more information about data deduplication, see the Microsoft [Understanding Data Deduplication](https://docs.microsoft.com/en-us/windows-server/storage/data-deduplication/understand) documentation\.
 
+**Note**  
+If you encounter issues with getting data deduplication jobs to run successfully, see [Troubleshooting data deduplication](data-dedup-ts.md)\.
+
 ## Enabling data deduplication<a name="enable-dedup"></a>
 
 You enable data deduplication on an Amazon FSx for Windows File Server file share using the `Enable-FSxDedup` command, as follows\.
@@ -18,7 +21,11 @@ You enable data deduplication on an Amazon FSx for Windows File Server file shar
 PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com -ConfigurationName FSxRemoteAdmin -ScriptBlock {Enable-FsxDedup }
 ```
 
-When you enable data deduplication, a default data dedup schedule is in place\. The schedule uses Coordinated Universal Time \(UTC\)\. Also, the minimum file age before optimizing is set to 3 days\. Data compression after deduplication is also enabled by default\.
+When you enable data deduplication, a default schedule and configuration are created\. You can create, modify, and remove schedules and configurations using the commands below\.
+
+Note that creating new, custom deduplication job schedules does not override or remove the existing default schedule\. Before creating a custom deduplication job, you may want to disable the default job if you don’t need it\.
+
+You can use the `Disable-FSxDedup` command to disable data deduplication entirely on your file system\.
 
 **Note**  
 When you increase a file system's storage capacity, Amazon FSx cancels existing data deduplication jobs during the storage optimization process that migrates data from the old disks to the new, larger disks\. During this period, the `OptimizedFilesSavingsRate` value is 0\. Amazon FSx resumes data deduplication once the storage capacity increase optimization job completes\. For more information about increasing storage capacity and storage optimization, see [Managing storage capacity](managing-storage-capacity.md)\.
@@ -48,26 +55,6 @@ Set-FSxDedupSchedule -Name "CustomOptimization" -Type Optimization -Days Mon,Tue
  This command modifies the existing `CustomOptimization` schedule to run on days Monday to Wednesday and Saturday, starting the job at 9:00 am \(UTC\) each day, with a maximum duration of 9 hours, after which the job stops if it is still running\. 
 
  To modify the minimum file age before optimizing setting, use the `Set-FSxDedupConfiguration` command\. 
-
-## Retrieving the data deduplication schedules<a name="get-dedup-sched"></a>
-
-You can retrieve the data dedup schedules for a file system using the `Get-FSxDedupSchedule` command, as follows\.
-
-```
-PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com -ConfigurationName FSxRemoteAdmin -ScriptBlock { Get-FSxDedupSchedule }
-```
-
-The output lists the dedup schedules and their configurations\.
-
-## Retrieving the dedup configuration<a name="get-dedup-config"></a>
-
-You can retrieve the data dedup configuration for a file system using the `Get-FsxDedupConfiguration` command, as follows\.
-
-```
-PS C:\Users\Admin> Invoke-Command -ComputerName amznfsxzzzzzzzz.corp.example.com -ConfigurationName FSxRemoteAdmin -ScriptBlock { Get-FsxDeDupConfiguration }
-```
-
-The output lists the dedup configuration parameters and their current values\.
 
 ## Viewing the amount of saved space<a name="get-dedup-status"></a>
 
@@ -108,8 +95,5 @@ Following are commands that you can use for data deduplication\.
 | Remove\-FSxDedupSchedule | Deletes a deduplication schedule\. | 
 | Get\-FSxDedupJob | Gets status and information for all currently running or queued deduplication jobs\. | 
 | Stop\-FSxDedupJob | Cancel one or more specified data deduplication jobs\. | 
-
-**Note**  
-The values shown for following output fields do not represent the actual values, and you should not rely on them: Capacity, FreeSpace, UsedSpace, UnoptimizedSize, and SavingsRate\.
 
 The online help for each command provides a reference of all command options\. To access this help, run the command with \-?, for example Enable\-FSxDedup \-?\. 

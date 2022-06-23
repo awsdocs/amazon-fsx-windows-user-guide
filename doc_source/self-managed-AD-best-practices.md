@@ -51,7 +51,7 @@ For example, suppose that your AD uses a time\-based password reset policy\. In 
 
 When you update the self\-managed AD configuration for your Amazon FSx file system, your file system's state switches from **Available** to **Updating** while the update is applied\. Verify that the state switches back to **Available** after the update has been applied – note that the update can take up to several minutes to complete\. For more information, see [Updating the self\-managed Active Directory configuration](update-self-ad-config.md)\.
 
-If there's an issue with the updated self\-managed AD configuration, the file system state switches to **Misconfigured**\. This state shows an error message and recommended corrective action beside the file system description in the console, API, and CLI\. After taking the recommended corrective action, verify that your file system's state eventually changes to **Available** – note that this change can take several minutes to complete\.
+If there's an issue with the updated self\-managed AD configuration, the file system state switches to **Misconfigured**\. This state shows an error message and recommended corrective action beside the file system description in the console, API, and CLI\. After taking the recommended corrective action, verify that your file system's state eventually changes to **Available**\.
 
 To learn more about troubleshooting possible self\-managed AD misconfigurations, see [File system is in a misconfigured state](misconfigured-ad-config.md)\.
 

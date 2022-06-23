@@ -31,7 +31,9 @@ Multi\-AZ file systems automatically fail over from the preferred file server to
 + The preferred file server becomes unavailable\.
 + The preferred file server undergoes planned maintenance\.
 
- When failing over from one file server to another, the new active file server automatically begins serving all file system read and write requests\. When the resources in the preferred subnet are available, Amazon FSx automatically fails back to the preferred file server in the preferred subnet\. A failover typically completes in less than 30 seconds from the detection of the failure on the active file server to the promotion of the standby file server to active status\. Failback to the original Multi\-AZ configuration also completes in less than 30 seconds, and only occurs once the file server in the preferred subnet is fully recovered\. During this 30\-second period, I/O may be paused\.
+When failing over from one file server to another, the new active file server automatically begins serving all file system read and write requests\. When the resources in the preferred subnet are available, Amazon FSx automatically fails back to the preferred file server in the preferred subnet\. A failover typically completes in less than 30 seconds from the detection of the failure on the active file server to the promotion of the standby file server to active status\. Failback to the original Multi\-AZ configuration also completes in less than 30 seconds, and only occurs once the file server in the preferred subnet is fully recovered\.
+
+During the brief period in which your file system is failing over and failing back, I/O may be paused and Amazon CloudWatch metrics may be temporarily unavailable\.
 
 ### Failover experience on Windows clients<a name="windows-failover"></a>
 
@@ -55,7 +57,7 @@ When you create a VPC, it spans all the Availability Zones \(AZs\) in the Region
 
 When you create a Multi\-AZ file system, you specify two subnets, one for the preferred file server, and one for the standby file server\. The two subnets you choose must be in different Availability Zones within the same AWS Region\. 
 
-For in\-AWS applications, we recommend that you launch your clients in the same Availability Zone as your preferred file server to reduce cross\-AZ data transfer costs and minimize latency\.
+For in\-AWS applications, we recommend that you launch your clients in the same Availability Zone as your preferred file server to minimize latency\.
 
 ### File system elastic network interfaces<a name="file-system-eni-fsxw"></a>
 
@@ -72,6 +74,8 @@ The following table summarizes the subnet, elastic network interface, and IP add
 | Single\-AZ 2 | 1 | 1 | 2 | 
 | Single\-AZ 1 | 1 | 1 | 1 | 
 | Multi\-AZ | 2 | 2 | 4 | 
+
+Once a file system is created, its IP addresses don't change until the file system is deleted\.
 
 **Important**  
 Amazon FSx doesn't support accessing file systems from, or exposing file system to the public Internet\. If an Elastic IP address, which is a public IP address reachable from the Internet, gets attached to a file system's elastic network interface, Amazon FSx automatically detaches it\.

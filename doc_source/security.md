@@ -17,3 +17,4 @@ Following, you can find a description of security considerations for working wit
 + [Resource administration access control with IAM for Amazon FSx](access-control-overview.md)
 + [AWS managed policies for Amazon FSx](security-iam-awsmanpol.md)
 + [Compliance Validation for Amazon FSx for Windows File Server](fsx-compliance.md)
++ [Amazon FSx for Windows File Server and interface VPC endpoints](fsx-vpc-endpoints.md)

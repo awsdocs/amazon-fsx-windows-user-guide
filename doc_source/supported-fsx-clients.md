@@ -22,6 +22,7 @@ The following operating systems are supported for use with Amazon FSx:
 + Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, and Windows Server 2019\.
 + Windows Vista, Windows 7, Windows 8, Windows 8\.1, and Windows 10 \(including the Windows 7 and Windows 10 desktop experiences of WorkSpaces\)\.
 + Linux, using the `cifs-utils` tool\.
++ macOS
 
 ## Supported access methods<a name="access-methods"></a>
 

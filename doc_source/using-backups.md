@@ -177,7 +177,7 @@ You have restored from a backup, and a new file system is now being created\. Wh
 
 ## Deleting backups<a name="delete-backups"></a>
 
-Deleting a backup is a permanent, unrecoverable action\. Any data in a deleted backup is also deleted\. Do not delete a backup unless you're sure you won't need that backup again in the future\. You can't delete backups that taken by AWS Backup, which have type **AWS Backup**, in the Amazon FSx console, CLI, or API\.
+Deleting a backup is a permanent, unrecoverable action\. Any data in a deleted backup is also deleted\. Do not delete a backup unless you're sure you won't need that backup again in the future\. You can't delete backups taken by AWS Backup, which have type **AWS Backup**, in the Amazon FSx console, CLI, or API\.
 
 **To delete a backup**
 

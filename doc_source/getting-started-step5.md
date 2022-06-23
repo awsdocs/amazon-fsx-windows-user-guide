@@ -32,4 +32,4 @@ New file systems can be created from backups\. We recommend that you create a fi
 
    Your Amazon FSx file system and related automatic backups are now deleted\.
 
-1. If you created an AWS Directory Service directory for this exercise in [Walkthrough 1: Prerequisites for getting started](walkthrough01-prereqs.md), you can delete it now\. For more information, see [Delete Your Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/simple_ad_delete.html) in the *AWS Directory Service Administration Guide\.*
+1. If you created an AWS Directory Service directory for this exercise in [Walkthrough 1: Prerequisites for getting started](walkthrough01-prereqs.md), you can delete it now\. For more information, see [Delete your directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/simple_ad_delete.html) in the *AWS Directory Service Administration Guide\.*
