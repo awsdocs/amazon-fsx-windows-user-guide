@@ -2,7 +2,9 @@
 
 With Amazon FSx, backups are file\-system\-consistent, highly durable, and incremental\. To ensure file system consistency, Amazon FSx uses the Volume Shadow Copy Service \(VSS\) in Microsoft Windows\. To ensure high durability, Amazon FSx stores backups in Amazon Simple Storage Service \(Amazon S3\)\. 
 
-Amazon FSx backups are incremental, whether they are generated using the automatic daily backup or the user\-initiated backup feature\. This means that only the data on the file system that has changed after your most recent backup is saved\. This minimizes the time required to create the backup and saves on storage costs by not duplicating data\. When you delete a backup, only the data unique to that backup is removed\. Each FSx for Windows File Server backup contains all of the information that is needed to create a new file system from the backup, effectively restoring a point\-in\-time snapshot of the file system\.
+Amazon FSx backups are incremental, whether they are generated using the automatic daily backup or the user\-initiated backup feature\. This means that only the data on the file system that has changed after your most recent backup is saved\. This minimizes the time required to create the backup and saves on storage costs by not duplicating data\. \(Note that if the data on your file system changes frequently, your total backup usage can be greater than the used storage capacity of your file system\.\) When you delete a backup, only the data unique to that backup is removed\.
+
+Each FSx for Windows File Server backup contains all of the information that is needed to create a new file system from the backup, effectively restoring a point\-in\-time snapshot of the file system\.
 
 Creating regular backups for your file system is a best practice that complements the replication that Amazon FSx for Windows File Server performs for your file system\. Amazon FSx backups help support your backup retention and compliance needs\. Working with Amazon FSx backups is easy, whether it's creating backups, copying a backup, restoring a file system from a backup, or deleting a backup\.
 
@@ -149,6 +151,8 @@ Your backup is copied within the same AWS account to the selected AWS Region\.
 ## Restoring backups<a name="restoring-backups"></a>
 
 You can use an available backup to create a new file system, effectively restoring a point\-in\-time snapshot of another file system\. You can restore a backup using the console, AWS CLI, or one of the AWS SDKs\. Restoring a backup to a new file system takes the same amount of time as creating a new file system\. The data restored from the backup is lazy\-loaded onto the file system, during which time you will experience slightly higher latency\.
+
+To ensure that users can continue to access the restored file system, make sure that the Active Directory domain associated with the restored file system is the same as that of the original file system, or is trusted by the AD domain of the original file system\. For more information about Active Directory, see [Working with Microsoft Active Directory in FSx for Windows File Server](aws-ad-integration-fsxW.md)\.
 
 The following procedure guides you through how to restore a backup using the console to create a new file system\.
 

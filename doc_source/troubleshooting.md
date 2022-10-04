@@ -14,3 +14,4 @@ If you encounter problems not listed following while using Amazon FSx, try askin
 + [Switching storage type to HDD while restoring a backup fails](create-fs-from-backup-fails.md)
 + [Troubleshooting shadow copies](shadow-copy-ts.md)
 + [Troubleshooting data deduplication](data-dedup-ts.md)
++ [Troubleshooting file system performance issues](performance-troubleshooting.md)

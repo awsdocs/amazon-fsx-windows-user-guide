@@ -1,17 +1,17 @@
 # Troubleshooting file systems joined to a self\-managed Active Directory<a name="unable-to-create-fs-self-ad"></a>
 
 **Topics**
-+ [Amazon FSx can't reach self\-managed AD DNS server or domain controllers\. File system creation failed\.](#w236aac43c11b9b5)
-+ [Can't connect to Microsoft AD domain controllers due to invalid service account credentials](#w236aac43c11b9b7)
-+ [Amazon FSx can't connect to Microsoft AD domain controllers due to insufficient service account permissions](#w236aac43c11b9b9)
-+ [Amazon FSx can't connect to the Microsoft AD domain controllers because the service account provided can't join any more computers to the domain](#w236aac43c11b9c11)
-+ [Amazon FSx can't connect to the Microsoft AD domain controllers because the organizational unit specified doesn't exist or isn't accessible](#w236aac43c11b9c13)
-+ [Amazon FSx can't apply the Microsoft AD configuration because the file system administrators group doesn't exist or isn't accessible to the service account](#w236aac43c11b9c15)
-+ [Amazon FSx can't apply your Microsoft Active Directory configuration\.](#w236aac43c11b9c17)
-+ [File system creation failed\. The service account provided does not have permission to join the file system to the domain with the specified organizational unit \(OU\)](#w236aac43c11b9c19)
-+ [Amazon FSx is unable to create a file system within the specified Microsoft Active Directory\.](#w236aac43c11b9c21)
++ [Amazon FSx can't reach self\-managed AD DNS server or domain controllers\. File system creation failed\.](#w265aac43c11b9b5)
++ [Can't connect to Microsoft AD domain controllers due to invalid service account credentials](#w265aac43c11b9b7)
++ [Amazon FSx can't connect to Microsoft AD domain controllers due to insufficient service account permissions](#w265aac43c11b9b9)
++ [Amazon FSx can't connect to the Microsoft AD domain controllers because the service account provided can't join any more computers to the domain](#w265aac43c11b9c11)
++ [Amazon FSx can't connect to the Microsoft AD domain controllers because the organizational unit specified doesn't exist or isn't accessible](#w265aac43c11b9c13)
++ [Amazon FSx can't apply the Microsoft AD configuration because the file system administrators group doesn't exist or isn't accessible to the service account](#w265aac43c11b9c15)
++ [Amazon FSx can't apply your Microsoft Active Directory configuration\.](#w265aac43c11b9c17)
++ [File system creation failed\. The service account provided does not have permission to join the file system to the domain with the specified organizational unit \(OU\)](#w265aac43c11b9c19)
++ [Amazon FSx is unable to create a file system within the specified Microsoft Active Directory\.](#w265aac43c11b9c21)
 
-## Amazon FSx can't reach self\-managed AD DNS server or domain controllers\. File system creation failed\.<a name="w236aac43c11b9b5"></a>
+## Amazon FSx can't reach self\-managed AD DNS server or domain controllers\. File system creation failed\.<a name="w265aac43c11b9b5"></a>
 
  Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -45,7 +45,7 @@ If you want to implement least privilege, you can allow outbound traffic only to
 
 1.  Make sure that the firewall rules on your Active Directory domain's domain controllers allow traffic from your Amazon FSx file system\. For more information, see the [Microsoft Active Directory documentation](https://support.microsoft.com/en-us/help/179442/how-to-configure-a-firewall-for-domains-and-trusts)\. 
 
-## Can't connect to Microsoft AD domain controllers due to invalid service account credentials<a name="w236aac43c11b9b7"></a>
+## Can't connect to Microsoft AD domain controllers due to invalid service account credentials<a name="w265aac43c11b9b7"></a>
 
  Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -73,7 +73,7 @@ DO NOT use the distinguished name \(DN\) when entering the service account user 
 
     For more information about creating a service account with correct permissions, see [ Delegating privileges to your Amazon FSx service account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\. 
 
-## Amazon FSx can't connect to Microsoft AD domain controllers due to insufficient service account permissions<a name="w236aac43c11b9b9"></a>
+## Amazon FSx can't connect to Microsoft AD domain controllers due to insufficient service account permissions<a name="w265aac43c11b9b9"></a>
 
  Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -94,7 +94,7 @@ Use the following procedure to troubleshoot and resolve the issue\.
 
    For more information about creating a service account with correct permissions, see [ Delegating privileges to your Amazon FSx service account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\. 
 
-## Amazon FSx can't connect to the Microsoft AD domain controllers because the service account provided can't join any more computers to the domain<a name="w236aac43c11b9c11"></a>
+## Amazon FSx can't connect to the Microsoft AD domain controllers because the service account provided can't join any more computers to the domain<a name="w265aac43c11b9c11"></a>
 
  Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -108,7 +108,7 @@ is able to join new computers to the domain.
 
 To resolve the issue, verify that the service account you provided has reached the maximum number of computers it can join to the domain\. If it has reached the maximum limit, create a new service account with the correct permissions\. Use the new service account and create a new file system\. For more information, see [ Delegating privileges to your Amazon FSx service account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\.
 
-## Amazon FSx can't connect to the Microsoft AD domain controllers because the organizational unit specified doesn't exist or isn't accessible<a name="w236aac43c11b9c13"></a>
+## Amazon FSx can't connect to the Microsoft AD domain controllers because the organizational unit specified doesn't exist or isn't accessible<a name="w265aac43c11b9c13"></a>
 
 Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -133,7 +133,7 @@ organizational unit to which the service account can join the file system.
 
     For more information about creating a service account with the correct permissions, see [ Delegating privileges to your Amazon FSx service account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\. 
 
-## Amazon FSx can't apply the Microsoft AD configuration because the file system administrators group doesn't exist or isn't accessible to the service account<a name="w236aac43c11b9c15"></a>
+## Amazon FSx can't apply the Microsoft AD configuration because the file system administrators group doesn't exist or isn't accessible to the service account<a name="w265aac43c11b9c15"></a>
 
 Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -156,7 +156,7 @@ Use the following steps to troubleshoot and resolve the issue\.
 
 1.  If you did not provide an administrator group parameter, Amazon FSx attempts to use the `Builtin Domain Admins` group in your Active Directory domain\. If the name of this group has been changed, or if you’re using a different group for domain administration, you need to provide that name for the group\. 
 
-## Amazon FSx can't apply your Microsoft Active Directory configuration\.<a name="w236aac43c11b9c17"></a>
+## Amazon FSx can't apply your Microsoft Active Directory configuration\.<a name="w265aac43c11b9c17"></a>
 
 Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -172,7 +172,7 @@ meeting the pre-requisites described in the Amazon FSx user guide.
 
 1.  Ensure that the computer objects created by Amazon FSx for your file systems in your Active Directory domain are still active, and were not deleted or otherwise manipulated\. 
 
-## File system creation failed\. The service account provided does not have permission to join the file system to the domain with the specified organizational unit \(OU\)<a name="w236aac43c11b9c19"></a>
+## File system creation failed\. The service account provided does not have permission to join the file system to the domain with the specified organizational unit \(OU\)<a name="w265aac43c11b9c19"></a>
 
 Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 
@@ -195,7 +195,7 @@ Make sure that you have delegated the required permissions to the service accoun
 
   For more information about creating a service account with the correct permissions, see [ Delegating privileges to your Amazon FSx service account ](self-managed-AD-best-practices.md#connect_delegate_privileges)\.
 
-## Amazon FSx is unable to create a file system within the specified Microsoft Active Directory\.<a name="w236aac43c11b9c21"></a>
+## Amazon FSx is unable to create a file system within the specified Microsoft Active Directory\.<a name="w265aac43c11b9c21"></a>
 
  Creating a file system joined to your self\-managed Active Directory fails with the following error message:
 

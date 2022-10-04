@@ -194,7 +194,7 @@ The `dnsserver` and `activedirectory` Windows modules are required to run the co
    $FSxDnsName="file_system_dns_name"
    $AliasHost=$Alias.Split('.')[0]
    $ZoneName=((Get-WmiObject Win32_ComputerSystem).Domain)
-   $DnsServerComputerName = (Resolve-DnsName $ZoneName -Type NS | Where Type -eq 'A' | Select -ExpandProperty Name)[0]
+   $DnsServerComputerName = (Resolve-DnsName $ZoneName -Type NS | Where Type -eq 'A' | Select -ExpandProperty Name)
    
    Add-DnsServerResourceRecordCName -Name $AliasHost -ComputerName $DnsServerComputerName -HostNameAlias $FSxDnsName -ZoneName $ZoneName
    ```

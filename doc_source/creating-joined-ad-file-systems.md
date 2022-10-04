@@ -79,9 +79,9 @@ Ensure that the service account you provided has permissions delegated to the OU
 
 1.  Re\-enter the password to confirm it in **Confirm password**\. 
 
-1. For **Delegated file system administrators group**, specify the `Domain Admins` group or a custom delegated file system administrators group \(if you've created one\)\. The group you specify should have the delegated authority to perform administrative tasks on your file system\. If you don't provide a value, Amazon FSx uses the Builtin `Domain Admins` group\.
+1. For **Delegated file system administrators group**, specify the `Domain Admins` group or a custom delegated file system administrators group \(if you've created one\)\. The group you specify should have the delegated authority to perform administrative tasks on your file system\. If you don't provide a value, Amazon FSx uses the Builtin `Domain Admins` group\. Note that Amazon FSx does not support having a `Delegated file system administrators group` \(either the `Domain Admins` group or the custom group you specify\) that is located in the Builtin container\.
 **Important**  
- If you do not provide a **Delegated file system administrators group**, by default Amazon FSx attempts to use the Builtin Domain Admins group in your AD domain\. If the name of this Builtin group has been changed or if you’re using a different group for domain administration, you must provide that name for the group here\. 
+ If you do not provide a **Delegated file system administrators group**, by default Amazon FSx attempts to use the Builtin `Domain Admins` group in your AD domain\. If the name of this Builtin group has been changed or if you’re using a different group for domain administration, you must provide that name for the group here\. 
 **Important**  
  DO NOT include a domain prefix \(corp\.com\\FSxAdmins\) or domain suffix \(FSxAdmins@corp\.com\) when providing the group name parameter\.   
  DO NOT use the Distinguished Name \(DN\) for the group\. An example of a distinguished name is CN=FSxAdmins,OU=example,DC=corp,DC=com\. 

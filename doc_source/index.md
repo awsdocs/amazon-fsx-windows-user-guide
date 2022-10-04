@@ -4,13 +4,13 @@
 *****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
-Amazon's trademarks and trade dress may not be used in 
-     connection with any product or service that is not Amazon's, 
-     in any manner that is likely to cause confusion among customers, 
-     or in any manner that disparages or discredits Amazon. All other 
-     trademarks not owned by Amazon are the property of their respective
-     owners, who may or may not be affiliated with, connected to, or 
-     sponsored by Amazon.
+Amazon's trademarks and trade dress may not be used in
+connection with any product or service that is not Amazon's,
+in any manner that is likely to cause confusion among customers,
+or in any manner that disparages or discredits Amazon. All other
+trademarks not owned by Amazon are the property of their respective
+owners, who may or may not be affiliated with, connected to, or
+sponsored by Amazon.
 
 -----
 ## Contents
@@ -70,11 +70,13 @@ Amazon's trademarks and trade dress may not be used in
 + [Grouping multiple file systems with DFS Namespaces](group-file-systems.md)
 + [Monitoring FSx for Windows File Server](monitoring_overview.md)
    + [Monitoring tools](monitoring_automated_manual.md)
-   + [Monitoring with Amazon CloudWatch](monitoring-cloudwatch.md)
+   + [Monitoring metrics with Amazon CloudWatch](monitoring-cloudwatch.md)
+      + [Metrics and dimensions](fsx-windows-metrics.md)
       + [How to use FSx for Windows File Server metrics](how_to_use_metrics.md)
-      + [Accessing CloudWatch metrics](accessingmetrics.md)
+      + [Performance warnings and recommendations](performance-insights-FSxW.md)
+      + [Accessing FSx for Windows File Server metrics](accessingmetrics.md)
       + [Creating CloudWatch alarms to monitor Amazon FSx](creating_alarms.md)
-   + [Logging FSx for Windows File Server API Calls with AWS CloudTrail](logging-using-cloudtrail-win.md)
+   + [Logging Amazon FSx for Windows File Server API calls using AWS CloudTrail](logging-using-cloudtrail.md)
 + [FSx for Windows File Server performance](performance.md)
 + [Amazon FSx Walkthroughs](walkthroughs.md)
    + [Walkthrough 1: Prerequisites for getting started](walkthrough01-prereqs.md)
@@ -111,5 +113,6 @@ Amazon's trademarks and trade dress may not be used in
    + [Switching storage type to HDD while restoring a backup fails](create-fs-from-backup-fails.md)
    + [Troubleshooting shadow copies](shadow-copy-ts.md)
    + [Troubleshooting data deduplication](data-dedup-ts.md)
+   + [Troubleshooting file system performance issues](performance-troubleshooting.md)
 + [Additional information](additional-info.md)
 + [Document history](doc-history.md)

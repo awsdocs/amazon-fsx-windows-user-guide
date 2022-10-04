@@ -6,7 +6,9 @@ As an alternative solution, you can use Robust File Copy, or Robocopy, which is 
 
 ## Best practices for migrating existing file storage to FSx for Windows File Server<a name="migrate-best-practices"></a>
 
-To migrate large amounts of data to FSx for Windows File Server as quickly as possible, use Amazon FSx file systems configured with solid state drive \(SSD\) storage\. After the migration is complete, you can move the data to Amazon FSx file systems using hard disk drive \(HDD\) storage if that is the best solution for your application\. To move data from an Amazon FSx file system using SDD storage to HDD storage you do the following:
+To migrate large amounts of data to FSx for Windows File Server as quickly as possible, use Amazon FSx file systems configured with solid state drive \(SSD\) storage\. After the migration is complete, you can move the data to Amazon FSx file systems using hard disk drive \(HDD\) storage if that is the best solution for your application\.
+
+To move data from an Amazon FSx file system using SDD storage to HDD storage, you can take the following steps\. \(Note that HDD file systems have a minimum 2TB storage capacity, and you cannot change storage capacity when restoring from a backup\.\)
 
 1. Take a backup of your SSD file system\. For more information, see [Creating user\-initiated backups](using-backups.md#creating-backups)\.
 

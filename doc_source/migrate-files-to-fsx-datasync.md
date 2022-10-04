@@ -4,7 +4,7 @@ We recommend using AWS DataSync to transfer data between FSx for Windows File Se
 
 DataSync supports copying NTFS access control lists \(ACLs\), and also supports copying file audit control information, also known as NTFS system access control lists \(SACLs\), which are used by administrators to control audit logging of user attempts to access files\.
 
-You can also use DataSync to transfer files between two FSx for Windows File Server file systems, including file systems in different AWS Regions and file systems owned by different AWS accounts\. You can also use DataSync with FSx for Windows File Server file systems for other tasks\. For example, you can perform one\-time data migrations, periodically ingest data for distributed workloads, and schedule replication for data protection and recovery\.
+You can use DataSync to transfer files between two FSx for Windows File Server file systems, and also move data to a file system in a different AWS Region or AWS account\. You can use DataSync with FSx for Windows File Server file systems for other tasks\. For example, you can perform one\-time data migrations, periodically ingest data for distributed workloads, and schedule replication for data protection and recovery\.
 
 In AWS DataSync, a *location* for FSx for Windows File Server is an endpoint for an FSx for Windows File Server\. You can transfer files between a location for FSx for Windows File Server and a location for other file systems\. For information, see [Working with Locations](https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html) in the *AWS DataSync User Guide*\.
 

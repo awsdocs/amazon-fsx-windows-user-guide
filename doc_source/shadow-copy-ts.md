@@ -3,11 +3,11 @@
 There are a number of potential causes when shadow copies are missing or inaccessible, as described in the following section\.
 
 **Topics**
-+ [Oldest shadow copies are missing](#w236aac43c23b7)
-+ [All of my shadow copies are missing](#w236aac43c23b9)
-+ [Cannot create Amazon FSx backups or access shadow copies on a recently restored or updated file system](#w236aac43c23c11)
++ [Oldest shadow copies are missing](#w265aac43c23b7)
++ [All of my shadow copies are missing](#w265aac43c23b9)
++ [Cannot create Amazon FSx backups or access shadow copies on a recently restored or updated file system](#w265aac43c23c11)
 
-## Oldest shadow copies are missing<a name="w236aac43c23b7"></a>
+## Oldest shadow copies are missing<a name="w265aac43c23b7"></a>
 
 The oldest shadow copies are deleted in either of these situations:
 + If you have 500 shadow copies, the next shadow copy replaces the oldest shadow copy, regardless of the remaining allocated storage volume space for shadow copies\.
@@ -15,9 +15,9 @@ The oldest shadow copies are deleted in either of these situations:
 
 Both results are expected behavior\. If you have insufficient storage allocated for shadow copies, consider increasing the storage you have allocated\.
 
-## All of my shadow copies are missing<a name="w236aac43c23b9"></a>
+## All of my shadow copies are missing<a name="w265aac43c23b9"></a>
 
-During the creation of shadow copies, having insufficient I/O performance capacity on your file system \(for example, because you're using HDD storage, because the HDD storage has run out of burst capacity, or because the throughput capacity is insufficient\) can cause all shadow copies to be deleted by Windows Server because it is unable to maintain the shadow copies with the available I/O performance capacity\. Consider the following recommendations to help prevent this problem:
+Having insufficient I/O performance capacity on your file system \(for example, because you're using HDD storage, because the HDD storage has run out of burst capacity, or because the throughput capacity is insufficient\) can cause all shadow copies to be deleted by Windows Server because it is unable to maintain the shadow copies with the available I/O performance capacity\. Consider the following recommendations to help prevent this problem:
 + If you're using HDD storage, switch to using SSD storage\. You can do so by taking a backup of your file system and restoring it with the storage type being switched to SSD\.
 + Increase the file system's throughput capacity to a value three times your expected workload\.
 + Make sure that your file system has at least 320 MB of free space, in addition to the maximum shadow copy storage amount configured\.
@@ -25,6 +25,6 @@ During the creation of shadow copies, having insufficient I/O performance capaci
 
 For more information, see [File system recommendations for shadow copies](shadow-copies-fsxW.md#shadow-cpy-config-recommend)\.
 
-## Cannot create Amazon FSx backups or access shadow copies on a recently restored or updated file system<a name="w236aac43c23c11"></a>
+## Cannot create Amazon FSx backups or access shadow copies on a recently restored or updated file system<a name="w265aac43c23c11"></a>
 
 This is expected behavior\. Amazon FSx rebuilds shadow\-copy state on a recently restored file system and does not allow access to shadow copies or backups while rebuilding the shadow copy state\.

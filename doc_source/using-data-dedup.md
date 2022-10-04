@@ -13,6 +13,9 @@ For more information about data deduplication, see the Microsoft [Understanding 
 **Note**  
 If you encounter issues with getting data deduplication jobs to run successfully, see [Troubleshooting data deduplication](data-dedup-ts.md)\.
 
+**Warning**  
+It is not recommended to run certain Robocopy commands with data deduplication because these commands can impact the data integrity of the Chunk Store\. For more information, see the Microsoft [Data Deduplication interoperability](https://docs.microsoft.com/en-us/windows-server/storage/data-deduplication/interop) documentation\.
+
 ## Enabling data deduplication<a name="enable-dedup"></a>
 
 You enable data deduplication on an Amazon FSx for Windows File Server file share using the `Enable-FSxDedup` command, as follows\.

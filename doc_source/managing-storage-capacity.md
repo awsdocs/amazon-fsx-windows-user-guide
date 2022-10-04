@@ -34,9 +34,13 @@ You can track the storage optimization progress at any time using the Amazon FSx
 + **Minimum throughput capacity** – To increase storage capacity, a file system must have a minimum throughput capacity of 16 MB/s\. This is because the storage optimization step is a throughput\-intensive process\.
 + **Time between increases** – You can't make further storage capacity increases on a file system until 6 hours after the last increase was requested, or until the storage optimization process has completed, whichever time is longer\. Storage optimization can take from a few hours up to a few days to complete\. To minimize the time it takes for storage optimization to complete, we recommend increasing your file system's throughput capacity before increasing storage capacity \(the throughput capacity can be scaled back down after storage scaling completes\), and increasing storage capacity when there is minimal traffic on the file system\.
 
+**Note**  
+Certain file system events can consume disk I/O performance resources For example:  
+The optimization phase of storage capacity scaling can generate increased disk throughput, and potentially trigger performance warnings\. For more information, see [Performance warnings and recommendations](performance-insights-FSxW.md)\.
+
 ## When to increase storage capacity<a name="when-to-modify-storage-capacity"></a>
 
-Increase your file system's storage capacity when it's running low on free storage capacity\. Use the `FreeStorageCapacity` CloudWatch metric to monitor the amount of free storage available on the file system\. You can create an Amazon CloudWatch alarm on this metric and get notified when it drops below a specific threshold\. For more information, see [Monitoring with Amazon CloudWatch](monitoring-cloudwatch.md)\.
+Increase your file system's storage capacity when it's running low on free storage capacity\. Use the `FreeStorageCapacity` CloudWatch metric to monitor the amount of free storage available on the file system\. You can create an Amazon CloudWatch alarm on this metric and get notified when it drops below a specific threshold\. For more information, see [Monitoring metrics with Amazon CloudWatch](monitoring-cloudwatch.md)\.
 
 You can automatically increase your file system's storage capacity when the amount free storage capacity falls below a defined threshold you specify\. Use the AWS‐developed custom AWS CloudFormation template to deploy all the components required to implement the automated solution\. For more information, see [Increasing storage capacity dynamically](#automate-storage-capacity-increase)\.
 

@@ -1,21 +1,31 @@
-# Monitoring with Amazon CloudWatch<a name="monitoring-cloudwatch"></a>
+# Monitoring metrics with Amazon CloudWatch<a name="monitoring-cloudwatch"></a>
 
-You can monitor file systems using Amazon CloudWatch, which collects and processes raw data from FSx for Windows File Server into readable, near real\-time metrics\. These statistics are retained for a period of 15 months, so that you can access historical information and gain a better perspective on how your web application or service is performing\. By default, Amazon FSx for Windows File Server metric data is automatically sent to CloudWatch at 1\-minute periods\. For more information about CloudWatch, see [What Is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
+You can monitor FSx for Windows File Server file systems using Amazon CloudWatch, which collects and processes raw data from FSx for Windows File Server into readable, near real\-time metrics\. These statistics are retained for a period of 15 months, so that you can access historical information and gain perspectives on how your web application or file system is performing\.
 
-Amazon FSx CloudWatch metrics are reported as raw *Bytes*\. Bytes are not rounded to either a decimal or binary multiple of the unit\.
+FSx for Windows File Server publishes CloudWatch metrics in the following domains:
++ Network I/O metrics measure activity between clients accessing the file system and the file server\.
++ File server metrics measure network throughput utilization, file server CPU and memory, and file server disk throughput and IOPS utilization\.
++ Disk I/O metrics measure activity between the file server and the storage volumes\.
++ Storage volume metrics measure disk throughput utilization for HDD storage volumes, and IOPS utilization for SSD storage volumes\.
++ Storage capacity metrics measure storage usage, including storage savings due to Data Deduplication\.
 
-Amazon FSx for Windows File Server publishes the following metrics into the `AWS/FSx` namespace in CloudWatch\. For each metric, FSx for Windows File Server emits a data point per file system per minute\.
+The following diagram illustrates an FSx for Windows File Server file system, its components, and the metric domains\.
 
+![\[FSx for Windows File Server reports metrics in CloudWatch that monitor network I/O, file server performance, and storage volume performance.\]](http://docs.aws.amazon.com/fsx/latest/WindowsGuide/images/metrics-overview-FSxW.png)
 
-| Metric | Description | 
-| --- | --- | 
-| DataReadBytes |  The number of bytes for file system read operations\. The `Sum` statistic is the total number of bytes associated with read operations during the period\. To calculate the average throughput \(Bytes per second\) for a period, divide the `Sum` statistic by the number of seconds in the period\. Units: Bytes Valid statistics: `Sum`  | 
-| DataWriteBytes |  The number of bytes for file system write operations\. The `Sum` statistic is the total number of bytes associated with write operations during the period\. To calculate the average throughput \(Bytes per second\) for a period, divide the `Sum` statistic by the number of seconds in the period\. Units: Bytes Valid statistics: `Sum`  | 
-| DataReadOperations |  The number of read operations\. The `Sum` statistic is the count of read operations during the time period\. To calculate the average number of read operations \(operations per second\) for a period, divide the `Sum` statistic by the number of seconds in the period\. Units: Count Valid statistics: `Sum`  | 
-| DataWriteOperations |  The number of write operations\. The `Sum` statistic is the count of write operations during the time period\. To calculate the average number of write operations \(operations per second\) for a period, divide the `Sum` statistic by the number of seconds in the period\. Units: Count Valid statistics: `Sum`  | 
-| MetadataOperations |  The number of metadata operations\. The `Sum` statistic is the count of metadata operations during the time period\. To calculate the average number of metadata operations \(operations per second\) for a period, divide the `Sum` statistic by the number of seconds in the period\. Units: Count Valid statistics: `Sum`  | 
-| FreeStorageCapacity |  The amount of available storage capacity\. Units: Bytes Valid statistics: `Average`, `Minimum`  | 
+By default, Amazon FSx for Windows File Server sends metric data to CloudWatch at 1\-minute periods, with the following exceptions that are emitted in 5\-minute intervals:
++ `FileServerDiskThroughputBalance`
++ `FileServerDiskIopsBalance`
 
-## FSx for Windows File Server dimensions<a name="fsx-dimensions"></a>
+For more information about CloudWatch, see [What is Amazon CloudWatch?](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html) in the *Amazon CloudWatch User Guide*\.
 
-FSx for Windows File Server metrics use the `FSx` namespace and provide metrics for a single dimension, `FileSystemId`\. You can find a file system's ID using the [describe\-file\-systems](https://docs.aws.amazon.com/cli/latest/reference/fsx/describe-file-systems.html) AWS CLI command or the [DescribeFileSystems](https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html) API command\. A file system ID takes the form of *fs\-0123456789abcdef0*\.
+Metrics might not be published for Single\-AZ ﬁle systems during ﬁle system maintenance or infrastructure component replacement, and for Multi\-AZ file systems during failover and failback between the primary and secondary file servers\.
+
+Some Amazon FSx CloudWatch metrics are reported as raw *Bytes*\. Bytes are not rounded to either a decimal or binary multiple of the unit\.
+
+**Topics**
++ [Metrics and dimensions](fsx-windows-metrics.md)
++ [How to use FSx for Windows File Server metrics](how_to_use_metrics.md)
++ [Performance warnings and recommendations](performance-insights-FSxW.md)
++ [Accessing FSx for Windows File Server metrics](accessingmetrics.md)
++ [Creating CloudWatch alarms to monitor Amazon FSx](creating_alarms.md)

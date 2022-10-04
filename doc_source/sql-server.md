@@ -2,6 +2,9 @@
 
 High availability \(HA\) Microsoft SQL Server is typically deployed across multiple database nodes in a Windows Server Failover Cluster \(WSFC\), with each node having access to shared file storage\. You can use FSx for Windows File Server as shared storage for High Availability \(HA\) Microsoft SQL Server deployments in two ways: as storage for active data files and as an SMB file share witness\.
 
+**Note**  
+Currently, Amazon FSx doesn't support the Microsoft SQL Server IFI \(Instant File Initialization\) feature\.
+
 SSD storage is recommended for SQL Server\. SSD storage is designed for the highest\-performance and most latency\-sensitive workloads, including databases\.
 
 For information about using Amazon FSx to reduce complexity and costs for your SQL Server high availability deployments, see the following posts on the *AWS Storage Blog*:

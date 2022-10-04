@@ -1,11 +1,14 @@
 # Document history<a name="doc-history"></a>
 + **API version: **2018\-03\-01
-+ **Latest documentation update: **April 5, 2022
++ **Latest documentation update: **September 22, 2022
 
 The following table describes important changes to the *Amazon FSx Windows User Guide*\. For notifications about documentation updates, you can subscribe to the RSS feed\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Support added for new CloudWatch metrics for Amazon FSx for Windows File Server](#doc-history) | FSx for Windows File Server now provides additional CloudWatch metrics that monitor file server and storage volume performance and capacity usage\. For more information, see [Metrics and dimensions](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/fsx-windows-metrics.html)\. | September 22, 2022 | 
+| [Support added for file system performance warnings](#doc-history) | Amazon FSx now provides warnings in the **Performance & monitoring** window when any of a set of CloudWatch metrics approach or cross predetermined thresholds for these metrics\. Each warning also provides an actionable recommendation for improving the file system's performance\. For more information, see [Performance warnings and recommendations](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/performance-insights-FSxW.html)\. | September 22, 2022 | 
+| [Support added for enhanced file system performance monitoring](#doc-history) | The Amazon FSx console file system monitoring dashboard for FSx for Windows File Server file systems includes new **Summary**, **Storage**, and **Performance** sections\. These sections display graphs of new CloudWatch metrics that provide you with enhanced performance monitoring\. For more information, see [Monitoring metrics with CloudWatch](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/monitoring-cloudwatch.html)\. | September 22, 2022 | 
 | [Support added for AWS PrivateLink interface VPC endpoints\.](#doc-history) | You can now use interface VPC endpoints to access the Amazon FSx API from your VPC without sending traffic over the internet\. For more information, see [ Amazon FSx and interface VPC endpoints](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/fsx-vpc-endpoints.html)\. | April 5, 2022 | 
 | [Support added for Amazon Kendra](#doc-history) | You can now use your FSx for Windows File Server file system as a data source for Amazon Kendra, allowing you to index and search for information contained in documents stored on your file system\. For more information, see [Using FSx for Windows File Server with Amazon Kendra](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/kendra-integration.html)\. | March 26, 2022 | 
 | [Support added for file access auditing](#doc-history) | You can now enable auditing of end\-user accesses on files, folders,and file shares\. You can choose to send audit event logs to the Amazon CloudWatch Logs or Amazon Kinesis Data Firehose services\. For more information, see [File access auditing](https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html)\. | June 8, 2021 | 

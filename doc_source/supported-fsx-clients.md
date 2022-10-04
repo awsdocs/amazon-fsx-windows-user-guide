@@ -19,8 +19,8 @@ The following AWS compute instances are supported for use with Amazon FSx:
 + VMs running in VMware Cloud on AWS environments – To learn more, see the AWS blog post [Storing and Sharing Files with FSx for Windows File Server in a VMware Cloud on AWS Environment](http://aws.amazon.com/blogs/apn/storing-and-sharing-files-with-amazon-fsx-in-a-vmware-cloud-on-aws-environment/)\. 
 
 The following operating systems are supported for use with Amazon FSx:
-+ Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, and Windows Server 2019\.
-+ Windows Vista, Windows 7, Windows 8, Windows 8\.1, and Windows 10 \(including the Windows 7 and Windows 10 desktop experiences of WorkSpaces\)\.
++ Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows Server 2016, Windows Server 2019, and Windows Server 2022\.
++ Windows Vista, Windows 7, Windows 8, Windows 8\.1, Windows 10 \(including the Windows 7 and Windows 10 desktop experiences of WorkSpaces\), and Windows 11\.
 + Linux, using the `cifs-utils` tool\.
 + macOS
 

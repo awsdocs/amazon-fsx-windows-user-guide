@@ -14,7 +14,7 @@ During a maintenance operation on the back end, system modifications \(such as a
 
 ## When to modify throughput capacity<a name="when-to-modify-throughput-capacity"></a>
 
-Amazon FSx integrates with Amazon CloudWatch, enabling you to monitor your file system's ongoing throughput usage levels\. The performance \(throughput and IOPS\) that you can drive through your file system depends on your specific workload’s characteristics, in addition to your file system’s throughput capacity, storage capacity, and storage type\. You can use CloudWatch metrics to determine which of these dimensions to change to improve performance\. For more information, see [Monitoring with Amazon CloudWatch](monitoring-cloudwatch.md)\.
+Amazon FSx integrates with Amazon CloudWatch, enabling you to monitor your file system's ongoing throughput usage levels\. The performance \(throughput and IOPS\) that you can drive through your file system depends on your specific workload’s characteristics, in addition to your file system’s throughput capacity, storage capacity, and storage type\. You can use CloudWatch metrics to determine which of these dimensions to change to improve performance\. For more information, see [Monitoring metrics with Amazon CloudWatch](monitoring-cloudwatch.md)\.
 
 For Multi\-AZ file systems, throughput capacity scaling results in an automatic failover and failback while Amazon FSx switches out the preferred and secondary file servers, and any data changes during this time need to be synchronized between file servers\. Your file system will continue to be available during this time, but in order to reduce the duration of data synchronization, we recommend modifying throughput capacity during idle periods when there is minimal load on your file system\.
 

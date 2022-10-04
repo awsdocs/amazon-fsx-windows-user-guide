@@ -26,7 +26,7 @@ The following procedures describe how to create alarms for Amazon FSx using the 
 
 1. In the **Conditions** section, choose the conditions you want for the alarm, and choose **Next**\.
 **Note**  
-Metrics may not be published during file system maintenance for Single\-AZ file systems\. To prevent unnecessary and misleading alarm condition changes and to configure your alarms so that they are resilient to missing data points, see [ Configuring how CloudWatch alarms treat missing data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the *Amazon CloudWatch User Guide*\.
+Metrics may not be published during file system maintenance for Single\-AZ file systems, or during failover and failback to or from the primary or secondary servers for Multi\-AZ file systems\. To prevent unnecessary and misleading alarm condition changes and to configure your alarms so that they are resilient to missing data points, see [ Configuring how CloudWatch alarms treat missing data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the *Amazon CloudWatch User Guide*\.
 
 1. If you want CloudWatch to send you an email or SNS notification when the alarm state triggers the action, choose an alarm state for **Whenever this alarm state is**\. 
 

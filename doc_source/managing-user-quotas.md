@@ -10,7 +10,9 @@ You can set these thresholds for quota settings:
 
 You can configure default quotas that are applied to new users who access a file system and quotas that apply to specific users or groups\. You can also view a report of how much storage each user or group is consuming and whether they're surpassing their quotas\. 
 
-Storage consumption at a user level is tracked based on file ownership\. Storage consumption is calculated using logical file size, not the actual physical storage space that files occupy\. User storage quotas are tracked at the time when data is written to a file\. 
+Storage consumption at a user level is tracked based on file ownership\. Storage consumption is calculated using logical file size, not the actual physical storage space that files occupy\. User storage quotas are tracked at the time when data is written to a file\.
+
+Updating quotas for multiple users requires either running the update command once for each user, or organizing the users into a group and updating the quota for that group\.
 
 ## Managing user storage quotas<a name="managing-storage-quotas"></a>
 
