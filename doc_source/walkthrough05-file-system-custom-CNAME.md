@@ -132,7 +132,9 @@ The following procedures describes how to do the following:
    $FileSystemHost = (Resolve-DnsName $FSxDnsName | Where Type -eq 'A')[0].Name.Split(".")[0]
    $FSxAdComputer = (Get-AdComputer -Identity $FileSystemHost)
    
+   ##Use one of the following commands, not both:
    Set-AdComputer -Identity $FSxAdComputer -Add @{"msDS-AdditionalDnsHostname"="$Alias"}
+   ##Or
    SetSpn /S ("HOST/" + $Alias.Split('.')[0]) $FSxAdComputer.Name
    SetSpn /S ("HOST/" + $Alias) $FSxAdComputer.Name
    ```
